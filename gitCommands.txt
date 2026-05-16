@@ -1,0 +1,59 @@
+bapun@Deepak MINGW64 /d/FSD/Advance_java/QuickServe_Project/QuickServe (main)
+$ git switch dev
+fatal: invalid reference: dev
+
+bapun@Deepak MINGW64 /d/FSD/Advance_java/QuickServe_Project/QuickServe (main)
+$ git switch dev
+fatal: invalid reference: dev
+
+bapun@Deepak MINGW64 /d/FSD/Advance_java/QuickServe_Project/QuickServe (main)
+$ cd ../
+
+bapun@Deepak MINGW64 /d/FSD/Advance_java/QuickServe_Project
+$ git checkout dev
+fatal: not a git repository (or any of the parent directories): .git
+
+bapun@Deepak MINGW64 /d/FSD/Advance_java/QuickServe_Project
+$ cd QuickServe/
+
+bapun@Deepak MINGW64 /d/FSD/Advance_java/QuickServe_Project/QuickServe (main)
+$ git checkout dev
+error: pathspec 'dev' did not match any file(s) known to git
+
+bapun@Deepak MINGW64 /d/FSD/Advance_java/QuickServe_Project/QuickServe (main)
+$ git switch dev
+fatal: invalid reference: dev
+
+bapun@Deepak MINGW64 /d/FSD/Advance_java/QuickServe_Project/QuickServe (main)
+$ git checkout -b new
+Switched to a new branch 'new'
+
+bapun@Deepak MINGW64 /d/FSD/Advance_java/QuickServe_Project/QuickServe (new)
+$ git fetch
+From https://github.com/deepak9437/QuickServe
+ * [new branch]      dev        -> origin/dev
+
+bapun@Deepak MINGW64 /d/FSD/Advance_java/QuickServe_Project/QuickServe (new)
+$ git switch dev
+M       Backend/target/classes/META-INF/maven/quick.serve/QuickServe/pom.properties
+branch 'dev' set up to track 'origin/dev'.
+Switched to a new branch 'dev'
+
+bapun@Deepak MINGW64 /d/FSD/Advance_java/QuickServe_Project/QuickServe (dev)
+$ git pull
+Already up to date.
+
+bapun@Deepak MINGW64 /d/FSD/Advance_java/QuickServe_Project/QuickServe (dev)
+$ git branch
+* dev
+  main
+  new
+
+bapun@Deepak MINGW64 /d/FSD/Advance_java/QuickServe_Project/QuickServe (dev)
+$ git pull origin dev
+From https://github.com/deepak9437/QuickServe
+ * branch            dev        -> FETCH_HEAD
+Already up to date.
+
+bapun@Deepak MINGW64 /d/FSD/Advance_java/QuickServe_Project/QuickServe (dev)
+$
