@@ -1,0 +1,95 @@
+<div class="page-wrapper">
+  <div class="page-header">
+    <div class="container">
+      <div class="breadcrumb"><a routerLink="/">Home</a> → Services</div>
+      <h1>Browse All <em>Services</em></h1>
+      <p>Find the right professional for every need</p>
+    </div>
+  </div>
+
+  <div class="container page-content">
+    <div class="filters-sidebar">
+      <div class="search-box">
+        <span>🔍</span>
+        <input type="text" placeholder="Search professionals..." (input)="onSearch($event)">
+      </div>
+
+      <div class="filter-section">
+        <h4>Categories</h4>
+        <div class="filter-options">
+          <button 
+            class="filter-btn" 
+            [class.active]="selectedCategory() === null"
+            (click)="selectCategory(null)">
+            All Services
+          </button>
+          @for (cat of categories; track cat.id) {
+            <button 
+              class="filter-btn"
+              [class.active]="selectedCategory() === cat.id"
+              (click)="selectCategory(cat.id)">
+              {{ cat.icon }} {{ cat.name }}
+              <span class="filter-count">{{ cat.count }}</span>
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="providers-panel">
+      <div class="results-header">
+        <span class="results-count">{{ filteredProviders.length }} professionals found</span>
+        <select class="sort-select">
+          <option>Sort: Recommended</option>
+          <option>Highest Rated</option>
+          <option>Lowest Price</option>
+          <option>Most Reviews</option>
+        </select>
+      </div>
+
+      <div class="providers-list">
+        @for (p of filteredProviders; track p.id) {
+          <div class="provider-row">
+            <div class="row-avatar">{{ p.avatar }}</div>
+            <div class="row-info">
+              <div class="row-top">
+                <h3>{{ p.name }}</h3>
+                @if (p.verified) { <span class="verified">✓ Verified</span> }
+                @if (p.featured) { <span class="featured-tag">⭐ Featured</span> }
+              </div>
+              <div class="row-role">{{ p.profession }}</div>
+              <div class="row-meta">
+                <span>📍 {{ p.location }} · {{ p.distance }}</span>
+                <span>🕐 {{ p.yearsExp }} yrs exp</span>
+                <span>✅ {{ p.completedJobs }} jobs</span>
+              </div>
+              <div class="row-tags">
+                @for (tag of p.tags; track tag) {
+                  <span class="tag">{{ tag }}</span>
+                }
+              </div>
+            </div>
+            <div class="row-right">
+              <div class="row-rating">
+                <span class="stars">{{ getStars(p.rating) }}</span>
+                <strong>{{ p.rating }}</strong>
+                <span class="reviews-count">({{ p.reviews }})</span>
+              </div>
+              <div class="row-price">{{ p.price }}<small>{{ p.priceUnit }}</small></div>
+              <button class="btn-primary">Book Now</button>
+            </div>
+          </div>
+        }
+
+        @if (filteredProviders.length === 0) {
+          <div class="empty-state">
+            <div class="empty-icon">🔍</div>
+            <h3>No providers found</h3>
+            <p>Try adjusting your search or category filter</p>
+            <button class="btn-outline" (click)="selectCategory(null)">Clear Filters</button>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

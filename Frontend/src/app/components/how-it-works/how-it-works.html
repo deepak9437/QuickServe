@@ -1,0 +1,23 @@
+<section class="hiw-section" id="how-it-works">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge">Simple Process</div>
+      <h2>How It <em>Works</em></h2>
+      <p>From search to service in just a few easy steps</p>
+    </div>
+
+    <div class="steps">
+      @for (step of steps; track step.num; let last = $last) {
+        <div class="step">
+          <div class="step-number">{{ step.num }}</div>
+          <div class="step-icon">{{ step.icon }}</div>
+          <h3>{{ step.title }}</h3>
+          <p>{{ step.desc }}</p>
+        </div>
+        @if (!last) {
+          <div class="step-connector">→</div>
+        }
+      }
+    </div>
+  </div>
+</section>

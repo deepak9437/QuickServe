@@ -1,0 +1,82 @@
+<section class="hero">
+  <div class="hero-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <div class="container hero-content">
+    <div class="hero-left">
+      <div class="badge animate-in">📍 Serving Odisha & Beyond</div>
+      <h1 class="animate-in" style="animation-delay:0.1s">
+        Find Trusted <br>
+        <em>Local Experts</em><br>
+        Near You
+      </h1>
+      <p class="hero-desc animate-in" style="animation-delay:0.2s">
+        Connect with verified, skilled professionals in your neighborhood. 
+        From plumbing to tutoring — quality service, just minutes away.
+      </p>
+
+      <div class="search-bar animate-in" style="animation-delay:0.3s">
+        <div class="search-input">
+          <span>🔍</span>
+          <input type="text" placeholder="What service do you need?">
+        </div>
+        <div class="search-input">
+          <span>📍</span>
+          <input type="text" placeholder="Your location..." value="Bhubaneswar">
+        </div>
+        <button class="btn-accent search-btn">Find Pros</button>
+      </div>
+
+      <div class="popular-tags animate-in" style="animation-delay:0.4s">
+        <span class="label">Popular:</span>
+        <span class="tag">Plumber</span>
+        <span class="tag">Electrician</span>
+        <span class="tag">Tutor</span>
+        <span class="tag">Cleaner</span>
+        <span class="tag">Painter</span>
+      </div>
+    </div>
+
+    <div class="hero-right animate-in" style="animation-delay:0.2s">
+      <div class="hero-card">
+        <div class="card-header">
+          <div class="avatar">AS</div>
+          <div>
+            <div class="card-name">Arjun Sharma</div>
+            <div class="card-role">Master Plumber · 12 yrs exp</div>
+          </div>
+          <div class="verified-badge">✓ Verified</div>
+        </div>
+        <div class="card-rating">
+          ⭐⭐⭐⭐⭐ <strong>4.9</strong> <span>(214 reviews)</span>
+        </div>
+        <div class="card-tags">
+          <span class="tag">Emergency</span>
+          <span class="tag">Commercial</span>
+          <span class="tag">Residential</span>
+        </div>
+        <div class="card-footer">
+          <div class="price">₹400<small>/hr</small></div>
+          <button class="btn-primary" style="font-size:0.85rem;padding:10px 20px">Book Now</button>
+        </div>
+      </div>
+
+      <div class="floating-badge badge-1">🔧 847 jobs completed</div>
+      <div class="floating-badge badge-2">⚡ Responds in 15 min</div>
+    </div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="container stats-inner">
+      @for (stat of stats; track stat.label) {
+        <div class="stat-item">
+          <div class="stat-value">{{ stat.value }}</div>
+          <div class="stat-label">{{ stat.label }}</div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

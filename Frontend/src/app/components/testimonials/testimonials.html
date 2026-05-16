@@ -1,0 +1,40 @@
+<section class="testimonials-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge">Real Reviews</div>
+      <h2>What Our <em>Customers</em> Say</h2>
+      <p>Thousands of satisfied customers across Odisha trust LocalServe</p>
+    </div>
+
+    <div class="testimonials-grid">
+      @for (t of testimonials; track t.id) {
+        <div class="testimonial-card">
+          <div class="quote-mark">"</div>
+          <p class="testimonial-text">{{ t.text }}</p>
+          <div class="testimonial-stars">
+            @for (s of [1,2,3,4,5]; track s) {
+              <span class="star">★</span>
+            }
+          </div>
+          <div class="service-tag">
+            <span class="tag">{{ t.service }}</span>
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">{{ t.avatar }}</div>
+            <div>
+              <div class="author-name">{{ t.name }}</div>
+              <div class="author-role">{{ t.role }}</div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="trust-bar">
+      <div class="trust-item">🔒 Secure Payments</div>
+      <div class="trust-item">✓ Background Checked</div>
+      <div class="trust-item">💯 Satisfaction Guarantee</div>
+      <div class="trust-item">📞 24/7 Support</div>
+    </div>
+  </div>
+</section>

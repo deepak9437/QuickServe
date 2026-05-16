@@ -1,0 +1,27 @@
+<section class="services-section" id="services">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge">Our Services</div>
+      <h2>Everything Your Home <em>Needs</em></h2>
+      <p>Browse hundreds of skilled professionals across all home & lifestyle categories</p>
+    </div>
+
+    <div class="categories-grid">
+      @for (cat of categories; track cat.id) {
+        <a [routerLink]="['/services']" [queryParams]="{category: cat.id}" class="category-card">
+          <div class="cat-icon" [style.background]="cat.color + '18'">{{ cat.icon }}</div>
+          <div class="cat-info">
+            <h3>{{ cat.name }}</h3>
+            <p>{{ cat.description }}</p>
+          </div>
+          <div class="cat-count">{{ cat.count }} pros</div>
+          <div class="cat-arrow">→</div>
+        </a>
+      }
+    </div>
+
+    <div class="view-all">
+      <a routerLink="/services" class="btn-outline">View All Services →</a>
+    </div>
+  </div>
+</section>
