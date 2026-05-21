@@ -13,8 +13,15 @@
     </ul>
 
     <div class="nav-actions">
-      <button class="btn-outline">Sign In</button>
-      <button class="btn-primary">Post a Job</button>
+      @if (authService.isLoggedIn()) {
+        <span class="user-greeting">
+          Hi, {{ authService.currentUser()?.firstName }}
+        </span>
+        <button class="btn-outline" (click)="logout()">Sign Out</button>
+      } @else {
+        <button class="btn-outline">Sign In</button>
+        <button class="btn-primary">Post a Job</button>
+      }
     </div>
 
     <button class="menu-toggle" (click)="toggleMenu()" [attr.aria-expanded]="menuOpen()">

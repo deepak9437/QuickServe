@@ -1,6 +1,7 @@
-import { Component, HostListener, signal } from '@angular/core';
+import { Component, HostListener, signal, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,14 +10,18 @@ import { CommonModule } from '@angular/common';
   styleUrl: './navbar.scss'
 })
 export class Navbar {
+  authService = inject(AuthService);
   scrolled = signal(false);
   menuOpen = signal(false);
 
   @HostListener('window:scroll')
-  onScroll() {
-    this.scrolled.set(window.scrollY > 40);
-  }
+  onScroll() { this.scrolled.set(window.scrollY > 40); }
 
   toggleMenu() { this.menuOpen.update(v => !v); }
-  closeMenu() { this.menuOpen.set(false); }
+  closeMenu()  { this.menuOpen.set(false); }
+
+  logout() {
+    this.authService.logout();
+    this.closeMenu();
+  }
 }

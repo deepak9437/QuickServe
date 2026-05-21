@@ -310,3 +310,52 @@
   .providers-list-panel { position: static; }
   .detail-header { flex-direction: column; }
 }
+
+.success-state {
+  text-align: center;
+  padding: 32px 16px;
+
+  .success-icon { font-size: 3rem; margin-bottom: 16px; }
+  h3 { margin-bottom: 8px; }
+  p { color: var(--text-muted); margin-bottom: 24px; }
+}
+
+.auth-notice {
+  background: rgba(232,160,69,0.12);
+  border: 1px solid rgba(232,160,69,0.3);
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.error-msg {
+  background: #fee2e2;
+  border: 1px solid #fca5a5;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 0.88rem;
+  color: #dc2626;
+}
+
+.skeleton-mini {
+  height: 72px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(90deg, #f0ede8 25%, #e8e3da 50%, #f0ede8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  margin-bottom: 8px;
+}
+
+.badge-checked {
+  background: #dbeafe; color: #1e40af;
+  padding: 4px 12px; border-radius: 50px;
+  font-size: 0.78rem; font-weight: 700;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}

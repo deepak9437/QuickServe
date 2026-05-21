@@ -117,3 +117,10 @@ nav {
   .nav-actions { display: none; }
   .menu-toggle { display: flex; }
 }
+
+.user-greeting {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary);
+  padding: 10px 12px;
+}
