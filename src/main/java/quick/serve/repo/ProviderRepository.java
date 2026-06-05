@@ -23,12 +23,12 @@ public interface ProviderRepository extends JpaRepository<ProviderEntity, Intege
 			    JOIN FETCH p.user
 			    LEFT JOIN FETCH p.pDocs
 			""")
-	List<ProviderEntity> findAllWithDetails();   //jpql
+	List<ProviderEntity> findAllWithDetails(); // jpql
 
 	String findByStatus(String status);
 
 //	@Query(value = "", nativeQuery = true);
-	
+
 	@Query(value = "select status from provider where user_id =:id", nativeQuery = true)
 	String findByUserId(@Param("id") Integer id);
 

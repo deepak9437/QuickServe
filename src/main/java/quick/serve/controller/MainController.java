@@ -50,15 +50,15 @@ public class MainController {
 	}
 
 	@PostMapping("/user_login")
-	public void gotoUserLogin(@RequestParam String userEmail, @RequestParam String password, HttpSession uSession) {
+	public String gotoUserLogin(@RequestParam String userEmail, @RequestParam String password, HttpSession uSession) {
 		UserEntity entity = mainService.userLoginService(userEmail, password);
 
 		if (entity != null) {
 			log.info("log in Successfully....");
 			uSession.setAttribute("email", userEmail);
-		} else {
-			log.info("log in failed...");
-		}
+			return "SUCCESS";
+		} 
+		return "FAILED";
 	}
 
 	@PostMapping("/provider_register")
@@ -98,7 +98,7 @@ public class MainController {
 
 		if (entity != null && "approved".equals(status)) {
 			log.info("provider login seuccessful ...");
-			pSession.setAttribute("pEmail", userEmail);     
+			pSession.setAttribute("pEmail", userEmail);
 			return "approved";
 		} else if (entity != null && "pending".equals(status)) {
 			log.info("Provider status is pending...try again after successful registration.");

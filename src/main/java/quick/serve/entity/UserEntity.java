@@ -1,3 +1,4 @@
+
 package quick.serve.entity;
 
 import jakarta.persistence.Column;

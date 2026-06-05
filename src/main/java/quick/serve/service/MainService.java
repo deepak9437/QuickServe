@@ -18,6 +18,7 @@ import quick.serve.dto.UserDTO;
 import quick.serve.entity.ProviderDocEntity;
 import quick.serve.entity.ProviderEntity;
 import quick.serve.entity.UserEntity;
+import quick.serve.repo.ProviderDocRepository;
 import quick.serve.repo.ProviderRepository;
 import quick.serve.repo.UserRepository;
 
@@ -29,6 +30,9 @@ public class MainService {
 
 	@Autowired
 	private ProviderRepository providerRepo;
+	
+	@Autowired
+	private ProviderDocRepository providerDocRepository;
 
 	@Autowired
 	private EmailService emailService;
@@ -41,6 +45,9 @@ public class MainService {
 
 	@Value("${image.path.provider.certificate}")
 	String pCertificate;
+	
+	@Value("${image.path.provider.extraCertificate}")
+	String pExtraCertificate;
 
 	public void userRegisterService(UserEntity entity) {
 		userRepo.save(entity);
@@ -64,8 +71,8 @@ public class MainService {
 
 		Path pCertificateLocation = Paths.get(pCertificate + File.separator + certificate.getOriginalFilename());
 
-		Path pExtrapCertificateLocation = Paths
-				.get(extraCertificate + File.separator + extraCertificate.getOriginalFilename());
+		Path pExtrapCertificateLocation =
+			    Paths.get(pExtraCertificate + File.separator + extraCertificate.getOriginalFilename());
 
 		try {
 			Files.copy(documentURL.getInputStream(), pDocLocation, StandardCopyOption.REPLACE_EXISTING);
@@ -83,9 +90,13 @@ public class MainService {
 		pdEntity.setDocumentType(documentType);
 
 		userRepo.save(entity);
+		
+		pEntity.setUser(entity);
 		providerRepo.save(pEntity);
-		providerRepo.save(pdEntity);
-
+		
+		pdEntity.setProvider(pEntity);
+		providerDocRepository.save(pdEntity);
+		
 		emailService.providerEmail(entity);
 
 	}
@@ -96,7 +107,6 @@ public class MainService {
 //		return null;
 //	}
 
-
 	public List<ProviderDTO> getAllProviders() {
 
 		List<ProviderEntity> providers = providerRepo.findAllWithDetails();
@@ -105,13 +115,12 @@ public class MainService {
 
 			ProviderDTO dto = new ProviderDTO();
 
-			dto.setId(provider.getId());
+			dto.setId(provider.getPId());
 			dto.setSkills(provider.getSkills());
 			dto.setExperience(provider.getExperience());
 			dto.setDescription(provider.getDescription());
 			dto.setStatus(provider.getStatus());
 			dto.setAvailability(provider.getAvailability());
-			dto.setRating(provider.getRating());
 			dto.setReview(provider.getReview());
 
 			// User DTO
@@ -145,4 +154,5 @@ public class MainService {
 
 		}).toList();
 	}
+
 }

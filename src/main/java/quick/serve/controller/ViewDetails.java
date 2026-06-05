@@ -14,11 +14,11 @@ import quick.serve.service.MainService;
 @RequestMapping("/view")
 public class ViewDetails {
 
-    @Autowired
-    private MainService mainService;
+	@Autowired
+	private MainService mainService;
 
-    @GetMapping("/all")
-    public List<ProviderDTO> getAllProviders() {
-        return mainService.getAllProviders();
-    }
+	@GetMapping("/all")
+	public List<ProviderDTO> getAllProviders() {
+		return mainService.getAllProviders();
+	}
 }
