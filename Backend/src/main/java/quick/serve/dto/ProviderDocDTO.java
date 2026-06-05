@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class ProviderDocDTO {
 
-	private Integer id;
+	private Integer pdId;
 	
 	private Integer pId;
 	

@@ -19,7 +19,7 @@ public class ProviderDocEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="pd_id")
-	private Integer id;
+	private Integer pdId;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "p_id")

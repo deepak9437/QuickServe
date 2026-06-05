@@ -18,6 +18,7 @@ import quick.serve.dto.UserDTO;
 import quick.serve.entity.ProviderDocEntity;
 import quick.serve.entity.ProviderEntity;
 import quick.serve.entity.UserEntity;
+import quick.serve.repo.ProviderDocRepository;
 import quick.serve.repo.ProviderRepository;
 import quick.serve.repo.UserRepository;
 
@@ -29,6 +30,9 @@ public class MainService {
 
 	@Autowired
 	private ProviderRepository providerRepo;
+	
+	@Autowired
+	private ProviderDocRepository providerDocRepo;
 
 	@Autowired
 	private EmailService emailService;
@@ -82,10 +86,11 @@ public class MainService {
 		pdEntity.setExtraCertificate(extraCertificate.getOriginalFilename());
 		pdEntity.setDocumentType(documentType);
 
-		userRepo.save(entity);
-		providerRepo.save(pEntity);
-		providerRepo.save(pdEntity);
-
+		UserEntity save = userRepo.save(entity);
+		pEntity.setUser(userRepo.findById(save.getUId()).get());
+		ProviderEntity save2 = providerRepo.save(pEntity);
+		pdEntity.setProvider(providerRepo.findById(save2.getPId()).get());
+		providerDocRepo.save(pdEntity);
 		emailService.providerEmail(entity);
 
 	}
@@ -105,18 +110,17 @@ public class MainService {
 
 			ProviderDTO dto = new ProviderDTO();
 
-			dto.setId(provider.getId());
+			dto.setPId(provider.getPId());
 			dto.setSkills(provider.getSkills());
 			dto.setExperience(provider.getExperience());
 			dto.setDescription(provider.getDescription());
 			dto.setStatus(provider.getStatus());
 			dto.setAvailability(provider.getAvailability());
-			dto.setRating(provider.getRating());
 			dto.setReview(provider.getReview());
 
 			// User DTO
 			UserDTO userDto = new UserDTO();
-			userDto.setId(provider.getUser().getId());
+			userDto.setUId(provider.getUser().getUId());
 			userDto.setFullName(provider.getUser().getFullName());
 			userDto.setUserEmail(provider.getUser().getUserEmail());
 			userDto.setUserPhone(provider.getUser().getUserPhone());
@@ -130,7 +134,7 @@ public class MainService {
 			List<ProviderDocDTO> docDtos = provider.getPDocs().stream().map(doc -> {
 				ProviderDocDTO docDto = new ProviderDocDTO();
 
-				docDto.setId(doc.getId());
+				docDto.setPdId(doc.getPdId());
 				docDto.setDocumentType(doc.getDocumentType());
 				docDto.setDocumentURL(doc.getDocumentURL());
 				docDto.setCertificate(doc.getCertificate());

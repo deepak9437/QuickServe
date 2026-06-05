@@ -24,7 +24,7 @@ public class ProviderEntity {
 	@Id
 	@Column(name = "p_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Integer pId;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
@@ -44,9 +44,6 @@ public class ProviderEntity {
 
 	@Column(name = "is_available")
 	private Boolean availability;
-
-	@Column(name = "rating")
-	private Double rating;
 
 	@Column(name = "total_reviews")
 	private Integer review;

@@ -34,7 +34,7 @@ public class MainController {
 	@PostMapping("/user_register")
 	public void gotoUserRegister(@RequestParam String fullName, @RequestParam String password,
 			@RequestParam String gender, @RequestParam String userEmail, @RequestParam String address,
-			@RequestParam Integer pincode, @RequestParam String role, @RequestParam String userPhone) {
+			@RequestParam Integer pincode, @RequestParam String userPhone) {
 
 		UserEntity entity = new UserEntity();
 		entity.setFullName(fullName);
@@ -67,7 +67,7 @@ public class MainController {
 			@RequestParam Integer pincode, @RequestParam String userPhone, @RequestParam String skills,
 			@RequestParam Integer experience, @RequestParam String description, @RequestParam String documentType,
 			@RequestParam MultipartFile documentURL, @RequestParam MultipartFile certificate,
-			@RequestParam MultipartFile extraCertificate) {
+			@RequestParam(required = false) MultipartFile extraCertificate) {
 
 		UserEntity entity = new UserEntity();
 		entity.setFullName(fullName);
@@ -93,7 +93,7 @@ public class MainController {
 			HttpSession pSession) {
 
 		UserEntity entity = userRepo.findByUserEmailAndPassword(userEmail, password);
-		String status = providerRepo.findByUserId(entity.getId());
+		String status = providerRepo.findByUId(entity.getUId());
 		System.out.println(status);
 
 		if (entity != null && "approved".equals(status)) {
