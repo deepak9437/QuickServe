@@ -34,7 +34,7 @@ public class MainController {
 	@PostMapping("/user_register")
 	public void gotoUserRegister(@RequestParam String fullName, @RequestParam String password,
 			@RequestParam String gender, @RequestParam String userEmail, @RequestParam String address,
-			@RequestParam Integer pincode, @RequestParam String userPhone) {
+			@RequestParam Integer pincode, @RequestParam String role, @RequestParam String userPhone) {
 
 		UserEntity entity = new UserEntity();
 		entity.setFullName(fullName);
@@ -50,15 +50,15 @@ public class MainController {
 	}
 
 	@PostMapping("/user_login")
-	public void gotoUserLogin(@RequestParam String userEmail, @RequestParam String password, HttpSession uSession) {
+	public String gotoUserLogin(@RequestParam String userEmail, @RequestParam String password, HttpSession uSession) {
 		UserEntity entity = mainService.userLoginService(userEmail, password);
 
 		if (entity != null) {
 			log.info("log in Successfully....");
 			uSession.setAttribute("email", userEmail);
-		} else {
-			log.info("log in failed...");
-		}
+			return "SUCCESS";
+		} 
+		return "FAILED";
 	}
 
 	@PostMapping("/provider_register")
@@ -67,7 +67,7 @@ public class MainController {
 			@RequestParam Integer pincode, @RequestParam String userPhone, @RequestParam String skills,
 			@RequestParam Integer experience, @RequestParam String description, @RequestParam String documentType,
 			@RequestParam MultipartFile documentURL, @RequestParam MultipartFile certificate,
-			@RequestParam(required = false) MultipartFile extraCertificate) {
+			@RequestParam MultipartFile extraCertificate) {
 
 		UserEntity entity = new UserEntity();
 		entity.setFullName(fullName);
@@ -93,12 +93,12 @@ public class MainController {
 			HttpSession pSession) {
 
 		UserEntity entity = userRepo.findByUserEmailAndPassword(userEmail, password);
-		String status = providerRepo.findByUId(entity.getUId());
+		String status = providerRepo.findByUserId(entity.getId());
 		System.out.println(status);
 
 		if (entity != null && "approved".equals(status)) {
 			log.info("provider login seuccessful ...");
-			pSession.setAttribute("pEmail", userEmail);     
+			pSession.setAttribute("pEmail", userEmail);
 			return "approved";
 		} else if (entity != null && "pending".equals(status)) {
 			log.info("Provider status is pending...try again after successful registration.");

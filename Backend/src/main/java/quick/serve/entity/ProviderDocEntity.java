@@ -13,28 +13,28 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="provider_documents")
+@Table(name = "provider_documents")
 public class ProviderDocEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="pd_id")
-	private Integer pdId;
-	
+	@Column(name = "pd_id")
+	private Integer id;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "p_id")
 	private ProviderEntity provider;
-	
-	@Column(name="document_type")
+
+	@Column(name = "document_type")
 	private String documentType;
-	
-	@Column(name="document_url")
+
+	@Column(name = "document_url")
 	private String documentURL;
-	
-	@Column(name="certificate")
+
+	@Column(name = "certificate")
 	private String certificate;
-	
-	@Column(name="extra_certificate")
+
+	@Column(name = "extra_certificate")
 	private String extraCertificate;
-	
+
 }

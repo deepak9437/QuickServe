@@ -32,7 +32,7 @@ public class MainService {
 	private ProviderRepository providerRepo;
 	
 	@Autowired
-	private ProviderDocRepository providerDocRepo;
+	private ProviderDocRepository providerDocRepository;
 
 	@Autowired
 	private EmailService emailService;
@@ -45,6 +45,9 @@ public class MainService {
 
 	@Value("${image.path.provider.certificate}")
 	String pCertificate;
+	
+	@Value("${image.path.provider.extraCertificate}")
+	String pExtraCertificate;
 
 	public void userRegisterService(UserEntity entity) {
 		userRepo.save(entity);
@@ -68,8 +71,8 @@ public class MainService {
 
 		Path pCertificateLocation = Paths.get(pCertificate + File.separator + certificate.getOriginalFilename());
 
-		Path pExtrapCertificateLocation = Paths
-				.get(extraCertificate + File.separator + extraCertificate.getOriginalFilename());
+		Path pExtrapCertificateLocation =
+			    Paths.get(pExtraCertificate + File.separator + extraCertificate.getOriginalFilename());
 
 		try {
 			Files.copy(documentURL.getInputStream(), pDocLocation, StandardCopyOption.REPLACE_EXISTING);
@@ -86,11 +89,14 @@ public class MainService {
 		pdEntity.setExtraCertificate(extraCertificate.getOriginalFilename());
 		pdEntity.setDocumentType(documentType);
 
-		UserEntity save = userRepo.save(entity);
-		pEntity.setUser(userRepo.findById(save.getUId()).get());
-		ProviderEntity save2 = providerRepo.save(pEntity);
-		pdEntity.setProvider(providerRepo.findById(save2.getPId()).get());
-		providerDocRepo.save(pdEntity);
+		userRepo.save(entity);
+		
+		pEntity.setUser(entity);
+		providerRepo.save(pEntity);
+		
+		pdEntity.setProvider(pEntity);
+		providerDocRepository.save(pdEntity);
+		
 		emailService.providerEmail(entity);
 
 	}
@@ -101,7 +107,6 @@ public class MainService {
 //		return null;
 //	}
 
-
 	public List<ProviderDTO> getAllProviders() {
 
 		List<ProviderEntity> providers = providerRepo.findAllWithDetails();
@@ -110,7 +115,7 @@ public class MainService {
 
 			ProviderDTO dto = new ProviderDTO();
 
-			dto.setPId(provider.getPId());
+			dto.setId(provider.getPId());
 			dto.setSkills(provider.getSkills());
 			dto.setExperience(provider.getExperience());
 			dto.setDescription(provider.getDescription());
@@ -120,7 +125,7 @@ public class MainService {
 
 			// User DTO
 			UserDTO userDto = new UserDTO();
-			userDto.setUId(provider.getUser().getUId());
+			userDto.setId(provider.getUser().getId());
 			userDto.setFullName(provider.getUser().getFullName());
 			userDto.setUserEmail(provider.getUser().getUserEmail());
 			userDto.setUserPhone(provider.getUser().getUserPhone());
@@ -134,7 +139,7 @@ public class MainService {
 			List<ProviderDocDTO> docDtos = provider.getPDocs().stream().map(doc -> {
 				ProviderDocDTO docDto = new ProviderDocDTO();
 
-				docDto.setPdId(doc.getPdId());
+				docDto.setId(doc.getId());
 				docDto.setDocumentType(doc.getDocumentType());
 				docDto.setDocumentURL(doc.getDocumentURL());
 				docDto.setCertificate(doc.getCertificate());
@@ -149,4 +154,5 @@ public class MainService {
 
 		}).toList();
 	}
+
 }

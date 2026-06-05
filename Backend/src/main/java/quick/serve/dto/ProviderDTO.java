@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class ProviderDTO {
 
-	private Integer pId;
+	private Integer id;
 
 	private String skills;
 
@@ -18,6 +18,8 @@ public class ProviderDTO {
 	private String status;
 
 	private Boolean availability;
+
+	private Double rating;
 
 	private Integer review;
 

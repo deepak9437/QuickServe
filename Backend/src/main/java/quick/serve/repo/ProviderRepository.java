@@ -7,10 +7,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import quick.serve.entity.ProviderDocEntity;
 import quick.serve.entity.ProviderEntity;
 
 @Repository
 public interface ProviderRepository extends JpaRepository<ProviderEntity, Integer> {
+
+	void save(ProviderDocEntity pdEntity);
 
 //	UserEntity findByEmailAndPassword(String email, String password);
 
@@ -27,7 +30,7 @@ public interface ProviderRepository extends JpaRepository<ProviderEntity, Intege
 //	@Query(value = "", nativeQuery = true);
 
 	@Query(value = "select status from provider where user_id =:id", nativeQuery = true)
-	String findByUId(@Param("id") Integer id);
+	String findByUserId(@Param("id") Integer id);
 
 //	ProviderEntity findByUserUserEmailAndUserPassword(String userEmail, String password);
 }

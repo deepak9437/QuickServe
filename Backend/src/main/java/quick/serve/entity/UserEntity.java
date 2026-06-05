@@ -1,3 +1,4 @@
+
 package quick.serve.entity;
 
 import jakarta.persistence.Column;
@@ -16,7 +17,7 @@ public class UserEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="user_id")
-	private Integer uId;
+	private Integer id;
 	
 	@Column(name="full_name")
 	private String fullName;
