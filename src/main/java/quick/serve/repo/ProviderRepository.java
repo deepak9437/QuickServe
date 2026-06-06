@@ -32,5 +32,13 @@ public interface ProviderRepository extends JpaRepository<ProviderEntity, Intege
 	@Query(value = "select status from provider where user_id =:id", nativeQuery = true)
 	String findByUserId(@Param("id") Integer id);
 
-//	ProviderEntity findByUserUserEmailAndUserPassword(String userEmail, String password);
+	
+	@Query("""
+		    SELECT p
+		    FROM ProviderEntity p
+		    JOIN FETCH p.user
+		    WHERE LOWER(p.skills) = LOWER(:skills)
+		""")
+		List<ProviderEntity> findBySkills(@Param("skills") String skills);
+
 }

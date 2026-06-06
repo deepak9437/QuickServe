@@ -50,15 +50,15 @@ public class MainController {
 	}
 
 	@PostMapping("/user_login")
-	public String gotoUserLogin(@RequestParam String userEmail, @RequestParam String password, HttpSession uSession) {
+	public UserEntity gotoUserLogin(@RequestParam String userEmail, @RequestParam String password, HttpSession uSession) {
 		UserEntity entity = mainService.userLoginService(userEmail, password);
 
 		if (entity != null) {
 			log.info("log in Successfully....");
 			uSession.setAttribute("email", userEmail);
-			return "SUCCESS";
+			return entity;
 		} 
-		return "FAILED";
+		return null;
 	}
 
 	@PostMapping("/provider_register")
