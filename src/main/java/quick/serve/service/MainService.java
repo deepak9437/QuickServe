@@ -123,7 +123,6 @@ public class MainService {
 			dto.setAvailability(provider.getAvailability());
 			dto.setReview(provider.getReview());
 
-			// User DTO
 			UserDTO userDto = new UserDTO();
 			userDto.setId(provider.getUser().getId());
 			userDto.setFullName(provider.getUser().getFullName());
@@ -135,7 +134,6 @@ public class MainService {
 
 			dto.setUser(userDto);
 
-			// Provider Documents DTO
 			List<ProviderDocDTO> docDtos = provider.getPDocs().stream().map(doc -> {
 				ProviderDocDTO docDto = new ProviderDocDTO();
 
