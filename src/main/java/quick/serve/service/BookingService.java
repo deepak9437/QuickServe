@@ -1,3 +1,4 @@
+
 package quick.serve.service;
 
 import org.springframework.stereotype.Service;
@@ -6,6 +7,6 @@ import org.springframework.stereotype.Service;
 public class BookingService {
 
 	public void bookService() {
-		
+
 	}
 }

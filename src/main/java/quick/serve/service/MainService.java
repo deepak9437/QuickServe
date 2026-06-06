@@ -30,7 +30,7 @@ public class MainService {
 
 	@Autowired
 	private ProviderRepository providerRepo;
-	
+
 	@Autowired
 	private ProviderDocRepository providerDocRepository;
 
@@ -45,7 +45,7 @@ public class MainService {
 
 	@Value("${image.path.provider.certificate}")
 	String pCertificate;
-	
+
 	@Value("${image.path.provider.extraCertificate}")
 	String pExtraCertificate;
 
@@ -71,8 +71,8 @@ public class MainService {
 
 		Path pCertificateLocation = Paths.get(pCertificate + File.separator + certificate.getOriginalFilename());
 
-		Path pExtrapCertificateLocation =
-			    Paths.get(pExtraCertificate + File.separator + extraCertificate.getOriginalFilename());
+		Path pExtrapCertificateLocation = Paths
+				.get(pExtraCertificate + File.separator + extraCertificate.getOriginalFilename());
 
 		try {
 			Files.copy(documentURL.getInputStream(), pDocLocation, StandardCopyOption.REPLACE_EXISTING);
@@ -90,13 +90,13 @@ public class MainService {
 		pdEntity.setDocumentType(documentType);
 
 		userRepo.save(entity);
-		
+
 		pEntity.setUser(entity);
 		providerRepo.save(pEntity);
-		
+
 		pdEntity.setProvider(pEntity);
 		providerDocRepository.save(pdEntity);
-		
+
 		emailService.providerEmail(entity);
 
 	}
@@ -123,6 +123,7 @@ public class MainService {
 			dto.setAvailability(provider.getAvailability());
 			dto.setReview(provider.getReview());
 
+			// User DTO
 			UserDTO userDto = new UserDTO();
 			userDto.setId(provider.getUser().getId());
 			userDto.setFullName(provider.getUser().getFullName());
@@ -131,9 +132,9 @@ public class MainService {
 			userDto.setPassword(provider.getUser().getPassword());
 			userDto.setGender(provider.getUser().getGender());
 
-
 			dto.setUser(userDto);
 
+			// Provider Documents DTO
 			List<ProviderDocDTO> docDtos = provider.getPDocs().stream().map(doc -> {
 				ProviderDocDTO docDto = new ProviderDocDTO();
 

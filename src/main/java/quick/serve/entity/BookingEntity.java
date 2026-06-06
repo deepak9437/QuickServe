@@ -1,3 +1,4 @@
+
 package quick.serve.entity;
 
 import java.math.BigDecimal;
@@ -12,28 +13,28 @@ import lombok.Data;
 @Entity
 @Data
 public class BookingEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="booking_id")
+	@Column(name = "booking_id")
 	private Integer bookingId;
-	
-	@Column(name="user_id")
+
+	@Column(name = "user_id")
 	private Integer uId;
-	
-	@Column(name="p_id")
+
+	@Column(name = "p_id")
 	private Integer pId;
-	
-	@Column(name="service_name")
+
+	@Column(name = "service_name")
 	private String serviceName;
-	
-	@Column(name="booking_status")
+
+	@Column(name = "booking_status")
 	private String bookingStatus;
-	
-	@Column(name="amount")
+
+	@Column(name = "amount")
 	private BigDecimal amount;
-	
-	@Column(name="address")
+
+	@Column(name = "address")
 	private String address;
-	
+
 }
