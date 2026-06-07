@@ -31,7 +31,7 @@ export class LoginComponent {
 
     this.authService.loginUser(this.loginData).subscribe({
       next: (response: string) => {
-        if (response === 'SUCCESS') {
+        if (response) {
           alert('Login Successful 🎉');
 
           this.router.navigate(['/dashboard']);
