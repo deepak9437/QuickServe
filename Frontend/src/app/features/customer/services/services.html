@@ -1,0 +1,59 @@
+<section class="services-page">
+  <div class="services-header">
+    <h1>Find Trusted Service Providers</h1>
+
+    <p>Browse verified professionals and book services instantly.</p>
+
+    <div class="search-filter">
+      <input type="text" placeholder="Search providers..." />
+
+      <select>
+        <option>All Categories</option>
+        <option>Electrician</option>
+        <option>Plumber</option>
+        <option>Cleaner</option>
+        <option>Carpenter</option>
+        <option>Painter</option>
+        <option>AC Repair</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="providers-grid">
+    <div class="provider-card" *ngFor="let provider of providers">
+      <div class="provider-top">
+        <div class="provider-avatar">
+          {{ provider.avatar }}
+        </div>
+
+        <div>
+          <h3>{{ provider.name }}</h3>
+          <span>{{ provider.skill }}</span>
+        </div>
+      </div>
+
+      <div class="rating">⭐ {{ provider.rating }} ({{ provider.reviews }} Reviews)</div>
+
+      <p>
+        {{ provider.experience }}
+        Years Experience
+      </p>
+
+      <div class="provider-footer">
+        <a [routerLink]="['/provider', provider.id]" class="profile-btn"> View Profile </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="pagination">
+  <button>«</button>
+
+  <button class="active">1</button>
+
+  <button>2</button>
+
+  <button>3</button>
+
+  <button>»</button>
+</div>

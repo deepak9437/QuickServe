@@ -1,0 +1,63 @@
+<div class="profile-container">
+  <div class="profile-card">
+    <div class="profile-header">
+      <div class="avatar">👨‍🔧</div>
+
+      <div class="profile-info">
+        <h1>{{ provider.fullName }}</h1>
+
+        <span class="skill">
+          {{ provider.skills }}
+        </span>
+
+        <span class="status"> ✔ {{ provider.status }} </span>
+      </div>
+
+      <button class="edit-btn">Edit Profile</button>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <h3>Experience</h3>
+        <p>{{ provider.experience }} Years</p>
+      </div>
+
+      <div class="stat-card">
+        <h3>Rating</h3>
+        <p>⭐ {{ provider.rating }}</p>
+      </div>
+
+      <div class="stat-card">
+        <h3>Reviews</h3>
+        <p>{{ provider.totalReviews }}</p>
+      </div>
+    </div>
+
+    <div class="details-section">
+      <h2>Contact Information</h2>
+
+      <div class="detail-row">
+        <strong>Email:</strong>
+        <span>{{ provider.email }}</span>
+      </div>
+
+      <div class="detail-row">
+        <strong>Phone:</strong>
+        <span>{{ provider.phone }}</span>
+      </div>
+
+      <div class="detail-row">
+        <strong>Address:</strong>
+        <span>{{ provider.address }}</span>
+      </div>
+    </div>
+
+    <div class="details-section">
+      <h2>About Me</h2>
+
+      <p class="description">
+        {{ provider.description }}
+      </p>
+    </div>
+  </div>
+</div>
