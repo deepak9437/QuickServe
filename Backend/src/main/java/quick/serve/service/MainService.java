@@ -8,6 +8,7 @@ import java.nio.file.StandardCopyOption;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -32,6 +33,9 @@ public class MainService {
 
 	@Autowired
 	private EmailService emailService;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Value("${image.path.user}")
 	String userImage;
@@ -51,8 +55,13 @@ public class MainService {
 	}
 
 	public UserEntity userLoginService(String userEmail, String password) {
-		UserEntity entity = userRepo.findByUserEmailAndPassword(userEmail, password);
-		return entity;
+		UserEntity entity = userRepo.findByUserEmail(userEmail);
+		
+		boolean matches = passwordEncoder.matches(password, entity.getPassword());
+		if (matches) {
+			return entity;
+		} 
+		return null;
 	}
 
 	public void providerRegisterService(UserEntity entity, ProviderEntity pEntity, String documentType,
