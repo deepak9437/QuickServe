@@ -6,11 +6,15 @@ Frontend/.angular/
 # Spring Boot
 Backend/target/
 
+# Spring Boot Config
+Backend/src/main/resources/application.properties
+
 # Eclipse/STS
 **/.classpath
 **/.project
 **/.settings/
 **/.metadata/
+
 
 # Logs
 *.log

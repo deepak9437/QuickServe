@@ -25,8 +25,9 @@ public class BookingController {
 	}
 
 	@PostMapping("/costumer_booking")
-	public void gotoBookings(@RequestParam Integer uId, @RequestParam Integer pId, @RequestParam String serviceName, 
-			@RequestParam String problem, @RequestParam String address ,@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate bookingDate) {
+	public void gotoBookings(@RequestParam Integer uId, @RequestParam Integer pId, @RequestParam String serviceName,
+			@RequestParam String problem, @RequestParam String address,
+			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate bookingDate) {
 
 		BookingEntity bookingEntity = new BookingEntity();
 //		UserEntity entity = new UserEntity();
@@ -41,7 +42,7 @@ public class BookingController {
 		bookingEntity.setBookingStatus("pending"); // pending,accepted,completed,cancelled
 
 		System.out.println(bookingEntity.getBookingDate());
-		
+
 		bookingService.bookService(bookingEntity);
 	}
 

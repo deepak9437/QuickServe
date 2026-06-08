@@ -1,4 +1,4 @@
-package quick.serve.controller;
+ package quick.serve.controller;
 
 import java.util.List;
 
@@ -15,6 +15,7 @@ import quick.serve.service.ViewService;
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/view")
+@CrossOrigin("*")
 public class ViewDetailsController {
 
 	@Autowired

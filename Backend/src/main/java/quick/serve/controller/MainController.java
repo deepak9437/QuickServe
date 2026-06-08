@@ -1,6 +1,7 @@
 package quick.serve.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,15 +31,21 @@ public class MainController {
 
 	@Autowired
 	private ProviderRepository providerRepo;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@PostMapping("/user_register")
 	public void gotoUserRegister(@RequestParam String fullName, @RequestParam String password,
 			@RequestParam String gender, @RequestParam String userEmail, @RequestParam String address,
-			@RequestParam Integer pincode, @RequestParam String role, @RequestParam String userPhone) {
+			@RequestParam Integer pincode, @RequestParam String userPhone) {
 
 		UserEntity entity = new UserEntity();
 		entity.setFullName(fullName);
-		entity.setPassword(password);
+		
+		String newPassword = passwordEncoder.encode(password);
+		
+		entity.setPassword(newPassword);
 		entity.setGender(gender);
 		entity.setUserEmail(userEmail);
 		entity.setAddress(address);
@@ -51,6 +58,7 @@ public class MainController {
 
 	@PostMapping("/user_login")
 	public UserEntity gotoUserLogin(@RequestParam String userEmail, @RequestParam String password, HttpSession uSession) {
+				
 		UserEntity entity = mainService.userLoginService(userEmail, password);
 
 		if (entity != null) {
