@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signup',
@@ -27,7 +28,7 @@ export class SignupComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
-  ) {}
+  ) { }
 
   onSubmit() {
     // Required field validation
@@ -57,7 +58,12 @@ export class SignupComponent {
       next: (response) => {
         this.isLoading = false;
 
-        alert('Registration Successful 🎉');
+        Swal.fire({
+          title: 'Success!',
+          text: 'Registration Successful',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
 
         this.router.navigate(['/login']);
       },
@@ -67,7 +73,12 @@ export class SignupComponent {
 
         console.error(error);
 
-        alert(JSON.stringify(error));
+        Swal.fire({
+          title: 'Error!',
+          text: 'Registration Failed',
+          icon: 'error',
+          confirmButtonText: 'Try Again'
+        });
       },
     });
   }

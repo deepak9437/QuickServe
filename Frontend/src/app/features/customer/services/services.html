@@ -1,14 +1,19 @@
 <section class="services-page">
+
   <div class="services-header">
     <h1>Find Trusted Service Providers</h1>
-
     <p>Browse verified professionals and book services instantly.</p>
 
     <div class="search-filter">
-      <input type="text" placeholder="Search providers..." />
 
-      <select>
-        <option>All Categories</option>
+      <input
+        type="text"
+        placeholder="Search providers..."
+        [(ngModel)]="searchText"
+      />
+
+      <select [(ngModel)]="selectedCategory">
+        <option value="">All Categories</option>
         <option>Electrician</option>
         <option>Plumber</option>
         <option>Cleaner</option>
@@ -16,44 +21,83 @@
         <option>Painter</option>
         <option>AC Repair</option>
       </select>
+
     </div>
   </div>
 
-  <div class="providers-grid">
-    <div class="provider-card" *ngFor="let provider of providers">
-      <div class="provider-top">
-        <div class="provider-avatar">
-          {{ provider.avatar }}
-        </div>
+ <div class="providers-grid">
 
-        <div>
-          <h3>{{ provider.name }}</h3>
-          <span>{{ provider.skill }}</span>
-        </div>
+  <div
+    class="provider-card"
+    *ngFor="let provider of paginatedProviders"
+  >
+
+    <div class="provider-top">
+
+      <div class="provider-avatar">
+        {{ provider.user.fullName.charAt(0).toUpperCase() }}
       </div>
 
-      <div class="rating">⭐ {{ provider.rating }} ({{ provider.reviews }} Reviews)</div>
-
-      <p>
-        {{ provider.experience }}
-        Years Experience
-      </p>
-
-      <div class="provider-footer">
-        <a [routerLink]="['/provider', provider.id]" class="profile-btn"> View Profile </a>
+      <div class="provider-info">
+        <h3>{{ provider.user.fullName }}</h3>
+        <span>{{ provider.skills }}</span>
       </div>
+
     </div>
+
+    <div class="rating">
+      ⭐ {{ provider.rating || 0 }}
+      ({{ provider.review || 0 }} Reviews)
+    </div>
+
+    <p class="experience">
+      Experience:
+      {{ provider.experience > 0 ? provider.experience : 0 }}
+      Years
+    </p>
+
+    <p class="description">
+      {{ provider.description }}
+    </p>
+
+    <div class="status">
+      Status:
+      <span>{{ provider.status }}</span>
+    </div>
+
+    <div class="provider-footer">
+
+      <a
+        routerLink="/booking"
+        class="booking-btn"
+      >
+        Book Now
+      </a>
+
+      <a
+        [routerLink]="['/provider', provider.id]"
+        class="profile-btn"
+      >
+        View Profile
+      </a>
+
+    </div>
+
   </div>
-</section>
 
-<div class="pagination">
-  <button>«</button>
-
-  <button class="active">1</button>
-
-  <button>2</button>
-
-  <button>3</button>
-
-  <button>»</button>
 </div>
+
+  <div class="pagination">
+
+    <div
+      *ngFor="let page of totalPages"
+      class="page-btn"
+      [class.active]="currentPage === page"
+      (click)="changePage(page)"
+    >
+      {{ page }}
+    </div>
+
+  </div>
+
+</section>

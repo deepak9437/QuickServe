@@ -3,25 +3,66 @@
 
   <ul class="nav-links">
     <li>
-      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
         Home
       </a>
     </li>
 
     <li>
-      <a routerLink="/services" routerLinkActive="active"> Services </a>
+      <a routerLink="/services" routerLinkActive="active">
+        Services
+      </a>
     </li>
 
     <li>
-      <a routerLink="/provider-register" routerLinkActive="active"> Become Provider </a>
+      <a routerLink="/provider-register" routerLinkActive="active">
+        Become Provider
+      </a>
     </li>
 
-    <li>
-      <a routerLink="/login"> Login </a>
-    </li>
+    <!-- Before Login -->
+    <ng-container *ngIf="!isLoggedIn">
 
-    <li>
-      <a routerLink="/signup" class="signup-btn"> Sign Up </a>
-    </li>
+      <li>
+        <a routerLink="/login">
+          Login
+        </a>
+      </li>
+
+      <li>
+        <a routerLink="/signup" class="signup-btn">
+          Sign Up
+        </a>
+      </li>
+
+    </ng-container>
+
+    <!-- After Login -->
+    <ng-container *ngIf="isLoggedIn">
+
+      <li>
+        <a routerLink="/profile">
+          Profile
+        </a>
+      </li>
+
+      <li>
+        <a routerLink="/dashboard">
+          Dashboard
+        </a>
+      </li>
+
+      <li>
+        <a href="#" (click)="logout()">
+          Logout
+        </a>
+      </li>
+
+    </ng-container>
+
   </ul>
 </nav>

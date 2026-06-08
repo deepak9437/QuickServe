@@ -1,9 +1,41 @@
 import { Component } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { ServiceBooking } from '../../../core/services/booking';
 
 @Component({
   selector: 'app-booking',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './booking.html',
   styleUrl: './booking.css',
 })
-export class Booking {}
+export class Booking {
+    booking = {
+    uId: '',
+    pId: '',
+    serviceName: '',
+    problem: '',
+    address: '',
+    bookingDate: ''
+  };
+
+  constructor(private bookingService: ServiceBooking,
+    private router: Router,) {}
+
+  submitBooking(): void {
+
+  this.bookingService.bookService(this.booking)
+    .subscribe({
+      next: (response) => {
+        alert('Booking Successful ✅');
+        this.router.navigate(['/my-bookings']);
+      },
+
+      error: (error) => {
+        console.error(error);
+        alert('Booking Failed ❌');
+      }
+    });
+
+}
+}
