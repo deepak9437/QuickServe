@@ -111,7 +111,7 @@ public class MainController {
 
 		if (matches && "approved".equals(status)) {
 			log.info("provider login seuccessful ...");
-			pSession.setAttribute("pEmail", userEmail);
+			pSession.setAttribute("pEmail", userEmail); 
 			return "approved";
 		} else if (matches && "pending".equals(status)) {
 			log.info("Provider status is pending...try again after successful registration.");
