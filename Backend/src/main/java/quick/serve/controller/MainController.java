@@ -31,7 +31,7 @@ public class MainController {
 
 	@Autowired
 	private ProviderRepository providerRepo;
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
@@ -42,9 +42,9 @@ public class MainController {
 
 		UserEntity entity = new UserEntity();
 		entity.setFullName(fullName);
-		
+
 		String newPassword = passwordEncoder.encode(password);
-		
+
 		entity.setPassword(newPassword);
 		entity.setGender(gender);
 		entity.setUserEmail(userEmail);
@@ -57,15 +57,16 @@ public class MainController {
 	}
 
 	@PostMapping("/user_login")
-	public UserEntity gotoUserLogin(@RequestParam String userEmail, @RequestParam String password, HttpSession uSession) {
-				
+	public UserEntity gotoUserLogin(@RequestParam String userEmail, @RequestParam String password,
+			HttpSession uSession) {
+
 		UserEntity entity = mainService.userLoginService(userEmail, password);
 
 		if (entity != null) {
 			log.info("log in Successfully....");
 			uSession.setAttribute("email", userEmail);
 			return entity;
-		} 
+		}
 		return null;
 	}
 
@@ -79,7 +80,10 @@ public class MainController {
 
 		UserEntity entity = new UserEntity();
 		entity.setFullName(fullName);
-		entity.setPassword(password);
+		
+		String newPassword = passwordEncoder.encode(password);
+		entity.setPassword(newPassword);
+		
 		entity.setGender(gender);
 		entity.setUserEmail(userEmail);
 		entity.setAddress(address);
@@ -100,15 +104,16 @@ public class MainController {
 	public String gotoProviderLogin(@RequestParam String userEmail, @RequestParam String password,
 			HttpSession pSession) {
 
-		UserEntity entity = userRepo.findByUserEmailAndPassword(userEmail, password);
+		UserEntity entity = userRepo.findByUserEmail(userEmail);
+		boolean matches = passwordEncoder.matches(password, entity.getPassword());
 		String status = providerRepo.findByUserId(entity.getId());
 		System.out.println(status);
 
-		if (entity != null && "approved".equals(status)) {
+		if (matches && "approved".equals(status)) {
 			log.info("provider login seuccessful ...");
 			pSession.setAttribute("pEmail", userEmail);
 			return "approved";
-		} else if (entity != null && "pending".equals(status)) {
+		} else if (matches && "pending".equals(status)) {
 			log.info("Provider status is pending...try again after successful registration.");
 			return "Provider status is pending...try again after successful registration.";
 		} else {
