@@ -14,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 import quick.serve.entity.ProviderEntity;
 import quick.serve.entity.UserEntity;
 import quick.serve.repo.ProviderRepository;
-import quick.serve.repo.UserRepository;
 import quick.serve.service.MainService;
 
 @RestController
@@ -26,8 +25,8 @@ public class MainController {
 	@Autowired
 	private MainService mainService;
 
-	@Autowired
-	private UserRepository userRepo;
+//	@Autowired
+//	private UserRepository userRepo;
 
 	@Autowired
 	private ProviderRepository providerRepo;
@@ -61,6 +60,8 @@ public class MainController {
 			HttpSession uSession) {
 
 		UserEntity entity = mainService.userLoginService(userEmail, password);
+		
+		mainService.providerLogingService(userEmail,password);
 
 		if (entity != null) {
 			log.info("log in Successfully....");
@@ -101,24 +102,24 @@ public class MainController {
 	}
 
 	@PostMapping("/provider_login")
-	public String gotoProviderLogin(@RequestParam String userEmail, @RequestParam String password,
+	public UserEntity gotoProviderLogin(@RequestParam String userEmail, @RequestParam String password,
 			HttpSession pSession) {
 
-		UserEntity entity = userRepo.findByUserEmail(userEmail);
-		boolean matches = passwordEncoder.matches(password, entity.getPassword());
+		UserEntity entity = mainService.providerLogingService(userEmail, password);
+		
 		String status = providerRepo.findByUserId(entity.getId());
 		System.out.println(status);
 
-		if (matches && "approved".equals(status)) {
+		if (entity != null && "approved".equals(status)) {
 			log.info("provider login seuccessful ...");
 			pSession.setAttribute("pEmail", userEmail); 
-			return "approved";
-		} else if (matches && "pending".equals(status)) {
+			return entity;
+		} else if (entity != null && "pending".equals(status)) {
 			log.info("Provider status is pending...try again after successful registration.");
-			return "Provider status is pending...try again after successful registration.";
+			return entity;
 		} else {
 			log.info("provider Login Failed !");
-			return "failed";
+			return null;
 		}
 
 //		return "ok";

@@ -18,6 +18,11 @@ public class SecurityConfig {
 	        .authorizeHttpRequests(auth -> auth
 	            .requestMatchers("/entry/user_register").permitAll()
 	            .requestMatchers("/entry/user_login").permitAll()
+	            .requestMatchers("/entry/provider_register").permitAll()
+	            .requestMatchers("/entry/provider_login").permitAll()
+	            .requestMatchers("/view/separate").permitAll()
+	            .requestMatchers("/view/all").permitAll()
+	            .requestMatchers("/booking/costumer_booking").permitAll()
 	            .anyRequest().authenticated()
 	        );
 
