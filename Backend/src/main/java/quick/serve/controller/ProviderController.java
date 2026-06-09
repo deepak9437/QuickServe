@@ -1,5 +1,6 @@
 package quick.serve.controller;
 
+import org.aspectj.lang.annotation.RequiredTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -37,7 +38,7 @@ public class ProviderController {
 			@RequestParam Integer pincode, @RequestParam String userPhone, @RequestParam String skills,
 			@RequestParam Integer experience, @RequestParam String description, @RequestParam String documentType,
 			@RequestParam MultipartFile documentURL, @RequestParam MultipartFile certificate,
-			@RequestParam MultipartFile extraCertificate) {
+			@RequestParam(required = false) MultipartFile extraCertificate) {
 
 		UserEntity entity = new UserEntity();
 		entity.setFullName(fullName);

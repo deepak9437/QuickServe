@@ -14,6 +14,7 @@ import Swal from "sweetalert2";
 export class ProfileComponent {
   constructor(private authService: AuthService) {}
   profileData = {
+    id: "",
     fullName: "",
     userEmail: "",
     userPhone: "",
@@ -24,6 +25,7 @@ export class ProfileComponent {
   ngOnInit() {
     const user = JSON.parse(sessionStorage.getItem("user") || "{}");
 
+    this.profileData.id = user.id || "";
     this.profileData.fullName = user.fullName || "";
     this.profileData.userEmail = user.userEmail || "";
     this.profileData.userPhone = user.userPhone || "";

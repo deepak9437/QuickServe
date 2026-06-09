@@ -6,7 +6,8 @@ import { Observable } from "rxjs";
   providedIn: "root",
 })
 export class AuthService {
-  private apiUrl = "http://localhost:3030/quickserve/entry";
+  private apiUrl1 = "http://localhost:3030/quickserve/user";
+  private apiUrl2 = "http://localhost:3030/quickserve/provider";
 
   constructor(private http: HttpClient) {}
 
@@ -22,7 +23,7 @@ export class AuthService {
     formData.append("role", "CUSTOMER");
     formData.append("userPhone", data.userPhone);
 
-    return this.http.post(`${this.apiUrl}/user_register`, formData);
+    return this.http.post(`${this.apiUrl1}/user_register`, formData);
   }
 
   loginUser(loginData: any) {
@@ -31,7 +32,7 @@ export class AuthService {
     formData.append("userEmail", loginData.userEmail);
     formData.append("password", loginData.password);
 
-    return this.http.post(`${this.apiUrl}/user_login`, formData, {
+    return this.http.post(`${this.apiUrl1}/user_login`, formData, {
       responseType: "text",
     });
   }
@@ -60,11 +61,11 @@ export class AuthService {
       formData.append("extraCertificate", provider.extraCertificate);
     }
 
-    return this.http.post(`${this.apiUrl}/provider_register`, formData);
+    return this.http.post(`${this.apiUrl2}/provider_register`, formData);
   }
   updateProfile(data: any) {
     return this.http.put(
-      "http://localhost:3030/quickserve/user/user_update",
+      `${this.apiUrl1}/user_update`,
       data,
     );
   }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import quick.serve.entity.UserEntity;
+import quick.serve.repo.UserRepository;
 import quick.serve.service.UserService;
 
 @RestController
@@ -25,6 +27,9 @@ public class UserController {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private UserRepository userRepository;
 
 	@PostMapping("/user_register")
 	public void gotoUserRegister(@RequestParam String fullName, @RequestParam String password,
@@ -52,8 +57,8 @@ public class UserController {
 			HttpSession uSession) {
 
 		UserEntity entity = userService.userLoginService(userEmail, password);
-		
-		//userService.userLoginService(userEmail,password);
+
+		// userService.userLoginService(userEmail,password);
 
 		if (entity != null) {
 			log.info("log in Successfully....");
@@ -63,11 +68,18 @@ public class UserController {
 		return null;
 	}
 
-	@PostMapping("/user_update")
-	public void updateProfile(@RequestBody UserEntity uEntity) {
-		userService.updateProfileService(uEntity);
+	@PutMapping("/user_update")
+	public void updateProfile(@RequestBody UserEntity user) {
+		UserEntity existUser = userRepository.findById(user.getId()).orElseThrow();
+		
+		existUser.setFullName(user.getFullName());
+		existUser.setAddress(user.getAddress());
+		existUser.setUserPhone(user.getUserPhone());
+		existUser.setPincode(user.getPincode());
+		
+		userRepository.save(existUser);
+	
 	}
 
-	
-
 }
+
