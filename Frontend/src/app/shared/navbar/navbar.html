@@ -41,7 +41,7 @@
         <div class="dropdown" *ngIf="showMenu">
           <p>{{ user.fullName }}</p>
 
-          <a routerLink="/profile"> View Profile </a>
+          <a routerLink="/view-profile"> View Profile </a>
 
           <a *ngIf="user.role === 'costumer'" routerLink="/dashboard">
             Dashboard

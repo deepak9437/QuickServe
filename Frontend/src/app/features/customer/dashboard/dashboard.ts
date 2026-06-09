@@ -1,16 +1,15 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Component } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-dashboard',
+  selector: "app-dashboard",
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './dashboard.html',
-  styleUrl: './dashboard.css'
+  templateUrl: "./dashboard.html",
+  styleUrl: "./dashboard.css",
 })
 export class DashboardComponent {
-
   user: any = {};
 
   totalBookings = 0;
@@ -19,28 +18,25 @@ export class DashboardComponent {
 
   recentBookings = [
     {
-      serviceName: 'Electrician',
-      status: 'Completed'
+      serviceName: "Electrician",
+      status: "Completed",
     },
     {
-      serviceName: 'Plumber',
-      status: 'Pending'
-    }
+      serviceName: "Plumber",
+      status: "Pending",
+    },
   ];
 
   constructor(private router: Router) {
-
-    this.user = JSON.parse(
-      localStorage.getItem('user') || '{}'
-    );
+    this.user = JSON.parse(localStorage.getItem("user") || "{}");
   }
 
   goToProfile() {
-    this.router.navigate(['/customer-profile']);
+    this.router.navigate(["/customer-profile"]);
   }
 
   logout() {
     localStorage.clear();
-    this.router.navigate(['/login']);
+    this.router.navigate(["/login"]);
   }
 }

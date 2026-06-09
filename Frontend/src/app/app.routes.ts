@@ -1,55 +1,60 @@
-import { Routes } from '@angular/router';
-import { HomeComponent } from './features/customer/home/home';
-import { ServicesComponent } from './features/customer/services/services';
-import { ProviderProfileComponent } from './features/customer/provider-profile/provider-profile';
-import { LoginComponent } from './features/auth/login/login';
-import { SignupComponent } from './features/auth/signup/signup';
-import { DashboardComponent } from './features/customer/dashboard/dashboard';
-import { ProfileComponent } from './features/customer/profile/profile';
-import { RegisterComponent } from './features/provider/register/register';
-import { providerdashboardComponent } from './features/provider/dashboard/dashboard';
-import { Booking } from './features/customer/booking/booking';
+import { Routes } from "@angular/router";
+import { HomeComponent } from "./features/customer/home/home";
+import { ServicesComponent } from "./features/customer/services/services";
+import { ProviderProfileComponent } from "./features/customer/provider-profile/provider-profile";
+import { LoginComponent } from "./features/auth/login/login";
+import { SignupComponent } from "./features/auth/signup/signup";
+import { DashboardComponent } from "./features/customer/dashboard/dashboard";
+import { ProfileComponent } from "./features/customer/profile/profile";
+import { RegisterComponent } from "./features/provider/register/register";
+import { providerdashboardComponent } from "./features/provider/dashboard/dashboard";
+import { Booking } from "./features/customer/booking/booking";
+import { ViewProfileComponent } from "./features/customer/view-profile/view-profile";
 
 export const routes: Routes = [
   {
-    path: '',
+    path: "",
     component: HomeComponent,
   },
   {
-    path: 'services',
+    path: "services",
     component: ServicesComponent,
   },
 
   {
-    path: 'provider/:id',
+    path: "provider/:id",
     component: ProviderProfileComponent,
   },
   {
-    path: 'login',
+    path: "login",
     component: LoginComponent,
   },
   {
-    path: 'signup',
+    path: "signup",
     component: SignupComponent,
   },
   {
-    path: 'dashboard',
+    path: "dashboard",
     component: DashboardComponent,
   },
   {
-    path: 'profile',
+    path: "profile",
     component: ProfileComponent,
   },
   {
-    path: 'provider-register',
+    path: "provider-register",
     component: RegisterComponent,
   },
   {
-    path: 'provider-dashboard',
+    path: "provider-dashboard",
     component: providerdashboardComponent,
   },
   {
-    path: 'booking',
+    path: "booking",
     component: Booking,
-  }
+  },
+  {
+    path: "view-profile",
+    component: ViewProfileComponent,
+  },
 ];

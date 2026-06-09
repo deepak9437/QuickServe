@@ -1,25 +1,51 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { CommonModule } from "@angular/common";
+import { AuthService } from "../../../core/services/auth";
+import Swal from "sweetalert2";
 
 @Component({
-  selector: 'app-customer-profile',
+  selector: "app-profile",
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './profile.html',
-  styleUrl: './profile.css'
+  imports: [CommonModule, FormsModule],
+  templateUrl: "./profile.html",
+  styleUrl: "./profile.css",
 })
 export class ProfileComponent {
+  constructor(private authService: AuthService) {}
+  profileData = {
+    fullName: "",
+    userEmail: "",
+    userPhone: "",
+    address: "",
+    pincode: "",
+  };
 
-  user: any = {};
+  ngOnInit() {
+    const user = JSON.parse(sessionStorage.getItem("user") || "{}");
 
-  constructor() {
-
-    this.user = JSON.parse(
-      localStorage.getItem('user') || '{}'
-    );
+    this.profileData.fullName = user.fullName || "";
+    this.profileData.userEmail = user.userEmail || "";
+    this.profileData.userPhone = user.userPhone || "";
+    this.profileData.address = user.address || "";
+    this.profileData.pincode = user.pincode || "";
   }
 
-  editProfile() {
-    alert('Navigate to Edit Profile Page');
+  updateProfile() {
+    this.authService.updateProfile(this.profileData).subscribe({
+      next: () => {
+        Swal.fire({
+          icon: "success",
+          title: "Profile Updated Successfully",
+        });
+      },
+
+      error: () => {
+        Swal.fire({
+          icon: "error",
+          title: "Update Failed",
+        });
+      },
+    });
   }
 }

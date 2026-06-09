@@ -1,0 +1,70 @@
+<div class="profile-page">
+  <div class="profile-card">
+    <div class="profile-banner"></div>
+
+    <div class="profile-header">
+      <div class="profile-avatar">
+        {{ user.fullName?.charAt(0).toUpperCase() }}
+      </div>
+
+      <h2>{{ user.fullName }}</h2>
+
+      <p>{{ user.userEmail }}</p>
+
+      <div class="profile-status">
+        <span class="verified"> ✔ Verified </span>
+
+        <span class="active"> ● Active </span>
+      </div>
+    </div>
+
+    <div class="profile-info">
+      <div class="info-item">
+        <div class="info-icon">👤</div>
+
+        <div>
+          <span>FULL NAME</span>
+          <h4>{{ user.fullName }}</h4>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon">✉️</div>
+
+        <div>
+          <span>EMAIL ADDRESS</span>
+          <h4>{{ user.userEmail }}</h4>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon">📞</div>
+
+        <div>
+          <span>PHONE NUMBER</span>
+          <h4>{{ user.userPhone }}</h4>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon">📍</div>
+
+        <div>
+          <span>ADDRESS</span>
+          <h4>{{ user.address }}</h4>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon">#</div>
+
+        <div>
+          <span>PINCODE</span>
+          <h4>{{ user.pincode }}</h4>
+        </div>
+      </div>
+    </div>
+
+    <button class="edit-btn" (click)="editProfile()">✎ Edit Profile</button>
+  </div>
+</div>

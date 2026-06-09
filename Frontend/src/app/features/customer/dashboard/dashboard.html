@@ -1,24 +1,16 @@
 <section class="dashboard">
-
   <div class="dashboard-header">
-
     <div>
       <h1>Welcome, {{user.fullName}} 👋</h1>
       <p>Manage your bookings easily.</p>
     </div>
 
-    <button
-      class="profile-btn"
-      (click)="goToProfile()">
-
+    <button class="profile-btn" routerLink="/customer-profile">
       My Profile
-
     </button>
-
   </div>
 
   <div class="stats-grid">
-
     <div class="stat-card">
       <h2>{{totalBookings}}</h2>
       <p>Total Bookings</p>
@@ -33,31 +25,17 @@
       <h2>{{favouriteProviders}}</h2>
       <p>Favourite Providers</p>
     </div>
-
   </div>
 
   <div class="dashboard-section">
-
     <h2>Recent Bookings</h2>
 
-    <div
-      class="booking-card"
-      *ngFor="let booking of recentBookings">
-
+    <div class="booking-card" *ngFor="let booking of recentBookings">
       <strong>{{booking.serviceName}}</strong>
 
       <span>{{booking.status}}</span>
-
     </div>
-
   </div>
 
-  <button
-    class="logout-btn"
-    (click)="logout()">
-
-    Logout
-
-  </button>
-
+  <button class="logout-btn" (click)="logout()">Logout</button>
 </section>
