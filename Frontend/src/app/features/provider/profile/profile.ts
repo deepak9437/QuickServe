@@ -6,20 +6,20 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './profile.html',
-  styleUrl: './profile.css',
+  styleUrl: './profile.css'
 })
-export class ProfileComponent {
-  provider = {
-    fullName: 'Rajesh Kumar',
-    email: 'rajesh@gmail.com',
-    phone: '+91 9876543210',
-    skills: 'Electrician',
-    experience: 8,
-    rating: 4.9,
-    totalReviews: 128,
-    address: 'Bhubaneswar, Odisha',
-    status: 'Approved',
-    description:
-      'Experienced electrician specializing in wiring, installation, maintenance and repair services.',
-  };
+export class ProviderProfileComponent {
+
+  provider: any = {};
+
+  constructor() {
+
+    this.provider = JSON.parse(
+      localStorage.getItem('provider') || '{}'
+    );
+  }
+
+  editProfile() {
+    alert('Navigate to Edit Profile Page');
+  }
 }

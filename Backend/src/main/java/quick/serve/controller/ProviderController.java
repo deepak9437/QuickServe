@@ -14,63 +14,23 @@ import lombok.extern.slf4j.Slf4j;
 import quick.serve.entity.ProviderEntity;
 import quick.serve.entity.UserEntity;
 import quick.serve.repo.ProviderRepository;
-import quick.serve.service.MainService;
+import quick.serve.service.ProviderService;
 
-@RestController
 @CrossOrigin("*")
-@RequestMapping("/entry")
+@RequestMapping("/provider")
+@RestController
 @Slf4j
-public class MainController {
-
-	@Autowired
-	private MainService mainService;
-
-//	@Autowired
-//	private UserRepository userRepo;
-
+public class ProviderController {
+	
 	@Autowired
 	private ProviderRepository providerRepo;
-
+	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-
-	@PostMapping("/user_register")
-	public void gotoUserRegister(@RequestParam String fullName, @RequestParam String password,
-			@RequestParam String gender, @RequestParam String userEmail, @RequestParam String address,
-			@RequestParam Integer pincode, @RequestParam String userPhone) {
-
-		UserEntity entity = new UserEntity();
-		entity.setFullName(fullName);
-
-		String newPassword = passwordEncoder.encode(password);
-
-		entity.setPassword(newPassword);
-		entity.setGender(gender);
-		entity.setUserEmail(userEmail);
-		entity.setAddress(address);
-		entity.setPincode(pincode);
-		entity.setRole("costumer");
-		entity.setUserPhone(userPhone);
-
-		mainService.userRegisterService(entity);
-	}
-
-	@PostMapping("/user_login")
-	public UserEntity gotoUserLogin(@RequestParam String userEmail, @RequestParam String password,
-			HttpSession uSession) {
-
-		UserEntity entity = mainService.userLoginService(userEmail, password);
-		
-		mainService.providerLogingService(userEmail,password);
-
-		if (entity != null) {
-			log.info("log in Successfully....");
-			uSession.setAttribute("email", userEmail);
-			return entity;
-		}
-		return null;
-	}
-
+	
+	@Autowired
+	private ProviderService providerService ;
+	
 	@PostMapping("/provider_register")
 	public void gotoProviderRegister(@RequestParam String fullName, @RequestParam String password,
 			@RequestParam String gender, @RequestParam String userEmail, @RequestParam String address,
@@ -98,14 +58,15 @@ public class MainController {
 		pEntity.setDescription(description);
 		pEntity.setStatus("pending");
 
-		mainService.providerRegisterService(entity, pEntity, documentType, documentURL, certificate, extraCertificate);
+		providerService.providerRegisterService(entity, pEntity, documentType, documentURL, certificate, extraCertificate);
 	}
-
+	
+	
 	@PostMapping("/provider_login")
 	public UserEntity gotoProviderLogin(@RequestParam String userEmail, @RequestParam String password,
 			HttpSession pSession) {
 
-		UserEntity entity = mainService.providerLogingService(userEmail, password);
+		UserEntity entity = providerService.providerLogingService(userEmail, password);
 		
 		String status = providerRepo.findByUserId(entity.getId());
 		System.out.println(status);
@@ -125,5 +86,5 @@ public class MainController {
 //		return "ok";
 
 	}
-
+	
 }
