@@ -15,7 +15,6 @@ import quick.serve.service.ViewService;
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/view")
-@CrossOrigin("*")
 public class ViewDetailsController {
 
 	@Autowired

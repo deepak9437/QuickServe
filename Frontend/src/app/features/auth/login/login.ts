@@ -32,6 +32,7 @@ export class LoginComponent {
 
     this.authService.loginUser(this.loginData).subscribe({
       next: (response: string) => {
+
         sessionStorage.setItem('user', response);
         if (response === 'CUSTOMER') {
 
@@ -56,11 +57,12 @@ export class LoginComponent {
       },
 
       error: (error) => {
-        console.error(error);
+          console.log('FULL ERROR:', error);
+
 
         Swal.fire({
           title: 'Error!',
-          text: 'Login Failed',
+          text:  JSON.stringify(error.error),
           icon: 'error',
           confirmButtonText: 'Try Again'
         });
