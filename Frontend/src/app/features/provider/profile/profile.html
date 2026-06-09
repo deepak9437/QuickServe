@@ -1,63 +1,75 @@
-<div class="profile-container">
+<section class="profile-container">
+
   <div class="profile-card">
-    <div class="profile-header">
-      <div class="avatar">👨‍🔧</div>
 
-      <div class="profile-info">
-        <h1>{{ provider.fullName }}</h1>
+    <img
+      src="assets/default-provider.png"
+      class="profile-image"
+      alt="Provider">
 
-        <span class="skill">
-          {{ provider.skills }}
-        </span>
+    <h2>{{provider.user?.fullName}}</h2>
 
-        <span class="status"> ✔ {{ provider.status }} </span>
+    <p>{{provider.user?.userEmail}}</p>
+
+    <div class="profile-details">
+
+      <div>
+        <strong>Phone</strong>
+        <p>{{provider.user?.userPhone}}</p>
       </div>
 
-      <button class="edit-btn">Edit Profile</button>
+      <div>
+        <strong>Gender</strong>
+        <p>{{provider.user?.gender}}</p>
+      </div>
+
+      <div>
+        <strong>Address</strong>
+        <p>{{provider.user?.address}}</p>
+      </div>
+
+      <div>
+        <strong>Pincode</strong>
+        <p>{{provider.user?.pincode}}</p>
+      </div>
+
+      <div>
+        <strong>Skills</strong>
+        <p>{{provider.skills}}</p>
+      </div>
+
+      <div>
+        <strong>Experience</strong>
+        <p>{{provider.experience}} Years</p>
+      </div>
+
+      <div>
+        <strong>Description</strong>
+        <p>{{provider.description}}</p>
+      </div>
+
+      <div>
+        <strong>Availability</strong>
+        <p>
+          {{provider.availability ? 'Available' : 'Unavailable'}}
+        </p>
+      </div>
+
+      <div>
+        <strong>Total Reviews</strong>
+        <p>{{provider.review}}</p>
+      </div>
+
     </div>
 
-    <div class="stats-grid">
-      <div class="stat-card">
-        <h3>Experience</h3>
-        <p>{{ provider.experience }} Years</p>
-      </div>
+    <button
+      class="edit-btn"
+      (click)="editProfile()">
 
-      <div class="stat-card">
-        <h3>Rating</h3>
-        <p>⭐ {{ provider.rating }}</p>
-      </div>
+      Edit Profile
 
-      <div class="stat-card">
-        <h3>Reviews</h3>
-        <p>{{ provider.totalReviews }}</p>
-      </div>
-    </div>
+    </button>
 
-    <div class="details-section">
-      <h2>Contact Information</h2>
-
-      <div class="detail-row">
-        <strong>Email:</strong>
-        <span>{{ provider.email }}</span>
-      </div>
-
-      <div class="detail-row">
-        <strong>Phone:</strong>
-        <span>{{ provider.phone }}</span>
-      </div>
-
-      <div class="detail-row">
-        <strong>Address:</strong>
-        <span>{{ provider.address }}</span>
-      </div>
-    </div>
-
-    <div class="details-section">
-      <h2>About Me</h2>
-
-      <p class="description">
-        {{ provider.description }}
-      </p>
-    </div>
   </div>
-</div>
+
+</section>

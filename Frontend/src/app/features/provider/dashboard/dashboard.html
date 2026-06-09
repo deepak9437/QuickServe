@@ -1,138 +1,71 @@
-<div class="dashboard-container">
-  <div class="hero-card">
-    <div class="hero-left">
-      <div class="avatar">👨‍🔧</div>
+<section class="dashboard">
 
-      <div>
-        <p class="welcome">Welcome Back 👋</p>
+  <div class="dashboard-header">
 
-        <h1>Rajesh Kumar</h1>
+    <div>
+      <h1>
+        Welcome, {{provider.user?.fullName}} 👋
+      </h1>
 
-        <h3>Electrician</h3>
-
-        <span class="approved"> ✔ APPROVED </span>
-      </div>
+      <p>
+        Manage your services and bookings.
+      </p>
     </div>
 
-    <div class="hero-right">
-      <div class="info-box">
-        <h4>Rating</h4>
-        <h2>4.9</h2>
-        <p>⭐ ⭐ ⭐ ⭐ ⭐</p>
-        <small>(128 Reviews)</small>
-      </div>
+    <button
+      class="profile-btn"
+      (click)="viewProfile()">
 
-      <div class="divider"></div>
+      My Profile
 
-      <div class="info-box">
-        <h4>Member Since</h4>
-        <h2>Jan 2024</h2>
-        <small>1+ Year with us</small>
-      </div>
-    </div>
+    </button>
+
   </div>
 
   <div class="stats-grid">
+
     <div class="stat-card">
-      <div class="icon">📋</div>
-      <h3>Total Bookings</h3>
-      <h1>124</h1>
-      <p>All Time Bookings</p>
+      <h2>{{provider.experience}}</h2>
+      <p>Years Experience</p>
     </div>
 
     <div class="stat-card">
-      <div class="icon">⏳</div>
-      <h3>Pending</h3>
-      <h1>8</h1>
-      <p>Needs Your Action</p>
+      <h2>{{provider.review}}</h2>
+      <p>Total Reviews</p>
     </div>
 
     <div class="stat-card">
-      <div class="icon">✅</div>
-      <h3>Completed</h3>
-      <h1>116</h1>
-      <p>Successfully Done</p>
+      <h2>{{provider.availability ? 'Yes' : 'No'}}</h2>
+      <p>Available</p>
     </div>
 
     <div class="stat-card">
-      <div class="icon">💰</div>
-      <h3>Earnings</h3>
-      <h1>₹45,200</h1>
-      <p>Total Earnings</p>
+      <h2>{{provider.skills}}</h2>
+      <p>Skill</p>
     </div>
+
   </div>
 
-  <div class="table-card">
-    <div class="table-header">
-      <h2>Recent Bookings</h2>
+  <div class="dashboard-section">
+
+    <h2>Recent Activities</h2>
+
+    <div
+      class="activity-card"
+      *ngFor="let activity of recentActivities">
+
+      {{activity}}
+
     </div>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Customer</th>
-          <th>Service</th>
-          <th>Date</th>
-          <th>Status</th>
-          <th>Amount</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr>
-          <td>Soumya Das</td>
-          <td>Electrical Repair</td>
-          <td>10 Jun 2026</td>
-          <td><span class="pending">Pending</span></td>
-          <td>₹850</td>
-        </tr>
-
-        <tr>
-          <td>Rakesh Kumar</td>
-          <td>Wiring Installation</td>
-          <td>08 Jun 2026</td>
-          <td><span class="completed">Completed</span></td>
-          <td>₹1500</td>
-        </tr>
-
-        <tr>
-          <td>Priya Sharma</td>
-          <td>Fan Repair</td>
-          <td>05 Jun 2026</td>
-          <td><span class="completed">Completed</span></td>
-          <td>₹600</td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 
-  <div class="actions-card">
-    <h2>Quick Actions</h2>
+  <button
+    class="logout-btn"
+    (click)="logout()">
 
-    <div class="action-grid">
-      <div class="action-item">
-        <span>👤</span>
-        <div>
-          <h3>Manage Profile</h3>
-          <p>Update your information</p>
-        </div>
-      </div>
+    Logout
 
-      <div class="action-item">
-        <span>📅</span>
-        <div>
-          <h3>View Bookings</h3>
-          <p>Check all bookings</p>
-        </div>
-      </div>
+  </button>
 
-      <div class="action-item">
-        <span>⏰</span>
-        <div>
-          <h3>Update Availability</h3>
-          <p>Set your schedule</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+</section>
