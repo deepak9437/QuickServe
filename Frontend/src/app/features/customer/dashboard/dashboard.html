@@ -1,31 +1,63 @@
 <section class="dashboard">
+
   <div class="dashboard-header">
-    <h1>Welcome Back, Soumya 👋</h1>
-    <p>Manage your bookings and providers here.</p>
+
+    <div>
+      <h1>Welcome, {{user.fullName}} 👋</h1>
+      <p>Manage your bookings easily.</p>
+    </div>
+
+    <button
+      class="profile-btn"
+      (click)="goToProfile()">
+
+      My Profile
+
+    </button>
+
   </div>
 
   <div class="stats-grid">
+
     <div class="stat-card">
-      <h2>12</h2>
+      <h2>{{totalBookings}}</h2>
       <p>Total Bookings</p>
     </div>
 
     <div class="stat-card">
-      <h2>3</h2>
+      <h2>{{activeRequests}}</h2>
       <p>Active Requests</p>
     </div>
 
     <div class="stat-card">
-      <h2>8</h2>
-      <p>Favorite Providers</p>
+      <h2>{{favouriteProviders}}</h2>
+      <p>Favourite Providers</p>
     </div>
+
   </div>
 
   <div class="dashboard-section">
+
     <h2>Recent Bookings</h2>
 
-    <div class="booking-card">🔧 Electrician Service - In Progress</div>
+    <div
+      class="booking-card"
+      *ngFor="let booking of recentBookings">
 
-    <div class="booking-card">🚿 Plumbing Service - Completed</div>
+      <strong>{{booking.serviceName}}</strong>
+
+      <span>{{booking.status}}</span>
+
+    </div>
+
   </div>
+
+  <button
+    class="logout-btn"
+    (click)="logout()">
+
+    Logout
+
+  </button>
+
 </section>
