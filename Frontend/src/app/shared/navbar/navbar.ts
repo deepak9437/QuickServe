@@ -1,29 +1,40 @@
-import { Component } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { Component } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { Router, RouterLink, RouterLinkActive } from "@angular/router";
 
 @Component({
-  selector: 'app-navbar',
+  selector: "app-navbar",
   standalone: true,
   imports: [CommonModule, RouterLink, RouterLinkActive],
-  templateUrl: './navbar.html',
-  styleUrl: './navbar.css',
+  templateUrl: "./navbar.html",
+  styleUrl: "./navbar.css",
 })
 export class NavbarComponent {
-
-  isLoggedIn = false;
+  user: any = null;
+  showMenu = false;
 
   constructor(private router: Router) {}
 
   ngOnInit() {
-    this.isLoggedIn = !!sessionStorage.getItem('user');
+    const storedUser = sessionStorage.getItem("user");
+
+    if (storedUser) {
+      this.user = JSON.parse(storedUser);
+    }
+  }
+
+  toggleMenu() {
+    this.showMenu = !this.showMenu;
   }
 
   logout() {
-    sessionStorage.removeItem('user');
+    sessionStorage.clear();
 
-    this.isLoggedIn = false;
+    this.user = null;
+    this.showMenu = false;
 
-    this.router.navigate(['/']);
+    this.router.navigate(["/"]).then(() => {
+      window.location.reload();
+    });
   }
 }

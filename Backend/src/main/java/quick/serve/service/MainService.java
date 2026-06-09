@@ -63,6 +63,16 @@ public class MainService {
 		} 
 		return null;
 	}
+	
+	public UserEntity providerLogingService(String userEmail, String password) {
+		UserEntity entity = userRepo.findByUserEmail(userEmail);
+		
+		boolean matches = passwordEncoder.matches(password, entity.getPassword());
+		if(matches) {
+			return entity;
+		}
+		return null;
+	}
 
 	public void providerRegisterService(UserEntity entity, ProviderEntity pEntity, String documentType,
 			MultipartFile documentURL, MultipartFile certificate, MultipartFile extraCertificate) {
@@ -105,5 +115,7 @@ public class MainService {
 		emailService.providerEmail(entity);
 
 	}
+
+
 
 }
