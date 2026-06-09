@@ -20,26 +20,23 @@ import quick.serve.repo.ProviderRepository;
 import quick.serve.repo.UserRepository;
 
 @Service
-public class MainService {
-
+public class ProviderService {
+	
 	@Autowired
 	private UserRepository userRepo;
-
+	
 	@Autowired
 	private ProviderRepository providerRepo;
 
 	@Autowired
 	private ProviderDocRepository providerDocRepository;
-
-	@Autowired
-	private EmailService emailService;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-
-	@Value("${image.path.user}")
-	String userImage;
-
+	
+	@Autowired
+	private EmailService emailService;
+	
 	@Value("${image.path.provider.document}")
 	String pDocument;
 
@@ -48,21 +45,6 @@ public class MainService {
 
 	@Value("${image.path.provider.extraCertificate}")
 	String pExtraCertificate;
-
-	public void userRegisterService(UserEntity entity) {
-		userRepo.save(entity);
-		emailService.userEmail(entity);
-	}
-
-	public UserEntity userLoginService(String userEmail, String password) {
-		UserEntity entity = userRepo.findByUserEmail(userEmail);
-		
-		boolean matches = passwordEncoder.matches(password, entity.getPassword());
-		if (matches) {
-			return entity;
-		} 
-		return null;
-	}
 	
 	public UserEntity providerLogingService(String userEmail, String password) {
 		UserEntity entity = userRepo.findByUserEmail(userEmail);
@@ -115,7 +97,5 @@ public class MainService {
 		emailService.providerEmail(entity);
 
 	}
-
-
-
+	
 }
