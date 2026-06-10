@@ -1,1 +1,53 @@
-<p>provider-approval works!</p>
+<div class="approval-container">
+  <div class="page-header">
+    <h1>Provider Approvals</h1>
+    <p>Review provider registration requests</p>
+  </div>
+
+  <div class="provider-card" *ngFor="let provider of providers">
+    <div class="provider-info">
+      <h2>{{ provider.user.fullName }}</h2>
+
+      <p>
+        <strong>Skill:</strong>
+        {{ provider.skills }}
+      </p>
+
+      <p>
+        <strong>Experience:</strong>
+        {{ provider.experience }} Years
+      </p>
+
+      <p>
+        <strong>Email:</strong>
+        {{ provider.user.userEmail }}
+      </p>
+
+      <p>
+        <strong>Phone:</strong>
+        {{ provider.user.userPhone }}
+      </p>
+
+      <p>
+        <strong>Description:</strong>
+        {{ provider.description }}
+      </p>
+
+      <span class="status" [ngClass]="provider.status">
+        {{ provider.status | uppercase }}
+      </span>
+    </div>
+
+    <div class="actions">
+      <button class="view-btn">View Documents</button>
+
+      <button class="approve-btn" (click)="approveProvider(provider.id)">
+        Approve
+      </button>
+
+      <button class="reject-btn" (click)="rejectProvider(provider.id)">
+        Reject
+      </button>
+    </div>
+  </div>
+</div>

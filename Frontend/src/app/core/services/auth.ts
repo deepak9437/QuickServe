@@ -64,9 +64,9 @@ export class AuthService {
     return this.http.post(`${this.apiUrl2}/provider_register`, formData);
   }
   updateProfile(data: any) {
-    return this.http.put(
-      `${this.apiUrl1}/user_update`,
-      data,
-    );
+    return this.http.put(`${this.apiUrl1}/user_update`, data);
+  }
+  getAllProviders() {
+    return this.http.get("http://localhost:3030/quickserve/view/all");
   }
 }

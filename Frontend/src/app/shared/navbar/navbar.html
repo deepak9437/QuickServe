@@ -23,37 +23,37 @@
     </li>
 
     <!-- Not Logged In -->
-    <ng-container *ngIf="!user">
-      <li>
-        <a routerLink="/login">Login</a>
-      </li>
+    @if (!user) {
+    <li>
+      <a routerLink="/login">Login</a>
+    </li>
 
-      <li>
-        <a routerLink="/signup" class="signup-btn"> Sign Up </a>
-      </li>
-    </ng-container>
+    <li>
+      <a routerLink="/signup" class="signup-btn"> Sign Up </a>
+    </li>
+    }
 
     <!-- Logged In -->
-    <ng-container *ngIf="user">
-      <li class="profile-menu">
-        <div class="profile-icon" (click)="toggleMenu()">👤</div>
+    @if (user) {
+    <li class="profile-menu">
+      <div class="profile-icon" (click)="toggleMenu()">👤</div>
 
-        <div class="dropdown" *ngIf="showMenu">
-          <p>{{ user.fullName }}</p>
+      @if (showMenu) {
+      <div class="dropdown">
+        <p>{{ user.fullName }}</p>
 
-          <a routerLink="/view-profile"> View Profile </a>
+        <a routerLink="/view-profile"> View Profile </a>
 
-          <a *ngIf="user.role === 'costumer'" routerLink="/dashboard">
-            Dashboard
-          </a>
+        @if (user.role === 'costumer') {
+        <a routerLink="/dashboard"> Dashboard </a>
+        } @if (user.role === 'provider') {
+        <a routerLink="/provider-dashboard"> Dashboard </a>
+        }
 
-          <a *ngIf="user.role === 'provider'" routerLink="/provider-dashboard">
-            Dashboard
-          </a>
-
-          <button (click)="logout()">Logout</button>
-        </div>
-      </li>
-    </ng-container>
+        <button (click)="logout()">Logout</button>
+      </div>
+      }
+    </li>
+    }
   </ul>
 </nav>

@@ -10,6 +10,8 @@ import { RegisterComponent } from "./features/provider/register/register";
 import { providerdashboardComponent } from "./features/provider/dashboard/dashboard";
 import { Booking } from "./features/customer/booking/booking";
 import { ViewProfileComponent } from "./features/customer/view-profile/view-profile";
+import { AdminDashboardComponent } from "./features/admin/dashboard/dashboard";
+import { ProviderApprovalComponent } from "./features/admin/provider-approval/provider-approval";
 
 export const routes: Routes = [
   {
@@ -50,11 +52,19 @@ export const routes: Routes = [
     component: providerdashboardComponent,
   },
   {
+    path: "admin-dashboard",
+    component: AdminDashboardComponent,
+  },
+  {
     path: "booking",
     component: Booking,
   },
   {
     path: "view-profile",
     component: ViewProfileComponent,
+  },
+  {
+    path: "admin/provider-approval",
+    component: ProviderApprovalComponent,
   },
 ];
