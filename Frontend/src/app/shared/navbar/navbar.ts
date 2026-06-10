@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, ElementRef, HostListener } from "@angular/core";
+
 import { CommonModule } from "@angular/common";
 import { Router, RouterLink, RouterLinkActive } from "@angular/router";
 
@@ -13,7 +14,10 @@ export class NavbarComponent {
   user: any = null;
   showMenu = false;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private elementRef: ElementRef,
+  ) {}
 
   ngOnInit() {
     const storedUser = sessionStorage.getItem("user");
@@ -25,6 +29,16 @@ export class NavbarComponent {
 
   toggleMenu() {
     this.showMenu = !this.showMenu;
+  }
+
+  @HostListener("document:click", ["$event"])
+  onDocumentClick(event: MouseEvent) {
+    const profileMenu =
+      this.elementRef.nativeElement.querySelector(".profile-menu");
+
+    if (profileMenu && !profileMenu.contains(event.target)) {
+      this.showMenu = false;
+    }
   }
 
   logout() {

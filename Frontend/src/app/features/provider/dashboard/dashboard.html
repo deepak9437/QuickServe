@@ -1,71 +1,68 @@
-<section class="dashboard">
-
-  <div class="dashboard-header">
+<div class="dashboard-container">
+  <div class="welcome-card">
+    <div class="avatar">{{ user.fullName?.charAt(0).toUpperCase() }}</div>
 
     <div>
-      <h1>
-        Welcome, {{provider.user?.fullName}} 👋
-      </h1>
-
-      <p>
-        Manage your services and bookings.
-      </p>
+      <h2>Welcome, {{ user.fullName }}</h2>
+      <p>{{ user.skills || 'Service Provider' }}</p>
     </div>
+  </div>
 
-    <button
-      class="profile-btn"
-      (click)="viewProfile()">
+  <div class="status-card">
+    <h3>Account Status</h3>
 
-      My Profile
-
-    </button>
-
+    <span class="status approved"> {{ user.status || 'Pending' }} </span>
   </div>
 
   <div class="stats-grid">
-
     <div class="stat-card">
-      <h2>{{provider.experience}}</h2>
-      <p>Years Experience</p>
+      <h1>{{ totalBookings }}</h1>
+      <p>Total Bookings</p>
     </div>
 
     <div class="stat-card">
-      <h2>{{provider.review}}</h2>
-      <p>Total Reviews</p>
+      <h1>{{ pendingRequests }}</h1>
+      <p>Pending Requests</p>
     </div>
 
     <div class="stat-card">
-      <h2>{{provider.availability ? 'Yes' : 'No'}}</h2>
-      <p>Available</p>
+      <h1>{{ completedJobs }}</h1>
+      <p>Completed Jobs</p>
     </div>
-
-    <div class="stat-card">
-      <h2>{{provider.skills}}</h2>
-      <p>Skill</p>
-    </div>
-
   </div>
 
-  <div class="dashboard-section">
-
-    <h2>Recent Activities</h2>
-
-    <div
-      class="activity-card"
-      *ngFor="let activity of recentActivities">
-
-      {{activity}}
-
+  <div class="actions-grid">
+    <div class="action-card">
+      👤
+      <h4>My Profile</h4>
     </div>
 
+    <div class="action-card">
+      📅
+      <h4>Bookings</h4>
+    </div>
+
+    <div class="action-card">
+      💰
+      <h4>Earnings</h4>
+    </div>
+
+    <div class="action-card">
+      ⭐
+      <h4>Reviews</h4>
+    </div>
   </div>
 
-  <button
-    class="logout-btn"
-    (click)="logout()">
+  <div class="recent-section">
+    <h3>Recent Requests</h3>
 
-    Logout
+    <div class="request-card" *ngFor="let request of recentRequests">
+      <div>
+        <h4>{{ request.customer }}</h4>
+        <p>{{ request.service }}</p>
+      </div>
 
-  </button>
-
-</section>
+      <span class="badge"> {{ request.status }} </span>
+    </div>
+  </div>
+</div>

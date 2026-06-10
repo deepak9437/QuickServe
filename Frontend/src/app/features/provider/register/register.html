@@ -84,12 +84,19 @@
 
       <div class="form-group">
         <label>Skills</label>
-        <input
-          type="text"
-          name="skills"
-          [(ngModel)]="provider.skills"
-          placeholder="Electrician, Plumber, Cleaner"
-        />
+
+        <select name="skills" [(ngModel)]="provider.skills">
+          <option value="">Select Skill</option>
+          <option value="Electrician">Electrician</option>
+          <option value="Plumber">Plumber</option>
+          <option value="Cleaner">Cleaner</option>
+          <option value="Carpenter">Carpenter</option>
+          <option value="Painter">Painter</option>
+          <option value="AC Technician">AC Technician</option>
+          <option value="Home Tutor">Home Tutor</option>
+          <option value="Gardener">Gardener</option>
+          <option value="Mechanic">Mechanic</option>
+        </select>
       </div>
 
       <div class="form-group">

@@ -1,41 +1,67 @@
-<section class="dashboard">
-  <div class="dashboard-header">
+<div class="dashboard-container">
+  <!-- Welcome -->
+  <div class="welcome-card">
+    <div class="avatar">{{ user.fullName?.charAt(0).toUpperCase() }}</div>
+
     <div>
-      <h1>Welcome, {{user.fullName}} 👋</h1>
+      <h2>Welcome back, {{ user.fullName }}</h2>
       <p>Manage your bookings easily.</p>
     </div>
-
-    <button class="profile-btn" routerLink="/customer-profile">
-      My Profile
-    </button>
   </div>
 
+  <!-- Stats -->
   <div class="stats-grid">
     <div class="stat-card">
-      <h2>{{totalBookings}}</h2>
+      <h1>{{ totalBookings }}</h1>
       <p>Total Bookings</p>
     </div>
 
     <div class="stat-card">
-      <h2>{{activeRequests}}</h2>
+      <h1>{{ activeRequests }}</h1>
       <p>Active Requests</p>
     </div>
 
     <div class="stat-card">
-      <h2>{{favouriteProviders}}</h2>
+      <h1>{{ favouriteProviders }}</h1>
       <p>Favourite Providers</p>
     </div>
   </div>
 
-  <div class="dashboard-section">
-    <h2>Recent Bookings</h2>
+  <!-- Quick Actions -->
+  <div class="section">
+    <h3>Quick Actions</h3>
 
-    <div class="booking-card" *ngFor="let booking of recentBookings">
-      <strong>{{booking.serviceName}}</strong>
+    <div class="actions">
+      <button routerLink="/services">New Booking</button>
 
-      <span>{{booking.status}}</span>
+      <button routerLink="/booking-history">Booking History</button>
+
+      <button routerLink="/favorites">Favourites</button>
+
+      <button routerLink="/messages">Support</button>
     </div>
   </div>
 
+  <!-- Recent Bookings -->
+  <div class="section">
+    <div class="section-header">
+      <h3>Recent Bookings</h3>
+      <button>See All</button>
+    </div>
+
+    <div class="booking-item" *ngFor="let booking of recentBookings">
+      <div>
+        <h4>{{ booking.service }}</h4>
+        <small>{{ booking.date }}</small>
+      </div>
+
+      <span [class]="'status ' + booking.status.toLowerCase()">
+        {{ booking.status }}
+      </span>
+    </div>
+  </div>
+
+  <!-- Logout -->
+
   <button class="logout-btn" (click)="logout()">Logout</button>
-</section>
+</div>

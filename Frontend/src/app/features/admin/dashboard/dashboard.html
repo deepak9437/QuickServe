@@ -1,1 +1,76 @@
-<p>dashboard works!</p>
+<div class="admin-dashboard">
+  <div class="welcome-card">
+    <h1>Welcome Admin 👋</h1>
+    <p>Manage QuickServe Platform</p>
+  </div>
+
+  <!-- Stats Cards -->
+
+  <div class="stats-grid">
+    <div class="stat-card users">
+      <h2>150</h2>
+      <p>Total Users</p>
+    </div>
+
+    <div class="stat-card providers">
+      <h2>45</h2>
+      <p>Total Providers</p>
+    </div>
+
+    <div class="stat-card approvals">
+      <h2>8</h2>
+      <p>Pending Approvals</p>
+    </div>
+
+    <div class="stat-card bookings">
+      <h2>120</h2>
+      <p>Total Bookings</p>
+    </div>
+  </div>
+
+  <!-- Quick Actions -->
+
+  <div class="action-section">
+    <h2>Quick Actions</h2>
+
+    <div class="action-grid">
+      <div class="action-card" (click)="goToUsers()">
+        👤
+        <h3>Users</h3>
+      </div>
+
+      <div class="action-card" (click)="goToProviders()">
+        👷
+        <h3>Providers</h3>
+      </div>
+
+      <div class="action-card" (click)="goToApprovals()">
+        ✅
+        <h3>Approvals</h3>
+      </div>
+
+      <div class="action-card" (click)="goToBookings()">
+        📅
+        <h3>Bookings</h3>
+      </div>
+
+      <div class="action-card" (click)="goToReports()">
+        📈
+        <h3>Reports</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Activity -->
+
+  <div class="activity-card">
+    <h2>Recent Activity</h2>
+
+    <ul>
+      <li>Rajesh Kumar registered as Provider</li>
+      <li>Satya Das booked Electrician Service</li>
+      <li>Provider #12 approved</li>
+      <li>New user registration completed</li>
+    </ul>
+  </div>
+</div>

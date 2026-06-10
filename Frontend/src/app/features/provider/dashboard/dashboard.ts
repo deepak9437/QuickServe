@@ -1,37 +1,38 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Component } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
 @Component({
-  selector: 'app-provider-dashboard',
+  selector: "app-provider-dashboard",
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './dashboard.html',
-  styleUrl: './dashboard.css'
+  templateUrl: "./dashboard.html",
+  styleUrl: "./dashboard.css",
 })
 export class providerdashboardComponent {
+  user: any = {};
 
-  provider: any = {};
+  totalBookings = 12;
+  pendingRequests = 4;
+  completedJobs = 18;
 
-  recentActivities = [
-    'New Booking Request',
-    'Profile Approved',
-    'Received a New Review'
+  recentRequests = [
+    {
+      customer: "Satya Das",
+      service: "Electrical Repair",
+      status: "Pending",
+    },
+    {
+      customer: "Rakesh Kumar",
+      service: "Home Wiring",
+      status: "Approved",
+    },
   ];
 
-  constructor(private router: Router) {
+  ngOnInit() {
+    const data = sessionStorage.getItem("user");
 
-    this.provider = JSON.parse(
-      localStorage.getItem('provider') || '{}'
-    );
-  }
-
-  viewProfile() {
-    this.router.navigate(['/provider-profile']);
-  }
-
-  logout() {
-    localStorage.clear();
-    this.router.navigate(['/login']);
+    if (data) {
+      this.user = JSON.parse(data);
+    }
   }
 }
