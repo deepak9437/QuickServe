@@ -20,7 +20,7 @@ public class ViewDetailsController {
 	@Autowired
 	private ViewService viewService;
 
-	@GetMapping("/all")
+	@GetMapping("/approved")
 	public List<ProviderDTO> getAllProviders() {
 		
 		return viewService.getAllProviders();
@@ -30,5 +30,10 @@ public class ViewDetailsController {
 	public List<ProviderDTO> singleProvider(@RequestParam String skills){
 		
 		return viewService.getSingleProvider(skills);
+	}
+	
+	@GetMapping("/pending")
+	public List<ProviderDTO> pendingProviders(){
+		return viewService.getAllPending();
 	}
 }

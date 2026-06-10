@@ -22,8 +22,9 @@ public class SecurityConfig {
 	            .requestMatchers("/provider/provider_register").permitAll()
 	            .requestMatchers("/provider/provider_login").permitAll()
 	            .requestMatchers("/view/separate").permitAll()
-	            .requestMatchers("/view/all").permitAll()
-	            .requestMatchers("/booking/costumer_booking").permitAll()
+	            .requestMatchers("/view/approved").permitAll()
+	            .requestMatchers("/view/pending").permitAll()
+	            .requestMatchers("/booking/customer_booking").permitAll()
 	            .anyRequest().authenticated()
 	        );
             		

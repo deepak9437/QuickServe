@@ -46,7 +46,7 @@ public class UserController {
 		entity.setUserEmail(userEmail);
 		entity.setAddress(address);
 		entity.setPincode(pincode);
-		entity.setRole("costumer");
+		entity.setRole("customer");
 		entity.setUserPhone(userPhone);
 
 		userService.userRegisterService(entity);

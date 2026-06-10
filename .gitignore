@@ -7,7 +7,7 @@ Frontend/.angular/
 Backend/target/
 
 # Spring Boot Config
-Backend/src/main/resources/application.properties
+**/application.properties
 
 # Eclipse/STS
 **/.classpath
