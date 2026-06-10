@@ -4,7 +4,9 @@
     <p>Review provider registration requests</p>
   </div>
 
-  <div class="provider-card" *ngFor="let provider of providers">
+  @if (providers.length > 0) { @for (provider of providers; track provider.id) {
+
+  <div class="provider-card">
     <div class="provider-info">
       <h2>{{ provider.user.fullName }}</h2>
 
@@ -33,9 +35,7 @@
         {{ provider.description }}
       </p>
 
-      <span class="status" [ngClass]="provider.status">
-        {{ provider.status | uppercase }}
-      </span>
+      <span class="status"> {{ provider.status }} </span>
     </div>
 
     <div class="actions">
@@ -50,4 +50,12 @@
       </button>
     </div>
   </div>
+
+  } } @else {
+
+  <div class="no-data">
+    <h3>No Provider Requests Found</h3>
+  </div>
+
+  }
 </div>
