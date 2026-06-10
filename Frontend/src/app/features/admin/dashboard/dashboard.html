@@ -4,31 +4,31 @@
     <p>Manage QuickServe Platform</p>
   </div>
 
-  <!-- Stats Cards -->
+  @if (dashboardStats) {
 
   <div class="stats-grid">
     <div class="stat-card users">
-      <h2>150</h2>
+      <h2>{{ dashboardStats.totalUsers }}</h2>
       <p>Total Users</p>
     </div>
 
     <div class="stat-card providers">
-      <h2>45</h2>
+      <h2>{{ dashboardStats.totalProviders }}</h2>
       <p>Total Providers</p>
     </div>
 
     <div class="stat-card approvals">
-      <h2>8</h2>
+      <h2>{{ dashboardStats.pendingApprovals }}</h2>
       <p>Pending Approvals</p>
     </div>
 
     <div class="stat-card bookings">
-      <h2>120</h2>
+      <h2>{{ dashboardStats.totalBookings }}</h2>
       <p>Total Bookings</p>
     </div>
   </div>
 
-  <!-- Quick Actions -->
+  }
 
   <div class="action-section">
     <h2>Quick Actions</h2>
@@ -61,16 +61,21 @@
     </div>
   </div>
 
-  <!-- Recent Activity -->
-
   <div class="activity-card">
     <h2>Recent Activity</h2>
 
+    @if (recentActivities.length > 0) {
+
     <ul>
-      <li>Rajesh Kumar registered as Provider</li>
-      <li>Satya Das booked Electrician Service</li>
-      <li>Provider #12 approved</li>
-      <li>New user registration completed</li>
+      @for (activity of recentActivities; track $index) {
+      <li>{{ activity }}</li>
+      }
     </ul>
+
+    } @else {
+
+    <p>No recent activities found.</p>
+
+    }
   </div>
 </div>
