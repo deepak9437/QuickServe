@@ -39,7 +39,7 @@ export class LoginComponent {
 
         sessionStorage.setItem("user", JSON.stringify(user));
 
-        if (user.role === "costumer") {
+        if (user.role === "customer") {
           Swal.fire({
             title: "Success!",
             text: "Customer Login Successful",
