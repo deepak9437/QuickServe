@@ -6,15 +6,15 @@ import { Observable } from "rxjs";
   providedIn: "root",
 })
 export class AdminService {
-  private apiUrl = "http://localhost:8080/admin";
+  private apiUrl = "http://localhost:3030/admin";
 
   constructor(private http: HttpClient) {}
 
   getDashboardStats(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/dashboard-stats`);
+    return this.http.get(`${this.apiUrl}/dashboard_stats`);
   }
 
   getRecentActivities(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/recent-activities`);
+    return this.http.get(`${this.apiUrl}/recent_activities`);
   }
 }
