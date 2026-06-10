@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import quick.serve.dto.AdminDashboardDTO;
 import quick.serve.entity.ProviderEntity;
 import quick.serve.repo.BookingRepo;
 import quick.serve.repo.ProviderRepository;
@@ -53,5 +54,25 @@ public class AdminController {
 	@GetMapping("/pending_approval")
 	public long pendingApproval() {
 		return providerRepository.countByStatus("pending");
+	}
+	
+	@GetMapping("/dashboard_stats")
+	public AdminDashboardDTO dashboardStats() {
+
+	    AdminDashboardDTO dto = new AdminDashboardDTO();
+
+	    dto.setTotalCustomers(
+	            userRepository.countByRole("customer"));
+
+	    dto.setTotalProviders(
+	            userRepository.countByRole("provider"));
+
+	    dto.setTotalBookings(
+	            bookingRepo.count());
+
+	    dto.setPendingApproval(
+	            providerRepository.countByStatus("pending"));
+
+	    return dto;
 	}
 }

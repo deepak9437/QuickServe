@@ -29,6 +29,7 @@ public class SecurityConfig {
 	            .requestMatchers("/admin/total_providers").permitAll()
 	            .requestMatchers("/admin/total_bookings").permitAll()
 	            .requestMatchers("/admin/pending_approval").permitAll()
+	            .requestMatchers("/admin/dashboard_stats").permitAll()
 	            .requestMatchers("/booking/customer_booking").permitAll()
 	           
 	            .anyRequest().authenticated()
