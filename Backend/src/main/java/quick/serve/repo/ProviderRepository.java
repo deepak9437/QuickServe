@@ -51,4 +51,6 @@ public interface ProviderRepository extends JpaRepository<ProviderEntity, Intege
 		""")
 		List<ProviderEntity> findBySkills(@Param("skills") String skills);
 
+	long countByStatus(String string);
+
 }

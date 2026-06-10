@@ -24,7 +24,13 @@ public class SecurityConfig {
 	            .requestMatchers("/view/separate").permitAll()
 	            .requestMatchers("/view/approved").permitAll()
 	            .requestMatchers("/view/pending").permitAll()
+	            .requestMatchers("/admin/approval").permitAll()
+	            .requestMatchers("/admin/total_customers").permitAll()
+	            .requestMatchers("/admin/total_providers").permitAll()
+	            .requestMatchers("/admin/total_bookings").permitAll()
+	            .requestMatchers("/admin/pending_approval").permitAll()
 	            .requestMatchers("/booking/customer_booking").permitAll()
+	           
 	            .anyRequest().authenticated()
 	        );
             		
