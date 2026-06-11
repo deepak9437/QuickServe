@@ -17,13 +17,6 @@ public interface ProviderRepository extends JpaRepository<ProviderEntity, Intege
 
 //	UserEntity findByEmailAndPassword(String email, String password);
 
-//	@Query("""
-//			    SELECT DISTINCT p
-//			    FROM ProviderEntity p
-//			    JOIN FETCH p.user
-//			    LEFT JOIN FETCH p.pDocs
-//			""")
-//	List<ProviderEntity> findAllWithDetails();
 	
 	// jpql
 	@Query("""

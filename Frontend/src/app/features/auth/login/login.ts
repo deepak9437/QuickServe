@@ -37,7 +37,7 @@ export class LoginComponent {
         console.log("User =", user);
         console.log("Role =", user.role);
 
-        sessionStorage.setItem("user", JSON.stringify(user));
+        sessionStorage.setItem("user", JSON.stringify(response));
 
         if (user.role === "customer") {
           Swal.fire({

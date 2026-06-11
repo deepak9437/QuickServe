@@ -6,11 +6,7 @@
 
     <div class="search-filter">
 
-      <input
-        type="text"
-        placeholder="Search providers..."
-        [(ngModel)]="searchText"
-      />
+      <input type="text" placeholder="Search providers..." [(ngModel)]="searchText" />
 
       <select [(ngModel)]="selectedCategory">
         <option value="">All Categories</option>
@@ -25,76 +21,63 @@
     </div>
   </div>
 
- <div class="providers-grid">
+  <div class="providers-grid">
 
-  <div
-    class="provider-card"
-    *ngFor="let provider of paginatedProviders"
-  >
+    <div class="provider-card" *ngFor="let provider of paginatedProviders">
 
-    <div class="provider-top">
+      <div class="provider-top">
 
-      <div class="provider-avatar">
-        {{ provider.user.fullName.charAt(0).toUpperCase() }}
+        <div class="provider-avatar">
+          {{ provider.user.fullName.charAt(0).toUpperCase() }}
+        </div>
+
+        <div class="provider-info">
+          <h3>{{ provider.user.fullName }}</h3>
+          <span>{{ provider.skills }}</span>
+        </div>
+
       </div>
 
-      <div class="provider-info">
-        <h3>{{ provider.user.fullName }}</h3>
-        <span>{{ provider.skills }}</span>
+      <div class="rating">
+        ⭐ {{ provider.rating || 0 }}
+        ({{ provider.review || 0 }} Reviews)
       </div>
 
-    </div>
+      <p class="experience">
+        Experience:
+        {{ provider.experience > 0 ? provider.experience : 0 }}
+        Years
+      </p>
 
-    <div class="rating">
-      ⭐ {{ provider.rating || 0 }}
-      ({{ provider.review || 0 }} Reviews)
-    </div>
+      <p class="description">
+        {{ provider.description }}
+      </p>
 
-    <p class="experience">
-      Experience:
-      {{ provider.experience > 0 ? provider.experience : 0 }}
-      Years
-    </p>
+      <div class="status">
+        Status:
+        <span>{{ provider.status }}</span>
+      </div>
 
-    <p class="description">
-      {{ provider.description }}
-    </p>
+      <div class="provider-footer">
 
-    <div class="status">
-      Status:
-      <span>{{ provider.status }}</span>
-    </div>
+        <button class="booking-btn" (click)="bookNow(provider)">
+          Book Now
+        </button>
 
-    <div class="provider-footer">
+        <a [routerLink]="['/provider', provider.id]" class="profile-btn">
+          View Profile
+        </a>
 
-      <a
-        routerLink="/booking"
-        class="booking-btn"
-      >
-        Book Now
-      </a>
-
-      <a
-        [routerLink]="['/provider', provider.id]"
-        class="profile-btn"
-      >
-        View Profile
-      </a>
+      </div>
 
     </div>
 
   </div>
 
-</div>
-
   <div class="pagination">
 
-    <div
-      *ngFor="let page of totalPages"
-      class="page-btn"
-      [class.active]="currentPage === page"
-      (click)="changePage(page)"
-    >
+    <div *ngFor="let page of totalPages" class="page-btn" [class.active]="currentPage === page"
+      (click)="changePage(page)">
       {{ page }}
     </div>
 
