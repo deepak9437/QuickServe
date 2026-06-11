@@ -11,8 +11,6 @@ import { AdminService } from "../../../core/services/admin";
   styleUrl: "./dashboard.css",
 })
 export class AdminDashboardComponent implements OnInit {
-  loading = true;
-
   dashboardStats = {
     totalUsers: 0,
     totalProviders: 0,
@@ -20,37 +18,31 @@ export class AdminDashboardComponent implements OnInit {
     totalBookings: 0,
   };
 
-  recentActivities: string[] = [];
-
   constructor(
     private router: Router,
     private adminService: AdminService,
   ) {}
 
   ngOnInit(): void {
+    console.log("Dashboard component loaded");
+
     this.loadDashboardData();
   }
 
   loadDashboardData(): void {
     this.adminService.getDashboardStats().subscribe({
-      next: (response: any) => {
-        this.dashboardStats = {
-          totalUsers: response.totalUsers,
-          totalProviders: response.totalProviders,
-          pendingApprovals: response.pendingApprovals,
-          totalBookings: response.totalBookings,
-        };
+      next: (data) => {
+        this.dashboardStats.totalUsers = data.totalCustomers;
+        this.dashboardStats.totalProviders = data.totalProviders;
+        this.dashboardStats.pendingApprovals = data.pendingApproval;
+        this.dashboardStats.totalBookings = data.totalBookings;
 
-        this.recentActivities = response.recentActivities || [];
-        this.loading = false;
-      },
-      error: (err) => {
-        console.error("Dashboard load failed", err);
-        this.loading = false;
+        console.log(this.dashboardStats);
+
+        console.log("dashboardStats =", this.dashboardStats);
       },
     });
   }
-
   goToUsers() {
     this.router.navigate(["/admin/users"]);
   }
