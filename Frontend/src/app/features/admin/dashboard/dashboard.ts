@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
 import { Router } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { AdminService } from "../../../core/services/admin";
@@ -21,11 +21,11 @@ export class AdminDashboardComponent implements OnInit {
   constructor(
     private router: Router,
     private adminService: AdminService,
+    private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
     console.log("Dashboard component loaded");
-
     this.loadDashboardData();
   }
 
@@ -37,12 +37,16 @@ export class AdminDashboardComponent implements OnInit {
         this.dashboardStats.pendingApprovals = data.pendingApproval;
         this.dashboardStats.totalBookings = data.totalBookings;
 
-        console.log(this.dashboardStats);
+        this.cdr.detectChanges();
 
         console.log("dashboardStats =", this.dashboardStats);
       },
+      error: (err) => {
+        console.error(err);
+      },
     });
   }
+
   goToUsers() {
     this.router.navigate(["/admin/users"]);
   }
