@@ -24,7 +24,7 @@ public class BookingController {
 		this.bookingService = bookingService;
 	}
 
-	@PostMapping("/costumer_booking")
+	@PostMapping("/customer_booking")
 	public void gotoBookings(@RequestParam Integer uId, @RequestParam Integer pId, @RequestParam String serviceName,
 			@RequestParam String problem, @RequestParam String address,
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate bookingDate) {
