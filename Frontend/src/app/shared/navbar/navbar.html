@@ -48,6 +48,8 @@
         <a routerLink="/dashboard"> Dashboard </a>
         } @if (user.role === 'provider') {
         <a routerLink="/provider-dashboard"> Dashboard </a>
+        } @if (user.role === 'admin') {
+        <a routerLink="/admin-dashboard"> Dashboard </a>
         }
 
         <button (click)="logout()">Logout</button>
