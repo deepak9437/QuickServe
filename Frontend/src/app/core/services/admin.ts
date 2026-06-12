@@ -12,4 +12,17 @@ export class AdminService {
   getDashboardStats() {
     return this.http.get<any>(`${this.apiUrl}/dashboard_stats`);
   }
+  approveProvider(id: number) {
+    return this.http.put(
+      `http://localhost:3030/quickserve/provider/approve/${id}`,
+      {},
+    );
+  }
+
+  rejectProvider(id: number) {
+    return this.http.put(
+      `http://localhost:3030/quickserve/provider/reject/${id}`,
+      {},
+    );
+  }
 }

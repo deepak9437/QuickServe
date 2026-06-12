@@ -1,45 +1,32 @@
 <div class="approval-container">
   <div class="page-header">
-    <h1>Provider Approvals</h1>
-    <p>Review provider registration requests</p>
+    <h1>Provider Approval Requests</h1>
+    <p>Review provider details before approval</p>
   </div>
 
-  @if (providers.length > 0) { @for (provider of providers; track provider.id) {
+  @for (provider of providers; track provider.id) {
 
   <div class="provider-card">
     <div class="provider-info">
       <h2>{{ provider.user.fullName }}</h2>
 
-      <p>
-        <strong>Skill:</strong>
-        {{ provider.skills }}
-      </p>
+      <p><strong>Skill:</strong> {{ provider.skills }}</p>
 
-      <p>
-        <strong>Experience:</strong>
-        {{ provider.experience }} Years
-      </p>
+      <p><strong>Experience:</strong> {{ provider.experience }} Years</p>
 
-      <p>
-        <strong>Email:</strong>
-        {{ provider.user.userEmail }}
-      </p>
+      <p><strong>Email:</strong> {{ provider.user.userEmail }}</p>
 
-      <p>
-        <strong>Phone:</strong>
-        {{ provider.user.userPhone }}
-      </p>
+      <p><strong>Phone:</strong> {{ provider.user.userPhone }}</p>
 
-      <p>
-        <strong>Description:</strong>
-        {{ provider.description }}
-      </p>
-
-      <span class="status"> {{ provider.status }} </span>
+      <p><strong>Status:</strong> {{ provider.status }}</p>
     </div>
 
     <div class="actions">
-      <button class="view-btn">View Documents</button>
+      <button class="view-btn" (click)="viewProvider(provider)">
+        View Details
+      </button>
+
+      @if (provider.status === 'pending') {
 
       <button class="approve-btn" (click)="approveProvider(provider.id)">
         Approve
@@ -48,13 +35,9 @@
       <button class="reject-btn" (click)="rejectProvider(provider.id)">
         Reject
       </button>
+
+      }
     </div>
-  </div>
-
-  } } @else {
-
-  <div class="no-data">
-    <h3>No Provider Requests Found</h3>
   </div>
 
   }

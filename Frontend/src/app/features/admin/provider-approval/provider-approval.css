@@ -1,27 +1,16 @@
 .approval-container {
   max-width: 1200px;
-  margin: 30px auto;
-  padding: 20px;
+  margin: auto;
+  padding: 30px;
 }
 
 .page-header {
   margin-bottom: 25px;
 }
 
-.page-header h1 {
-  font-size: 32px;
-  color: #222;
-  margin-bottom: 8px;
-}
-
-.page-header p {
-  color: #666;
-  font-size: 15px;
-}
-
 .provider-card {
-  background: #fff;
-  border-radius: 18px;
+  background: white;
+  border-radius: 16px;
   padding: 25px;
   margin-bottom: 20px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
@@ -29,17 +18,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 20px;
-
-  transition: 0.3s;
-}
-
-.provider-card:hover {
-  transform: translateY(-3px);
-}
-
-.provider-info {
-  flex: 1;
 }
 
 .provider-info h2 {
@@ -49,31 +27,6 @@
 
 .provider-info p {
   margin: 8px 0;
-  color: #444;
-}
-
-.status {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 7px 15px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.pending {
-  background: #fff7d6;
-  color: #b45309;
-}
-
-.approved {
-  background: #dcfce7;
-  color: #166534;
-}
-
-.rejected {
-  background: #fee2e2;
-  color: #b91c1c;
 }
 
 .actions {
@@ -88,16 +41,11 @@
   border-radius: 10px;
   cursor: pointer;
   font-weight: 600;
-  transition: 0.3s;
 }
 
 .view-btn {
-  background: #3b82f6;
-  color: white;
-}
-
-.view-btn:hover {
   background: #2563eb;
+  color: white;
 }
 
 .approve-btn {
@@ -105,17 +53,9 @@
   color: white;
 }
 
-.approve-btn:hover {
-  background: #15803d;
-}
-
 .reject-btn {
   background: #dc2626;
   color: white;
-}
-
-.reject-btn:hover {
-  background: #b91c1c;
 }
 
 @media (max-width: 768px) {
@@ -125,10 +65,6 @@
   }
 
   .actions {
-    width: 100%;
-  }
-
-  .actions button {
     width: 100%;
   }
 }

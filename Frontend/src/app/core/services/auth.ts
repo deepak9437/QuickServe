@@ -67,6 +67,6 @@ export class AuthService {
     return this.http.put(`${this.apiUrl1}/user_update`, data);
   }
   getAllProviders() {
-    return this.http.get("http://localhost:3030/quickserve/view/all");
+    return this.http.get("http://localhost:3030/quickserve/view/pending");
   }
 }

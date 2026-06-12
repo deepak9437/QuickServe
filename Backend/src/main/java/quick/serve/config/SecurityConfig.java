@@ -31,6 +31,9 @@ public class SecurityConfig {
 	            .requestMatchers("/admin/pending_approval").permitAll()
 	            .requestMatchers("/admin/dashboard_stats").permitAll()
 	            .requestMatchers("/booking/customer_booking").permitAll()
+	            .requestMatchers("/provider/approve/**").permitAll()
+	            .requestMatchers("/provider/reject/**").permitAll()
+	            
 	           
 	            .anyRequest().authenticated()
 	        );

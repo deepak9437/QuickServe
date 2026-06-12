@@ -36,4 +36,5 @@ public class ViewDetailsController {
 	public List<ProviderDTO> pendingProviders(){
 		return viewService.getAllPending();
 	}
+	
 }

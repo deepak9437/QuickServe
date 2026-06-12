@@ -58,6 +58,17 @@ public class ProviderService {
 
 	public void providerRegisterService(UserEntity entity, ProviderEntity pEntity, String documentType,
 			MultipartFile documentURL, MultipartFile certificate, MultipartFile extraCertificate) {
+		
+		 // Check if email already exists
+	    UserEntity existingUser =
+	            userRepo.findByUserEmail(
+	                    entity.getUserEmail());
+
+	    if (existingUser != null) {
+	        throw new RuntimeException(
+	                "Email already registered");
+	    }
+
 
 		ProviderDocEntity pdEntity = new ProviderDocEntity();
 
@@ -68,22 +79,40 @@ public class ProviderService {
 
 		Path pCertificateLocation = Paths.get(pCertificate + File.separator + certificate.getOriginalFilename());
 
-		Path pExtrapCertificateLocation = Paths
-				.get(pExtraCertificate + File.separator + extraCertificate.getOriginalFilename());
+		Path pExtrapCertificateLocation = null;
+
+		if (extraCertificate != null && !extraCertificate.isEmpty()) {
+
+		    pExtrapCertificateLocation = Paths.get(
+		        pExtraCertificate +
+		        File.separator +
+		        extraCertificate.getOriginalFilename()
+		    );
+		}
 
 		try {
 			Files.copy(documentURL.getInputStream(), pDocLocation, StandardCopyOption.REPLACE_EXISTING);
 			Files.copy(certificate.getInputStream(), pCertificateLocation, StandardCopyOption.REPLACE_EXISTING);
-			Files.copy(extraCertificate.getInputStream(), pExtrapCertificateLocation,
-					StandardCopyOption.REPLACE_EXISTING);
+			if (extraCertificate != null && !extraCertificate.isEmpty()) {
 
+			    Files.copy(
+			        extraCertificate.getInputStream(),
+			        pExtrapCertificateLocation,
+			        StandardCopyOption.REPLACE_EXISTING
+			    );
+			}
 		} catch (Exception e) {
 			e.getLocalizedMessage();
 		}
 
 		pdEntity.setDocumentURL(documentURL.getOriginalFilename());
 		pdEntity.setCertificate(certificate.getOriginalFilename());
-		pdEntity.setExtraCertificate(extraCertificate.getOriginalFilename());
+		if (extraCertificate != null && !extraCertificate.isEmpty()) {
+
+		    pdEntity.setExtraCertificate(
+		        extraCertificate.getOriginalFilename()
+		    );
+		}
 		pdEntity.setDocumentType(documentType);
 
 		userRepo.save(entity);
@@ -98,4 +127,26 @@ public class ProviderService {
 
 	}
 	
+//	-----------------------------------------------------
+	public void approveProvider(Integer id) {
+
+	    ProviderEntity provider =
+	            providerRepo.findById(id)
+	                        .orElseThrow();
+
+	    provider.setStatus("approved");
+
+	    providerRepo.save(provider);
+	}
+
+	public void rejectProvider(Integer id) {
+
+	    ProviderEntity provider =
+	            providerRepo.findById(id)
+	                        .orElseThrow();
+
+	    provider.setStatus("rejected");
+
+	    providerRepo.save(provider);
+	}
 }

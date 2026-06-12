@@ -32,12 +32,14 @@ export class LoginComponent {
 
     this.authService.loginUser(this.loginData).subscribe({
       next: (response: any) => {
+        console.log("LOGIN RESPONSE =", response);
+
         const user = JSON.parse(response);
 
         console.log("User =", user);
         console.log("Role =", user.role);
 
-        sessionStorage.setItem("user", JSON.stringify(response));
+        sessionStorage.setItem("user", JSON.stringify(user));
 
         if (user.role === "customer") {
           Swal.fire({

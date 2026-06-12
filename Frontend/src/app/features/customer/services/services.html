@@ -1,12 +1,14 @@
 <section class="services-page">
-
   <div class="services-header">
     <h1>Find Trusted Service Providers</h1>
     <p>Browse verified professionals and book services instantly.</p>
 
     <div class="search-filter">
-
-      <input type="text" placeholder="Search providers..." [(ngModel)]="searchText" />
+      <input
+        type="text"
+        placeholder="Search providers..."
+        [(ngModel)]="searchText"
+      />
 
       <select [(ngModel)]="selectedCategory">
         <option value="">All Categories</option>
@@ -17,16 +19,12 @@
         <option>Painter</option>
         <option>AC Repair</option>
       </select>
-
     </div>
   </div>
 
   <div class="providers-grid">
-
     <div class="provider-card" *ngFor="let provider of paginatedProviders">
-
       <div class="provider-top">
-
         <div class="provider-avatar">
           {{ provider.user.fullName.charAt(0).toUpperCase() }}
         </div>
@@ -35,23 +33,18 @@
           <h3>{{ provider.user.fullName }}</h3>
           <span>{{ provider.skills }}</span>
         </div>
-
       </div>
 
       <div class="rating">
-        ⭐ {{ provider.rating || 0 }}
-        ({{ provider.review || 0 }} Reviews)
+        ⭐ {{ provider.rating || 0 }} ({{ provider.review || 0 }} Reviews)
       </div>
 
       <p class="experience">
-        Experience:
-        {{ provider.experience > 0 ? provider.experience : 0 }}
+        Experience: {{ provider.experience > 0 ? provider.experience : 0 }}
         Years
       </p>
 
-      <p class="description">
-        {{ provider.description }}
-      </p>
+      <p class="description">{{ provider.description }}</p>
 
       <div class="status">
         Status:
@@ -59,7 +52,6 @@
       </div>
 
       <div class="provider-footer">
-
         <button class="booking-btn" (click)="bookNow(provider)">
           Book Now
         </button>
@@ -67,20 +59,37 @@
         <a [routerLink]="['/provider', provider.id]" class="profile-btn">
           View Profile
         </a>
-
       </div>
-
     </div>
-
   </div>
 
   <div class="pagination">
+    <button
+      class="page-btn"
+      [disabled]="currentPage === 1"
+      (click)="changePage(currentPage - 1)"
+    >
+      Prev
+    </button>
 
-    <div *ngFor="let page of totalPages" class="page-btn" [class.active]="currentPage === page"
-      (click)="changePage(page)">
+    @for (page of totalPages; track page) {
+
+    <button
+      class="page-btn"
+      [class.active]="currentPage === page"
+      (click)="changePage(page)"
+    >
       {{ page }}
-    </div>
+    </button>
 
+    }
+
+    <button
+      class="page-btn"
+      [disabled]="currentPage === totalPages.length"
+      (click)="changePage(currentPage + 1)"
+    >
+      Next
+    </button>
   </div>
-
 </section>

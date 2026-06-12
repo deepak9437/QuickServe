@@ -1,47 +1,69 @@
+@if (provider) {
+
 <div class="profile-container">
-  <div class="profile-card">
-    <div class="profile-header">
-      <div class="avatar">👨‍🔧</div>
-
-      <div>
-        <h1>{{ provider.fullName }}</h1>
-
-        <span class="skill">
-          {{ provider.skills }}
-        </span>
-
-        <p class="rating">⭐ {{ provider.rating }} ({{ provider.reviews }} Reviews)</p>
-      </div>
+  <div class="profile-header">
+    <div class="profile-avatar">
+      {{ provider.user.fullName.charAt(0).toUpperCase() }}
     </div>
 
-    <div class="profile-body">
-      <div class="info-box">
-        <h3>Experience</h3>
+    <div>
+      <h1>{{ provider.user.fullName }}</h1>
 
+      <p>{{ provider.skills }}</p>
+    </div>
+  </div>
+
+  <div class="profile-card">
+    <h2>Provider Information</h2>
+
+    <div class="info-grid">
+      <div>
+        <label>Email</label>
+        <p>{{ provider.user.userEmail }}</p>
+      </div>
+
+      <div>
+        <label>Phone</label>
+        <p>{{ provider.user.userPhone }}</p>
+      </div>
+
+      <div>
+        <label>Experience</label>
         <p>{{ provider.experience }} Years</p>
       </div>
 
-      <div class="info-box">
-        <h3>Contact Number</h3>
-
-        <p>
-          {{ provider.phone }}
-        </p>
+      <div>
+        <label>Status</label>
+        <p>{{ provider.status }}</p>
       </div>
 
-      <div class="description">
-        <h3>About Provider</h3>
-
-        <p>
-          {{ provider.description }}
-        </p>
+      <div>
+        <label>Rating</label>
+        <p>{{ provider.rating || 0 }}</p>
       </div>
-    </div>
 
-    <div class="actions">
-      <button class="book-btn">Book Service</button>
-
-      <button class="contact-btn">Contact Provider</button>
+      <div>
+        <label>Reviews</label>
+        <p>{{ provider.review || 0 }}</p>
+      </div>
     </div>
   </div>
+
+  <div class="profile-card">
+    <h2>Description</h2>
+
+    <p class="description">{{ provider.description }}</p>
+  </div>
+
+  <div class="profile-card">
+    <h2>Service Area</h2>
+
+    <p>{{ provider.user.address }}</p>
+  </div>
+
+  <div class="action-buttons">
+    <button class="book-btn" (click)="bookNow(provider)">Book Service</button>
+  </div>
 </div>
+
+}

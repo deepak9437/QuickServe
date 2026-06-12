@@ -89,7 +89,7 @@ export class RegisterComponent {
         //alert(JSON.stringify(error));
         Swal.fire({
           title: "Error!",
-          text: "Provider Registration Failed",
+          text: error.error || "Provider Registration Failed",
           icon: "error",
           timer: 1500,
           showConfirmButton: false,

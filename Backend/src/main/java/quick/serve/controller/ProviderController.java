@@ -15,6 +15,8 @@ import quick.serve.entity.ProviderEntity;
 import quick.serve.entity.UserEntity;
 import quick.serve.repo.ProviderRepository;
 import quick.serve.service.ProviderService;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 
 @CrossOrigin("*")
 @RequestMapping("/provider")
@@ -83,8 +85,19 @@ public class ProviderController {
 			return null;
 		}
 
-//		return "ok";
 
 	}
-	
+	@PutMapping("/approve/{id}")
+	public void approveProvider(@PathVariable Integer id) {
+
+	    providerService.approveProvider(id);
+
+	}
+
+	@PutMapping("/reject/{id}")
+	public void rejectProvider(@PathVariable Integer id) {
+
+	    providerService.rejectProvider(id);
+
+	}
 }
