@@ -3,7 +3,10 @@ package quick.serve.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,12 +14,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
+import quick.serve.dto.ProviderDashboardDTO;
 import quick.serve.entity.ProviderEntity;
 import quick.serve.entity.UserEntity;
 import quick.serve.repo.ProviderRepository;
+import quick.serve.service.BookingService;
 import quick.serve.service.ProviderService;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
 
 @CrossOrigin("*")
 @RequestMapping("/provider")
@@ -29,6 +32,9 @@ public class ProviderController {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private BookingService bookingService;
 	
 	@Autowired
 	private ProviderService providerService ;
@@ -98,6 +104,12 @@ public class ProviderController {
 	public void rejectProvider(@PathVariable Integer id) {
 
 	    providerService.rejectProvider(id);
-
 	}
+	
+	 @GetMapping("/dashboard/{pId}")
+	    public ProviderDashboardDTO dashboard(
+	            @PathVariable Integer pId) {
+
+	        return bookingService.getDashboardData(pId);
+	    }
 }

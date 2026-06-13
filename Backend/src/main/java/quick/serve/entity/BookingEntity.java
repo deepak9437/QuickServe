@@ -25,7 +25,7 @@ public class BookingEntity {
 	private Integer uId;
 
 	@Column(name = "p_id")
-	private Integer pId;
+	private Integer PId;
 
 	@Column(name = "service_name")
 	private String serviceName;
