@@ -1,38 +1,69 @@
-import { Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AuthService } from "../../../core/services/auth";
+import { ChangeDetectorRef } from '@angular/core';
+
 
 @Component({
-  selector: "app-provider-dashboard",
+  selector: 'app-provider-dashboard',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: "./dashboard.html",
-  styleUrl: "./dashboard.css",
+  templateUrl: './dashboard.html',
+  styleUrl: './dashboard.css'
 })
-export class providerdashboardComponent {
-  user: any = {};
+export class providerdashboardComponent implements OnInit {
 
-  totalBookings = 12;
-  pendingRequests = 4;
-  completedJobs = 18;
+  provider: any = {};
 
-  recentRequests = [
-    {
-      customer: "Satya Das",
-      service: "Electrical Repair",
-      status: "Pending",
-    },
-    {
-      customer: "Rakesh Kumar",
-      service: "Home Wiring",
-      status: "Approved",
-    },
-  ];
+  totalBookings = 0;
+  pendingRequests = 0;
+  completedJobs = 0;
 
-  ngOnInit() {
-    const data = sessionStorage.getItem("user");
+  recentBookings: any[] = [];
+
+  constructor(
+    private dashboardService: AuthService,
+    private cdr: ChangeDetectorRef
+  ) { }
+
+  ngOnInit(): void {
+
+    const data = sessionStorage.getItem('user');
 
     if (data) {
-      this.user = JSON.parse(data);
+
+      this.provider = JSON.parse(data);
+
+      console.log('Provider Data:', this.provider);
+
+      this.loadDashboard();
     }
+  }
+
+  loadDashboard(): void {
+
+  const pId = this.provider.id;
+
+  this.dashboardService
+    .getDashboardData(pId)
+    .subscribe({
+
+      next: (response) => {
+
+        this.totalBookings = response.totalBookings;
+        this.pendingRequests = response.pendingRequests;
+        this.completedJobs = response.completedJobs;
+
+        this.recentBookings = response.recentBookings;
+
+        this.cdr.detectChanges(); // important
+      },
+
+        error: (error: any) => {
+          console.log('Status:', error.status);
+          console.log('Message:', error.message);
+          console.log('Error:', error);
+        }
+      });
   }
 }

@@ -33,6 +33,7 @@ public class SecurityConfig {
 	            .requestMatchers("/booking/customer_booking").permitAll()
 	            .requestMatchers("/provider/approve/**").permitAll()
 	            .requestMatchers("/provider/reject/**").permitAll()
+	            .requestMatchers("/provider/dashboard/**").permitAll()
 	            
 	           
 	            .anyRequest().authenticated()

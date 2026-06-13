@@ -69,4 +69,10 @@ export class AuthService {
   getAllProviders() {
     return this.http.get("http://localhost:3030/quickserve/view/pending");
   }
+
+   getDashboardData(pId: number): Observable<any> {
+    return this.http.get<any>(
+      `${this.apiUrl2}/dashboard/${pId}`
+    );
+  }
 }

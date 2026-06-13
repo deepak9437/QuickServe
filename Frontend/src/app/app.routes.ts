@@ -51,6 +51,7 @@ export const routes: Routes = [
     path: "provider-dashboard",
     component: providerdashboardComponent,
   },
+
   {
     path: "admin-dashboard",
     component: AdminDashboardComponent,
