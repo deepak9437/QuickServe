@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectorRef } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { AuthService } from "../../../core/services/auth";
@@ -12,7 +12,11 @@ import Swal from "sweetalert2";
   styleUrl: "./profile.css",
 })
 export class ProfileComponent {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private cdr: ChangeDetectorRef,
+  ) {}
+
   profileData = {
     id: "",
     fullName: "",
@@ -36,6 +40,12 @@ export class ProfileComponent {
   updateProfile() {
     this.authService.updateProfile(this.profileData).subscribe({
       next: () => {
+        // Update session storage with latest values
+        sessionStorage.setItem("user", JSON.stringify(this.profileData));
+
+        // Refresh UI
+        this.cdr.detectChanges();
+
         Swal.fire({
           icon: "success",
           title: "Profile Updated Successfully",
