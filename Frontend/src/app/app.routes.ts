@@ -12,6 +12,7 @@ import { Booking } from "./features/customer/booking/booking";
 import { ViewProfileComponent } from "./features/customer/view-profile/view-profile";
 import { AdminDashboardComponent } from "./features/admin/dashboard/dashboard";
 import { ProviderApprovalComponent } from "./features/admin/provider-approval/provider-approval";
+import { AboutComponent } from "./features/about/about";
 
 export const routes: Routes = [
   {
@@ -67,5 +68,9 @@ export const routes: Routes = [
   {
     path: "admin/provider-approval",
     component: ProviderApprovalComponent,
+  },
+  {
+    path: "about",
+    component: AboutComponent,
   },
 ];

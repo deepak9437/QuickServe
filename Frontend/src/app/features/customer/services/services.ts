@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Router, RouterModule } from "@angular/router";
 import { Service } from "../../../core/services/service";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-services",
@@ -16,6 +17,7 @@ export class ServicesComponent implements OnInit {
     private service: Service,
     private cdr: ChangeDetectorRef,
     private router: Router,
+    private route: ActivatedRoute,
   ) {}
 
   searchText = "";
@@ -27,6 +29,12 @@ export class ServicesComponent implements OnInit {
   providers: any[] = [];
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe((params) => {
+      if (params["search"]) {
+        this.searchText = params["search"];
+      }
+    });
+
     this.viewProviders();
   }
 

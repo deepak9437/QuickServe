@@ -9,13 +9,19 @@
     </h1>
 
     <p>
-      Find verified plumbers, electricians, cleaners, tutors, and other skilled professionals in
-      minutes.
+      Find verified plumbers, electricians, cleaners, tutors, and other skilled
+      professionals in minutes.
     </p>
 
     <div class="search-box">
-      <input type="text" placeholder="Search services..." />
-      <button>Search</button>
+      <input
+        type="text"
+        placeholder="Search services..."
+        [(ngModel)]="searchText"
+        (keyup.enter)="searchService()"
+      />
+
+      <button (click)="searchService()">Search</button>
     </div>
 
     <div class="hero-stats">
@@ -41,7 +47,11 @@
 
     <div class="service-card card-2">🚿 Plumber</div>
 
-    <img src="/images/home.png" alt="Service Professional" class="worker-image" />
+    <img
+      src="/images/home.png"
+      alt="Service Professional"
+      class="worker-image"
+    />
 
     <div class="service-card card-3">🧹 Cleaning</div>
 
@@ -56,7 +66,7 @@
   </div>
 
   <div class="categories-grid">
-    <div class="category-card">
+    <div class="category-card" routerLink="/services">
       <div class="category-icon">🔧</div>
       <h3>Electrician</h3>
       <p>Expert electrical repairs & installations</p>
@@ -140,59 +150,38 @@
   </div>
 
   <div class="providers-grid">
+    @if (providers.length > 0) { @for (provider of providers; track
+    provider.pId) {
+
     <div class="provider-card">
-      <div class="provider-avatar">👨‍🔧</div>
+      <div class="provider-avatar">
+        {{ provider.user.fullName.charAt(0).toUpperCase() }}
+      </div>
 
-      <h3>Rajesh Kumar</h3>
+      <h3>{{ provider.user.fullName }}</h3>
 
-      <span class="provider-role"> Electrician </span>
+      <span class="provider-role"> {{ provider.skills }} </span>
 
-      <div class="provider-rating">⭐ 4.9 (128 Reviews)</div>
-
-      <p>8+ years experience in electrical repairs and installations.</p>
+      <p>{{ provider.description }}</p>
 
       <div class="provider-actions">
-        <button class="contact-btn">Contact</button>
-
-        <a routerLink="/provider/1" class="profile-btn"> View Profile </a>
+        <a [routerLink]="['/provider', provider.id]" class="profile-btn">
+          View Profile
+        </a>
       </div>
     </div>
 
-    <div class="provider-card">
-      <div class="provider-avatar">🚿</div>
+    } } @else {
 
-      <h3>Prakash Das</h3>
-
-      <span class="provider-role"> Plumber </span>
-
-      <div class="provider-rating">⭐ 4.8 (95 Reviews)</div>
-
-      <p>Expert in pipe repair, water leakage and bathroom fittings.</p>
-
-      <div class="provider-actions">
-        <button class="contact-btn">Contact</button>
-
-        <button class="profile-btn">View Profile</button>
-      </div>
+    <div class="no-provider">
+      <h3>No Providers Available</h3>
     </div>
 
-    <div class="provider-card">
-      <div class="provider-avatar">🧹</div>
+    }
+  </div>
 
-      <h3>Sunita Mohanty</h3>
-
-      <span class="provider-role"> Cleaning Expert </span>
-
-      <div class="provider-rating">⭐ 4.9 (210 Reviews)</div>
-
-      <p>Professional home and office cleaning specialist.</p>
-
-      <div class="provider-actions">
-        <button class="contact-btn">Contact</button>
-
-        <button class="profile-btn">View Profile</button>
-      </div>
-    </div>
+  <div class="view-all">
+    <a routerLink="/services"> Browse All Providers </a>
   </div>
 </section>
 <!-- -------------------------------------------------------------------------------- -->
@@ -205,14 +194,20 @@
   <div class="testimonial-grid">
     <div class="testimonial-card">
       <div class="stars">⭐⭐⭐⭐⭐</div>
-      <p>"Found an electrician within minutes. The service was professional and affordable."</p>
+      <p>
+        "Found an electrician within minutes. The service was professional and
+        affordable."
+      </p>
       <h4>Rahul Sharma</h4>
       <span>Bhubaneswar</span>
     </div>
 
     <div class="testimonial-card">
       <div class="stars">⭐⭐⭐⭐⭐</div>
-      <p>"The direct contact feature helped me discuss my requirements before booking."</p>
+      <p>
+        "The direct contact feature helped me discuss my requirements before
+        booking."
+      </p>
       <h4>Priya Das</h4>
       <span>Cuttack</span>
     </div>
@@ -232,12 +227,17 @@
   <div class="cta-content">
     <h2>Are You a Service Provider?</h2>
 
-    <p>Join Quick Serve today and grow your business by connecting with customers near you.</p>
+    <p>
+      Join Quick Serve today and grow your business by connecting with customers
+      near you.
+    </p>
 
     <div class="cta-buttons">
-      <button class="join-btn"><a routerLink="/provider-register">Become a Provider</a></button>
+      <button class="join-btn">
+        <a routerLink="/provider-register">Become a Provider</a>
+      </button>
 
-      <button class="learn-btn">Learn More</button>
+      <a routerLink="/about" class="learn-btn"> Learn More </a>
     </div>
   </div>
 </section>
