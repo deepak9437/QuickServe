@@ -50,7 +50,7 @@ export class LoginComponent {
             showConfirmButton: false,
           });
 
-          this.router.navigate(["/dashboard"]).then(() => {
+          this.router.navigate(["/"]).then(() => {
             window.location.reload();
           });
         } else if (user.role === "provider") {

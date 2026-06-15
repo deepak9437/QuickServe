@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener } from "@angular/core";
+import { Component, ElementRef, HostListener, OnInit } from "@angular/core";
 
 import { CommonModule } from "@angular/common";
 import { Router, RouterLink, RouterLinkActive } from "@angular/router";
@@ -10,7 +10,7 @@ import { Router, RouterLink, RouterLinkActive } from "@angular/router";
   templateUrl: "./navbar.html",
   styleUrl: "./navbar.css",
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   user: any = null;
   showMenu = false;
 

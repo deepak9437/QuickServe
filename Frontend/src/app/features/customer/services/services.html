@@ -23,7 +23,9 @@
   </div>
 
   <div class="providers-grid">
-    <div class="provider-card" *ngFor="let provider of paginatedProviders">
+    @if (paginatedProviders.length > 0) { @for (provider of paginatedProviders;
+    track provider.id) {
+    <div class="provider-card">
       <div class="provider-top">
         <div class="provider-avatar">
           {{ provider.user.fullName.charAt(0).toUpperCase() }}
@@ -61,6 +63,14 @@
         </a>
       </div>
     </div>
+    } } @else {
+
+    <div class="no-providers">
+      <h3>No providers found</h3>
+      <p>Try adjusting your search or category filter.</p>
+    </div>
+
+    }
   </div>
 
   <div class="pagination">

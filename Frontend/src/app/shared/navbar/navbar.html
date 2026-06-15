@@ -2,6 +2,7 @@
   <div class="logo">Quick<span>Serve</span></div>
 
   <ul class="nav-links">
+    <!-- Home -->
     <li>
       <a
         routerLink="/"
@@ -12,17 +13,18 @@
       </a>
     </li>
 
+    <!-- Services (Hide for Admin) -->
+    @if (!user || user.role !== 'admin') {
     <li>
       <a routerLink="/services" routerLinkActive="active"> Services </a>
     </li>
-
+    } @if (!user || user.role === 'customer') {
     <li>
-      <a routerLink="/provider-register" routerLinkActive="active">
-        Become Provider
-      </a>
+      <a routerLink="/about" routerLinkActive="active"> About Us </a>
     </li>
+    }
 
-    <!-- Not Logged In -->
+    <!-- Guest -->
     @if (!user) {
     <li>
       <a routerLink="/login">Login</a>
@@ -39,21 +41,24 @@
       <div class="profile-icon" (click)="toggleMenu()">👤</div>
 
       @if (showMenu) {
+
       <div class="dropdown">
         <p>{{ user.fullName }}</p>
+        <!-- <small>{{ user.role }}</small> -->
 
         <a routerLink="/view-profile"> View Profile </a>
 
         @if (user.role === 'customer') {
-        <a routerLink="/dashboard"> Dashboard </a>
+        <a routerLink="/dashboard"> Customer Dashboard </a>
         } @if (user.role === 'provider') {
-        <a routerLink="/provider-dashboard"> Dashboard </a>
+        <a routerLink="/provider-dashboard"> Provider Dashboard </a>
         } @if (user.role === 'admin') {
-        <a routerLink="/admin-dashboard"> Dashboard </a>
+        <a routerLink="/admin-dashboard"> Admin Dashboard </a>
         }
 
         <button (click)="logout()">Logout</button>
       </div>
+
       }
     </li>
     }
