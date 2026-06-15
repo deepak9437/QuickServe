@@ -7,10 +7,10 @@ import quick.serve.entity.BookingEntity;
 
 @Data
 public class ProviderDashboardDTO {
-	
-	 private long pendingRequests;
-	    private long completedJobs;
-	    private long totalBookings;
 
-	    private List<BookingEntity> recentBookings;
+	private long pendingRequests;
+	private long completedJobs;
+	private long totalBookings;
+
+	private List<BookingEntity> recentBookings;
 }

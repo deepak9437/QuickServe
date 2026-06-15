@@ -10,12 +10,17 @@ import quick.serve.entity.BookingEntity;
 @Repository
 public interface BookingRepo extends JpaRepository<BookingEntity, Integer> {
 
-    long countByPId(Integer pId);
+	long countByPId(Integer pId);
 
-    long countByPIdAndBookingStatus(Integer pId, String bookingStatus);
+	long countByPIdAndBookingStatus(Integer pId, String bookingStatus);
 
-    List<BookingEntity> findByPIdOrderByBookingDateDesc(Integer pId);
-    
-  
+	List<BookingEntity> findByPIdOrderByBookingDateDesc(Integer pId);
+	
+
+	long countByUId(Integer uId);
+
+	long countByUIdAndBookingStatus(Integer uId, String bookingStatus);
+
+	List<BookingEntity> findByUIdOrderByBookingDateDesc(Integer uId);
 
 }

@@ -19,6 +19,7 @@ public class SecurityConfig {
 	            .requestMatchers("/user/user_register").permitAll()
 	            .requestMatchers("/user/user_login").permitAll()
 	            .requestMatchers("/user/user_update").permitAll()
+	            .requestMatchers("/user/dashboard/**").permitAll()
 	            .requestMatchers("/provider/provider_register").permitAll()
 	            .requestMatchers("/provider/provider_login").permitAll()
 	            .requestMatchers("/view/separate").permitAll()

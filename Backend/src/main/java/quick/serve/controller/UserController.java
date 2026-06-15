@@ -3,6 +3,8 @@ package quick.serve.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
+import quick.serve.dto.UserDashboardDTO;
 import quick.serve.entity.UserEntity;
 import quick.serve.repo.UserRepository;
 import quick.serve.service.UserService;
@@ -27,7 +30,7 @@ public class UserController {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	@Autowired
 	private UserRepository userRepository;
 
@@ -71,15 +74,20 @@ public class UserController {
 	@PutMapping("/user_update")
 	public void updateProfile(@RequestBody UserEntity user) {
 		UserEntity existUser = userRepository.findById(user.getId()).orElseThrow();
-		
+
 		existUser.setFullName(user.getFullName());
 		existUser.setAddress(user.getAddress());
 		existUser.setUserPhone(user.getUserPhone());
 		existUser.setPincode(user.getPincode());
-		
+
 		userRepository.save(existUser);
-	
+
+	}
+
+	@GetMapping("/dashboard/{uId}")
+	public UserDashboardDTO dashboard(@PathVariable Integer uId) {
+
+		return userService.getUserDashboardData(uId);
 	}
 
 }
-

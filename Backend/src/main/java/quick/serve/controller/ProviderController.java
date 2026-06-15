@@ -18,7 +18,6 @@ import quick.serve.dto.ProviderDashboardDTO;
 import quick.serve.entity.ProviderEntity;
 import quick.serve.entity.UserEntity;
 import quick.serve.repo.ProviderRepository;
-import quick.serve.service.BookingService;
 import quick.serve.service.ProviderService;
 
 @CrossOrigin("*")
@@ -32,9 +31,6 @@ public class ProviderController {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
-	@Autowired
-	private BookingService bookingService;
 	
 	@Autowired
 	private ProviderService providerService ;
@@ -110,6 +106,6 @@ public class ProviderController {
 	    public ProviderDashboardDTO dashboard(
 	            @PathVariable Integer pId) {
 
-	        return bookingService.getDashboardData(pId);
+	        return providerService.getDashboardData(pId);
 	    }
 }

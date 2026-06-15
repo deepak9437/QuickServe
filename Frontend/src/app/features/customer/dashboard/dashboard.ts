@@ -1,56 +1,80 @@
-import { Component } from "@angular/core";
-import { Router } from "@angular/router";
-import { CommonModule } from "@angular/common";
+import {
+  Component,
+  OnInit,
+  ChangeDetectorRef
+} from '@angular/core';
+
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../core/services/auth';
 
 @Component({
-  selector: "app-dashboard",
+  selector: 'app-dashboard',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: "./dashboard.html",
-  styleUrl: "./dashboard.css",
+  templateUrl: './dashboard.html',
+  styleUrl: './dashboard.css'
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
+
   user: any = {};
 
-  totalBookings = 24;
-  activeRequests = 3;
-  favouriteProviders = 7;
+  totalBookings = 0;
+  activeBookings = 0;
+  completedBookings = 0;
 
-  recentBookings = [
-    {
-      service: "Home Cleaning",
-      date: "08 Jun 2026",
-      status: "Confirmed",
-    },
-    {
-      service: "Garden Maintenance",
-      date: "05 Jun 2026",
-      status: "Pending",
-    },
-    {
-      service: "Electrical Repair",
-      date: "01 Jun 2026",
-      status: "Completed",
-    },
-    {
-      service: "Wall Painting",
-      date: "28 May 2026",
-      status: "Cancelled",
-    },
-  ];
+  recentBookings: any[] = [];
 
-  constructor(private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private cdr: ChangeDetectorRef
+  ) {}
 
-  ngOnInit() {
-    const data = sessionStorage.getItem("user");
+  ngOnInit(): void {
+
+    const data = sessionStorage.getItem('user');
 
     if (data) {
+
       this.user = JSON.parse(data);
+
+      console.log('User Data:', this.user);
+
+      this.loadDashboard();
     }
   }
 
-  logout() {
+  loadDashboard(): void {
+
+    this.authService
+      .getUserDashboardData(this.user.id)
+      .subscribe({
+
+        next: (response: any) => {
+
+          console.log('Dashboard Response:', response);
+
+          this.totalBookings = response.totalBookings;
+          this.activeBookings = response.activeBookings;
+          this.completedBookings = response.completedBookings;
+
+          this.recentBookings = response.recentBookings;
+
+          this.cdr.detectChanges();
+        },
+
+        error: (error: any) => {
+
+          console.error(error);
+        }
+      });
+  }
+
+  logout(): void {
+
     sessionStorage.clear();
-    this.router.navigate(["/login"]);
+
+    this.router.navigate(['/login']);
   }
 }

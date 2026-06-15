@@ -75,4 +75,11 @@ export class AuthService {
       `${this.apiUrl2}/dashboard/${pId}`
     );
   }
+
+  getUserDashboardData(uId: number) {
+
+  return this.http.get(
+    `http://localhost:3030/quickserve/user/dashboard/${uId}`
+  );
+}
 }

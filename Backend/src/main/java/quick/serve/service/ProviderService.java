@@ -12,31 +12,36 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import quick.serve.dto.ProviderDashboardDTO;
 import quick.serve.entity.ProviderDocEntity;
 import quick.serve.entity.ProviderEntity;
 import quick.serve.entity.UserEntity;
+import quick.serve.repo.BookingRepo;
 import quick.serve.repo.ProviderDocRepository;
 import quick.serve.repo.ProviderRepository;
 import quick.serve.repo.UserRepository;
 
 @Service
 public class ProviderService {
-	
+
 	@Autowired
 	private UserRepository userRepo;
-	
+
 	@Autowired
 	private ProviderRepository providerRepo;
 
 	@Autowired
 	private ProviderDocRepository providerDocRepository;
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
+	private BookingRepo bookingRepo;
+
+	@Autowired
 	private EmailService emailService;
-	
+
 	@Value("${image.path.provider.document}")
 	String pDocument;
 
@@ -45,12 +50,12 @@ public class ProviderService {
 
 	@Value("${image.path.provider.extraCertificate}")
 	String pExtraCertificate;
-	
+
 	public UserEntity providerLogingService(String userEmail, String password) {
 		UserEntity entity = userRepo.findByUserEmail(userEmail);
-		
+
 		boolean matches = passwordEncoder.matches(password, entity.getPassword());
-		if(matches) {
+		if (matches) {
 			return entity;
 		}
 		return null;
@@ -58,17 +63,13 @@ public class ProviderService {
 
 	public void providerRegisterService(UserEntity entity, ProviderEntity pEntity, String documentType,
 			MultipartFile documentURL, MultipartFile certificate, MultipartFile extraCertificate) {
-		
-		 // Check if email already exists
-	    UserEntity existingUser =
-	            userRepo.findByUserEmail(
-	                    entity.getUserEmail());
 
-	    if (existingUser != null) {
-	        throw new RuntimeException(
-	                "Email already registered");
-	    }
+		// Check if email already exists
+		UserEntity existingUser = userRepo.findByUserEmail(entity.getUserEmail());
 
+		if (existingUser != null) {
+			throw new RuntimeException("Email already registered");
+		}
 
 		ProviderDocEntity pdEntity = new ProviderDocEntity();
 
@@ -83,11 +84,8 @@ public class ProviderService {
 
 		if (extraCertificate != null && !extraCertificate.isEmpty()) {
 
-		    pExtrapCertificateLocation = Paths.get(
-		        pExtraCertificate +
-		        File.separator +
-		        extraCertificate.getOriginalFilename()
-		    );
+			pExtrapCertificateLocation = Paths
+					.get(pExtraCertificate + File.separator + extraCertificate.getOriginalFilename());
 		}
 
 		try {
@@ -95,11 +93,8 @@ public class ProviderService {
 			Files.copy(certificate.getInputStream(), pCertificateLocation, StandardCopyOption.REPLACE_EXISTING);
 			if (extraCertificate != null && !extraCertificate.isEmpty()) {
 
-			    Files.copy(
-			        extraCertificate.getInputStream(),
-			        pExtrapCertificateLocation,
-			        StandardCopyOption.REPLACE_EXISTING
-			    );
+				Files.copy(extraCertificate.getInputStream(), pExtrapCertificateLocation,
+						StandardCopyOption.REPLACE_EXISTING);
 			}
 		} catch (Exception e) {
 			e.getLocalizedMessage();
@@ -109,9 +104,7 @@ public class ProviderService {
 		pdEntity.setCertificate(certificate.getOriginalFilename());
 		if (extraCertificate != null && !extraCertificate.isEmpty()) {
 
-		    pdEntity.setExtraCertificate(
-		        extraCertificate.getOriginalFilename()
-		    );
+			pdEntity.setExtraCertificate(extraCertificate.getOriginalFilename());
 		}
 		pdEntity.setDocumentType(documentType);
 
@@ -126,28 +119,40 @@ public class ProviderService {
 		emailService.providerEmail(entity);
 
 	}
-	
+
 //	-----------------------------------------------------
 	public void approveProvider(Integer id) {
 
-	    ProviderEntity provider =
-	            providerRepo.findById(id)
-	                        .orElseThrow();
+		ProviderEntity provider = providerRepo.findById(id).orElseThrow();
 
-	    provider.setStatus("approved");
+		provider.setStatus("approved");
 
-	    providerRepo.save(provider);
+		providerRepo.save(provider);
 	}
 
 	public void rejectProvider(Integer id) {
 
-	    ProviderEntity provider =
-	            providerRepo.findById(id)
-	                        .orElseThrow();
+		ProviderEntity provider = providerRepo.findById(id).orElseThrow();
 
-	    provider.setStatus("rejected");
+		provider.setStatus("rejected");
 
-	    providerRepo.save(provider);
+		providerRepo.save(provider);
+	}
+
+	public ProviderDashboardDTO getDashboardData(Integer pId) {
+
+		ProviderDashboardDTO dto = new ProviderDashboardDTO();
+
+		dto.setTotalBookings(bookingRepo.countByPId(pId));
+
+		dto.setPendingRequests(bookingRepo.countByPIdAndBookingStatus(pId, "pending"));
+
+		dto.setCompletedJobs(bookingRepo.countByPIdAndBookingStatus(pId, "completed"));
+
+		dto.setRecentBookings(bookingRepo.findByPIdOrderByBookingDateDesc(pId));
+
+		return dto;
+
 	}
 
 }

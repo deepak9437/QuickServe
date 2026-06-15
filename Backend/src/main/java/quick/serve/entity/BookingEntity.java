@@ -22,7 +22,7 @@ public class BookingEntity {
 	private Integer bookingId;
 
 	@Column(name = "user_id")
-	private Integer uId;
+	private Integer UId;
 
 	@Column(name = "p_id")
 	private Integer PId;
@@ -42,6 +42,7 @@ public class BookingEntity {
 	@Column(name="booking_date")
 	private LocalDate bookingDate;
 	
-
+	
+	
 
 }
