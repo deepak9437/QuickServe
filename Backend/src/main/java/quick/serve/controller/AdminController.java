@@ -1,5 +1,7 @@
 package quick.serve.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import quick.serve.dto.AdminDashboardDTO;
 import quick.serve.entity.ProviderEntity;
+import quick.serve.entity.UserEntity;
 import quick.serve.repo.BookingRepo;
 import quick.serve.repo.ProviderRepository;
 import quick.serve.repo.UserRepository;
@@ -74,5 +77,11 @@ public class AdminController {
 	            providerRepository.countByStatus("pending"));
 
 	    return dto;
+	}
+	@GetMapping("/users")
+	public List<UserEntity> getAllUsers() {
+
+	    return userRepository.findByRole("customer");
+
 	}
 }

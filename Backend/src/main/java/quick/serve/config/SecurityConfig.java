@@ -35,6 +35,7 @@ public class SecurityConfig {
 	            .requestMatchers("/provider/approve/**").permitAll()
 	            .requestMatchers("/provider/reject/**").permitAll()
 	            .requestMatchers("/provider/dashboard/**").permitAll()
+	            .requestMatchers("/admin/users").permitAll()
 	            
 	           
 	            .anyRequest().authenticated()

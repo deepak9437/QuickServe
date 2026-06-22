@@ -25,4 +25,7 @@ export class AdminService {
       {},
     );
   }
+  getUsers() {
+    return this.http.get<any[]>(`${this.apiUrl}/users`);
+  }
 }

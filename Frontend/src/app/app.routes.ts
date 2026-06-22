@@ -73,4 +73,9 @@ export const routes: Routes = [
     path: "about",
     component: AboutComponent,
   },
+  {
+    path: "admin/users",
+    loadComponent: () =>
+      import("./features/admin/users/users").then((m) => m.UsersComponent),
+  },
 ];
