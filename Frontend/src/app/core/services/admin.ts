@@ -28,4 +28,10 @@ export class AdminService {
   getUsers() {
     return this.http.get<any[]>(`${this.apiUrl}/users`);
   }
+  getProviders() {
+    return this.http.get<any[]>(`${this.apiUrl}/providers`);
+  }
+  getBookings() {
+    return this.http.get<any[]>(`${this.apiUrl}/bookings`);
+  }
 }

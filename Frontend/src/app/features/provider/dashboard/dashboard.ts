@@ -1,18 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { AuthService } from "../../../core/services/auth";
-import { ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
 
+import { CommonModule } from "@angular/common";
+import { AuthService } from "../../../core/services/auth";
 
 @Component({
-  selector: 'app-provider-dashboard',
+  selector: "app-provider-dashboard",
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './dashboard.html',
-  styleUrl: './dashboard.css'
+  templateUrl: "./dashboard.html",
+  styleUrl: "./dashboard.css",
 })
 export class providerdashboardComponent implements OnInit {
-
   provider: any = {};
 
   totalBookings = 0;
@@ -23,47 +21,77 @@ export class providerdashboardComponent implements OnInit {
 
   constructor(
     private dashboardService: AuthService,
-    private cdr: ChangeDetectorRef
-  ) { }
+    private cdr: ChangeDetectorRef,
+  ) {}
 
   ngOnInit(): void {
-
-    const data = sessionStorage.getItem('user');
+    const data = sessionStorage.getItem("user");
 
     if (data) {
-
       this.provider = JSON.parse(data);
 
-      console.log('Provider Data:', this.provider);
+      console.log("Provider Data:", this.provider);
 
-      this.loadDashboard();
+      // TEMPORARY TEST
+      const userId = this.provider.id;
+
+      this.dashboardService.getProviderId(userId).subscribe({
+        next: (pId) => {
+          console.log("Provider ID =", pId);
+
+          this.loadDashboard(pId);
+        },
+
+        error: (err) => {
+          console.error(err);
+        },
+      });
     }
   }
 
-  loadDashboard(): void {
+  loadDashboard(pId: number): void {
+    this.dashboardService.getDashboardData(pId).subscribe({
+      next: (response: any) => {
+        console.log("Dashboard Response:", response);
 
-  const pId = this.provider.id;
+        this.totalBookings = response.totalBookings || 0;
 
-  this.dashboardService
-    .getDashboardData(pId)
-    .subscribe({
+        this.pendingRequests = response.pendingRequests || 0;
 
-      next: (response) => {
+        this.completedJobs = response.completedJobs || 0;
 
-        this.totalBookings = response.totalBookings;
-        this.pendingRequests = response.pendingRequests;
-        this.completedJobs = response.completedJobs;
+        this.recentBookings = response.recentBookings || [];
 
-        this.recentBookings = response.recentBookings;
+        console.log(
+          "Values:",
+          this.totalBookings,
+          this.pendingRequests,
+          this.completedJobs,
+        );
 
-        this.cdr.detectChanges(); // important
+        this.cdr.detectChanges();
       },
 
-        error: (error: any) => {
-          console.log('Status:', error.status);
-          console.log('Message:', error.message);
-          console.log('Error:', error);
-        }
-      });
+      error: (error) => {
+        console.error(error);
+      },
+    });
+  }
+  acceptBooking(id: number) {
+    this.dashboardService.acceptBooking(id).subscribe(() => {
+      window.location.reload();
+    });
+  }
+
+  rejectBooking(id: number) {
+    this.dashboardService.cancelBooking(id).subscribe(() => {
+      window.location.reload();
+    });
+  }
+
+  completeBooking(id: number) {
+    this.dashboardService.completeBooking(id).subscribe(() => {
+      window.location.reload();
+    });
   }
 }

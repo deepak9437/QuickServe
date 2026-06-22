@@ -1,1 +1,52 @@
-<p>reports works!</p>
+<div class="reports-container">
+  <div class="page-header">
+    <h1>Reports & Analytics</h1>
+    <p>Overview of QuickServe Platform</p>
+  </div>
+
+  <div class="stats-grid">
+    <div class="report-card customers">
+      <h2>{{ report.totalCustomers }}</h2>
+      <p>Total Customers</p>
+    </div>
+
+    <div class="report-card providers">
+      <h2>{{ report.totalProviders }}</h2>
+      <p>Total Providers</p>
+    </div>
+
+    <div class="report-card bookings">
+      <h2>{{ report.totalBookings }}</h2>
+      <p>Total Bookings</p>
+    </div>
+
+    <div class="report-card approvals">
+      <h2>{{ report.pendingApproval }}</h2>
+      <p>Pending Approvals</p>
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <h2>Platform Summary</h2>
+
+    <p>
+      QuickServe currently has
+      <strong>{{ report.totalCustomers }}</strong>
+      registered customers and
+      <strong>{{ report.totalProviders }}</strong>
+      active service providers.
+    </p>
+
+    <p>
+      A total of
+      <strong>{{ report.totalBookings }}</strong>
+      bookings have been made through the platform.
+    </p>
+
+    <p>
+      There are
+      <strong>{{ report.pendingApproval }}</strong>
+      provider applications waiting for approval.
+    </p>
+  </div>
+</div>

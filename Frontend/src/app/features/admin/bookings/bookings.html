@@ -1,1 +1,53 @@
-<p>bookings works!</p>
+<div class="bookings-container">
+  <div class="page-header">
+    <h1>Manage Bookings</h1>
+    <p>View all customer bookings</p>
+  </div>
+
+  @if (bookings.length > 0) { @for (booking of bookings; track
+  booking.bookingId) {
+
+  <div class="booking-card">
+    <h3>Booking #{{ booking.bookingId }}</h3>
+
+    <p>
+      <strong>Service:</strong>
+      {{ booking.serviceName }}
+    </p>
+
+    <p>
+      <strong>User ID:</strong>
+      {{ booking.uId }}
+    </p>
+
+    <p>
+      <strong>Provider ID:</strong>
+      {{ booking.pId }}
+    </p>
+
+    <p>
+      <strong>Problem:</strong>
+      {{ booking.problem }}
+    </p>
+
+    <p>
+      <strong>Address:</strong>
+      {{ booking.address }}
+    </p>
+
+    <p>
+      <strong>Date:</strong>
+      {{ booking.bookingDate }}
+    </p>
+
+    <span class="status"> {{ booking.bookingStatus }} </span>
+  </div>
+
+  } } @else {
+
+  <div class="no-data">
+    <h3>No Bookings Found</h3>
+  </div>
+
+  }
+</div>

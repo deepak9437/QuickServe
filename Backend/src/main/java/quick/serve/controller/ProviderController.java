@@ -108,4 +108,13 @@ public class ProviderController {
 
 	        return providerService.getDashboardData(pId);
 	    }
+	 @GetMapping("/provider-id/{userId}")
+	 public Integer getProviderId(
+	         @PathVariable Integer userId) {
+
+	     ProviderEntity provider =
+	             providerRepo.findProviderByUserId(userId);
+
+	     return provider.getPId();
+	 }
 }

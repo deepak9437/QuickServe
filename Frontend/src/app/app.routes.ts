@@ -78,4 +78,25 @@ export const routes: Routes = [
     loadComponent: () =>
       import("./features/admin/users/users").then((m) => m.UsersComponent),
   },
+  {
+    path: "admin/providers",
+    loadComponent: () =>
+      import("./features/admin/providers/providers").then(
+        (m) => m.ProvidersComponent,
+      ),
+  },
+  {
+    path: "admin/bookings",
+    loadComponent: () =>
+      import("./features/admin/bookings/bookings").then(
+        (m) => m.BookingsComponent,
+      ),
+  },
+  {
+    path: "admin/reports",
+    loadComponent: () =>
+      import("./features/admin/reports/reports").then(
+        (m) => m.ReportsComponent,
+      ),
+  },
 ];

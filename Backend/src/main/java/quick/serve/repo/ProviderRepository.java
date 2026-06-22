@@ -46,4 +46,11 @@ public interface ProviderRepository extends JpaRepository<ProviderEntity, Intege
 
 	long countByStatus(String string);
 
+	@Query("""
+		       SELECT p
+		       FROM ProviderEntity p
+		       WHERE p.user.id = :userId
+		       """)
+		ProviderEntity findProviderByUserId(
+		        @Param("userId") Integer userId);
 }

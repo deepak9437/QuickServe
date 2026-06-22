@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import quick.serve.dto.AdminDashboardDTO;
+import quick.serve.entity.BookingEntity;
 import quick.serve.entity.ProviderEntity;
 import quick.serve.entity.UserEntity;
 import quick.serve.repo.BookingRepo;
@@ -82,6 +83,18 @@ public class AdminController {
 	public List<UserEntity> getAllUsers() {
 
 	    return userRepository.findByRole("customer");
+
+	}
+	@GetMapping("/providers")
+	public List<ProviderEntity> getAllProviders() {
+
+	    return providerRepository.findAll();
+
+	}
+	@GetMapping("/bookings")
+	public List<BookingEntity> getAllBookings() {
+
+	    return bookingRepo.findAll();
 
 	}
 }

@@ -1,20 +1,14 @@
 <div class="dashboard-container">
-
   <div class="welcome-card">
-
-    <div class="avatar">
-      {{ provider.fullName?.charAt(0) }}
-    </div>
+    <div class="avatar">{{ provider.fullName?.charAt(0) }}</div>
 
     <div class="provider-info">
       <h2>Welcome Back, {{ provider.fullName }}</h2>
       <p>{{ provider.role | uppercase }}</p>
     </div>
-
   </div>
 
   <div class="stats-grid">
-
     <div class="stat-card bookings">
       <h1>{{ totalBookings }}</h1>
       <p>Total Bookings</p>
@@ -29,21 +23,17 @@
       <h1>{{ completedJobs }}</h1>
       <p>Completed Jobs</p>
     </div>
-
   </div>
 
   <div class="recent-section">
-
     <div class="section-header">
       <h3>Recent Service Requests</h3>
     </div>
 
-    <div
-      class="request-card"
-      *ngFor="let booking of recentBookings">
+    @for (booking of recentBookings; track booking.bookingId) {
 
+    <div class="request-card">
       <div class="booking-info">
-
         <h4>{{ booking.serviceName }}</h4>
 
         <p>
@@ -56,22 +46,39 @@
           {{ booking.address }}
         </p>
 
-        <small>
-          {{ booking.bookingDate }}
-        </small>
-
+        <small>{{ booking.bookingDate }}</small>
       </div>
 
-      <span
-        class="status-badge"
-        [ngClass]="booking.bookingStatus">
+      <div class="booking-right">
+        <span class="status-badge" [ngClass]="booking.bookingStatus">
+          {{ booking.bookingStatus }}
+        </span>
 
-        {{ booking.bookingStatus }}
+        <div class="booking-actions">
+          @if (booking.bookingStatus === 'pending') {
 
-      </span>
+          <button class="accept-btn" (click)="acceptBooking(booking.bookingId)">
+            Accept
+          </button>
 
+          <button class="reject-btn" (click)="rejectBooking(booking.bookingId)">
+            Reject
+          </button>
+
+          } @if (booking.bookingStatus === 'accepted') {
+
+          <button
+            class="complete-btn"
+            (click)="completeBooking(booking.bookingId)"
+          >
+            Complete Job
+          </button>
+
+          }
+        </div>
+      </div>
     </div>
 
+    }
   </div>
-
 </div>

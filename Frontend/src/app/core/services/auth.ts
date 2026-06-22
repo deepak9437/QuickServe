@@ -6,6 +6,7 @@ import { Observable } from "rxjs";
   providedIn: "root",
 })
 export class AuthService {
+  private apiUrl = "http://localhost:3030/quickserve";
   private apiUrl1 = "http://localhost:3030/quickserve/user";
   private apiUrl2 = "http://localhost:3030/quickserve/provider";
 
@@ -70,16 +71,30 @@ export class AuthService {
     return this.http.get("http://localhost:3030/quickserve/view/pending");
   }
 
-   getDashboardData(pId: number): Observable<any> {
-    return this.http.get<any>(
-      `${this.apiUrl2}/dashboard/${pId}`
-    );
+  getDashboardData(pId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl2}/dashboard/${pId}`);
   }
 
   getUserDashboardData(uId: number) {
+    return this.http.get(
+      `http://localhost:3030/quickserve/user/dashboard/${uId}`,
+    );
+  }
+  getProviderId(userId: number) {
+    return this.http.get<number>(
+      `http://localhost:3030/quickserve/provider/provider-id/${userId}`,
+    );
+  }
+  //----------------------------------------------------------------------------------------
+  acceptBooking(id: number) {
+    return this.http.put(`${this.apiUrl}/provider/accept/${id}`, {});
+  }
 
-  return this.http.get(
-    `http://localhost:3030/quickserve/user/dashboard/${uId}`
-  );
-}
+  cancelBooking(id: number) {
+    return this.http.put(`${this.apiUrl}/provider/cancel/${id}`, {});
+  }
+
+  completeBooking(id: number) {
+    return this.http.put(`${this.apiUrl}/provider/complete/${id}`, {});
+  }
 }
