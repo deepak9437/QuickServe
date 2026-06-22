@@ -39,6 +39,9 @@ public class SecurityConfig {
 	            .requestMatchers("/admin/providers").permitAll()
 	            .requestMatchers("/admin/bookings").permitAll()
 	            .requestMatchers("/provider/provider-id/**").permitAll()
+	            .requestMatchers("/provider/accept/**").permitAll()
+	            .requestMatchers("/provider/cancel/**").permitAll()
+	            .requestMatchers("/provider/complete/**").permitAll()
 	            
 	           
 	            .anyRequest().authenticated()

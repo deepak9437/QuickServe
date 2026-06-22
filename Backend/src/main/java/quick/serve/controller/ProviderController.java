@@ -15,8 +15,10 @@ import org.springframework.web.multipart.MultipartFile;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import quick.serve.dto.ProviderDashboardDTO;
+import quick.serve.entity.BookingEntity;
 import quick.serve.entity.ProviderEntity;
 import quick.serve.entity.UserEntity;
+import quick.serve.repo.BookingRepo;
 import quick.serve.repo.ProviderRepository;
 import quick.serve.service.ProviderService;
 
@@ -25,6 +27,8 @@ import quick.serve.service.ProviderService;
 @RestController
 @Slf4j
 public class ProviderController {
+	@Autowired
+	private BookingRepo bookingRepo;
 	
 	@Autowired
 	private ProviderRepository providerRepo;
@@ -116,5 +120,45 @@ public class ProviderController {
 	             providerRepo.findProviderByUserId(userId);
 
 	     return provider.getPId();
+	 }
+	 
+		/*
+		 * provider dashboard recent services where provider accept/reject users
+		 */
+	 @PutMapping("/accept/{bookingId}")
+	 public void acceptBooking(
+	         @PathVariable Integer bookingId) {
+
+	     BookingEntity booking =
+	             bookingRepo.findById(bookingId)
+	                        .orElseThrow();
+
+	     booking.setBookingStatus("accepted");
+
+	     bookingRepo.save(booking);
+	 }
+	 @PutMapping("/cancel/{bookingId}")
+	 public void cancelBooking(
+	         @PathVariable Integer bookingId) {
+
+	     BookingEntity booking =
+	             bookingRepo.findById(bookingId)
+	                        .orElseThrow();
+
+	     booking.setBookingStatus("cancelled");
+
+	     bookingRepo.save(booking);
+	 }
+	 @PutMapping("/complete/{bookingId}")
+	 public void completeBooking(
+	         @PathVariable Integer bookingId) {
+
+	     BookingEntity booking =
+	             bookingRepo.findById(bookingId)
+	                        .orElseThrow();
+
+	     booking.setBookingStatus("completed");
+
+	     bookingRepo.save(booking);
 	 }
 }
