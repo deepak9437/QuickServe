@@ -1,5 +1,7 @@
 package quick.serve.controller;
 
+import java.security.SecureRandom;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,6 +22,8 @@ import quick.serve.entity.ProviderEntity;
 import quick.serve.entity.UserEntity;
 import quick.serve.repo.BookingRepo;
 import quick.serve.repo.ProviderRepository;
+import quick.serve.repo.UserRepository;
+import quick.serve.service.EmailService;
 import quick.serve.service.ProviderService;
 
 @CrossOrigin("*")
@@ -29,16 +33,22 @@ import quick.serve.service.ProviderService;
 public class ProviderController {
 	@Autowired
 	private BookingRepo bookingRepo;
-	
+
 	@Autowired
 	private ProviderRepository providerRepo;
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+
+	@Autowired
+	private ProviderService providerService;
 	
 	@Autowired
-	private ProviderService providerService ;
+	private UserRepository userRepo;
 	
+	@Autowired
+	private EmailService emailService;
+
 	@PostMapping("/provider_register")
 	public void gotoProviderRegister(@RequestParam String fullName, @RequestParam String password,
 			@RequestParam String gender, @RequestParam String userEmail, @RequestParam String address,
@@ -49,10 +59,10 @@ public class ProviderController {
 
 		UserEntity entity = new UserEntity();
 		entity.setFullName(fullName);
-		
+
 		String newPassword = passwordEncoder.encode(password);
 		entity.setPassword(newPassword);
-		
+
 		entity.setGender(gender);
 		entity.setUserEmail(userEmail);
 		entity.setAddress(address);
@@ -66,22 +76,22 @@ public class ProviderController {
 		pEntity.setDescription(description);
 		pEntity.setStatus("pending");
 
-		providerService.providerRegisterService(entity, pEntity, documentType, documentURL, certificate, extraCertificate);
+		providerService.providerRegisterService(entity, pEntity, documentType, documentURL, certificate,
+				extraCertificate);
 	}
-	
-	
+
 	@PostMapping("/provider_login")
 	public UserEntity gotoProviderLogin(@RequestParam String userEmail, @RequestParam String password,
 			HttpSession pSession) {
 
 		UserEntity entity = providerService.providerLogingService(userEmail, password);
-		
+
 		String status = providerRepo.findByUserId(entity.getId());
 		System.out.println(status);
 
 		if (entity != null && "approved".equals(status)) {
 			log.info("provider login seuccessful ...");
-			pSession.setAttribute("pEmail", userEmail); 
+			pSession.setAttribute("pEmail", userEmail);
 			return entity;
 		} else if (entity != null && "pending".equals(status)) {
 			log.info("Provider status is pending...try again after successful registration.");
@@ -91,74 +101,109 @@ public class ProviderController {
 			return null;
 		}
 
-
 	}
+
 	@PutMapping("/approve/{id}")
 	public void approveProvider(@PathVariable Integer id) {
 
-	    providerService.approveProvider(id);
+		providerService.approveProvider(id);
 
 	}
 
 	@PutMapping("/reject/{id}")
 	public void rejectProvider(@PathVariable Integer id) {
 
-	    providerService.rejectProvider(id);
+		providerService.rejectProvider(id);
 	}
-	
-	 @GetMapping("/dashboard/{pId}")
-	    public ProviderDashboardDTO dashboard(
-	            @PathVariable Integer pId) {
 
-	        return providerService.getDashboardData(pId);
-	    }
-	 @GetMapping("/provider-id/{userId}")
-	 public Integer getProviderId(
-	         @PathVariable Integer userId) {
+	@GetMapping("/dashboard/{pId}")
+	public ProviderDashboardDTO dashboard(@PathVariable Integer pId) {
 
-	     ProviderEntity provider =
-	             providerRepo.findProviderByUserId(userId);
+		return providerService.getDashboardData(pId);
+	}
 
-	     return provider.getPId();
-	 }
-	 
-		/*
-		 * provider dashboard recent services where provider accept/reject users
-		 */
-	 @PutMapping("/accept/{bookingId}")
-	 public void acceptBooking(
-	         @PathVariable Integer bookingId) {
+	@GetMapping("/provider-id/{userId}")
+	public Integer getProviderId(@PathVariable Integer userId) {
 
-	     BookingEntity booking =
-	             bookingRepo.findById(bookingId)
-	                        .orElseThrow();
+		ProviderEntity provider = providerRepo.findProviderByUserId(userId);
 
-	     booking.setBookingStatus("accepted");
+		return provider.getPId();
+	}
 
-	     bookingRepo.save(booking);
-	 }
-	 @PutMapping("/cancel/{bookingId}")
-	 public void cancelBooking(
-	         @PathVariable Integer bookingId) {
+	/*
+	 * provider dashboard recent services where provider accept/reject users
+	 */
 
-	     BookingEntity booking =
-	             bookingRepo.findById(bookingId)
-	                        .orElseThrow();
+	@PutMapping("/accept/{bookingId}")
+	public void acceptBooking(@PathVariable Integer bookingId) {
 
-	     booking.setBookingStatus("cancelled");
+		BookingEntity booking = bookingRepo.findById(bookingId).orElseThrow();
 
-	     bookingRepo.save(booking);
-	 }
-	 @PutMapping("/complete/{bookingId}")
-	 public void completeBooking(
-	         @PathVariable Integer bookingId) {
+		booking.setBookingStatus("accepted");
+		String otp = generateOtp();
+		booking.setOtp(otp);
+		bookingRepo.save(booking);
+		
+		UserEntity customer = userRepo.findById(booking.getUId()).orElseThrow();
+		
+		String customerEmail = customer.getUserEmail();
+		
+		emailService.otpEmail(customerEmail,otp);
+		
+	}
 
-	     BookingEntity booking =
-	             bookingRepo.findById(bookingId)
-	                        .orElseThrow();
+//	@PutMapping("/accept/{bookingId}")
+//	public void acceptBooking(@PathVariable Integer bookingId) {
+//
+//		BookingEntity booking = bookingRepo.findById(bookingId).orElseThrow();
+//
+//		booking.setBookingStatus("accepted");
+//
+//		String otp = generateOtp();
+//
+//		booking.setOtp(otp);
+//
+//		bookingRepo.save(booking);
+//
+//		UserEntity customer = userRepo.findById(booking.getUId()).orElseThrow();
+//
+//		String customerPhone = customer.getUserPhone();
+//
+//		System.out.println("Phone = [" + customerPhone + "]");
+//		System.out.println("Length = " + customerPhone.length());
+//
+//		smsService.sendSms("QuickServe: Your booking has been accepted.Your Booking OTP is: "
+//				+ otp
+//				+ ".Don't share this otp to anyone.Only share this otp to the provider after the service completed.",customerPhone);
+//	}
 
-	     booking.setBookingStatus("completed");
+	@PutMapping("/cancel/{bookingId}")
+	public void cancelBooking(@PathVariable Integer bookingId) {
 
-	     bookingRepo.save(booking);
-	 }
+		BookingEntity booking = bookingRepo.findById(bookingId).orElseThrow();
+
+		booking.setBookingStatus("cancelled");
+
+		bookingRepo.save(booking);
+	}
+
+	@PutMapping("/complete/{bookingId}")
+	public void completeBooking(@PathVariable Integer bookingId) {
+
+		BookingEntity booking = bookingRepo.findById(bookingId).orElseThrow();
+
+		booking.setBookingStatus("completed");
+
+		bookingRepo.save(booking);
+	}
+
+//	 @GetMapping("/x")
+	public String generateOtp() {
+
+		SecureRandom random = new SecureRandom();
+
+		int otp = 100000 + random.nextInt(900000);
+
+		return String.valueOf(otp);
+	}
 }

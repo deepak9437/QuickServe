@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>4.0.6</version>
+		<version>4.0.7</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>quick.serve</groupId>
@@ -105,6 +105,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.twilio.sdk</groupId>
+			<artifactId>twilio</artifactId>
+			<version>10.5.0</version>
 		</dependency>
 
 	</dependencies>

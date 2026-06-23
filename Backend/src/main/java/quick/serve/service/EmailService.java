@@ -33,6 +33,17 @@ public class EmailService {
 				+ " manage bookings, and connect with customers through our platform.\n\n"
 				+ "We will notify you when your account is approved.\n\n" + "Thank you for joining QuickService.\n\n"
 				+ "Regards,\n" + "QuickService Team");
+		mailSender.send(msg);
+	}
+
+	public void otpEmail(String customerEmail, String otp) {
+		SimpleMailMessage msg = new SimpleMailMessage();
+		msg.setTo(customerEmail);
+		msg.setSubject("Your request accepted...");
+		msg.setText("QuickServe: Your booking has been accepted.\n\nYour Booking OTP is: " + otp
+				+ "\n\nDon't share this otp to anyone.Only share this otp to the provider after the service completed.\n\n"
+				+ "Regards,\n" + "QuickService Team");
+		mailSender.send(msg);
 	}
 
 }

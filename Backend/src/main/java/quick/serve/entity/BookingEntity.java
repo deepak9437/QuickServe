@@ -26,6 +26,9 @@ public class BookingEntity {
 
 	@Column(name = "p_id")
 	private Integer PId;
+	
+	@Column(name="otp")
+	private String otp;
 
 	@Column(name = "service_name")
 	private String serviceName;
