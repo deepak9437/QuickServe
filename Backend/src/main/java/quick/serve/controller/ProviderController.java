@@ -151,6 +151,13 @@ public class ProviderController {
 		emailService.otpEmail(customerEmail,otp);
 		
 	}
+	
+	@GetMapping("/getOtp/{bookingId}")
+	public Integer getOtp(@PathVariable Integer bookingId) {
+		BookingEntity booking = bookingRepo.findById(bookingId).orElseThrow();
+		
+		return Integer.valueOf(booking.getOtp());
+	}
 
 //	@PutMapping("/accept/{bookingId}")
 //	public void acceptBooking(@PathVariable Integer bookingId) {
