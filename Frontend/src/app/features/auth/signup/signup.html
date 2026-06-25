@@ -1,3 +1,7 @@
+@if (isLoading) {
+<app-loading></app-loading>
+}
+
 <div class="signup-container">
   <div class="signup-card">
     <h2>Create Account</h2>
@@ -57,6 +61,7 @@
       <div class="form-group">
         <label>Gender</label>
         <select name="gender" [(ngModel)]="user.gender">
+          <option value="">Select Gender</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
           <option value="other">Other</option>
@@ -78,7 +83,9 @@
         />
       </div>
 
-      <button type="submit" class="signup-btn">Create Account</button>
+      <button type="submit" class="signup-btn" [disabled]="isLoading">
+        @if (!isLoading) { Create Account } @else { Creating Account... }
+      </button>
     </form>
 
     <div class="login-link">

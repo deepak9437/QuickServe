@@ -13,6 +13,7 @@ import { ViewProfileComponent } from "./features/customer/view-profile/view-prof
 import { AdminDashboardComponent } from "./features/admin/dashboard/dashboard";
 import { ProviderApprovalComponent } from "./features/admin/provider-approval/provider-approval";
 import { AboutComponent } from "./features/about/about";
+import { ForgotPasswordComponent } from "./features/auth/forgot-password/forgot-password";
 
 export const routes: Routes = [
   {
@@ -31,6 +32,10 @@ export const routes: Routes = [
   {
     path: "login",
     component: LoginComponent,
+  },
+  {
+    path: "forgot-password",
+    component: ForgotPasswordComponent,
   },
   {
     path: "signup",

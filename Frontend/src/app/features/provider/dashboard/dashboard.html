@@ -4,6 +4,7 @@
 
     <div class="provider-info">
       <h2>Welcome Back, {{ provider.fullName }}</h2>
+
       <p>{{ provider.role | uppercase }}</p>
     </div>
   </div>
@@ -11,16 +12,19 @@
   <div class="stats-grid">
     <div class="stat-card bookings">
       <h1>{{ totalBookings }}</h1>
+
       <p>Total Bookings</p>
     </div>
 
     <div class="stat-card pending">
       <h1>{{ pendingRequests }}</h1>
+
       <p>Pending Requests</p>
     </div>
 
     <div class="stat-card completed">
       <h1>{{ completedJobs }}</h1>
+
       <p>Completed Jobs</p>
     </div>
   </div>
@@ -30,7 +34,7 @@
       <h3>Recent Service Requests</h3>
     </div>
 
-    @for (booking of recentBookings; track booking.bookingId) {
+    @for ( booking of recentBookings; track booking.bookingId ) {
 
     <div class="request-card">
       <div class="booking-info">
@@ -38,41 +42,121 @@
 
         <p>
           <strong>Problem:</strong>
+
           {{ booking.problem }}
         </p>
 
         <p>
           <strong>Address:</strong>
+
           {{ booking.address }}
         </p>
 
-        <small>{{ booking.bookingDate }}</small>
+        <small> {{ booking.bookingDate }} </small>
+
+        @if ( booking.bookingStatus !== 'pending' ) {
+
+        <div class="customer-details">
+          <h5>Customer Details</h5>
+
+          <p>
+            <strong>Name:</strong>
+
+            {{ booking.customerName }}
+          </p>
+
+          <p>
+            <strong>Phone:</strong>
+
+            {{ booking.customerPhone }}
+          </p>
+
+          <p>
+            <strong>Email:</strong>
+
+            {{ booking.customerEmail }}
+          </p>
+        </div>
+
+        }
       </div>
 
       <div class="booking-right">
-        <span class="status-badge" [ngClass]="booking.bookingStatus">
+        <span
+          class="status-badge"
+          [ngClass]="
+            booking.bookingStatus
+          "
+        >
           {{ booking.bookingStatus }}
         </span>
 
         <div class="booking-actions">
-          @if (booking.bookingStatus === 'pending') {
+          @if ( booking.bookingStatus === 'pending' ) {
 
-          <button class="accept-btn" (click)="acceptBooking(booking.bookingId)">
+          <button
+            class="accept-btn"
+            (click)="
+              acceptBooking(
+                booking.bookingId
+              )
+            "
+          >
             Accept
           </button>
 
-          <button class="reject-btn" (click)="rejectBooking(booking.bookingId)">
+          <button
+            class="reject-btn"
+            (click)="
+              rejectBooking(
+                booking.bookingId
+              )
+            "
+          >
             Reject
           </button>
 
-          } @if (booking.bookingStatus === 'accepted') {
+          } @if ( booking.bookingStatus === 'accepted' ) {
 
           <button
             class="complete-btn"
-            (click)="completeBooking(booking.bookingId)"
+            (click)="
+              generateOtp(
+                booking.bookingId
+              )
+            "
           >
-            Complete Job
+            Generate OTP
           </button>
+
+          } @if ( booking.bookingStatus === 'otp_sent' ) {
+
+          <div class="otp-section">
+            <input
+              type="text"
+              class="otp-input"
+              placeholder="Enter OTP"
+              [(ngModel)]="
+                booking.enteredOtp
+              "
+            />
+
+            <button
+              class="verify-btn"
+              (click)="
+                verifyOtp(
+                  booking.bookingId,
+                  booking.enteredOtp
+                )
+              "
+            >
+              Verify OTP
+            </button>
+          </div>
+
+          } @if ( booking.bookingStatus === 'completed' ) {
+
+          <div class="completed-message">✅ Service Completed</div>
 
           }
         </div>

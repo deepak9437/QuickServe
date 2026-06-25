@@ -24,7 +24,9 @@ export class AuthService {
     formData.append("role", "CUSTOMER");
     formData.append("userPhone", data.userPhone);
 
-    return this.http.post(`${this.apiUrl1}/user_register`, formData);
+    return this.http.post(`${this.apiUrl1}/user_register`, formData, {
+      responseType: "text",
+    });
   }
 
   loginUser(loginData: any) {
@@ -85,7 +87,9 @@ export class AuthService {
       `http://localhost:3030/quickserve/provider/provider-id/${userId}`,
     );
   }
-  //----------------------------------------------------------------------------------------
+  // ----------------------------------------------------------------------------------------
+  // Provider Dashboard Booking Actions
+
   acceptBooking(id: number) {
     return this.http.put(`${this.apiUrl}/provider/accept/${id}`, {});
   }
@@ -94,7 +98,14 @@ export class AuthService {
     return this.http.put(`${this.apiUrl}/provider/cancel/${id}`, {});
   }
 
-  completeBooking(id: number) {
-    return this.http.put(`${this.apiUrl}/provider/complete/${id}`, {});
+  generateOtp(id: number) {
+    return this.http.put(`${this.apiUrl}/provider/generateOtp/${id}`, {});
+  }
+
+  verifyOtp(bookingId: number, otp: string) {
+    return this.http.put(
+      `${this.apiUrl}/provider/verifyOtp/${bookingId}?otp=${otp}`,
+      {},
+    );
   }
 }

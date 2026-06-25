@@ -1,17 +1,21 @@
 import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
 
 import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+
 import { AuthService } from "../../../core/services/auth";
 
 @Component({
   selector: "app-provider-dashboard",
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: "./dashboard.html",
   styleUrl: "./dashboard.css",
 })
 export class providerdashboardComponent implements OnInit {
   provider: any = {};
+
+  providerId = 0;
 
   totalBookings = 0;
   pendingRequests = 0;
@@ -30,14 +34,11 @@ export class providerdashboardComponent implements OnInit {
     if (data) {
       this.provider = JSON.parse(data);
 
-      console.log("Provider Data:", this.provider);
-
-      // TEMPORARY TEST
       const userId = this.provider.id;
 
       this.dashboardService.getProviderId(userId).subscribe({
         next: (pId) => {
-          console.log("Provider ID =", pId);
+          this.providerId = pId;
 
           this.loadDashboard(pId);
         },
@@ -52,8 +53,6 @@ export class providerdashboardComponent implements OnInit {
   loadDashboard(pId: number): void {
     this.dashboardService.getDashboardData(pId).subscribe({
       next: (response: any) => {
-        console.log("Dashboard Response:", response);
-
         this.totalBookings = response.totalBookings || 0;
 
         this.pendingRequests = response.pendingRequests || 0;
@@ -61,13 +60,6 @@ export class providerdashboardComponent implements OnInit {
         this.completedJobs = response.completedJobs || 0;
 
         this.recentBookings = response.recentBookings || [];
-
-        console.log(
-          "Values:",
-          this.totalBookings,
-          this.pendingRequests,
-          this.completedJobs,
-        );
 
         this.cdr.detectChanges();
       },
@@ -77,21 +69,28 @@ export class providerdashboardComponent implements OnInit {
       },
     });
   }
+
   acceptBooking(id: number) {
     this.dashboardService.acceptBooking(id).subscribe(() => {
-      window.location.reload();
+      this.loadDashboard(this.providerId);
     });
   }
 
   rejectBooking(id: number) {
     this.dashboardService.cancelBooking(id).subscribe(() => {
-      window.location.reload();
+      this.loadDashboard(this.providerId);
     });
   }
 
-  completeBooking(id: number) {
-    this.dashboardService.completeBooking(id).subscribe(() => {
-      window.location.reload();
+  generateOtp(id: number) {
+    this.dashboardService.generateOtp(id).subscribe(() => {
+      this.loadDashboard(this.providerId);
+    });
+  }
+
+  verifyOtp(bookingId: number, otp: string) {
+    this.dashboardService.verifyOtp(bookingId, otp).subscribe(() => {
+      this.loadDashboard(this.providerId);
     });
   }
 }

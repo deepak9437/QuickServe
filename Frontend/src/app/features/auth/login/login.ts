@@ -12,6 +12,8 @@ import Swal from "sweetalert2";
   styleUrl: "./login.css",
 })
 export class LoginComponent {
+  showPassword = false;
+
   loginData = {
     userEmail: "",
     password: "",
@@ -26,7 +28,12 @@ export class LoginComponent {
     console.log("Login button clicked");
 
     if (!this.loginData.userEmail || !this.loginData.password) {
-      alert("Please fill all fields");
+      Swal.fire({
+        title: "Error!",
+        text: "Please fill all fields",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
       return;
     }
 

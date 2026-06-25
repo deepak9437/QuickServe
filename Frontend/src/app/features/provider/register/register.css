@@ -1,79 +1,238 @@
+/* ═══════════════════════════════════════════════
+   QuickServe Provider Registration
+═══════════════════════════════════════════════ */
+
 .provider-container {
-  background: #f5f7fa;
-  padding: 50px 20px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+
+  background: linear-gradient(135deg, #f8fafc, #ecfdf5);
 }
 
 .provider-card {
-  max-width: 750px;
-  margin: auto;
-  background: #fff;
-  padding: 35px;
-  border-radius: 18px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 850px;
+
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 24px;
+
+  padding: 2.5rem;
+
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+
+  animation: fadeUp 0.4s ease;
 }
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─────────────────────────────
+   Header
+───────────────────────────── */
 
 .provider-card h2 {
-  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
   color: #111827;
-  margin-bottom: 10px;
+  margin-bottom: 0.5rem;
 }
 
-.provider-card p {
-  text-align: center;
+.provider-card > p {
   color: #6b7280;
-  margin-bottom: 30px;
+  margin-bottom: 2rem;
 }
 
 .provider-card h3 {
-  margin: 20px 0;
-  color: #22c55e;
+  color: #111827;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
 }
 
-.form-group {
-  margin-bottom: 18px;
+hr {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 1.5rem 0;
 }
-.form-group select {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 14px;
+
+/* ─────────────────────────────
+   Form Layout
+───────────────────────────── */
+
+form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+/* Full width fields */
+
+.form-group:nth-child(1),
+.form-group:nth-child(2),
+.form-group:nth-child(6),
+.form-group:nth-child(11),
+.form-group:nth-child(15),
+.provider-btn {
+  grid-column: 1 / -1;
+}
+
+/* ─────────────────────────────
+   Form Group
+───────────────────────────── */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
 }
 
 .form-group label {
-  display: block;
-  margin-bottom: 6px;
+  font-size: 13px;
   font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
 }
+
+/* ─────────────────────────────
+   Inputs
+───────────────────────────── */
 
 .form-group input,
 .form-group select,
 .form-group textarea {
   width: 100%;
-  padding: 12px;
-  border: 1px solid #dcdcdc;
-  border-radius: 8px;
-  font-size: 15px;
+
+  padding: 12px 14px;
+
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+
+  background: #f9fafb;
+  color: #111827;
+
+  font-size: 14px;
+  font-family: inherit;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    background 0.2s;
 }
 
-.provider-btn {
-  width: 100%;
-  padding: 14px;
-  border: none;
-  border-radius: 8px;
-  background: #22c55e;
-  color: white;
-  font-size: 16px;
-  font-weight: 600;
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #9ca3af;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  background: #ffffff;
+  border-color: #10b981;
+
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.15);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-group select {
   cursor: pointer;
 }
 
-.provider-btn:hover {
-  background: #16a34a;
+/* ─────────────────────────────
+   File Upload
+───────────────────────────── */
+
+.form-group input[type="file"] {
+  background: #ffffff;
+  padding: 10px;
+  cursor: pointer;
 }
 
-hr {
-  margin: 30px 0;
+.form-group input[type="file"]::file-selector-button {
   border: none;
-  border-top: 1px solid #e5e7eb;
+  background: #10b981;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 8px;
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+.form-group input[type="file"]::file-selector-button:hover {
+  background: #059669;
+}
+
+/* ─────────────────────────────
+   Button
+───────────────────────────── */
+
+.provider-btn {
+  width: 100%;
+  margin-top: 1rem;
+
+  padding: 14px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #10b981;
+  color: white;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s,
+    transform 0.15s;
+}
+
+.provider-btn:hover {
+  background: #059669;
+  transform: translateY(-2px);
+}
+
+.provider-btn:active {
+  transform: translateY(0);
+}
+
+/* ─────────────────────────────
+   Responsive
+───────────────────────────── */
+
+@media (max-width: 768px) {
+  .provider-card {
+    padding: 2rem 1.5rem;
+  }
+
+  form {
+    grid-template-columns: 1fr;
+  }
+
+  .form-group {
+    grid-column: 1 / -1 !important;
+  }
+
+  .provider-card h2 {
+    font-size: 1.7rem;
+  }
 }

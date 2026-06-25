@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-loading',
+  selector: "app-loading",
+  standalone: true,
   imports: [],
-  templateUrl: './loading.html',
-  styleUrl: './loading.css',
+  templateUrl: "./loading.html",
+  styleUrl: "./loading.css",
 })
 export class Loading {}
