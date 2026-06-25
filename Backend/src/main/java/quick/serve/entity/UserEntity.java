@@ -40,6 +40,9 @@ public class UserEntity {
 	@Column(name="role")
 	private String role;
 	
+	@Column(name="otp")
+	private String otp;
+	
 	@Column(name="phone")
 	private String userPhone;
 

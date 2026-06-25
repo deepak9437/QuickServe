@@ -1,7 +1,5 @@
 package quick.serve.controller;
 
-import java.security.SecureRandom;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -48,6 +46,9 @@ public class ProviderController {
 	
 	@Autowired
 	private EmailService emailService;
+	
+	@Autowired
+	private ForgotPasswordController forgotPasswordController;
 
 	@PostMapping("/provider_register")
 	public void gotoProviderRegister(@RequestParam String fullName, @RequestParam String password,
@@ -140,7 +141,7 @@ public class ProviderController {
 		BookingEntity booking = bookingRepo.findById(bookingId).orElseThrow();
 
 		booking.setBookingStatus("accepted");
-		String otp = generateOtp();
+		String otp = forgotPasswordController.generateOtp();
 		booking.setOtp(otp);
 		bookingRepo.save(booking);
 		
@@ -152,12 +153,33 @@ public class ProviderController {
 		
 	}
 	
-	@GetMapping("/getOtp/{bookingId}")
+	@GetMapping("/completeJobOtp/{bookingId}")
 	public Integer getOtp(@PathVariable Integer bookingId) {
 		BookingEntity booking = bookingRepo.findById(bookingId).orElseThrow();
 		
 		return Integer.valueOf(booking.getOtp());
 	}
+
+	@PutMapping("/cancel/{bookingId}")
+	public void cancelBooking(@PathVariable Integer bookingId) {
+
+		BookingEntity booking = bookingRepo.findById(bookingId).orElseThrow();
+
+		booking.setBookingStatus("cancelled");
+
+		bookingRepo.save(booking);
+	}
+
+	@PutMapping("/complete/{bookingId}")
+	public void completeBooking(@PathVariable Integer bookingId) {
+
+		BookingEntity booking = bookingRepo.findById(bookingId).orElseThrow();
+
+		booking.setBookingStatus("completed");
+
+		bookingRepo.save(booking);
+	}
+	
 
 //	@PutMapping("/accept/{bookingId}")
 //	public void acceptBooking(@PathVariable Integer bookingId) {
@@ -184,33 +206,5 @@ public class ProviderController {
 //				+ ".Don't share this otp to anyone.Only share this otp to the provider after the service completed.",customerPhone);
 //	}
 
-	@PutMapping("/cancel/{bookingId}")
-	public void cancelBooking(@PathVariable Integer bookingId) {
 
-		BookingEntity booking = bookingRepo.findById(bookingId).orElseThrow();
-
-		booking.setBookingStatus("cancelled");
-
-		bookingRepo.save(booking);
-	}
-
-	@PutMapping("/complete/{bookingId}")
-	public void completeBooking(@PathVariable Integer bookingId) {
-
-		BookingEntity booking = bookingRepo.findById(bookingId).orElseThrow();
-
-		booking.setBookingStatus("completed");
-
-		bookingRepo.save(booking);
-	}
-
-//	 @GetMapping("/x")
-	public String generateOtp() {
-
-		SecureRandom random = new SecureRandom();
-
-		int otp = 100000 + random.nextInt(900000);
-
-		return String.valueOf(otp);
-	}
 }
