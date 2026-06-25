@@ -12,5 +12,5 @@ public class ProviderDashboardDTO {
 	private long completedJobs;
 	private long totalBookings;
 
-	private List<BookingEntity> recentBookings;
+	private List<CustomerBookingDTO> recentBookings;
 }

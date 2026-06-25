@@ -89,8 +89,23 @@ export class providerdashboardComponent implements OnInit {
   }
 
   verifyOtp(bookingId: number, otp: string) {
-    this.dashboardService.verifyOtp(bookingId, otp).subscribe(() => {
-      this.loadDashboard(this.providerId);
+    if (!otp) {
+      alert("Please enter OTP");
+      return;
+    }
+
+    this.dashboardService.verifyOtp(bookingId, otp).subscribe({
+      next: (response) => {
+        alert(response);
+
+        this.loadDashboard(this.providerId);
+      },
+
+      error: (error) => {
+        console.error(error);
+
+        alert("Invalid OTP");
+      },
     });
   }
 }

@@ -5,38 +5,31 @@ import { HttpClient } from "@angular/common/http";
   providedIn: "root",
 })
 export class ForgotPasswordService {
-  private apiUrl = "http://localhost:3030/quickserve/user";
+  private apiUrl = "http://localhost:3030/quickserve/forgot";
 
   constructor(private http: HttpClient) {}
 
   forgotPassword(email: string) {
-    const formData = new FormData();
-
-    formData.append("userEmail", email);
-
-    return this.http.post(`${this.apiUrl}/forgot-password`, formData, {
+    return this.http.get(`${this.apiUrl}/forgot_password/${email}`, {
       responseType: "text",
     });
   }
 
   verifyOtp(email: string, otp: string) {
-    const formData = new FormData();
-
-    formData.append("userEmail", email);
-    formData.append("otp", otp);
-
-    return this.http.post(`${this.apiUrl}/verify-otp`, formData, {
-      responseType: "text",
-    });
+    return this.http.post(
+      `${this.apiUrl}/verifyOtp/${email}/${otp}`,
+      {},
+      { responseType: "text" },
+    );
   }
 
   resetPassword(email: string, newPassword: string) {
-    const formData = new FormData();
+    const body = {
+      userEmail: email,
+      newPassword: newPassword,
+    };
 
-    formData.append("userEmail", email);
-    formData.append("newPassword", newPassword);
-
-    return this.http.post(`${this.apiUrl}/reset-password`, formData, {
+    return this.http.put(`${this.apiUrl}/updatePassword`, body, {
       responseType: "text",
     });
   }

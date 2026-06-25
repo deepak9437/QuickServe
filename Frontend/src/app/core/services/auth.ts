@@ -106,6 +106,7 @@ export class AuthService {
     return this.http.put(
       `${this.apiUrl}/provider/verifyOtp/${bookingId}?otp=${otp}`,
       {},
+      { responseType: "text" },
     );
   }
 }

@@ -1,5 +1,7 @@
 package quick.serve.controller;
 
+import java.security.SecureRandom;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -46,9 +48,6 @@ public class ProviderController {
 	
 	@Autowired
 	private EmailService emailService;
-	
-	@Autowired
-	private ForgotPasswordController forgotPasswordController;
 
 	@PostMapping("/provider_register")
 	public void gotoProviderRegister(@RequestParam String fullName, @RequestParam String password,
@@ -136,29 +135,69 @@ public class ProviderController {
 	 */
 
 	@PutMapping("/accept/{bookingId}")
-	public void acceptBooking(@PathVariable Integer bookingId) {
+	public void acceptBooking(
+	        @PathVariable Integer bookingId) {
 
-		BookingEntity booking = bookingRepo.findById(bookingId).orElseThrow();
+	    BookingEntity booking =
+	            bookingRepo.findById(bookingId)
+	                       .orElseThrow();
 
-		booking.setBookingStatus("accepted");
-		String otp = forgotPasswordController.generateOtp();
-		booking.setOtp(otp);
-		bookingRepo.save(booking);
-		
-		UserEntity customer = userRepo.findById(booking.getUId()).orElseThrow();
-		
-		String customerEmail = customer.getUserEmail();
-		
-		emailService.otpEmail(customerEmail,otp);
-		
+	    booking.setBookingStatus("accepted");
+
+	    bookingRepo.save(booking);
 	}
 	
-	@GetMapping("/completeJobOtp/{bookingId}")
-	public Integer getOtp(@PathVariable Integer bookingId) {
-		BookingEntity booking = bookingRepo.findById(bookingId).orElseThrow();
-		
-		return Integer.valueOf(booking.getOtp());
+	
+	
+	@PutMapping("/generateOtp/{bookingId}")
+	public void generateOtpForBooking(
+	        @PathVariable Integer bookingId) {
+
+	    BookingEntity booking =
+	            bookingRepo.findById(bookingId)
+	                       .orElseThrow();
+
+	    String otp = generateOtp();
+
+	    booking.setOtp(otp);
+
+	    booking.setBookingStatus("otp_sent");
+
+	    bookingRepo.save(booking);
+
+	    UserEntity customer =
+	            userRepo.findById(
+	                    booking.getUId())
+	                    .orElseThrow();
+
+	    emailService.otpEmail(
+	            customer.getUserEmail(),
+	            otp);
 	}
+	
+	
+	@PutMapping("/verifyOtp/{bookingId}")
+	public String verifyOtp(
+	        @PathVariable Integer bookingId,
+	        @RequestParam String otp) {
+
+	    BookingEntity booking =
+	            bookingRepo.findById(bookingId)
+	                       .orElseThrow();
+
+	    if (booking.getOtp().equals(otp)) {
+
+	        booking.setBookingStatus("completed");
+
+	        bookingRepo.save(booking);
+
+	        return "OTP Verified";
+	    }
+
+	    return "Invalid OTP";
+	}
+
+
 
 	@PutMapping("/cancel/{bookingId}")
 	public void cancelBooking(@PathVariable Integer bookingId) {
@@ -170,16 +209,19 @@ public class ProviderController {
 		bookingRepo.save(booking);
 	}
 
-	@PutMapping("/complete/{bookingId}")
-	public void completeBooking(@PathVariable Integer bookingId) {
-
-		BookingEntity booking = bookingRepo.findById(bookingId).orElseThrow();
-
-		booking.setBookingStatus("completed");
-
-		bookingRepo.save(booking);
-	}
 	
+
+//	 @GetMapping("/x")
+	public String generateOtp() {
+
+		SecureRandom random = new SecureRandom();
+
+		int otp = 100000 + random.nextInt(900000);
+
+		return String.valueOf(otp);
+	}
+}
+
 
 //	@PutMapping("/accept/{bookingId}")
 //	public void acceptBooking(@PathVariable Integer bookingId) {
@@ -207,4 +249,4 @@ public class ProviderController {
 //	}
 
 
-}
+

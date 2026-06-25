@@ -5,6 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,7 +14,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import quick.serve.dto.CustomerBookingDTO;
 import quick.serve.dto.ProviderDashboardDTO;
+import quick.serve.entity.BookingEntity;
 import quick.serve.entity.ProviderDocEntity;
 import quick.serve.entity.ProviderEntity;
 import quick.serve.entity.UserEntity;
@@ -141,18 +145,86 @@ public class ProviderService {
 
 	public ProviderDashboardDTO getDashboardData(Integer pId) {
 
-		ProviderDashboardDTO dto = new ProviderDashboardDTO();
+	    ProviderDashboardDTO dto =
+	            new ProviderDashboardDTO();
 
-		dto.setTotalBookings(bookingRepo.countByPId(pId));
+	    dto.setTotalBookings(
+	            bookingRepo.countByPId(pId));
 
-		dto.setPendingRequests(bookingRepo.countByPIdAndBookingStatus(pId, "pending"));
+	    dto.setPendingRequests(
+	            bookingRepo.countByPIdAndBookingStatus(
+	                    pId,
+	                    "pending"));
 
-		dto.setCompletedJobs(bookingRepo.countByPIdAndBookingStatus(pId, "completed"));
+	    dto.setCompletedJobs(
+	            bookingRepo.countByPIdAndBookingStatus(
+	                    pId,
+	                    "completed"));
 
-		dto.setRecentBookings(bookingRepo.findByPIdOrderByBookingDateDesc(pId));
+	    dto.setRecentBookings(
+	            getProviderBookings(pId));
 
-		return dto;
-
+	    return dto;
 	}
 
+	
+	//for provider Accept the service then shows customer details
+	
+	public List<CustomerBookingDTO> getProviderBookings(
+	        Integer pId) {
+
+	    List<BookingEntity> bookings =
+	            bookingRepo.findByPIdOrderByBookingDateDesc(pId);
+	    if (bookings.size() > 5) {
+	        bookings = bookings.subList(0, 5);
+	    }
+
+	    List<CustomerBookingDTO> result =
+	            new ArrayList<>();
+
+	    for (BookingEntity booking : bookings) {
+
+	        UserEntity customer =
+	                userRepo.findById(
+	                        booking.getUId())
+	                        .orElse(null);
+
+	        CustomerBookingDTO dto =
+	                new CustomerBookingDTO();
+
+	        dto.setBookingId(
+	                booking.getBookingId());
+
+	        dto.setServiceName(
+	                booking.getServiceName());
+
+	        dto.setProblem(
+	                booking.getProblem());
+
+	        dto.setAddress(
+	                booking.getAddress());
+
+	        dto.setBookingStatus(
+	                booking.getBookingStatus());
+
+	        dto.setBookingDate(
+	                booking.getBookingDate());
+
+	        if (customer != null) {
+
+	            dto.setCustomerName(
+	                    customer.getFullName());
+
+	            dto.setCustomerPhone(
+	                    customer.getUserPhone());
+
+	            dto.setCustomerEmail(
+	                    customer.getUserEmail());
+	        }
+
+	        result.add(dto);
+	    }
+
+	    return result;
+	}
 }
