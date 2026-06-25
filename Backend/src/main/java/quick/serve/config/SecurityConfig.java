@@ -44,7 +44,7 @@ public class SecurityConfig {
 	            .requestMatchers("/provider/complete/**").permitAll()
 	            .requestMatchers("/provider/getOtp/**").permitAll()
 	            .requestMatchers("/forgot/forgot_password/**").permitAll()
-	            .requestMatchers("/forgot/updatePassword").permitAll()
+	            .requestMatchers("/forgot/updatePassword/**").permitAll()
 	           // .requestMatchers("/provider/x").permitAll()
 	            
 	           

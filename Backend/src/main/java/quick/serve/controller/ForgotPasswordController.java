@@ -31,26 +31,28 @@ public class ForgotPasswordController {
 	
 	
 	@GetMapping("/forgot_password/{userEmail}")
-	public void forgotPassword(@PathVariable String userEmail) {
+	public String forgotPassword(@PathVariable String userEmail) {
 		UserEntity entity = userRepository.findByUserEmail(userEmail);
 		
 		String otp =generateOtp();
 		entity.setOtp(otp);
 		if(userEmail.equals(entity.getUserEmail())) {
 			emailService.forgotPasswordOtp(userEmail, otp);
+			return String.valueOf(otp);
 		}
-		
+		return null;
 	}
 	
-	@GetMapping("/updatePassword")
-	public void updatePassword(@RequestBody UserEntity user) {
-		UserEntity existUser = userRepository.findById(user.getId()).orElseThrow();
-		
-		String newPassword = passwordEncoder.encode(user.getPassword());
-		existUser.setPassword(newPassword);
-		
-		userRepository.save(existUser);
-	}
+//	@GetMapping("/updatePassword/{userEmail}")
+//	public void updatePassword(@PathVariable String userEmail) {
+//		UserEntity existUser = userRepository.findByUserEmail(userEmail);
+//		 Integer id =existUser.getId();
+//		String newPassword = passwordEncoder.encode(user.getPassword());
+//		existUser.setPassword(newPassword);
+//		
+//		userRepository.save(existUser);
+//	}
+	
 	
 
 //	 @GetMapping("/x")
