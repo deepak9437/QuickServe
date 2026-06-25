@@ -1,7 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
-
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
+
+import Swal from "sweetalert2";
 
 import { AuthService } from "../../../core/services/auth";
 
@@ -39,7 +40,6 @@ export class providerdashboardComponent implements OnInit {
       this.dashboardService.getProviderId(userId).subscribe({
         next: (pId) => {
           this.providerId = pId;
-
           this.loadDashboard(pId);
         },
 
@@ -70,41 +70,144 @@ export class providerdashboardComponent implements OnInit {
     });
   }
 
+  // Accept Booking
+
   acceptBooking(id: number) {
-    this.dashboardService.acceptBooking(id).subscribe(() => {
-      this.loadDashboard(this.providerId);
+    Swal.fire({
+      title: "Accepting Request...",
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
     });
-  }
 
-  rejectBooking(id: number) {
-    this.dashboardService.cancelBooking(id).subscribe(() => {
-      this.loadDashboard(this.providerId);
-    });
-  }
-
-  generateOtp(id: number) {
-    this.dashboardService.generateOtp(id).subscribe(() => {
-      this.loadDashboard(this.providerId);
-    });
-  }
-
-  verifyOtp(bookingId: number, otp: string) {
-    if (!otp) {
-      alert("Please enter OTP");
-      return;
-    }
-
-    this.dashboardService.verifyOtp(bookingId, otp).subscribe({
-      next: (response) => {
-        alert(response);
+    this.dashboardService.acceptBooking(id).subscribe({
+      next: () => {
+        Swal.fire({
+          icon: "success",
+          title: "Booking Accepted",
+          text: "Customer details are now available.",
+          timer: 2000,
+          showConfirmButton: false,
+        });
 
         this.loadDashboard(this.providerId);
       },
 
-      error: (error) => {
-        console.error(error);
+      error: () => {
+        Swal.fire({
+          icon: "error",
+          title: "Failed",
+          text: "Unable to accept booking.",
+        });
+      },
+    });
+  }
 
-        alert("Invalid OTP");
+  // Reject Booking
+
+  rejectBooking(id: number) {
+    Swal.fire({
+      title: "Rejecting Request...",
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+
+    this.dashboardService.cancelBooking(id).subscribe({
+      next: () => {
+        Swal.fire({
+          icon: "success",
+          title: "Booking Rejected",
+          timer: 1500,
+          showConfirmButton: false,
+        });
+
+        this.loadDashboard(this.providerId);
+      },
+
+      error: () => {
+        Swal.fire({
+          icon: "error",
+          title: "Failed",
+          text: "Unable to reject booking.",
+        });
+      },
+    });
+  }
+
+  // Generate OTP
+
+  generateOtp(id: number) {
+    Swal.fire({
+      title: "Sending OTP...",
+      text: "Please wait",
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+
+    this.dashboardService.generateOtp(id).subscribe({
+      next: () => {
+        Swal.fire({
+          icon: "success",
+          title: "OTP Sent Successfully",
+          text: "OTP has been sent to customer's email.",
+        });
+
+        this.loadDashboard(this.providerId);
+      },
+
+      error: () => {
+        Swal.fire({
+          icon: "error",
+          title: "Failed",
+          text: "Unable to send OTP.",
+        });
+      },
+    });
+  }
+
+  // Verify OTP
+
+  verifyOtp(bookingId: number, otp: string) {
+    if (!otp || otp.trim() === "") {
+      Swal.fire({
+        icon: "warning",
+        title: "Enter OTP",
+        text: "Please enter the OTP provided by the customer.",
+      });
+
+      return;
+    }
+
+    Swal.fire({
+      title: "Verifying OTP...",
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+
+    this.dashboardService.verifyOtp(bookingId, otp).subscribe({
+      next: (response: any) => {
+        Swal.fire({
+          icon: "success",
+          title: "Service Completed",
+          text: response,
+        });
+
+        this.loadDashboard(this.providerId);
+      },
+
+      error: () => {
+        Swal.fire({
+          icon: "error",
+          title: "Invalid OTP",
+          text: "OTP verification failed.",
+        });
       },
     });
   }
