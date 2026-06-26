@@ -1,10 +1,18 @@
 package quick.serve.controller;
 
 import java.security.SecureRandom;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import quick.serve.dto.ForgotPasswordDTO;
 import quick.serve.entity.UserEntity;
@@ -16,103 +24,89 @@ import quick.serve.service.EmailService;
 @RequestMapping("/forgot")
 public class ForgotPasswordController {
 
-    @Autowired
-    private UserRepository userRepository;
+	@Autowired
+	private UserRepository userRepository;
 
-    @Autowired
-    private EmailService emailService;
+	@Autowired
+	private EmailService emailService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
-    @GetMapping("/forgot_password/{userEmail}")
-    public String forgotPassword(
-            @PathVariable String userEmail) {
+	@GetMapping("/forgot_password/{userEmail}")
+	public String forgotPassword(@PathVariable String userEmail) {
 
-        UserEntity entity =
-                userRepository.findByUserEmail(userEmail);
+		UserEntity entity = userRepository.findByUserEmail(userEmail);
+		if (entity == null) {
+			return "EMAIL_NOT_FOUND";
+		}
 
-        if (entity == null) {
-            return "EMAIL_NOT_FOUND";
-        }
+		String otp = generateOtp();
 
-        String otp = generateOtp();
+		Boolean sent = emailService.forgotPasswordOtp(userEmail, otp);
 
-        entity.setOtp(otp);
+		if (Boolean.TRUE.equals(sent)) {
+			entity.setOtp(otp);
+			entity.setOtpExpiry(LocalDateTime.now().plusMinutes(5));
+			userRepository.save(entity);
 
-        userRepository.save(entity);
+			return "OTP_SENT"; // Success path
+		} else {
+			return "EMAIL_SENDING_FAILED";
+		}
+	}
 
-        emailService.forgotPasswordOtp(
-                userEmail,
-                otp
-        );
+	@PostMapping("/verifyOtp/{userEmail}/{otp}")
+	public String verifyOtp(@PathVariable String userEmail, @PathVariable String otp) {
 
-        return "OTP_SENT";
-    }
+		UserEntity entity = userRepository.findByUserEmail(userEmail);
 
-    @PostMapping("/verifyOtp/{userEmail}/{otp}")
-    public String verifyOtp(
-            @PathVariable String userEmail,
-            @PathVariable String otp) {
+		if (entity == null) {
+			return "USER_NOT_FOUND";
+		}
 
-        System.out.println("VERIFY OTP API HIT");
+		if (entity.getOtp() == null || entity.getOtpExpiry() == null) {
+			return "OTP_NOT_FOUND";
+		}
 
-        UserEntity entity =
-                userRepository.findByUserEmail(userEmail);
+		if (entity.getOtpExpiry().isBefore(LocalDateTime.now())) {
+			return "OTP_EXPIRED";
+		}
 
-        System.out.println("Entered OTP = " + otp);
+		if (!entity.getOtp().trim().equals(otp.trim())) {
+			return "INVALID_OTP";
+		}
 
-        if(entity != null) {
-            System.out.println("DB OTP = " + entity.getOtp());
-        }
+		return "OTP_VERIFIED";
+	}
 
-        if(entity == null) {
-            return "USER_NOT_FOUND";
-        }
+	@PutMapping("/updatePassword")
+	public String updatePassword(@RequestBody ForgotPasswordDTO dto) {
 
-        if(otp.trim().equals(entity.getOtp().trim())) {
-            return "OTP_VERIFIED";
-        }
+		UserEntity existUser = userRepository.findByUserEmail(dto.getUserEmail());
 
-        return "INVALID_OTP";
-    }
+		if (existUser == null) {
+			return "USER_NOT_FOUND";
+		}
 
-    @PutMapping("/updatePassword")
-    public String updatePassword(
-            @RequestBody ForgotPasswordDTO dto) {
+		String encodedPassword = passwordEncoder.encode(dto.getNewPassword());
 
-        UserEntity existUser =
-                userRepository.findByUserEmail(
-                        dto.getUserEmail());
+		existUser.setPassword(encodedPassword);
 
-        if (existUser == null) {
-            return "USER_NOT_FOUND";
-        }
+		existUser.setOtp(null);
+		existUser.setOtpExpiry(null);
 
-        String encodedPassword =
-                passwordEncoder.encode(
-                        dto.getNewPassword());
+		userRepository.save(existUser);
 
-        existUser.setPassword(
-                encodedPassword);
+		return "PASSWORD_RESET_SUCCESS";
+	}
 
-        existUser.setOtp(null);
+	private String generateOtp() {
 
-        userRepository.save(
-                existUser);
+		SecureRandom random = new SecureRandom();
 
-        return "PASSWORD_RESET_SUCCESS";
-    }
+		int otp = 100000 + random.nextInt(900000);
 
-    private String generateOtp() {
-
-        SecureRandom random =
-                new SecureRandom();
-
-        int otp =
-                100000 +
-                random.nextInt(900000);
-
-        return String.valueOf(otp);
-    }
+		return String.valueOf(otp);
+	}
 }

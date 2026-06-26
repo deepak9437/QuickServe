@@ -1,6 +1,8 @@
 
 package quick.serve.entity;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -42,6 +44,9 @@ public class UserEntity {
 	
 	@Column(name="otp")
 	private String otp;
+
+	@Column(name = "otp_expiry")
+	private LocalDateTime otpExpiry;
 	
 	@Column(name="phone")
 	private String userPhone;
