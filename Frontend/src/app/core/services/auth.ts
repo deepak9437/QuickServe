@@ -109,4 +109,17 @@ export class AuthService {
       { responseType: "text" },
     );
   }
+
+updateAvailability(
+  pId: number,
+  available: boolean
+) {
+
+  return this.http.put(
+    `${this.apiUrl}/provider/availability/${pId}?available=${available}`,
+    {}
+  );
+
+}
+
 }

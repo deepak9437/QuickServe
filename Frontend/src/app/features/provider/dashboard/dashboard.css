@@ -7,43 +7,137 @@ body {
   margin: auto;
   padding: 40px 20px;
 }
-
-/* Welcome Section */
+/* ===========================
+   Welcome Section
+=========================== */
 
 .welcome-card {
+  position: relative;
   background: linear-gradient(135deg, #111827, #16a34a);
-  color: white;
+  color: #fff;
   display: flex;
   align-items: center;
   gap: 25px;
   padding: 30px;
   border-radius: 20px;
   margin-bottom: 30px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 30px rgba(0,0,0,.15);
 }
 
 .avatar {
   width: 90px;
   height: 90px;
+  min-width: 90px;
   border-radius: 50%;
-  background: white;
+  background: #fff;
   color: #16a34a;
   font-size: 36px;
-  font-weight: bold;
+  font-weight: 700;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.provider-info h2 {
-  margin: 0;
-  font-size: 28px;
+.provider-info{
+    display:flex;
+    flex-direction:column;
+}
+.provider-top{
+    width:100%;
 }
 
-.provider-info p {
-  margin-top: 8px;
-  color: #d1fae5;
+.provider-name h2{
+  margin:0;
+  font-size:28px;
+  font-weight:700;
 }
+
+.provider-name p{
+  margin-top:8px;
+  color:#d1fae5;
+  font-size:15px;
+  letter-spacing:1px;
+}
+
+/* ===========================
+   Online / Offline
+=========================== */
+
+.availability-box{
+    position:absolute;
+    top:22px;
+    right:25px;
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    background:rgba(255,255,255,.15);
+    padding:10px 18px;
+    border-radius:40px;
+
+    backdrop-filter:blur(8px);
+}
+
+.availability-text{
+  font-size:15px;
+  font-weight:600;
+  min-width:55px;
+  text-align:right;
+}
+
+.availability-text.online{
+  color:#bbf7d0;
+}
+
+.availability-text.offline{
+  color:#e5e7eb;
+}
+
+/* Toggle */
+
+.toggle-switch{
+  position:relative;
+  width:58px;
+  height:30px;
+  display:inline-block;
+}
+
+.toggle-switch input{
+  display:none;
+}
+
+.toggle-slider{
+  position:absolute;
+  inset:0;
+  cursor:pointer;
+  background:#9ca3af;
+  transition:.35s;
+  border-radius:50px;
+}
+
+.toggle-slider::before{
+  content:"";
+  position:absolute;
+  width:24px;
+  height:24px;
+  left:3px;
+  top:3px;
+  background:#fff;
+  border-radius:50%;
+  transition:.35s;
+  box-shadow:0 3px 10px rgba(0,0,0,.25);
+}
+
+.toggle-switch input:checked + .toggle-slider{
+  background:#22c55e;
+}
+
+.toggle-switch input:checked + .toggle-slider::before{
+  transform:translateX(28px);
+}
+
+
 
 /* Stats Section */
 

@@ -33,7 +33,7 @@ public interface ProviderRepository extends JpaRepository<ProviderEntity, Intege
 //	@Query(value = "", nativeQuery = true);
 
 	@Query(value = "select status from provider where user_id =:id", nativeQuery = true)
-	String findByUserId(@Param("id") Integer id);
+	ProviderEntity findByUserId(@Param("id") Integer id);
 
 	
 	@Query("""

@@ -22,6 +22,7 @@ export class providerdashboardComponent implements OnInit {
   pendingRequests = 0;
   completedJobs = 0;
 
+  isOnline = false;
   recentBookings: any[] = [];
 
   constructor(
@@ -34,7 +35,7 @@ export class providerdashboardComponent implements OnInit {
 
     if (data) {
       this.provider = JSON.parse(data);
-
+      this.isOnline = this.provider.isAvailable;
       const userId = this.provider.id;
 
       this.dashboardService.getProviderId(userId).subscribe({
@@ -49,6 +50,54 @@ export class providerdashboardComponent implements OnInit {
       });
     }
   }
+
+  toggleAvailability(event: Event) {
+
+  const checked = (event.target as HTMLInputElement).checked;
+
+  // Update UI immediately
+  this.isOnline = checked;
+
+  this.dashboardService
+    .updateAvailability(this.provider.id, checked)
+    .subscribe({
+
+      next: () => {
+
+        // Update sessionStorage also
+        this.provider.isAvailable = checked;
+
+        sessionStorage.setItem(
+          "user",
+          JSON.stringify(this.provider)
+        );
+
+        Swal.fire({
+          icon: "success",
+          title: checked
+            ? "You are Online"
+            : "You are Offline",
+          timer: 1200,
+          showConfirmButton: false
+        });
+
+      },
+
+      error: () => {
+
+        // Revert toggle if API fails
+        this.isOnline = !checked;
+
+        Swal.fire({
+          icon: "error",
+          title: "Unable to update status"
+        });
+
+      }
+
+    });
+
+}
 
   loadDashboard(pId: number): void {
     this.dashboardService.getDashboardData(pId).subscribe({

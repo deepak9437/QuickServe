@@ -37,6 +37,8 @@ SecurityFilterChain securityFilterChain(
 
             .requestMatchers("/provider/provider-id/**").permitAll()
             .requestMatchers("/provider/dashboard/**").permitAll()
+            
+            .requestMatchers("/provider/availability/**").permitAll()
 
             // Provider Approval
 

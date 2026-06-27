@@ -86,8 +86,9 @@ public class ProviderController {
 
 		UserEntity entity = providerService.providerLogingService(userEmail, password);
 
-		String status = providerRepo.findByUserId(entity.getId());
-		System.out.println(status);
+		ProviderEntity pEntity = providerRepo.findByUserId(entity.getId());
+		System.out.println(pEntity.getStatus());
+		String status = pEntity.getStatus();
 
 		if (entity != null && "approved".equals(status)) {
 			log.info("provider login seuccessful ...");
@@ -197,6 +198,16 @@ public class ProviderController {
 		int otp = 100000 + random.nextInt(900000);
 
 		return String.valueOf(otp);
+	}
+
+	@PutMapping("/availability/{pId}")
+	public void updateAvailability(@PathVariable Integer pId, @RequestParam Boolean available) {
+
+		ProviderEntity provider = providerRepo.findProviderByUserId(pId);
+
+		provider.setAvailability(available);
+
+		providerRepo.save(provider);
 	}
 }
 
