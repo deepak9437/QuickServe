@@ -47,14 +47,12 @@ body {
   align-items: center;
   gap: 4rem;
   padding: 3rem 4rem;
-  min-height: 100vh;
+  min-height: 110vh;
 
   background-image: url("/images/hero-bg.png");
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
-
-  overflow: hidden;
 }
 /* ==========================================================
    LEFT SIDE
@@ -367,7 +365,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(255, 2555, 255, 0.8);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(12px);
   padding: 20px;
   border-radius: 20px;
@@ -480,6 +478,14 @@ body {
    Categories Section
 ======================= */
 /* Section Heading */
+.qs-sec--white {
+  position: relative;
+  /* top: -70px; */
+  background: white;
+  border-radius: 30px 30px 0 0;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.04);
+  z-index: 10;
+}
 
 .qs-sec__head {
   text-align: center;
