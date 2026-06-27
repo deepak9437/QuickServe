@@ -94,6 +94,30 @@
   margin-top: 12px;
 }
 
+/* Provider Availability */
+
+.availability-status {
+  margin-top: 15px;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.status-badge.online {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.status-badge.offline {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
 .provider-footer {
   margin-top: 25px;
   display: flex;

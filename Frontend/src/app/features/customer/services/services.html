@@ -13,11 +13,17 @@
       <select [(ngModel)]="selectedCategory">
         <option value="">All Categories</option>
         <option>Electrician</option>
+        <option>Mechanic</option>
         <option>Plumber</option>
         <option>Cleaner</option>
         <option>Carpenter</option>
         <option>Painter</option>
         <option>Tutor</option>
+        <option>Tutor</option>
+        <option>Chef</option>
+        <option>Gardener</option>
+        <option>Driver</option>
+        <option>Technician</option>
       </select>
     </div>
   </div>
@@ -48,9 +54,13 @@
 
       <p class="description">{{ provider.description }}</p>
 
-      <div class="status">
-        Status:
-        <span>{{ provider.status }}</span>
+      <div class="availability-status">
+        <span
+          class="status-badge"
+          [ngClass]="provider.availability ? 'online' : 'offline'"
+        >
+          {{ provider.availability ? 'Online' : 'Offline' }}
+        </span>
       </div>
 
       <div class="provider-footer">

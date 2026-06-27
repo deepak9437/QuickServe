@@ -42,10 +42,10 @@ public class ProviderController {
 
 	@Autowired
 	private ProviderService providerService;
-	
+
 	@Autowired
 	private UserRepository userRepo;
-	
+
 	@Autowired
 	private EmailService emailService;
 
@@ -86,8 +86,9 @@ public class ProviderController {
 
 		UserEntity entity = providerService.providerLogingService(userEmail, password);
 
-		String status = providerRepo.findByUserId(entity.getId());
-		System.out.println(status);
+		ProviderEntity pEntity = providerRepo.findByUserId(entity.getId());
+		System.out.println(pEntity.getStatus());
+		String status = pEntity.getStatus();
 
 		if (entity != null && "approved".equals(status)) {
 			log.info("provider login seuccessful ...");
@@ -135,69 +136,49 @@ public class ProviderController {
 	 */
 
 	@PutMapping("/accept/{bookingId}")
-	public void acceptBooking(
-	        @PathVariable Integer bookingId) {
+	public void acceptBooking(@PathVariable Integer bookingId) {
 
-	    BookingEntity booking =
-	            bookingRepo.findById(bookingId)
-	                       .orElseThrow();
+		BookingEntity booking = bookingRepo.findById(bookingId).orElseThrow();
 
-	    booking.setBookingStatus("accepted");
+		booking.setBookingStatus("accepted");
 
-	    bookingRepo.save(booking);
+		bookingRepo.save(booking);
 	}
-	
-	
-	
+
 	@PutMapping("/generateOtp/{bookingId}")
-	public void generateOtpForBooking(
-	        @PathVariable Integer bookingId) {
+	public void generateOtpForBooking(@PathVariable Integer bookingId) {
 
-	    BookingEntity booking =
-	            bookingRepo.findById(bookingId)
-	                       .orElseThrow();
+		BookingEntity booking = bookingRepo.findById(bookingId).orElseThrow();
 
-	    String otp = generateOtp();
+		String otp = generateOtp();
 
-	    booking.setOtp(otp);
+		booking.setOtp(otp);
 
-	    booking.setBookingStatus("otp_sent");
+		booking.setBookingStatus("otp_sent");
 
-	    bookingRepo.save(booking);
+		bookingRepo.save(booking);
 
-	    UserEntity customer =
-	            userRepo.findById(
-	                    booking.getUId())
-	                    .orElseThrow();
+		UserEntity customer = userRepo.findById(booking.getUId()).orElseThrow();
 
-	    emailService.otpEmail(
-	            customer.getUserEmail(),
-	            otp);
+		emailService.otpEmail(customer.getUserEmail(), otp);
 	}
-	
-	
+
 	@PutMapping("/verifyOtp/{bookingId}")
-	public String verifyOtp(
-	        @PathVariable Integer bookingId,
-	        @RequestParam String otp) {
+	public String verifyOtp(@PathVariable Integer bookingId, @RequestParam String otp) {
 
-	    BookingEntity booking =
-	            bookingRepo.findById(bookingId)
-	                       .orElseThrow();
+		BookingEntity booking = bookingRepo.findById(bookingId).orElseThrow();
 
-	    if (booking.getOtp().equals(otp)) {
+		if (booking.getOtp().equals(otp)) {
 
-	        booking.setBookingStatus("completed");
+			booking.setBookingStatus("completed");
 
-	        bookingRepo.save(booking);
+			bookingRepo.save(booking);
 
-	        return "OTP Verified";
-	    }
+			return "OTP Verified";
+		}
 
-	    return "Invalid OTP";
+		return "Invalid OTP";
 	}
-
-
 
 	@PutMapping("/cancel/{bookingId}")
 	public void cancelBooking(@PathVariable Integer bookingId) {
@@ -209,8 +190,6 @@ public class ProviderController {
 		bookingRepo.save(booking);
 	}
 
-	
-
 //	 @GetMapping("/x")
 	public String generateOtp() {
 
@@ -220,8 +199,17 @@ public class ProviderController {
 
 		return String.valueOf(otp);
 	}
-}
 
+	@PutMapping("/availability/{pId}")
+	public void updateAvailability(@PathVariable Integer pId, @RequestParam Boolean available) {
+
+		ProviderEntity provider = providerRepo.findProviderByUserId(pId);
+
+		provider.setAvailability(available);
+
+		providerRepo.save(provider);
+	}
+}
 
 //	@PutMapping("/accept/{bookingId}")
 //	public void acceptBooking(@PathVariable Integer bookingId) {
@@ -247,6 +235,3 @@ public class ProviderController {
 //				+ otp
 //				+ ".Don't share this otp to anyone.Only share this otp to the provider after the service completed.",customerPhone);
 //	}
-
-
-

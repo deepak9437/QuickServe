@@ -39,22 +39,33 @@ public class EmailService {
 	public void otpEmail(String customerEmail, String otp) {
 		SimpleMailMessage msg = new SimpleMailMessage();
 		msg.setTo(customerEmail);
-		msg.setSubject("QuickServe - Your request accepted...");
+		msg.setSubject("QuickServe - Service complete OTP...");
 		msg.setText("QuickServe: Your booking has been accepted.\n\nYour Booking OTP is: " + otp
 				+ "\n\nDon't share this otp to anyone.Only share this otp to the provider after the service completed.\n\n"
 				+ "Regards,\n" + "QuickService Team");
 		mailSender.send(msg);
 	}
 
-	public void forgotPasswordOtp(String userEmail, String otp) {
-		SimpleMailMessage message = new SimpleMailMessage();
-		message.setTo(userEmail);
-		message.setSubject("QuickServe - Password Reset OTP");
-		message.setText("QuickServe: We received a request to reset your password.\n\n" + "Your Password Reset OTP is: "
-				+ otp + "\n\nThis OTP is valid for a limited time." + "\nPlease do not share this OTP with anyone."
-				+ "\nIf you did not request a password reset, you can safely ignore this email." + "\n\nRegards,"
-				+ "\nQuickServe Team");
-		mailSender.send(message);
+	public Boolean forgotPasswordOtp(String userEmail, String otp) {
+		try {
+			SimpleMailMessage message = new SimpleMailMessage();
+			message.setTo(userEmail);
+			message.setSubject("QuickServe - Password Reset OTP");
+			message.setText("QuickServe: We received a request to reset your password.\n\n"
+					+ "Your Password Reset OTP is: " + otp + "\n\nThis OTP is valid for 5 minutes."
+					+ "\nPlease do not share this OTP with anyone."
+					+ "\nIf you did not request a password reset, you can safely ignore this email."
+					+ "\n\nRegards,\nQuickServe Team");
+
+			mailSender.send(message);
+
+			return true;
+
+		} catch (Exception e) {
+			System.err.println("Email failed to send: " + e.getMessage());
+
+			return false;
+		}
 	}
 
 }
