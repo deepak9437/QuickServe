@@ -57,9 +57,7 @@ export class LoginComponent {
             showConfirmButton: false,
           });
 
-          this.router.navigate(["/"]).then(() => {
-            window.location.reload();
-          });
+          this.router.navigate(["/"]);
         } else if (user.role === "provider") {
           Swal.fire({
             title: "Success!",
@@ -69,13 +67,9 @@ export class LoginComponent {
             showConfirmButton: false,
           });
 
-          this.router.navigate(["/provider-dashboard"]).then(() => {
-            window.location.reload();
-          });
+          this.router.navigate(["/provider-dashboard"]);
         } else if (user.role === "admin") {
-          this.router.navigate(["/admin-dashboard"]).then(() => {
-            window.location.reload();
-          });
+          this.router.navigate(["/admin-dashboard"]);
         } else {
           Swal.fire({
             title: "Error!",

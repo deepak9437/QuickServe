@@ -1,263 +1,313 @@
-/* ── QuickServe Navbar ─────────────────────────────────────────── */
-
+/* ==========================================================
+   NAVBAR
+========================================================== */
 .navbar {
+  width: 95%;
+  max-width: 1600px;
+
+  margin: 3px auto;
+
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 0 2rem;
-  height: 64px;
-  background: rgba(255, 255, 255, 0.95);
-  border-bottom: 1px solid #e5e7eb;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  align-items: center;
+
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(29, 158, 117, 0.08);
+
+  border-radius: 24px;
 }
 
-/* ── Logo ──────────────────────────────────────────────────────── */
-
+/* ==========================================================
+   LOGO
+========================================================== */
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  font-size: 20px;
-  font-weight: 600;
-  color: #1a1a1a;
-  letter-spacing: -0.3px;
 }
 
 .logo img {
-  width: 34px;
-  height: 34px;
-  border-radius: 9px;
-  object-fit: cover;
+  height: 40px;
+  width: auto;
+  display: block;
+  transition: 0.3s ease;
 }
 
-.logo span {
-  color: #1d9e75;
+.logo img:hover {
+  transform: scale(1.03);
 }
 
-/* ── Nav Links ─────────────────────────────────────────────────── */
+/* ==========================================================
+   NAVIGATION
+========================================================== */
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 10px;
+  margin-left: auto;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.nav-links li a {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 7px 13px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 400;
-  color: #555;
+.nav-links li {
+  position: relative;
+}
+
+.nav-links a {
   text-decoration: none;
-  white-space: nowrap;
-  transition:
-    background 0.15s ease,
-    color 0.15s ease;
+
+  color: #0b1f17;
+
+  font-size: 1rem;
+  font-weight: 600;
+
+  padding: 12px 18px;
+
+  border-radius: 14px;
+
+  transition: all 0.25s ease;
 }
 
-.nav-links li a:hover {
-  background: #f0faf6;
-  color: #1a1a1a;
-}
+/* Hover */
 
-.nav-links li a.active {
-  background: #e1f5ee;
+.nav-links a:hover {
+  background: #f2faf7;
   color: #1d9e75;
-  font-weight: 500;
 }
 
-/* ── Divider (optional <li class="divider">) ───────────────────── */
+/* Active */
 
-.nav-links li.divider {
-  width: 1px;
-  height: 20px;
-  background: #e0e0e0;
-  margin: 0 6px;
-  pointer-events: none;
+.nav-links a.active {
+  background: #e7f7f1;
+  color: #1d9e75;
+  position: relative;
 }
 
-/* ── Login Button ──────────────────────────────────────────────── */
+.nav-links a.active::after {
+  content: "";
 
-.nav-links li a.signup-btn,
-.nav-links li a[routerLink="/login"] {
-  border: 1px solid #d0d0d0;
-  color: #1a1a1a;
-  background: transparent;
-  font-weight: 500;
-}
+  position: absolute;
 
-.nav-links li a[routerLink="/login"]:hover {
-  background: #f5f5f5;
-  color: #1a1a1a;
-}
+  left: 50%;
+  bottom: 6px;
 
-/* ── Sign Up Button ────────────────────────────────────────────── */
+  transform: translateX(-50%);
 
-.nav-links li a.signup-btn {
+  width: 24px;
+  height: 3px;
+
+  border-radius: 10px;
+
   background: #1d9e75;
-  color: #ffffff !important;
-  border: none;
-  font-weight: 500;
-  padding: 7px 16px;
 }
 
-.nav-links li a.signup-btn:hover {
-  background: #0f6e56;
-  color: #ffffff;
+/* ==========================================================
+   LOGIN BUTTON
+========================================================== */
+
+.login-btn,
+.nav-links a[href="/login"] {
+  background: white;
+
+  border: 1.5px solid #dceee8;
+
+  padding: 12px 24px;
+
+  border-radius: 14px;
+
+  font-weight: 700;
 }
 
-/* ── Profile Menu ──────────────────────────────────────────────── */
+.login-btn:hover,
+.nav-links a[href="/login"]:hover {
+  border-color: #1d9e75;
+}
+
+/* ==========================================================
+   SIGNUP BUTTON
+========================================================== */
+
+.signup-btn {
+  background: #1d9e75;
+
+  color: white !important;
+
+  padding: 12px 26px;
+
+  border-radius: 14px;
+
+  font-weight: 700;
+
+  transition: all 0.25s ease;
+}
+
+.signup-btn:hover {
+  background: #168564;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 8px 20px rgba(29, 158, 117, 0.25);
+}
+
+/* ==========================================================
+   PROFILE MENU
+========================================================== */
 
 .profile-menu {
   position: relative;
 }
 
+/* Profile Circle */
+
 .profile-icon {
-  width: 36px;
-  height: 36px;
+  width: 48px;
+  height: 48px;
+
   border-radius: 50%;
-  background: #e1f5ee;
-  border: 1.5px solid #9fe1cb;
+
+  background: linear-gradient(135deg, #1d9e75, #3ac99d);
+
+  color: white;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+
+  font-weight: 700;
+  font-size: 1rem;
+
   cursor: pointer;
-  user-select: none;
-  transition: box-shadow 0.15s ease;
+
+  transition: all 0.25s ease;
 }
 
 .profile-icon:hover {
-  box-shadow: 0 0 0 3px #9fe1cb;
+  transform: scale(1.05);
 }
 
-/* ── Dropdown ──────────────────────────────────────────────────── */
+/* ==========================================================
+   DROPDOWN
+========================================================== */
 
 .dropdown {
   position: absolute;
+
   right: 0;
-  top: calc(100% + 10px);
-  width: 220px;
-  background: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  padding: 8px;
-  z-index: 999;
-  animation: dropIn 0.15s ease;
-}
+  top: 65px;
 
-@keyframes dropIn {
-  from {
-    opacity: 0;
-    transform: translateY(-6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+  width: 240px;
 
-/* User name inside dropdown */
-.dropdown > p {
-  font-size: 14px;
-  font-weight: 600;
-  color: #1a1a1a;
-  padding: 8px 10px 4px;
-}
+  background: white;
 
-.dropdown > small {
-  display: block;
-  font-size: 12px;
-  color: #888;
-  padding: 0 10px 10px;
-  border-bottom: 1px solid #f0f0f0;
-  margin-bottom: 6px;
-}
+  border: 1px solid #dceee8;
 
-/* Dropdown links */
-.dropdown a {
+  border-radius: 18px;
+
+  padding: 16px;
+
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+
   display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 10px;
-  font-size: 13.5px;
-  color: #444;
+  flex-direction: column;
+  gap: 10px;
+
+  z-index: 999;
+}
+
+.dropdown p {
+  margin: 0;
+
+  font-weight: 700;
+
+  color: #0b1f17;
+}
+
+.dropdown small {
+  color: #6b7280;
+}
+
+/* Dropdown Links */
+
+.dropdown a {
   text-decoration: none;
-  border-radius: 8px;
-  transition:
-    background 0.12s ease,
-    color 0.12s ease;
+
+  padding: 10px 12px;
+
+  border-radius: 10px;
+
+  color: #374151;
+
+  transition: all 0.2s ease;
 }
 
 .dropdown a:hover {
-  background: #f0faf6;
+  background: #f3faf7;
   color: #1d9e75;
 }
 
-/* Dropdown logout button */
+/* Logout Button */
+
 .dropdown button {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-  padding: 8px 10px;
-  margin-top: 6px;
-  font-size: 13.5px;
-  font-weight: 500;
-  color: #d85a30;
-  background: transparent;
   border: none;
-  border-top: 1px solid #f0f0f0;
-  border-radius: 0 0 8px 8px;
+
+  background: #fee2e2;
+
+  color: #dc2626;
+
+  padding: 10px;
+
+  border-radius: 10px;
+
+  font-weight: 700;
+
   cursor: pointer;
-  text-align: left;
-  transition: background 0.12s ease;
+
+  transition: all 0.2s ease;
 }
 
 .dropdown button:hover {
-  background: #faece7;
-  color: #993c1d;
+  background: #fecaca;
 }
 
-/* ── Responsive ────────────────────────────────────────────────── */
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .navbar {
-    padding: 0 1rem;
-  }
-
-  .nav-links li a {
-    padding: 6px 10px;
-    font-size: 13px;
+    padding: 14px 20px;
   }
 
   .logo {
-    font-size: 17px;
+    font-size: 1.5rem;
   }
 
-  .logo img {
-    width: 28px;
-    height: 28px;
+  .nav-links {
+    gap: 6px;
+  }
+
+  .nav-links a {
+    padding: 10px 14px;
+    font-size: 0.95rem;
   }
 }
 
-@media (max-width: 540px) {
-  .nav-links li a span,
-  .nav-links li:not(.profile-menu):not(:last-child) a {
-    display: none;
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 15px;
+
+    padding: 20px;
   }
 
-  .nav-links li a[routerLink="/login"],
-  .nav-links li a.signup-btn {
-    display: flex;
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .dropdown {
+    right: -20px;
   }
 }

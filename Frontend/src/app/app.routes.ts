@@ -14,6 +14,9 @@ import { AdminDashboardComponent } from "./features/admin/dashboard/dashboard";
 import { ProviderApprovalComponent } from "./features/admin/provider-approval/provider-approval";
 import { AboutComponent } from "./features/about/about";
 import { ForgotPasswordComponent } from "./features/auth/forgot-password/forgot-password";
+import { roleGuard } from "./core/guards/role-guard";
+
+import { authGuard } from "./core/guards/auth-guard";
 
 export const routes: Routes = [
   {
@@ -24,7 +27,6 @@ export const routes: Routes = [
     path: "services",
     component: ServicesComponent,
   },
-
   {
     path: "provider/:id",
     component: ProviderProfileComponent,
@@ -34,21 +36,40 @@ export const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: "forgot-password",
-    component: ForgotPasswordComponent,
-  },
-  {
     path: "signup",
     component: SignupComponent,
   },
   {
+    path: "forgot-password",
+    component: ForgotPasswordComponent,
+  },
+
+  // CUSTOMER
+  {
     path: "dashboard",
     component: DashboardComponent,
+    canActivate: [authGuard, roleGuard],
+    data: { role: "customer" },
   },
   {
     path: "profile",
     component: ProfileComponent,
+    canActivate: [authGuard, roleGuard],
+    data: { role: "customer" },
   },
+  {
+    path: "booking",
+    component: Booking,
+    canActivate: [authGuard, roleGuard],
+    data: { role: "customer" },
+  },
+  {
+    path: "view-profile",
+    component: ViewProfileComponent,
+    canActivate: [authGuard],
+  },
+
+  // PROVIDER
   {
     path: "provider-register",
     component: RegisterComponent,
@@ -56,32 +77,29 @@ export const routes: Routes = [
   {
     path: "provider-dashboard",
     component: providerdashboardComponent,
+    canActivate: [authGuard, roleGuard],
+    data: { role: "provider" },
   },
 
+  // ADMIN
   {
     path: "admin-dashboard",
     component: AdminDashboardComponent,
-  },
-  {
-    path: "booking",
-    component: Booking,
-  },
-  {
-    path: "view-profile",
-    component: ViewProfileComponent,
+    canActivate: [authGuard, roleGuard],
+    data: { role: "admin" },
   },
   {
     path: "admin/provider-approval",
     component: ProviderApprovalComponent,
-  },
-  {
-    path: "about",
-    component: AboutComponent,
+    canActivate: [authGuard, roleGuard],
+    data: { role: "admin" },
   },
   {
     path: "admin/users",
     loadComponent: () =>
       import("./features/admin/users/users").then((m) => m.UsersComponent),
+    canActivate: [authGuard, roleGuard],
+    data: { role: "admin" },
   },
   {
     path: "admin/providers",
@@ -89,6 +107,7 @@ export const routes: Routes = [
       import("./features/admin/providers/providers").then(
         (m) => m.ProvidersComponent,
       ),
+    canActivate: [authGuard],
   },
   {
     path: "admin/bookings",
@@ -96,6 +115,7 @@ export const routes: Routes = [
       import("./features/admin/bookings/bookings").then(
         (m) => m.BookingsComponent,
       ),
+    canActivate: [authGuard],
   },
   {
     path: "admin/reports",
@@ -103,5 +123,11 @@ export const routes: Routes = [
       import("./features/admin/reports/reports").then(
         (m) => m.ReportsComponent,
       ),
+    canActivate: [authGuard],
+  },
+
+  {
+    path: "about",
+    component: AboutComponent,
   },
 ];
