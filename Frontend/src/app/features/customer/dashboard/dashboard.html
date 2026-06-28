@@ -53,47 +53,70 @@
 
   <!-- Recent Bookings -->
 
-  <div class="recent-section">
+<div class="recent-section">
 
-    <div class="section-header">
+  <div class="section-header">
+    <h3 class="section-title">
+      📋 Recent Bookings
+    </h3>
+  </div>
 
-      <h3 class="section-title">
-  📋 Recent Bookings
-</h3>
+  <div
+    class="booking-card"
+    *ngFor="let booking of recentBookings">
+
+    <div class="booking-details">
+
+      <h4 class="provider-name">
+        {{ booking.providerName }}
+      </h4>
+
+      <p class="problem">
+        {{ booking.problem }}
+      </p>
+
+      <p class="date">
+        Date: {{ booking.bookingDate }}
+      </p>
+
+      <!-- Review Button -->
+
+      <div
+        *ngIf="booking.bookingStatus==='completed'"
+        class="review-section">
+
+        <button
+          *ngIf="!booking.reviewGiven"
+          class="review-btn"
+          (click)="openReviewDialog(booking)">
+
+          ⭐ Give Review
+
+        </button>
+
+        <div
+          *ngIf="booking.reviewGiven"
+          class="reviewed">
+
+          ✅ Review Submitted
+
+        </div>
+
+      </div>
 
     </div>
 
-    <div
-      class="booking-card"
-      *ngFor="let booking of recentBookings">
+    <span
+      class="badge"
+      [ngClass]="booking.bookingStatus">
 
-     <div class="booking-details">
+      {{ booking.bookingStatus }}
 
-  <h4 class="provider-name">
-    {{ booking.providerName }}
-  </h4>
-
-  <p class="problem">
-    {{ booking.problem }}
-  </p>
-
-  <p class="date">
-    Date: {{ booking.bookingDate }}
-  </p>
-
-</div>
-
-      <span
-        class="badge"
-        [ngClass]="booking.bookingStatus">
-
-        {{ booking.bookingStatus }}
-
-      </span>
-
-    </div>
+    </span>
 
   </div>
+
+</div>
 
   <!-- Logout -->
 

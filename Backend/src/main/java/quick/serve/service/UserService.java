@@ -14,6 +14,7 @@ import quick.serve.entity.ProviderEntity;
 import quick.serve.entity.UserEntity;
 import quick.serve.repo.BookingRepo;
 import quick.serve.repo.ProviderRepository;
+import quick.serve.repo.ReviewRepo;
 import quick.serve.repo.UserRepository;
 
 @Service
@@ -33,6 +34,9 @@ public class UserService {
 
 	@Autowired
 	private ProviderRepository providerRepo;
+	
+	@Autowired
+	private ReviewRepo reviewRepo;
 
 //	@Value("${image.path.user}")
 //	String userImage;
@@ -79,6 +83,12 @@ public class UserService {
 			recentBooking.setBookingStatus(booking.getBookingStatus());
 
 			recentBooking.setBookingDate(booking.getBookingDate());
+
+			recentBooking.setBookingId(booking.getBookingId());
+
+			recentBooking.setPId(booking.getPId());
+
+			recentBooking.setReviewGiven(reviewRepo.existsByBId(booking.getBookingId()));
 
 			ProviderEntity provider = providerRepo.findById(booking.getPId()).orElse(null);
 

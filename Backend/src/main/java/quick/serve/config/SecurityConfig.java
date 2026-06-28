@@ -97,7 +97,8 @@ SecurityFilterChain securityFilterChain(
             // =========================
             // ALL OTHER REQUESTS
             // =========================
-
+            
+            .requestMatchers("/review/set_review").permitAll()
             .anyRequest().authenticated()
 
         );

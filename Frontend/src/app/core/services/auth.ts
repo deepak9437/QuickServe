@@ -10,7 +10,7 @@ export class AuthService {
   private apiUrl1 = "http://localhost:3030/quickserve/user";
   private apiUrl2 = "http://localhost:3030/quickserve/provider";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   registerUser(data: any): Observable<any> {
     const formData = new FormData();
@@ -110,14 +110,39 @@ export class AuthService {
     );
   }
 
-updateAvailability(
+  updateAvailability(
+    pId: number,
+    available: boolean
+  ) {
+
+    return this.http.put(
+      `${this.apiUrl}/provider/availability/${pId}?available=${available}`,
+      {}
+    );
+
+  }
+
+ submitReview(
+  bId: number,
+  uId: number,
   pId: number,
-  available: boolean
+  rating: number,
+  comment: string
 ) {
 
-  return this.http.put(
-    `${this.apiUrl}/provider/availability/${pId}?available=${available}`,
-    {}
+  return this.http.post(
+    `${this.apiUrl}/review/set_review`,
+    null,
+    {
+      params: {
+        bId,
+        uId,
+        pId,
+        rating,
+        comment
+      },
+      responseType: 'text'
+    }
   );
 
 }

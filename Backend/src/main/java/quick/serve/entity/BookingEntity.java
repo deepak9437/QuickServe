@@ -44,8 +44,4 @@ public class BookingEntity {
 	
 	@Column(name="booking_date")
 	private LocalDate bookingDate;
-	
-	
-	
-
 }
