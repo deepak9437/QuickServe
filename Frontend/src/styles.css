@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "tailwindcss";
-
+@import "bootstrap-icons/font/bootstrap-icons.css";
 html,
 body {
   margin: 0;
@@ -22,122 +22,102 @@ app-root {
    Review Popup
 =========================== */
 
-.review-popup-card{
+.review-popup-card {
+  width: 620px !important;
 
-    width:620px !important;
+  border-radius: 22px !important;
 
-    border-radius:22px !important;
-
-    padding:35px !important;
-
+  padding: 35px !important;
 }
 
-.review-popup{
-
-    width:100%;
-
+.review-popup {
+  width: 100%;
 }
 
-.star-rating{
+.star-rating {
+  display: flex;
 
-    display:flex;
+  justify-content: center;
 
-    justify-content:center;
+  align-items: center;
 
-    align-items:center;
+  gap: 14px;
 
-    gap:14px;
-
-    margin:20px 0 30px;
-
+  margin: 20px 0 30px;
 }
 
-.star{
+.star {
+  font-size: 56px !important;
 
-    font-size:56px !important;
+  color: #d1d5db;
 
-    color:#d1d5db;
+  cursor: pointer;
 
-    cursor:pointer;
+  transition: 0.25s;
 
-    transition:.25s;
+  user-select: none;
 
-    user-select:none;
-
-    line-height:1;
-
+  line-height: 1;
 }
 
-.star:hover{
-
-    transform:scale(1.25);
-
+.star:hover {
+  transform: scale(1.25);
 }
 
-.review-textarea{
+.review-textarea {
+  width: 100% !important;
 
-    width:100% !important;
+  height: 170px !important;
 
-    height:170px !important;
+  resize: none !important;
 
-    resize:none !important;
+  border: 2px solid #d1d5db !important;
 
-    border:2px solid #d1d5db !important;
+  border-radius: 14px !important;
 
-    border-radius:14px !important;
+  padding: 18px !important;
 
-    padding:18px !important;
+  font-size: 16px !important;
 
-    font-size:16px !important;
+  font-family: inherit !important;
 
-    font-family:inherit !important;
+  box-sizing: border-box !important;
 
-    box-sizing:border-box !important;
+  outline: none !important;
 
-    outline:none !important;
+  background: #fff !important;
 
-    background:#fff !important;
+  color: #374151 !important;
 
-    color:#374151 !important;
-
-    transition:.3s;
-
+  transition: 0.3s;
 }
 
-.review-textarea:focus{
+.review-textarea:focus {
+  border-color: #16a34a !important;
 
-    border-color:#16a34a !important;
-
-    box-shadow:0 0 0 4px rgba(22,163,74,.15);
-
+  box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.15);
 }
 
-.review-textarea::placeholder{
-
-    color:#9ca3af;
-
+.review-textarea::placeholder {
+  color: #9ca3af;
 }
 
-.swal2-confirm{
+.swal2-confirm {
+  border-radius: 10px !important;
 
-    border-radius:10px !important;
+  font-size: 16px !important;
 
-    font-size:16px !important;
+  padding: 12px 28px !important;
 
-    padding:12px 28px !important;
-
-    font-weight:600 !important;
-
+  font-weight: 600 !important;
 }
 
-.swal2-cancel{
+.swal2-cancel {
+  border-radius: 10px !important;
 
-    border-radius:10px !important;
+  font-size: 16px !important;
 
-    font-size:16px !important;
+  padding: 12px 28px !important;
 
-    padding:12px 28px !important;
-
-    font-weight:600 !important;
-
+  font-weight: 600 !important;
 }

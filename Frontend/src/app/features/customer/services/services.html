@@ -1,7 +1,14 @@
 <section class="services-page">
   <div class="services-header">
-    <h1>Find Trusted Service Providers</h1>
-    <p>Browse verified professionals and book services instantly.</p>
+    <h1>
+      <i class="bi bi-search"></i>
+      Find Trusted Service Providers
+    </h1>
+
+    <p>
+      <i class="bi bi-patch-check-fill"></i>
+      Browse verified professionals and book services instantly.
+    </p>
 
     <div class="search-filter">
       <input
@@ -19,7 +26,6 @@
         <option>Carpenter</option>
         <option>Painter</option>
         <option>Tutor</option>
-        <option>Tutor</option>
         <option>Chef</option>
         <option>Gardener</option>
         <option>Driver</option>
@@ -31,6 +37,7 @@
   <div class="providers-grid">
     @if (paginatedProviders.length > 0) { @for (provider of paginatedProviders;
     track provider.id) {
+
     <div class="provider-card">
       <div class="provider-top">
         <div class="provider-avatar">
@@ -39,44 +46,76 @@
 
         <div class="provider-info">
           <h3>{{ provider.user.fullName }}</h3>
-          <span>{{ provider.skills }}</span>
+
+          <span>
+            <i class="bi bi-tools"></i>
+            {{ provider.skills }}
+          </span>
         </div>
       </div>
 
       <div class="rating">
-        ⭐ {{ provider.rating || 0 }} ({{ provider.review || 0 }} Reviews)
+        <i class="bi bi-star-fill"></i>
+
+        {{ provider.rating || 0 }}
+
+        <span> ({{ provider.review || 0 }} Reviews) </span>
       </div>
 
       <p class="experience">
+        <i class="bi bi-briefcase-fill"></i>
+
         Experience: {{ provider.experience > 0 ? provider.experience : 0 }}
         Years
       </p>
 
-      <p class="description">{{ provider.description }}</p>
+      <p class="description">
+        <i class="bi bi-card-text"></i>
+
+        {{ provider.description }}
+      </p>
 
       <div class="availability-status">
         <span
           class="status-badge"
           [ngClass]="provider.availability ? 'online' : 'offline'"
         >
+          <i
+            class="bi"
+            [ngClass]="provider.availability ? 'bi-wifi' : 'bi-wifi-off'"
+          >
+          </i>
+
           {{ provider.availability ? 'Online' : 'Offline' }}
         </span>
       </div>
 
       <div class="provider-footer">
         <button class="booking-btn" (click)="bookNow(provider)">
+          <i class="bi bi-calendar-check-fill"></i>
+
           Book Now
         </button>
 
         <a [routerLink]="['/provider', provider.id]" class="profile-btn">
+          <i class="bi bi-person-vcard-fill"></i>
+
           View Profile
         </a>
       </div>
     </div>
+
     } } @else {
 
     <div class="no-providers">
+      <i
+        class="bi bi-person-x-fill"
+        style="font-size: 60px; color: #9ca3af; margin-bottom: 15px"
+      >
+      </i>
+
       <h3>No providers found</h3>
+
       <p>Try adjusting your search or category filter.</p>
     </div>
 
@@ -89,6 +128,8 @@
       [disabled]="currentPage === 1"
       (click)="changePage(currentPage - 1)"
     >
+      <i class="bi bi-chevron-left"></i>
+
       Prev
     </button>
 
@@ -110,6 +151,8 @@
       (click)="changePage(currentPage + 1)"
     >
       Next
+
+      <i class="bi bi-chevron-right"></i>
     </button>
   </div>
 </section>

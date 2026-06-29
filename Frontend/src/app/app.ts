@@ -23,6 +23,7 @@ export class App {
           "/signup",
           "/provider-register",
           "/about",
+          "/dashboard",
         ];
 
         this.hideFooter = hiddenRoutes.includes(this.router.url);
