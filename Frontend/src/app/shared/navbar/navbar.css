@@ -4,6 +4,7 @@
 .navbar {
   width: 95%;
   max-width: 1600px;
+  padding: 3px;
 
   margin: 3px auto;
   position: fixed;

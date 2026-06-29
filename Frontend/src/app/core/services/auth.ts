@@ -21,6 +21,21 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  // Current User Methods
+  setCurrentUser(user: any) {
+    sessionStorage.setItem("user", JSON.stringify(user));
+    this.currentUserSubject.next(user);
+  }
+
+  clearCurrentUser() {
+    sessionStorage.removeItem("user");
+    this.currentUserSubject.next(null);
+  }
+
+  getCurrentUser() {
+    return this.currentUserSubject.value;
+  }
+
   registerUser(data: any): Observable<any> {
     const formData = new FormData();
 

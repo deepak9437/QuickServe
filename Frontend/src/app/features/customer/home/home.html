@@ -1,7 +1,15 @@
+<!-- ==========================================================
+     HERO SECTION
+========================================================== -->
+
 <section class="hero">
   <!-- LEFT SIDE -->
+
   <div class="qs-hero__copy">
-    <div class="qs-pill">⭐ Trusted Service Platform Across Odisha</div>
+    <div class="qs-pill">
+      <i class="bi bi-patch-check-fill"></i>
+      Trusted Service Platform Across Odisha
+    </div>
 
     <h1 class="qs-hero__heading">
       Book Trusted
@@ -9,9 +17,11 @@
     </h1>
 
     <p class="qs-hero__sub">
-      Find verified electricians, plumbers, cleaners, AC technicians, tutors,
-      and other skilled professionals near you — fast, reliable, and affordable.
+      Find verified electricians, plumbers, cleaners, AC technicians, tutors and
+      other skilled professionals near you — fast, reliable and affordable.
     </p>
+
+    <!-- Search -->
 
     <div class="qs-search">
       <input
@@ -21,16 +31,42 @@
         (keyup.enter)="searchService()"
       />
 
-      <button (click)="searchService()">Find Now</button>
+      <button (click)="searchService()">
+        <i class="bi bi-search"></i>
+        Find Now
+      </button>
     </div>
 
+    <!-- Tags -->
+
     <div class="qs-hero__tags">
-      <span class="qs-tag">🔧 Electrician</span>
-      <span class="qs-tag">🚿 Plumber</span>
-      <span class="qs-tag">🧹 Cleaning</span>
-      <span class="qs-tag">❄️ AC Repair</span>
-      <span class="qs-tag">📚 Tutor</span>
+      <span class="qs-tag">
+        <i class="bi bi-tools"></i>
+        Electrician
+      </span>
+
+      <span class="qs-tag">
+        <i class="bi bi-droplet-fill"></i>
+        Plumber
+      </span>
+
+      <span class="qs-tag">
+        <i class="bi bi-stars"></i>
+        Cleaning
+      </span>
+
+      <span class="qs-tag">
+        <i class="bi bi-snow"></i>
+        AC Repair
+      </span>
+
+      <span class="qs-tag">
+        <i class="bi bi-book"></i>
+        Tutor
+      </span>
     </div>
+
+    <!-- Stats -->
 
     <div class="qs-hero__stats">
       <div class="qs-stat">
@@ -44,60 +80,79 @@
       </div>
 
       <div class="qs-stat">
-        <span class="qs-stat__num">4.8★</span>
+        <span class="qs-stat__num">
+          <i class="bi bi-star-fill"></i>
+          4.8
+        </span>
         <span class="qs-stat__lbl">Rating</span>
       </div>
     </div>
   </div>
 
   <!-- RIGHT SIDE -->
+
   <div class="qs-hero__visual">
     <div class="qs-mosaic">
-      <!-- MAIN CARD -->
+      <!-- Main Card -->
+
       <div class="qs-photo qs-photo--tall">
         <img src="/images/img1.jpg" alt="Electrician" />
 
-        <span class="qs-photo__badge"> 🔧 Electrician </span>
+        <span class="qs-photo__badge">
+          <i class="bi bi-tools"></i>
+          Electrician
+        </span>
 
         <div class="qs-photo__overlay">
           <h4>Verified Electricians</h4>
-          <p>Repairs, wiring & installations</p>
+          <p>Repairs, Wiring & Installations</p>
         </div>
       </div>
 
-      <!-- RIGHT COLUMN -->
+      <!-- Right Column -->
+
       <div class="qs-mosaic__col">
         <div class="qs-photo qs-photo--short">
           <img src="/images/img2.jpg" alt="AC Repair" />
 
-          <span class="qs-photo__badge"> ❄️ AC Repair </span>
+          <span class="qs-photo__badge">
+            <i class="bi bi-snow"></i>
+            AC Repair
+          </span>
 
           <div class="qs-photo__overlay">
             <h4>AC Repair Services</h4>
-            <p>Cooling solutions & maintenance</p>
+            <p>Cooling Solutions & Maintenance</p>
           </div>
         </div>
 
         <div class="qs-photo qs-photo--short">
           <img src="/images/img3.jpg" alt="Tutor" />
 
-          <span class="qs-photo__badge"> 📚 Tutor </span>
+          <span class="qs-photo__badge">
+            <i class="bi bi-book"></i>
+            Tutor
+          </span>
 
           <div class="qs-photo__overlay">
             <h4>Experienced Tutors</h4>
-            <p>Learn from trusted educators</p>
+            <p>Learn From Trusted Educators</p>
           </div>
         </div>
       </div>
 
-      <!-- BOTTOM BAND -->
+      <!-- Bottom Band -->
+
       <div class="qs-mosaic__band">
         <div class="qs-mosaic__band-left">
-          <span class="qs-mosaic__band-pill"> ✓ Serving all of Odisha </span>
+          <span class="qs-mosaic__band-pill">
+            <i class="bi bi-patch-check-fill"></i>
+            Serving all of Odisha
+          </span>
 
           <h4>Bhubaneswar · Cuttack · Puri · Rourkela</h4>
 
-          <p>Instant booking · Verified professionals · Trusted service</p>
+          <p>Instant Booking · Verified Professionals · Trusted Service</p>
         </div>
 
         <div class="qs-mosaic__band-stats">
@@ -115,106 +170,223 @@
     </div>
   </div>
 </section>
-<!-- ---------------------------------------------------------------------------------- -->
+<!-- ==========================================================
+     CATEGORIES
+========================================================== -->
 
-<!-- ── CATEGORIES ─────────────────────────────────────────────── -->
 <section class="qs-sec qs-sec--white">
   <div class="qs-sec__inner">
     <div class="qs-sec__head">
-      <div class="qs-eyebrow">What we offer</div>
+      <div class="qs-eyebrow">What We Offer</div>
+
       <h2>All the services you need, one platform</h2>
+
       <p>Choose from 8+ categories of trusted local professionals</p>
     </div>
 
     <div class="qs-cat-grid">
+      <!-- Electrician -->
+
       <div class="qs-cat" routerLink="/services">
-        <div class="qs-cat__icon">🔧</div>
+        <div class="qs-cat__icon">
+          <i class="bi bi-tools"></i>
+        </div>
+
         <h3>Electrician</h3>
+
         <p>Wiring, repairs & installations</p>
-        <span class="qs-cat__cta">Book now →</span>
+
+        <span class="qs-cat__cta">
+          Book Now
+          <i class="bi bi-arrow-right"></i>
+        </span>
       </div>
+
+      <!-- Plumber -->
+
       <div class="qs-cat" routerLink="/services">
-        <div class="qs-cat__icon">🚿</div>
+        <div class="qs-cat__icon">
+          <i class="bi bi-droplet-fill"></i>
+        </div>
+
         <h3>Plumber</h3>
+
         <p>Leaks, pipes & bathrooms</p>
-        <span class="qs-cat__cta">Book now →</span>
+
+        <span class="qs-cat__cta">
+          Book Now
+          <i class="bi bi-arrow-right"></i>
+        </span>
       </div>
+
+      <!-- Cleaning -->
+
       <div class="qs-cat" routerLink="/services">
-        <div class="qs-cat__icon">🧹</div>
+        <div class="qs-cat__icon">
+          <i class="bi bi-stars"></i>
+        </div>
+
         <h3>Cleaning</h3>
-        <p>Home & office deep clean</p>
-        <span class="qs-cat__cta">Book now →</span>
+
+        <p>Home & Office Deep Clean</p>
+
+        <span class="qs-cat__cta">
+          Book Now
+          <i class="bi bi-arrow-right"></i>
+        </span>
       </div>
+
+      <!-- Tutor -->
+
       <div class="qs-cat" routerLink="/services">
-        <div class="qs-cat__icon">📚</div>
+        <div class="qs-cat__icon">
+          <i class="bi bi-book"></i>
+        </div>
+
         <h3>Tutor</h3>
-        <p>Every subject, all grades</p>
-        <span class="qs-cat__cta">Book now →</span>
+
+        <p>Every Subject, All Grades</p>
+
+        <span class="qs-cat__cta">
+          Book Now
+          <i class="bi bi-arrow-right"></i>
+        </span>
       </div>
+
+      <!-- Painter -->
+
       <div class="qs-cat" routerLink="/services">
-        <div class="qs-cat__icon">🎨</div>
+        <div class="qs-cat__icon">
+          <i class="bi bi-palette-fill"></i>
+        </div>
+
         <h3>Painter</h3>
-        <p>Interior & exterior painting</p>
-        <span class="qs-cat__cta">Book now →</span>
+
+        <p>Interior & Exterior Painting</p>
+
+        <span class="qs-cat__cta">
+          Book Now
+          <i class="bi bi-arrow-right"></i>
+        </span>
       </div>
+
+      <!-- AC Repair -->
+
       <div class="qs-cat" routerLink="/services">
-        <div class="qs-cat__icon">❄️</div>
+        <div class="qs-cat__icon">
+          <i class="bi bi-snow"></i>
+        </div>
+
         <h3>AC Repair</h3>
-        <p>Install, service & gas refill</p>
-        <span class="qs-cat__cta">Book now →</span>
+
+        <p>Install, Service & Gas Refill</p>
+
+        <span class="qs-cat__cta">
+          Book Now
+          <i class="bi bi-arrow-right"></i>
+        </span>
       </div>
+
+      <!-- Computer Repair -->
+
       <div class="qs-cat" routerLink="/services">
-        <div class="qs-cat__icon">💻</div>
+        <div class="qs-cat__icon">
+          <i class="bi bi-laptop"></i>
+        </div>
+
         <h3>Computer Repair</h3>
-        <p>Laptop & desktop fixes</p>
-        <span class="qs-cat__cta">Book now →</span>
+
+        <p>Laptop & Desktop Fixes</p>
+
+        <span class="qs-cat__cta">
+          Book Now
+          <i class="bi bi-arrow-right"></i>
+        </span>
       </div>
+
+      <!-- Moving -->
+
       <div class="qs-cat" routerLink="/services">
-        <div class="qs-cat__icon">🚚</div>
+        <div class="qs-cat__icon">
+          <i class="bi bi-truck"></i>
+        </div>
+
         <h3>Moving</h3>
-        <p>Safe packing & relocation</p>
-        <span class="qs-cat__cta">Book now →</span>
+
+        <p>Safe Packing & Relocation</p>
+
+        <span class="qs-cat__cta">
+          Book Now
+          <i class="bi bi-arrow-right"></i>
+        </span>
       </div>
     </div>
   </div>
 </section>
-<!-- --------------------------------------------------------------------------- -->
+
+<!-- ==========================================================
+     HOW IT WORKS
+========================================================== -->
+
 <section class="how-it-works">
   <div class="section-header">
-    <h2>How Quick Serve Works</h2>
+    <h2>How QuickServe Works</h2>
+
     <p>Find and connect with trusted local professionals in 3 simple steps</p>
   </div>
 
   <div class="steps-grid">
+    <!-- Step 1 -->
+
     <div class="step-card">
-      <div class="step-number">1</div>
+      <div class="step-number">
+        <i class="bi bi-search"></i>
+      </div>
+
       <h3>Search Services</h3>
+
       <p>Browse categories and find the service you need.</p>
     </div>
 
-    <div class="step-card">
-      <div class="step-number">2</div>
-      <h3>Connect Provider</h3>
-      <p>View profiles, ratings and contact providers directly.</p>
-    </div>
+    <!-- Step 2 -->
 
     <div class="step-card">
-      <div class="step-number">3</div>
+      <div class="step-number">
+        <i class="bi bi-person-check-fill"></i>
+      </div>
+
+      <h3>Connect Provider</h3>
+
+      <p>View provider profiles, ratings and contact professionals directly.</p>
+    </div>
+
+    <!-- Step 3 -->
+
+    <div class="step-card">
+      <div class="step-number">
+        <i class="bi bi-calendar-check-fill"></i>
+      </div>
+
       <h3>Book & Review</h3>
-      <p>Complete the service and share your experience.</p>
+
+      <p>
+        Complete the service and share your experience with other customers.
+      </p>
     </div>
   </div>
 </section>
-<!-- -------------------------------------------------------------------------------------- -->
-<!-- -------------------- --
- -- PROVIDER PAGE --
-  -- ------------------------- -->
+<!-- ==========================================================
+     TOP PROVIDERS
+========================================================== -->
+
 <section class="qs-sec qs-sec--gray">
   <div class="qs-sec__inner">
     <div class="qs-sec__head">
       <div class="qs-eyebrow">Top Rated</div>
+
       <h2>Trusted Professionals Near You</h2>
-      <p>Verified, reviewed, and ready to help</p>
+
+      <p>Verified, reviewed and ready to help</p>
     </div>
 
     <div class="qs-prov-grid">
@@ -231,24 +403,37 @@
 
         <div class="qs-prov__name">{{ provider.user.fullName }}</div>
 
-        <span class="qs-prov__skill"> {{ provider.skills }} </span>
+        <span class="qs-prov__skill">
+          <i class="bi bi-briefcase-fill"></i>
+
+          {{ provider.skills }}
+        </span>
 
         <div class="qs-prov__stars">
-          ⭐⭐⭐⭐⭐
-          <span>{{ provider.rating ?? 4.8 }}</span>
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+
+          <span> {{ provider.rating ?? 4.8 }} </span>
         </div>
 
         <p class="qs-prov__desc">{{ provider.description }}</p>
 
         <a [routerLink]="['/provider', provider.id]" class="qs-prov__btn">
-          View Profile →
+          View Profile
+
+          <i class="bi bi-arrow-right"></i>
         </a>
       </div>
 
       } } @else {
 
       <div class="qs-prov-empty">
-        <p>No providers available right now. Check back soon!</p>
+        <i class="bi bi-person-x-fill"></i>
+
+        <p>No providers available right now. Please check back later.</p>
       </div>
 
       }
@@ -256,113 +441,183 @@
 
     <div class="qs-view-all">
       <a routerLink="/services" class="qs-view-all__btn">
-        Browse All Providers →
+        Browse All Providers
+
+        <i class="bi bi-arrow-right-circle-fill"></i>
       </a>
     </div>
-    <<<<<<< HEAD ======= >>>>>>> 8cade786871933c37a668e031efa5784ec505f1d
   </div>
 </section>
 
-<!-- -------------------------------------------------------------------------------- -->
+<!-- ==========================================================
+     TESTIMONIALS
+========================================================== -->
 
-<!-- ── TESTIMONIALS ──────────────────────────────────────────── -->
 <section class="qs-sec qs-sec--white">
   <div class="qs-sec__inner">
     <div class="qs-sec__head">
-      <div class="qs-eyebrow">Customer stories</div>
-      <h2>What people across Odisha say</h2>
+      <div class="qs-eyebrow">Customer Stories</div>
+
+      <h2>What People Across Odisha Say</h2>
+
       <p>Real reviews from real customers</p>
     </div>
 
     <div class="qs-t-grid">
+      <!-- Review 1 -->
+
       <div class="qs-t">
-        <div class="qs-t__stars">★★★★★</div>
+        <div class="qs-t__stars">
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+        </div>
+
         <p class="qs-t__quote">
-          "Found an electrician within minutes. Professional, punctual, and very
+          "Found an electrician within minutes. Professional, punctual and
           affordable. Will definitely use again."
         </p>
+
         <div class="qs-t__author">
           <div class="qs-t__av qs-t__av--purple">R</div>
+
           <div>
-            <strong>Rahul Sharma</strong>
-            <small>Bhubaneswar</small>
+            <strong> Rahul Sharma </strong>
+
+            <small>
+              <i class="bi bi-geo-alt-fill"></i>
+
+              Bhubaneswar
+            </small>
           </div>
         </div>
       </div>
+
+      <!-- Review 2 -->
+
       <div class="qs-t">
-        <div class="qs-t__stars">★★★★★</div>
+        <div class="qs-t__stars">
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+        </div>
+
         <p class="qs-t__quote">
-          "The direct contact feature helped me discuss my requirements before
-          booking. No surprises at all."
+          "The direct contact feature helped me discuss everything before
+          booking. Very transparent."
         </p>
+
         <div class="qs-t__author">
           <div class="qs-t__av qs-t__av--green">P</div>
+
           <div>
-            <strong>Priya Das</strong>
-            <small>Cuttack</small>
+            <strong> Priya Das </strong>
+
+            <small>
+              <i class="bi bi-geo-alt-fill"></i>
+
+              Cuttack
+            </small>
           </div>
         </div>
       </div>
+
+      <!-- Review 3 -->
+
       <div class="qs-t">
-        <div class="qs-t__stars">★★★★★</div>
+        <div class="qs-t__stars">
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+        </div>
+
         <p class="qs-t__quote">
           "Very easy to use and the providers are genuinely reliable. The review
           system keeps everyone honest."
         </p>
+
         <div class="qs-t__author">
           <div class="qs-t__av qs-t__av--orange">A</div>
+
           <div>
-            <strong>Amit Kumar</strong>
-            <small>Puri</small>
+            <strong> Amit Kumar </strong>
+
+            <small>
+              <i class="bi bi-geo-alt-fill"></i>
+
+              Puri
+            </small>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-
-<!-- -------------------------------------------------------------------------------------- -->
-
-<!-- ── PROVIDER CTA ───────────────────────────────────────────── -->
-
+<!-- ==========================================================
+     BECOME A PROVIDER CTA
+========================================================== -->
 <section class="qs-cta">
   <div class="qs-cta__inner">
-    <!-- LEFT: copy -->
     <div class="qs-cta__copy">
-      <div class="qs-cta__eyebrow">🛠️ For Service Professionals</div>
-      <h2>Grow Your Business <span>Across Odisha</span></h2>
-      <p>
-        Join {{ totalProviders }}+ verified professionals already earning on
-        QuickServe. Get discovered by customers in Bhubaneswar, Cuttack, Puri,
-        and Rourkela — for free.
-      </p>
+      <div class="qs-cta__eyebrow">
+        <i class="bi bi-patch-check-fill"></i>
+        Partner With QuickServe
+      </div>
+
+      <h2>
+        Turn Your Skills Into
+        <span>Income</span>
+      </h2>
+
+      <p>Join hundreds of verified professionals across Odisha.</p>
+
       <div class="qs-cta__btns">
         <a routerLink="/provider-register" class="qs-cta__btn-join">
-          ⚡ Become a Provider
+          <i class="bi bi-person-plus-fill"></i>
+
+          Become a Provider
         </a>
-        <a routerLink="/about" class="qs-cta__btn-learn"> Learn More → </a>
+
+        <a routerLink="/about" class="qs-cta__btn-learn"> Learn More </a>
       </div>
     </div>
 
     <!-- RIGHT: perks grid -->
     <div class="qs-cta__perks">
       <div class="qs-perk">
-        <span class="qs-perk__icon">📣</span>
+        <span class="qs-perk__icon">
+          <i class="bi bi-megaphone-fill"></i>
+        </span>
         <h4>Free Listing</h4>
         <p>Create your profile and get discovered at zero cost</p>
       </div>
+
       <div class="qs-perk">
-        <span class="qs-perk__icon">⭐</span>
+        <span class="qs-perk__icon">
+          <i class="bi bi-star-fill"></i>
+        </span>
         <h4>Build Reputation</h4>
         <p>Earn verified reviews that grow your customer base</p>
       </div>
+
       <div class="qs-perk">
-        <span class="qs-perk__icon">💰</span>
+        <span class="qs-perk__icon">
+          <i class="bi bi-cash-coin"></i>
+        </span>
         <h4>More Earnings</h4>
         <p>Connect with customers ready to book and pay now</p>
       </div>
+
       <div class="qs-perk">
-        <span class="qs-perk__icon">📍</span>
+        <span class="qs-perk__icon">
+          <i class="bi bi-geo-alt-fill"></i>
+        </span>
         <h4>Local First</h4>
         <p>Reach customers in your city, your neighbourhood</p>
       </div>

@@ -49,7 +49,9 @@ body {
   padding: 3rem 4rem;
   min-height: 110vh;
 
-  background-image: url("/images/hero-bg.png");
+  background:
+    linear-gradient(rgba(206, 246, 199, 0.88), rgba(255, 255, 255, 0.88)),
+    url("/images/hero-bg.png");
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -1288,4 +1290,239 @@ body {
     justify-content: center;
     width: 100%;
   }
+}
+
+/* ==========================================================
+   BOOTSTRAP ICONS
+========================================================== */
+
+/* General Bootstrap Icons */
+
+.bi {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* ==========================================================
+   HERO
+========================================================== */
+
+.qs-pill i {
+  font-size: 16px;
+  margin-right: 8px;
+  color: #1d9e75;
+}
+
+.qs-search button i {
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+.qs-tag {
+  gap: 8px;
+}
+
+.qs-tag i {
+  font-size: 15px;
+  color: #1d9e75;
+}
+
+.qs-stat__num i {
+  color: #f4b400;
+  font-size: 20px;
+  margin-right: 4px;
+}
+
+/* ==========================================================
+   HERO IMAGE BADGES
+========================================================== */
+
+.qs-photo__badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.qs-photo__badge i {
+  color: #1d9e75;
+}
+
+/* ==========================================================
+   CATEGORIES
+========================================================== */
+
+.qs-cat__icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.qs-cat__icon i {
+  font-size: 42px;
+  color: #1d9e75;
+}
+
+.qs-cat__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.qs-cat__cta i {
+  font-size: 13px;
+}
+/* ==========================================================
+   HOW IT WORKS
+========================================================== */
+
+.step-number {
+  width: 72px;
+  height: 72px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto 18px;
+
+  border-radius: 18px;
+
+  background: #e8f7ef;
+  border: 1px solid #d8ebe4;
+}
+
+.step-number i {
+  font-size: 32px;
+  color: #1d9e75;
+}
+
+/* ==========================================================
+   PROVIDERS
+========================================================== */
+
+.qs-prov__skill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.qs-prov__skill i {
+  color: #1d9e75;
+}
+
+.qs-prov__stars {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+}
+
+.qs-prov__stars i {
+  color: #f4b400;
+  font-size: 14px;
+}
+
+.qs-prov__stars span {
+  margin-left: 6px;
+  font-weight: 600;
+}
+
+.qs-prov__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.qs-prov-empty i {
+  font-size: 56px;
+  color: #9ca3af;
+  margin-bottom: 15px;
+}
+
+/* ==========================================================
+   TESTIMONIALS
+========================================================== */
+
+.qs-t__stars {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 12px;
+}
+
+.qs-t__stars i {
+  color: #f4b400;
+  font-size: 15px;
+}
+
+.qs-t__author small {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.qs-t__author small i {
+  color: #1d9e75;
+}
+
+/* ==========================================================
+   PROVIDER CTA
+========================================================== */
+
+.qs-provider-cta__icon {
+  width: 82px;
+  height: 82px;
+  border-radius: 20px;
+  background: rgba(29, 158, 117, 0.12);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.qs-provider-cta__icon i {
+  font-size: 42px;
+  color: #1d9e75;
+}
+
+.qs-provider-cta__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.qs-provider-benefit {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.qs-provider-benefit i {
+  font-size: 18px;
+  color: #1d9e75;
+  width: 22px;
+}
+
+.qs-provider-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.qs-perk__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: #e8f7ef;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #1d9e75;
+}
+
+.qs-perk__icon i {
+  font-size: 24px;
 }
