@@ -46,7 +46,8 @@ export class LoginComponent {
         console.log("User =", user);
         console.log("Role =", user.role);
 
-        sessionStorage.setItem("user", JSON.stringify(user));
+        // Notify the app state instead of setting raw sessionStorage here
+        this.authService.setCurrentUser(user);
 
         if (user.role === "customer") {
           Swal.fire({
@@ -69,6 +70,14 @@ export class LoginComponent {
 
           this.router.navigate(["/provider-dashboard"]);
         } else if (user.role === "admin") {
+          Swal.fire({
+            title: "Success!",
+            text: "Admin Login Successful",
+            icon: "success",
+            timer: 1500,
+            showConfirmButton: false,
+          });
+
           this.router.navigate(["/admin-dashboard"]);
         } else {
           Swal.fire({

@@ -2,6 +2,8 @@
   min-height: 100vh;
   padding: 40px;
   background: linear-gradient(to bottom, #f7fafc, #edf7f0);
+  margin-bottom: -50px;
+  margin-top: 20px;
 }
 
 .services-header {

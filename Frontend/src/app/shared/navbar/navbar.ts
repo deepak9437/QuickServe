@@ -1,7 +1,14 @@
-import { Component, ElementRef, HostListener, OnInit } from "@angular/core";
-
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  OnDestroy,
+} from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { Router, RouterLink, RouterLinkActive } from "@angular/router";
+import { AuthService } from "../../core/services/auth";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-navbar",
@@ -10,21 +17,24 @@ import { Router, RouterLink, RouterLinkActive } from "@angular/router";
   templateUrl: "./navbar.html",
   styleUrl: "./navbar.css",
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
   user: any = null;
   showMenu = false;
+  private authSubscription!: Subscription;
 
   constructor(
     private router: Router,
     private elementRef: ElementRef,
+    private authService: AuthService,
   ) {}
 
   ngOnInit() {
-    const storedUser = sessionStorage.getItem("user");
-
-    if (storedUser) {
-      this.user = JSON.parse(storedUser);
-    }
+    // Dynamically listen to login/logout events via the AuthService observable
+    this.authSubscription = this.authService.currentUser$.subscribe({
+      next: (user) => {
+        this.user = user;
+      },
+    });
   }
 
   toggleMenu() {
@@ -42,13 +52,18 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    sessionStorage.clear();
-
-    this.user = null;
+    // Clear user state globally using the service
+    this.authService.clearCurrentUser();
     this.showMenu = false;
 
-    this.router.navigate(["/"]).then(() => {
-      window.location.reload();
-    });
+    // Redirect to home without needing a window.location.reload()
+    this.router.navigate(["/"]);
+  }
+
+  ngOnDestroy() {
+    // Unsubscribe to avoid memory leaks
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe();
+    }
   }
 }

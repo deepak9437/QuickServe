@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, BehaviorSubject } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -10,7 +10,28 @@ export class AuthService {
   private apiUrl1 = "http://localhost:3030/quickserve/user";
   private apiUrl2 = "http://localhost:3030/quickserve/provider";
 
+  // 1. Add a BehaviorSubject to hold and stream the current user's state.
+  // It checks sessionStorage on initialization so users stay logged in on refresh.
+  private currentUserSubject = new BehaviorSubject<any>(
+    JSON.parse(sessionStorage.getItem("user") || "null"),
+  );
+
+  // 2. Expose the subject as an Observable that components can subscribe to.
+  currentUser$ = this.currentUserSubject.asObservable();
+
   constructor(private http: HttpClient) {}
+
+  // 3. Helper method to broadcast login event across the application
+  setCurrentUser(user: any) {
+    sessionStorage.setItem("user", JSON.stringify(user));
+    this.currentUserSubject.next(user);
+  }
+
+  // 4. Helper method to broadcast logout event across the application
+  clearCurrentUser() {
+    sessionStorage.clear();
+    this.currentUserSubject.next(null);
+  }
 
   registerUser(data: any): Observable<any> {
     const formData = new FormData();
@@ -66,9 +87,11 @@ export class AuthService {
 
     return this.http.post(`${this.apiUrl2}/provider_register`, formData);
   }
+
   updateProfile(data: any) {
     return this.http.put(`${this.apiUrl1}/user_update`, data);
   }
+
   getAllProviders() {
     return this.http.get("http://localhost:3030/quickserve/view/pending");
   }
@@ -82,11 +105,13 @@ export class AuthService {
       `http://localhost:3030/quickserve/user/dashboard/${uId}`,
     );
   }
+
   getProviderId(userId: number) {
     return this.http.get<number>(
       `http://localhost:3030/quickserve/provider/provider-id/${userId}`,
     );
   }
+
   // ----------------------------------------------------------------------------------------
   // Provider Dashboard Booking Actions
 
@@ -110,16 +135,10 @@ export class AuthService {
     );
   }
 
-updateAvailability(
-  pId: number,
-  available: boolean
-) {
-
-  return this.http.put(
-    `${this.apiUrl}/provider/availability/${pId}?available=${available}`,
-    {}
-  );
-
-}
-
+  updateAvailability(pId: number, available: boolean) {
+    return this.http.put(
+      `${this.apiUrl}/provider/availability/${pId}?available=${available}`,
+      {},
+    );
+  }
 }
