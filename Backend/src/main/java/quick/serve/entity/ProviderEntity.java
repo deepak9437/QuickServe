@@ -44,9 +44,12 @@ public class ProviderEntity {
 
 	@Column(name = "is_available")
 	private Boolean availability;
+	
+	@Column(name="rating")
+	private Double rating;
 
 	@Column(name = "total_reviews")
-	private Integer review;
+	private Integer totalReview;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "provider")

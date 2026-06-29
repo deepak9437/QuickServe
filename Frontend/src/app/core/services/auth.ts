@@ -144,4 +144,11 @@ export class AuthService {
       {},
     );
   }
+  getAvailability(userId:number){
+
+    return this.http.get<boolean>(
+        `${this.apiUrl}/provider/availability/${userId}`
+    );
+
+}
 }

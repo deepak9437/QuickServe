@@ -34,7 +34,8 @@ public class ViewService {
 	        dto.setDescription(provider.getDescription());
 	        dto.setStatus(provider.getStatus());
 	        dto.setAvailability(provider.getAvailability());
-	        dto.setReview(provider.getReview());
+	        dto.setRating(provider.getRating());
+	        dto.setReview(provider.getTotalReview());
 
 	        UserDTO userDto = new UserDTO();
 
@@ -73,7 +74,8 @@ public class ViewService {
 			dto.setDescription(provider.getDescription());
 			dto.setStatus(provider.getStatus());
 			dto.setAvailability(provider.getAvailability());
-			dto.setReview(provider.getReview());
+			dto.setRating(provider.getRating());
+			dto.setReview(provider.getTotalReview());
 
 			// User DTO
 			UserDTO userDto = new UserDTO();
@@ -124,7 +126,8 @@ public class ViewService {
 			dto.setDescription(provider.getDescription());
 			dto.setStatus(provider.getStatus());
 			dto.setAvailability(provider.getAvailability());
-			dto.setReview(provider.getReview());
+			dto.setRating(provider.getRating());
+			dto.setReview(provider.getTotalReview());
 
 			// User DTO
 			UserDTO userDto = new UserDTO();

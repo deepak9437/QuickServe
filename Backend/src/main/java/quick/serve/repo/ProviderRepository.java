@@ -50,4 +50,12 @@ public interface ProviderRepository extends JpaRepository<ProviderEntity, Intege
 			WHERE p.user.id = :userId
 			""")
 	ProviderEntity findProviderByUserId(@Param("userId") Integer userId);
+	
+//	@Query("""
+//			SELECT p
+//			FROM ProviderEntity p
+//			WHERE p.provider.id = :pId
+//			""")
+//	ProviderEntity findProviderByUserId(@Param("pId") Integer pId);
+	
 }
