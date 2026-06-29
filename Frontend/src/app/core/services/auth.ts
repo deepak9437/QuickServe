@@ -21,18 +21,6 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  // 3. Helper method to broadcast login event across the application
-  setCurrentUser(user: any) {
-    sessionStorage.setItem("user", JSON.stringify(user));
-    this.currentUserSubject.next(user);
-  }
-
-  // 4. Helper method to broadcast logout event across the application
-  clearCurrentUser() {
-    sessionStorage.clear();
-    this.currentUserSubject.next(null);
-  }
-
   registerUser(data: any): Observable<any> {
     const formData = new FormData();
 

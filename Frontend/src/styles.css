@@ -18,3 +18,126 @@ app-root {
   display: flex;
   flex-direction: column;
 }
+/* ===========================
+   Review Popup
+=========================== */
+
+.review-popup-card{
+
+    width:620px !important;
+
+    border-radius:22px !important;
+
+    padding:35px !important;
+
+}
+
+.review-popup{
+
+    width:100%;
+
+}
+
+.star-rating{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:14px;
+
+    margin:20px 0 30px;
+
+}
+
+.star{
+
+    font-size:56px !important;
+
+    color:#d1d5db;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    user-select:none;
+
+    line-height:1;
+
+}
+
+.star:hover{
+
+    transform:scale(1.25);
+
+}
+
+.review-textarea{
+
+    width:100% !important;
+
+    height:170px !important;
+
+    resize:none !important;
+
+    border:2px solid #d1d5db !important;
+
+    border-radius:14px !important;
+
+    padding:18px !important;
+
+    font-size:16px !important;
+
+    font-family:inherit !important;
+
+    box-sizing:border-box !important;
+
+    outline:none !important;
+
+    background:#fff !important;
+
+    color:#374151 !important;
+
+    transition:.3s;
+
+}
+
+.review-textarea:focus{
+
+    border-color:#16a34a !important;
+
+    box-shadow:0 0 0 4px rgba(22,163,74,.15);
+
+}
+
+.review-textarea::placeholder{
+
+    color:#9ca3af;
+
+}
+
+.swal2-confirm{
+
+    border-radius:10px !important;
+
+    font-size:16px !important;
+
+    padding:12px 28px !important;
+
+    font-weight:600 !important;
+
+}
+
+.swal2-cancel{
+
+    border-radius:10px !important;
+
+    font-size:16px !important;
+
+    padding:12px 28px !important;
+
+    font-weight:600 !important;
+
+}

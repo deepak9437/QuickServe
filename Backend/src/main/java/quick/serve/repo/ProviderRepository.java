@@ -17,16 +17,15 @@ public interface ProviderRepository extends JpaRepository<ProviderEntity, Intege
 
 //	UserEntity findByEmailAndPassword(String email, String password);
 
-	
 	// jpql
 	@Query("""
-		    SELECT DISTINCT p
-		    FROM ProviderEntity p
-		    JOIN FETCH p.user
-		    LEFT JOIN FETCH p.pDocs
-		    WHERE p.status = :status
-		""")
-		List<ProviderEntity> findAllDetails(@Param("status") String status);
+			    SELECT DISTINCT p
+			    FROM ProviderEntity p
+			    JOIN FETCH p.user
+			    LEFT JOIN FETCH p.pDocs
+			    WHERE p.status = :status
+			""")
+	List<ProviderEntity> findAllDetails(@Param("status") String status);
 
 	String findByStatus(String status);
 
@@ -35,22 +34,20 @@ public interface ProviderRepository extends JpaRepository<ProviderEntity, Intege
 	@Query(value = "select status from provider where user_id =:id", nativeQuery = true)
 	ProviderEntity findByUserId(@Param("id") Integer id);
 
-	
 	@Query("""
-		    SELECT p
-		    FROM ProviderEntity p
-		    JOIN FETCH p.user
-		    WHERE LOWER(p.skills) = LOWER(:skills)
-		""")
-		List<ProviderEntity> findBySkills(@Param("skills") String skills);
+			    SELECT p
+			    FROM ProviderEntity p
+			    JOIN FETCH p.user
+			    WHERE LOWER(p.skills) = LOWER(:skills)
+			""")
+	List<ProviderEntity> findBySkills(@Param("skills") String skills);
 
 	long countByStatus(String string);
 
 	@Query("""
-		       SELECT p
-		       FROM ProviderEntity p
-		       WHERE p.user.id = :userId
-		       """)
-		ProviderEntity findProviderByUserId(
-		        @Param("userId") Integer userId);
+			SELECT p
+			FROM ProviderEntity p
+			WHERE p.user.id = :userId
+			""")
+	ProviderEntity findProviderByUserId(@Param("userId") Integer userId);
 }

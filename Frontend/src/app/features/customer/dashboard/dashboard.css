@@ -248,3 +248,181 @@
   color: #6b7280;
   font-size: 14px;
 }
+
+/* ==========================================
+   Review Section
+========================================== */
+
+.review-section{
+    margin-top:18px;
+}
+
+.review-btn{
+
+    background:#16a34a;
+    color:#fff;
+
+    border:none;
+    border-radius:10px;
+
+    padding:10px 22px;
+
+    font-size:15px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    box-shadow:0 6px 18px rgba(22,163,74,.25);
+
+}
+
+.review-btn:hover{
+
+    background:#15803d;
+
+    transform:translateY(-2px);
+
+    box-shadow:0 10px 25px rgba(22,163,74,.35);
+
+}
+
+.reviewed{
+
+    display:inline-block;
+
+    padding:10px 16px;
+
+    background:#dcfce7;
+
+    color:#166534;
+
+    border-radius:10px;
+
+    font-weight:600;
+
+    border:1px solid #bbf7d0;
+
+}
+
+/* ==========================================
+   SweetAlert Review Popup
+========================================== */
+
+.review-popup{
+
+    padding:15px;
+
+}
+
+/* ---------- Stars ---------- */
+
+.star-rating{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:14px;
+
+    margin-bottom:25px;
+
+}
+
+.star{
+
+    font-size:55px;
+
+    color:#d1d5db;
+
+    cursor:pointer;
+
+    transition:all .25s ease;
+
+    user-select:none;
+
+    line-height:1;
+
+}
+
+.star:hover{
+
+    transform:scale(1.20);
+
+}
+
+/* ---------- Text Area ---------- */
+
+.review-textarea{
+
+    width:100%;
+
+    min-height:140px;
+
+    resize:none;
+
+    padding:15px;
+
+    border:2px solid #d1d5db;
+
+    border-radius:14px;
+
+    background:#fff;
+
+    color:#374151;
+
+    font-size:15px;
+
+    font-family:inherit;
+
+    line-height:1.6;
+
+    box-sizing:border-box;
+
+    outline:none;
+
+    transition:.25s;
+
+}
+
+.review-textarea:focus{
+
+    border-color:#16a34a;
+
+    box-shadow:0 0 0 4px rgba(22,163,74,.15);
+
+}
+
+.review-textarea::placeholder{
+
+    color:#9ca3af;
+
+}
+
+/* ==========================================
+   SweetAlert Buttons
+========================================== */
+
+.swal2-confirm{
+
+    border-radius:10px !important;
+
+    font-weight:600 !important;
+
+    padding:10px 22px !important;
+
+}
+
+.swal2-cancel{
+
+    border-radius:10px !important;
+
+    font-weight:600 !important;
+
+    padding:10px 22px !important;
+
+}
+

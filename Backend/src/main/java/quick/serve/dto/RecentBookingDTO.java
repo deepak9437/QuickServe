@@ -6,10 +6,16 @@ import lombok.Data;
 
 @Data
 public class RecentBookingDTO {
-	
-	private String providerName;
-	
-	private String problem;
+
+    private Integer bookingId;
+
+    private Integer pId;
+
+    private Boolean reviewGiven;
+
+    private String providerName;
+
+    private String problem;
 
     private String bookingStatus;
 
