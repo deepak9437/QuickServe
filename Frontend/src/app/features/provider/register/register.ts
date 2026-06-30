@@ -68,9 +68,19 @@ export class RegisterComponent {
       alert("Please fill all required fields");
       return;
     }
+    Swal.fire({
+      title: "Submitting Registration...",
+      text: "Please wait while we upload your documents.",
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
 
     this.authService.registerProvider(this.provider).subscribe({
       next: () => {
+        Swal.close();
         //alert("Provider Registration Submitted Successfully 🎉");
         Swal.fire({
           title: "Success!",
@@ -84,6 +94,7 @@ export class RegisterComponent {
       },
 
       error: (error) => {
+        Swal.close();
         console.error(error);
 
         //alert(JSON.stringify(error));

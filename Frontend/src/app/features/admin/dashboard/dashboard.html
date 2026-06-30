@@ -119,42 +119,8 @@
 </div>
 
 <!-- ===========================
-     LISTS
-=========================== -->
-
-<div class="lists-row">
-  <div class="list-card">
-    <div class="list-header">
-      <h3>Recent Bookings</h3>
-      <a routerLink="/admin/bookings">View All</a>
-    </div>
-
-    <!-- bookings -->
-  </div>
-
-  <div class="list-card">
-    <div class="list-header">
-      <h3>Top Providers</h3>
-      <a routerLink="/admin/providers">View All</a>
-    </div>
-
-    <!-- providers -->
-  </div>
-
-  <div class="list-card">
-    <div class="list-header">
-      <h3>Recent Users</h3>
-      <a routerLink="/admin/users">View All</a>
-    </div>
-
-    <!-- users -->
-  </div>
-</div>
-
-<!-- ===========================
      APPROVAL TABLE
 =========================== -->
-
 <div class="approvals-card">
   <div class="list-header">
     <h3>Pending Provider Approvals</h3>
@@ -163,8 +129,61 @@
   </div>
 
   <div class="approvals-table-wrap">
+    @if (pendingApprovals.length > 0) {
+
     <table class="approvals-table">
-      <!-- your table -->
+      <thead>
+        <tr>
+          <th>Provider</th>
+          <th>Skill</th>
+          <th>Experience</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @for(provider of pendingApprovals; track provider.id){
+
+        <tr>
+          <td>
+            <div class="provider-user">
+              <div class="avatar">
+                {{ provider.user.fullName.charAt(0).toUpperCase() }}
+              </div>
+
+              <div>
+                <strong>{{ provider.user.fullName }}</strong>
+
+                <br />
+
+                <small>{{ provider.user.userEmail }}</small>
+              </div>
+            </div>
+          </td>
+
+          <td>{{ provider.skills }}</td>
+
+          <td>{{ provider.experience }} Years</td>
+
+          <td>
+            <span class="status pending"> Pending </span>
+          </td>
+        </tr>
+
+        }
+      </tbody>
     </table>
+
+    } @else {
+
+    <div class="empty-state">
+      <i class="bi bi-check-circle-fill"></i>
+
+      <h4>No Pending Provider Requests</h4>
+
+      <p>Everything is up to date.</p>
+    </div>
+
+    }
   </div>
 </div>

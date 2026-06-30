@@ -227,6 +227,129 @@
   overflow-x: auto;
 }
 
+.dashboard-section {
+  background: #fff;
+  border-radius: 20px;
+  padding: 25px;
+  margin-top: 35px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.section-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.badge-count {
+  background: #ecfdf5;
+  color: #16a34a;
+  padding: 8px 15px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.provider-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.provider-table thead {
+  background: #f8fafc;
+}
+
+.provider-table th {
+  padding: 16px;
+  text-align: left;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.provider-table td {
+  padding: 18px 16px;
+  border-top: 1px solid #eef2f7;
+}
+
+.provider-user {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #16a34a;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+}
+
+.status {
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.status.pending {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.action-buttons button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.view-btn {
+  background: #2563eb;
+}
+
+.approve-btn {
+  background: #16a34a;
+}
+
+.reject-btn {
+  background: #dc2626;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty-state i {
+  font-size: 50px;
+  color: #16a34a;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+  .provider-table {
+    min-width: 700px;
+  }
+}
+
 /* ====================== */
 
 @media (max-width: 1200px) {

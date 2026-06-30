@@ -33,7 +33,9 @@ export class App {
       currentUrl === "/login" ||
       currentUrl === "/signup" ||
       currentUrl === "/provider-register" ||
-      currentUrl === "/admin/dashboard"
+      currentUrl === "/admin/dashboard" ||
+      currentUrl === "/about" ||
+      currentUrl === "/services"
     );
   }
 }

@@ -34,4 +34,9 @@ export class AdminService {
   getBookings() {
     return this.http.get<any[]>(`${this.apiUrl}/bookings`);
   }
+  getPendingProviders() {
+    return this.http.get<any[]>(
+      "http://localhost:3030/quickserve/view/pending",
+    );
+  }
 }

@@ -15,6 +15,9 @@ import { ServiceBooking } from "../../../core/services/booking";
   styleUrl: "./services.css",
 })
 export class ServicesComponent implements OnInit {
+  searchService() {
+    throw new Error("Method not implemented.");
+  }
   // ── State ─────────────────────────────────────────────────────
   providers: any[] = [];
   searchText = "";
@@ -103,7 +106,7 @@ export class ServicesComponent implements OnInit {
 
   changePage(page: number): void {
     this.currentPage = page;
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    // window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   // ── Helpers ───────────────────────────────────────────────────

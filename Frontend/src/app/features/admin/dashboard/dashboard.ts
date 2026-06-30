@@ -61,12 +61,23 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     console.log("Dashboard component loaded");
     this.loadDashboardData();
+    this.loadPendingProviders();
   }
 
   ngAfterViewInit(): void {
     this.viewReady = true;
     this.renderBookingsChart([0, 0, 0, 0, 0, 0, 0]);
     this.renderStatusChart();
+  }
+  loadPendingProviders(): void {
+    this.adminService.getPendingProviders().subscribe({
+      next: (data: any) => {
+        this.pendingApprovals = data;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
   }
 
   loadDashboardData(): void {

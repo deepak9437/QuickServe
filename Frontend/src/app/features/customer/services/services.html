@@ -1,235 +1,247 @@
 <section class="services-page">
-  <!-- ===========================
-        HERO
-  ============================ -->
-
+  <!-- ==========================================================
+       HERO SECTION
+  =========================================================== -->
   <section class="services-hero">
     <div class="container">
       <div class="hero-content">
         <span class="hero-badge">
           <i class="bi bi-patch-check-fill"></i>
-
           100% Verified Local Professionals
         </span>
 
         <h1>
           Find Trusted
-
           <span>Service Providers</span>
         </h1>
 
         <p>
-          Book verified electricians, plumbers, cleaners and more skilled
-          professionals near you.
+          Connect with verified electricians, plumbers, carpenters, painters,
+          tutors, cleaners and many more trusted professionals near you.
         </p>
       </div>
 
-      <!-- Search Box -->
-
+      <!-- Search -->
       <div class="search-card shadow-lg">
-        <div class="row g-3 align-items-center">
-          <div class="col-lg-6">
+        <div class="row g-3">
+          <div class="col-lg-8">
             <div class="search-input">
               <i class="bi bi-search"></i>
 
               <input
                 type="text"
-                placeholder="Search by provider name..."
+                placeholder="Search by provider name or service..."
                 [(ngModel)]="searchText"
               />
             </div>
           </div>
 
-          <div class="col-lg-3">
+          <div class="col-lg-4">
             <select class="form-select" [(ngModel)]="selectedCategory">
               <option value="">All Categories</option>
-
               <option>Electrician</option>
-
               <option>Plumber</option>
-
               <option>Cleaner</option>
-
               <option>Painter</option>
-
               <option>Carpenter</option>
-
               <option>Tutor</option>
-
               <option>Driver</option>
-
               <option>Mechanic</option>
             </select>
           </div>
-
-          <div class="col-lg-3">
-            <button class="search-btn w-100" type="button">
-              <i class="bi bi-search"></i>
-              Search
-            </button>
-          </div>
         </div>
       </div>
 
-      <!-- Category Chips -->
-
+      <!-- Categories -->
       <div class="category-list">
-        <button class="category-chip">⚡ Electrician</button>
+        <button class="category-chip" (click)="selectedCategory='Electrician'">
+          ⚡ Electrician
+        </button>
 
-        <button class="category-chip">💧 Plumber</button>
+        <button class="category-chip" (click)="selectedCategory='Plumber'">
+          💧 Plumber
+        </button>
 
-        <button class="category-chip">✨ Cleaner</button>
+        <button class="category-chip" (click)="selectedCategory='Cleaner'">
+          ✨ Cleaner
+        </button>
 
-        <button class="category-chip">🔨 Carpenter</button>
+        <button class="category-chip" (click)="selectedCategory='Carpenter'">
+          🔨 Carpenter
+        </button>
 
-        <button class="category-chip">🎨 Painter</button>
+        <button class="category-chip" (click)="selectedCategory='Painter'">
+          🎨 Painter
+        </button>
 
-        <button class="category-chip">📚 Tutor</button>
+        <button class="category-chip" (click)="selectedCategory='Tutor'">
+          📚 Tutor
+        </button>
 
-        <button class="category-chip">🚗 Driver</button>
+        <button class="category-chip" (click)="selectedCategory='Driver'">
+          🚗 Driver
+        </button>
 
-        <button class="category-chip">➕ More</button>
+        <button class="category-chip" (click)="selectedCategory=''">All</button>
       </div>
     </div>
   </section>
-  <div class="providers-grid">
-    @if (paginatedProviders.length > 0) { @for (provider of paginatedProviders;
-    track provider.id) {
 
-    <div class="provider-card">
-      <!-- =========================
-            CARD HEADER
-      ========================== -->
+  <!-- ==========================================================
+       PROVIDERS
+  =========================================================== -->
 
-      <div class="provider-header">
-        <div class="provider-avatar">
-          {{ provider.user.fullName.charAt(0).toUpperCase() }}
-        </div>
-
-        <div class="provider-details">
-          <div class="provider-name">
-            <h3>{{ provider.user.fullName }}</h3>
-
-            <i class="bi bi-patch-check-fill verified-icon"></i>
-          </div>
-
-          <p class="provider-skill">
-            <i class="bi bi-tools"></i>
-
-            {{ provider.skills }}
+  <section class="providers-section" id="providers">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <h2>Browse Service Providers</h2>
+          <p>
+            Choose from experienced and verified professionals ready to help
+            you.
           </p>
         </div>
-      </div>
 
-      <!-- =========================
-            RATING
-      ========================== -->
-
-      <div class="provider-rating">
-        <i class="bi bi-star-fill"></i>
-
-        <strong>{{ provider.rating || 0 }}</strong>
-
-        <span> ({{ provider.review || 0 }} Reviews) </span>
-      </div>
-
-      <!-- =========================
-            INFO
-      ========================== -->
-
-      <div class="provider-info">
-        <div class="info-item">
-          <i class="bi bi-briefcase-fill"></i>
-
-          <span> {{ provider.experience || 0 }} Years Experience </span>
-        </div>
-
-        <div class="info-item">
-          <i class="bi bi-geo-alt-fill"></i>
-
-          <span> Bhubaneswar, Odisha </span>
-        </div>
-
-        <div class="info-item">
-          <i class="bi bi-card-text"></i>
-
-          <span> {{ provider.description }} </span>
-        </div>
-      </div>
-
-      <!-- =========================
-            STATUS
-      ========================== -->
-
-      <div class="provider-status">
-        <span
-          class="status-pill"
-          [ngClass]="provider.availability ? 'online' : 'offline'"
-        >
-          <span class="status-dot"></span>
-
-          {{ provider.availability ? 'Available Now' : 'Offline' }}
+        <span class="provider-count">
+          {{ filteredProviders.length }} Providers Found
         </span>
       </div>
 
-      <!-- =========================
-            BUTTONS
-      ========================== -->
+      <div class="providers-grid">
+        @if (paginatedProviders.length > 0) { @for(provider of
+        paginatedProviders; track provider.id){
 
-      <div class="provider-actions">
-        <button class="booking-btn" (click)="bookNow(provider)">
-          <i class="bi bi-calendar-check-fill"></i>
+        <div class="provider-card">
+          <!-- Card Header -->
 
-          Book Now
+          <div class="provider-header">
+            <div
+              class="provider-avatar"
+              [style.background]="getAvatarColor(provider.id)"
+            >
+              {{ getInitials(provider.user.fullName) }}
+            </div>
+
+            <div class="provider-details">
+              <div class="provider-name">
+                <h3>{{ provider.user.fullName }}</h3>
+
+                <i class="bi bi-patch-check-fill verified-icon"></i>
+              </div>
+
+              <p class="provider-skill">
+                <i class="bi bi-tools"></i>
+
+                {{ provider.skills }}
+              </p>
+            </div>
+          </div>
+
+          <!-- Rating -->
+
+          <div class="provider-rating">
+            <i class="bi bi-star-fill"></i>
+
+            <strong> {{ provider.rating || 0 }} </strong>
+
+            <span> ({{ provider.review || 0 }} Reviews) </span>
+          </div>
+
+          <!-- Information -->
+
+          <div class="provider-info">
+            <div class="info-item">
+              <i class="bi bi-briefcase-fill"></i>
+
+              <span> {{ provider.experience || 0 }} Years Experience </span>
+            </div>
+
+            <div class="info-item">
+              <i class="bi bi-geo-alt-fill"></i>
+
+              <span> Bhubaneswar, Odisha </span>
+            </div>
+          </div>
+
+          <!-- Availability -->
+
+          <div class="provider-status">
+            <span
+              class="status-pill"
+              [ngClass]="provider.availability ? 'online' : 'offline'"
+            >
+              <span class="status-dot"></span>
+
+              {{ provider.availability ? "Available Now" : "Offline" }}
+            </span>
+          </div>
+
+          <!-- Actions -->
+
+          <div class="provider-actions">
+            <button class="booking-btn" (click)="bookNow(provider)">
+              <i class="bi bi-calendar-check-fill"></i>
+
+              Book Now
+            </button>
+
+            <a class="profile-btn" [routerLink]="['/provider', provider.id]">
+              <i class="bi bi-person-vcard-fill"></i>
+
+              View Profile
+            </a>
+          </div>
+        </div>
+
+        } } @else {
+
+        <div class="no-provider">
+          <i class="bi bi-person-x-fill"></i>
+
+          <h3>No Providers Found</h3>
+
+          <p>Try another category or search keyword.</p>
+        </div>
+
+        }
+      </div>
+      <!-- ==========================================
+           PAGINATION
+      =========================================== -->
+
+      @if (totalPages.length > 1) {
+
+      <div class="pagination-wrapper">
+        <button
+          class="page-btn"
+          [disabled]="currentPage === 1"
+          (click)="changePage(currentPage - 1)"
+        >
+          <i class="bi bi-chevron-left"></i>
         </button>
 
-        <a class="profile-btn" [routerLink]="['/provider', provider.id]">
-          <i class="bi bi-person-vcard-fill"></i>
+        @for(page of totalPages; track page){
 
-          View Profile
-        </a>
+        <button
+          class="page-btn"
+          [class.active]="page === currentPage"
+          (click)="changePage(page)"
+        >
+          {{ page }}
+        </button>
+
+        }
+
+        <button
+          class="page-btn"
+          [disabled]="currentPage === totalPages.length"
+          (click)="changePage(currentPage + 1)"
+        >
+          <i class="bi bi-chevron-right"></i>
+        </button>
       </div>
+
+      }
     </div>
-
-    } } @else {
-
-    <div class="no-provider">
-      <i class="bi bi-person-x-fill"></i>
-
-      <h3>No Providers Found</h3>
-
-      <p>Try another keyword or category.</p>
-    </div>
-
-    }
-  </div>
-  <div class="pagination-wrapper">
-    <button
-      class="page-btn"
-      [disabled]="currentPage===1"
-      (click)="changePage(currentPage-1)"
-    >
-      <i class="bi bi-chevron-left"></i>
-    </button>
-
-    @for(page of totalPages; track page){
-
-    <button
-      class="page-btn"
-      [class.active]="page===currentPage"
-      (click)="changePage(page)"
-    >
-      {{page}}
-    </button>
-
-    }
-
-    <button
-      class="page-btn"
-      [disabled]="currentPage===totalPages.length"
-      (click)="changePage(currentPage+1)"
-    >
-      <i class="bi bi-chevron-right"></i>
-    </button>
-  </div>
+  </section>
 </section>
