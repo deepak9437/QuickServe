@@ -28,7 +28,7 @@ public class ReviewEntity {
 	private Integer pId;
 	
 	@Column(name="rating")
-	private Integer rating;
+	private Double rating;
 	
 	@Column(name="comment")
 	private String comment;

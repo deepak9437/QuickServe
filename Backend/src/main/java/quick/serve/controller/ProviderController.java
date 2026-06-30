@@ -206,8 +206,17 @@ public class ProviderController {
 		ProviderEntity provider = providerRepo.findProviderByUserId(pId);
 
 		provider.setAvailability(available);
-
+		//System.out.println(provider);
 		providerRepo.save(provider);
+	}
+	
+	@GetMapping("/availability/{userId}")
+	public Boolean getAvailability(@PathVariable Integer userId){
+
+	    ProviderEntity provider =
+	            providerRepo.findProviderByUserId(userId);
+
+	    return provider.getAvailability();
 	}
 }
 

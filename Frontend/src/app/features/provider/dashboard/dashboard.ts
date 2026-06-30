@@ -34,11 +34,18 @@ export class providerdashboardComponent implements OnInit {
     const data = sessionStorage.getItem("user");
 
     if (data) {
-      this.provider = JSON.parse(data);
-      this.isOnline = this.provider.isAvailable;
-      const userId = this.provider.id;
+     this.provider = JSON.parse(data);
 
-      this.dashboardService.getProviderId(userId).subscribe({
+const userId = this.provider.id;
+
+// Fetch latest availability from DB
+this.dashboardService.getAvailability(userId).subscribe({
+  next: (available: boolean) => {
+    this.isOnline = available;
+  }
+});
+
+this.dashboardService.getProviderId(userId).subscribe({
         next: (pId) => {
           this.providerId = pId;
           this.loadDashboard(pId);
