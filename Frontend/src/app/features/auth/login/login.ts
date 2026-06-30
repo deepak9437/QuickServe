@@ -50,14 +50,6 @@ export class LoginComponent {
         this.authService.setCurrentUser(user);
 
         if (user.role === "customer") {
-          Swal.fire({
-            title: "Success!",
-            text: "Customer Login Successful",
-            icon: "success",
-            timer: 1500,
-            showConfirmButton: false,
-          });
-
           this.router.navigate(["/"]);
         } else if (user.role === "provider") {
           Swal.fire({
@@ -78,7 +70,7 @@ export class LoginComponent {
             showConfirmButton: false,
           });
 
-          this.router.navigate(["/admin-dashboard"]);
+          this.router.navigate(["/admin/dashboard"]);
         } else {
           Swal.fire({
             title: "Error!",

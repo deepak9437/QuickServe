@@ -1,25 +1,21 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
 @Component({
-  selector: 'app-provider-profile',
+  selector: "app-provider-profile",
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './profile.html',
-  styleUrl: './profile.css'
+  templateUrl: "./profile.html",
+  styleUrl: "./profile.css",
 })
-export class ProviderProfileComponent {
-
+export class ProviderProfile {
   provider: any = {};
 
   constructor() {
-
-    this.provider = JSON.parse(
-      localStorage.getItem('provider') || '{}'
-    );
+    this.provider = JSON.parse(localStorage.getItem("provider") || "{}");
   }
 
   editProfile() {
-    alert('Navigate to Edit Profile Page');
+    alert("Navigate to Edit Profile Page");
   }
 }

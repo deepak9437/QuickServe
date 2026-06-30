@@ -1,18 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
 @import "tailwindcss";
 @import "bootstrap-icons/font/bootstrap-icons.css";
+
 html,
 body {
   margin: 0;
   padding: 0;
   min-height: 100%;
+  font-family: "Inter", sans-serif;
 }
 
 body {
   background: linear-gradient(to bottom, #f8fafc, #ffffff);
 }
-
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
 app-root {
   min-height: 100vh;
   display: flex;
@@ -120,4 +130,203 @@ app-root {
   padding: 12px 28px !important;
 
   font-weight: 600 !important;
+}
+
+/* =========================================================
+   QUICKSERVE BOOKING POPUP
+========================================================= */
+
+.qs-booking-popup {
+  width: 700px !important;
+  max-width: 95vw;
+  margin-top: 60px;
+  border-radius: 22px !important;
+  padding: 24px !important;
+}
+
+.qs-booking-card {
+  text-align: left;
+}
+
+/* ---------- Provider ---------- */
+
+.qs-provider {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.qs-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+.qs-provider h3 {
+  margin: 0;
+  font-size: 22px;
+  color: #111827;
+  font-weight: 700;
+}
+
+.qs-skill {
+  display: inline-block;
+  margin-top: 8px;
+  background: #dcfce7;
+  color: #15803d;
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.qs-divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 22px 0;
+}
+
+/* ---------- Form ---------- */
+
+.qs-group {
+  margin-bottom: 18px;
+}
+
+.qs-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.qs-group textarea,
+.qs-group input {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: 0.25s;
+  background: #fff;
+}
+
+.qs-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.qs-group input {
+  height: 48px;
+}
+
+.qs-group textarea:focus,
+.qs-group input:focus {
+  outline: none;
+  border-color: #22c55e;
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.15);
+}
+
+/* ---------- Note ---------- */
+
+.qs-note {
+  margin-top: 22px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: #f0fdf4;
+  border-left: 4px solid #22c55e;
+  color: #166534;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* ---------- Buttons ---------- */
+
+.qs-confirm-btn,
+.qs-cancel-btn {
+  border: none;
+  border-radius: 12px;
+  padding: 12px 26px;
+  min-width: 140px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.qs-confirm-btn {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #fff;
+  box-shadow: 0 10px 18px rgba(34, 197, 94, 0.25);
+}
+
+.qs-confirm-btn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #16a34a, #15803d);
+}
+
+.qs-cancel-btn {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.qs-cancel-btn:hover {
+  background: #e5e7eb;
+  transform: translateY(-2px);
+}
+
+.swal2-actions {
+  gap: 14px;
+  margin-top: 28px !important;
+}
+
+/* ---------- Validation ---------- */
+
+.swal2-validation-message {
+  margin-top: 16px !important;
+  border-radius: 10px;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 768px) {
+  .qs-booking-popup {
+    width: 95% !important;
+    padding: 20px !important;
+  }
+
+  .qs-provider {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .qs-provider h3 {
+    font-size: 20px;
+  }
+
+  .qs-avatar {
+    width: 64px;
+    height: 64px;
+    font-size: 22px;
+  }
+
+  .qs-confirm-btn,
+  .qs-cancel-btn {
+    width: 100%;
+  }
+
+  .swal2-actions {
+    flex-direction: column-reverse;
+  }
 }

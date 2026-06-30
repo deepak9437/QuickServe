@@ -1,0 +1,59 @@
+<header class="topbar">
+  <!-- Left -->
+
+  <div class="topbar-left">
+    <h1>
+      Welcome back,
+      <span>{{ adminName }}</span>
+      <span class="wave">👋</span>
+    </h1>
+
+    <p>Here's what's happening with QuickServe today.</p>
+  </div>
+
+  <!-- Right -->
+
+  <div class="topbar-right">
+    <!-- Search -->
+
+    <div class="search-box">
+      <i class="bi bi-search"></i>
+
+      <input type="text" placeholder="Search anything..." />
+
+      <span class="shortcut"> Ctrl / </span>
+    </div>
+
+    <!-- Notification -->
+
+    <button class="icon-btn">
+      <i class="bi bi-bell"></i>
+
+      @if(notifications>0){
+
+      <span class="badge"> {{ notifications }} </span>
+
+      }
+    </button>
+
+    <!-- Profile -->
+
+    <div class="profile-menu">
+      <div class="profile-avatar">{{ adminName.charAt(0) }}</div>
+
+      <div class="profile-info">
+        <h4>{{ adminName }}</h4>
+
+        <small>Super Admin</small>
+      </div>
+    </div>
+
+    <!-- Logout -->
+
+    <button class="logout-btn" (click)="logout()">
+      <i class="bi bi-box-arrow-right"></i>
+
+      Logout
+    </button>
+  </div>
+</header>

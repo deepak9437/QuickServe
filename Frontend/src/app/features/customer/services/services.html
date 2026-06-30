@@ -1,103 +1,189 @@
 <section class="services-page">
-  <div class="services-header">
-    <h1>
-      <i class="bi bi-search"></i>
-      Find Trusted Service Providers
-    </h1>
+  <!-- ===========================
+        HERO
+  ============================ -->
 
-    <p>
-      <i class="bi bi-patch-check-fill"></i>
-      Browse verified professionals and book services instantly.
-    </p>
+  <section class="services-hero">
+    <div class="container">
+      <div class="hero-content">
+        <span class="hero-badge">
+          <i class="bi bi-patch-check-fill"></i>
 
-    <div class="search-filter">
-      <input
-        type="text"
-        placeholder="Search providers..."
-        [(ngModel)]="searchText"
-      />
+          100% Verified Local Professionals
+        </span>
 
-      <select [(ngModel)]="selectedCategory">
-        <option value="">All Categories</option>
-        <option>Electrician</option>
-        <option>Mechanic</option>
-        <option>Plumber</option>
-        <option>Cleaner</option>
-        <option>Carpenter</option>
-        <option>Painter</option>
-        <option>Tutor</option>
-        <option>Chef</option>
-        <option>Gardener</option>
-        <option>Driver</option>
-        <option>Technician</option>
-      </select>
+        <h1>
+          Find Trusted
+
+          <span>Service Providers</span>
+        </h1>
+
+        <p>
+          Book verified electricians, plumbers, cleaners and more skilled
+          professionals near you.
+        </p>
+      </div>
+
+      <!-- Search Box -->
+
+      <div class="search-card shadow-lg">
+        <div class="row g-3 align-items-center">
+          <div class="col-lg-6">
+            <div class="search-input">
+              <i class="bi bi-search"></i>
+
+              <input
+                type="text"
+                placeholder="Search by provider name..."
+                [(ngModel)]="searchText"
+              />
+            </div>
+          </div>
+
+          <div class="col-lg-3">
+            <select class="form-select" [(ngModel)]="selectedCategory">
+              <option value="">All Categories</option>
+
+              <option>Electrician</option>
+
+              <option>Plumber</option>
+
+              <option>Cleaner</option>
+
+              <option>Painter</option>
+
+              <option>Carpenter</option>
+
+              <option>Tutor</option>
+
+              <option>Driver</option>
+
+              <option>Mechanic</option>
+            </select>
+          </div>
+
+          <div class="col-lg-3">
+            <button class="search-btn w-100" type="button">
+              <i class="bi bi-search"></i>
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category Chips -->
+
+      <div class="category-list">
+        <button class="category-chip">⚡ Electrician</button>
+
+        <button class="category-chip">💧 Plumber</button>
+
+        <button class="category-chip">✨ Cleaner</button>
+
+        <button class="category-chip">🔨 Carpenter</button>
+
+        <button class="category-chip">🎨 Painter</button>
+
+        <button class="category-chip">📚 Tutor</button>
+
+        <button class="category-chip">🚗 Driver</button>
+
+        <button class="category-chip">➕ More</button>
+      </div>
     </div>
-  </div>
-
+  </section>
   <div class="providers-grid">
     @if (paginatedProviders.length > 0) { @for (provider of paginatedProviders;
     track provider.id) {
 
     <div class="provider-card">
-      <div class="provider-top">
+      <!-- =========================
+            CARD HEADER
+      ========================== -->
+
+      <div class="provider-header">
         <div class="provider-avatar">
           {{ provider.user.fullName.charAt(0).toUpperCase() }}
         </div>
 
-        <div class="provider-info">
-          <h3>{{ provider.user.fullName }}</h3>
+        <div class="provider-details">
+          <div class="provider-name">
+            <h3>{{ provider.user.fullName }}</h3>
 
-          <span>
+            <i class="bi bi-patch-check-fill verified-icon"></i>
+          </div>
+
+          <p class="provider-skill">
             <i class="bi bi-tools"></i>
+
             {{ provider.skills }}
-          </span>
+          </p>
         </div>
       </div>
 
-      <div class="rating">
+      <!-- =========================
+            RATING
+      ========================== -->
+
+      <div class="provider-rating">
         <i class="bi bi-star-fill"></i>
 
-        {{ provider.rating || 0 }}
+        <strong>{{ provider.rating || 0 }}</strong>
 
         <span> ({{ provider.review || 0 }} Reviews) </span>
       </div>
 
-      <p class="experience">
-        <i class="bi bi-briefcase-fill"></i>
+      <!-- =========================
+            INFO
+      ========================== -->
 
-        Experience: {{ provider.experience > 0 ? provider.experience : 0 }}
-        Years
-      </p>
+      <div class="provider-info">
+        <div class="info-item">
+          <i class="bi bi-briefcase-fill"></i>
 
-      <p class="description">
-        <i class="bi bi-card-text"></i>
+          <span> {{ provider.experience || 0 }} Years Experience </span>
+        </div>
 
-        {{ provider.description }}
-      </p>
+        <div class="info-item">
+          <i class="bi bi-geo-alt-fill"></i>
 
-      <div class="availability-status">
+          <span> Bhubaneswar, Odisha </span>
+        </div>
+
+        <div class="info-item">
+          <i class="bi bi-card-text"></i>
+
+          <span> {{ provider.description }} </span>
+        </div>
+      </div>
+
+      <!-- =========================
+            STATUS
+      ========================== -->
+
+      <div class="provider-status">
         <span
-          class="status-badge"
+          class="status-pill"
           [ngClass]="provider.availability ? 'online' : 'offline'"
         >
-          <i
-            class="bi"
-            [ngClass]="provider.availability ? 'bi-wifi' : 'bi-wifi-off'"
-          >
-          </i>
+          <span class="status-dot"></span>
 
-          {{ provider.availability ? 'Online' : 'Offline' }}
+          {{ provider.availability ? 'Available Now' : 'Offline' }}
         </span>
       </div>
 
-      <div class="provider-footer">
+      <!-- =========================
+            BUTTONS
+      ========================== -->
+
+      <div class="provider-actions">
         <button class="booking-btn" (click)="bookNow(provider)">
           <i class="bi bi-calendar-check-fill"></i>
 
           Book Now
         </button>
 
-        <a [routerLink]="['/provider', provider.id]" class="profile-btn">
+        <a class="profile-btn" [routerLink]="['/provider', provider.id]">
           <i class="bi bi-person-vcard-fill"></i>
 
           View Profile
@@ -107,51 +193,42 @@
 
     } } @else {
 
-    <div class="no-providers">
-      <i
-        class="bi bi-person-x-fill"
-        style="font-size: 60px; color: #9ca3af; margin-bottom: 15px"
-      >
-      </i>
+    <div class="no-provider">
+      <i class="bi bi-person-x-fill"></i>
 
-      <h3>No providers found</h3>
+      <h3>No Providers Found</h3>
 
-      <p>Try adjusting your search or category filter.</p>
+      <p>Try another keyword or category.</p>
     </div>
 
     }
   </div>
-
-  <div class="pagination">
+  <div class="pagination-wrapper">
     <button
       class="page-btn"
-      [disabled]="currentPage === 1"
-      (click)="changePage(currentPage - 1)"
+      [disabled]="currentPage===1"
+      (click)="changePage(currentPage-1)"
     >
       <i class="bi bi-chevron-left"></i>
-
-      Prev
     </button>
 
-    @for (page of totalPages; track page) {
+    @for(page of totalPages; track page){
 
     <button
       class="page-btn"
-      [class.active]="currentPage === page"
+      [class.active]="page===currentPage"
       (click)="changePage(page)"
     >
-      {{ page }}
+      {{page}}
     </button>
 
     }
 
     <button
       class="page-btn"
-      [disabled]="currentPage === totalPages.length"
-      (click)="changePage(currentPage + 1)"
+      [disabled]="currentPage===totalPages.length"
+      (click)="changePage(currentPage+1)"
     >
-      Next
-
       <i class="bi bi-chevron-right"></i>
     </button>
   </div>

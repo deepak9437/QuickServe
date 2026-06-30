@@ -1,180 +1,279 @@
-<div class="dashboard-container">
-  <div class="welcome-card">
-    <div class="avatar">{{ provider.fullName?.charAt(0) }}</div>
+<section class="provider-dashboard">
+  <!-- ===========================
+       HERO SECTION
+  ============================ -->
 
-   <div class="provider-info">
-
-  <div class="provider-top">
-
-    <div class="provider-name">
-
-      <h2>Welcome Back, {{ provider.fullName }}</h2>
-
-      <p>{{ provider.role | uppercase }}</p>
-
-    </div>
-
-        <div class="availability-box">
-
-          <span class="availability-text" [ngClass]="{
-          online:isOnline,
-          offline:!isOnline
-        }">
-
-            {{ isOnline ? 'Online' : 'Offline' }}
-
-          </span>
-
-          <label class="toggle-switch">
-
-            <input type="checkbox" [checked]="isOnline" (change)="toggleAvailability($event)">
-
-            <span class="toggle-slider"></span>
-
-          </label>
-
-        </div>
-
+  <div class="provider-hero">
+    <div class="provider-left">
+      <div class="provider-avatar">
+        {{ provider.fullName?.charAt(0).toUpperCase() }}
       </div>
 
-    </div> <!-- provider-info -->
+      <div class="provider-details">
+        <span class="provider-role">
+          <i class="bi bi-patch-check-fill"></i>
 
-</div> <!-- welcome-card -->
+          Verified Provider
+        </span>
 
-<div class="stats-grid">
-      <div class="stat-card bookings">
-        <h1>{{ totalBookings }}</h1>
+        <h2>Welcome Back, {{ provider.fullName }}</h2>
+
+        <p>
+          <i class="bi bi-person-workspace"></i>
+
+          {{ provider.role | uppercase }}
+        </p>
+      </div>
+    </div>
+
+    <div class="provider-right">
+      <div class="availability-card">
+        <span
+          class="availability-status"
+          [ngClass]="{
+            online:isOnline,
+            offline:!isOnline
+          }"
+        >
+          <i class="bi" [ngClass]="isOnline ? 'bi-wifi' : 'bi-wifi-off'"> </i>
+
+          {{ isOnline ? 'Online' : 'Offline' }}
+        </span>
+
+        <label class="toggle-switch">
+          <input
+            type="checkbox"
+            [checked]="isOnline"
+            (change)="toggleAvailability($event)"
+          />
+
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===========================
+       STATISTICS
+  ============================ -->
+
+  <div class="stats-grid">
+    <!-- Total Bookings -->
+
+    <div class="stat-card">
+      <div class="stat-icon bookings">
+        <i class="bi bi-calendar-check-fill"></i>
+      </div>
+
+      <div class="stat-info">
+        <h2>{{ totalBookings }}</h2>
 
         <p>Total Bookings</p>
       </div>
+    </div>
 
-      <div class="stat-card pending">
-        <h1>{{ pendingRequests }}</h1>
+    <!-- Pending -->
+
+    <div class="stat-card">
+      <div class="stat-icon pending">
+        <i class="bi bi-hourglass-split"></i>
+      </div>
+
+      <div class="stat-info">
+        <h2>{{ pendingRequests }}</h2>
 
         <p>Pending Requests</p>
       </div>
+    </div>
 
-      <div class="stat-card completed">
-        <h1>{{ completedJobs }}</h1>
+    <!-- Completed -->
+
+    <div class="stat-card">
+      <div class="stat-icon completed">
+        <i class="bi bi-check-circle-fill"></i>
+      </div>
+
+      <div class="stat-info">
+        <h2>{{ completedJobs }}</h2>
 
         <p>Completed Jobs</p>
       </div>
     </div>
+  </div>
 
-    <div class="recent-section">
-      <div class="section-header">
-        <h3>Recent Service Requests</h3>
+  <!-- ===========================
+       RECENT BOOKINGS
+  ============================ -->
+
+  <div class="recent-section">
+    <div class="section-header">
+      <div>
+        <h3>
+          <i class="bi bi-clock-history"></i>
+
+          Recent Service Requests
+        </h3>
+
+        <p>View and manage all incoming customer requests.</p>
       </div>
 
-      @for ( booking of recentBookings; track booking.bookingId ) {
+      <span class="request-count"> {{ recentBookings.length }} Requests </span>
+    </div>
 
-      <div class="request-card">
-        <div class="booking-info">
-          <h4>{{ booking.serviceName }}</h4>
+    <div class="booking-scroll">
+      @for (booking of recentBookings; track booking.bookingId) {
 
-          <p>
-            <strong>Problem:</strong>
+      <div class="booking-card">
+        <!-- LEFT SIDE -->
 
-            {{ booking.problem }}
-          </p>
-
-          <p>
-            <strong>Address:</strong>
-
-            {{ booking.address }}
-          </p>
-
-          <small> {{ booking.bookingDate }} </small>
-
-          @if ( booking.bookingStatus !== 'pending' ) {
-
-          <div class="customer-details">
-            <h5>Customer Details</h5>
-
-            <p>
-              <strong>Name:</strong>
-
-              {{ booking.customerName }}
-            </p>
-
-            <p>
-              <strong>Phone:</strong>
-
-              {{ booking.customerPhone }}
-            </p>
-
-            <p>
-              <strong>Email:</strong>
-
-              {{ booking.customerEmail }}
-            </p>
+        <div class="booking-left">
+          <div class="service-icon">
+            <i class="bi bi-tools"></i>
           </div>
 
-          }
-        </div>
+          <div class="booking-details">
+            <div class="booking-title">
+              <h4>{{ booking.serviceName }}</h4>
 
-        <div class="booking-right">
-          <span class="status-badge" [ngClass]="
-            booking.bookingStatus
-          ">
-            {{ booking.bookingStatus }}
-          </span>
-
-          <div class="booking-actions">
-            @if ( booking.bookingStatus === 'pending' ) {
-
-            <button class="accept-btn" (click)="
-              acceptBooking(
-                booking.bookingId
-              )
-            ">
-              Accept
-            </button>
-
-            <button class="reject-btn" (click)="
-              rejectBooking(
-                booking.bookingId
-              )
-            ">
-              Reject
-            </button>
-
-            } @if ( booking.bookingStatus === 'accepted' ) {
-
-            <button class="complete-btn" (click)="
-              generateOtp(
-                booking.bookingId
-              )
-            ">
-              Generate OTP
-            </button>
-
-            } @if ( booking.bookingStatus === 'otp_sent' ) {
-
-            <div class="otp-section">
-              <input type="text" class="otp-input" placeholder="Enter OTP" [(ngModel)]="
-                booking.enteredOtp
-              " />
-
-              <button class="verify-btn" (click)="
-                verifyOtp(
-                  booking.bookingId,
-                  booking.enteredOtp
-                )
-              ">
-                Verify OTP
-              </button>
+              <span class="status-badge" [ngClass]="booking.bookingStatus">
+                {{ booking.bookingStatus }}
+              </span>
             </div>
 
-            } @if ( booking.bookingStatus === 'completed' ) {
+            <div class="booking-meta">
+              <p>
+                <i class="bi bi-exclamation-circle-fill"></i>
 
-            <div class="completed-message">✅ Service Completed</div>
+                {{ booking.problem }}
+              </p>
+
+              <p>
+                <i class="bi bi-geo-alt-fill"></i>
+
+                {{ booking.address }}
+              </p>
+
+              <p>
+                <i class="bi bi-calendar-event-fill"></i>
+
+                {{ booking.bookingDate }}
+              </p>
+            </div>
+
+            @if (booking.bookingStatus !== 'pending') {
+
+            <div class="customer-card">
+              <h5>
+                <i class="bi bi-person-fill"></i>
+
+                Customer Details
+              </h5>
+
+              <div class="customer-grid">
+                <div>
+                  <i class="bi bi-person-circle"></i>
+
+                  <span>{{ booking.customerName }}</span>
+                </div>
+
+                <div>
+                  <i class="bi bi-telephone-fill"></i>
+
+                  <span>{{ booking.customerPhone }}</span>
+                </div>
+
+                <div>
+                  <i class="bi bi-envelope-fill"></i>
+
+                  <span>{{ booking.customerEmail }}</span>
+                </div>
+              </div>
+            </div>
 
             }
           </div>
         </div>
+
+        <!-- RIGHT SIDE -->
+
+        <div class="booking-right">
+          @if (booking.bookingStatus === 'pending') {
+
+          <button
+            class="action-btn accept-btn"
+            (click)="acceptBooking(booking.bookingId)"
+          >
+            <i class="bi bi-check-circle-fill"></i>
+
+            Accept
+          </button>
+
+          <button
+            class="action-btn reject-btn"
+            (click)="rejectBooking(booking.bookingId)"
+          >
+            <i class="bi bi-x-circle-fill"></i>
+
+            Reject
+          </button>
+
+          } @if (booking.bookingStatus === 'accepted') {
+
+          <button
+            class="action-btn otp-btn"
+            (click)="generateOtp(booking.bookingId)"
+          >
+            <i class="bi bi-key-fill"></i>
+
+            Generate OTP
+          </button>
+
+          } @if (booking.bookingStatus === 'otp_sent') {
+
+          <div class="otp-box">
+            <input
+              type="text"
+              maxlength="6"
+              placeholder="Enter OTP"
+              [(ngModel)]="booking.enteredOtp"
+            />
+
+            <button
+              class="action-btn verify-btn"
+              (click)="verifyOtp(
+                booking.bookingId,
+                booking.enteredOtp
+              )"
+            >
+              <i class="bi bi-patch-check-fill"></i>
+
+              Verify
+            </button>
+          </div>
+
+          } @if (booking.bookingStatus === 'completed') {
+
+          <div class="completed-card">
+            <i class="bi bi-check-circle-fill"></i>
+
+            <span>Service Completed</span>
+          </div>
+
+          }
+        </div>
+      </div>
+
+      } @if (recentBookings.length === 0) {
+
+      <div class="empty-bookings">
+        <i class="bi bi-inbox-fill"></i>
+
+        <h3>No Service Requests</h3>
+
+        <p>New customer booking requests will appear here.</p>
       </div>
 
       }
     </div>
   </div>
+</section>

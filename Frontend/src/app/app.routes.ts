@@ -8,13 +8,15 @@ import { DashboardComponent } from "./features/customer/dashboard/dashboard";
 import { ProfileComponent } from "./features/customer/profile/profile";
 import { RegisterComponent } from "./features/provider/register/register";
 import { providerdashboardComponent } from "./features/provider/dashboard/dashboard";
-import { Booking } from "./features/customer/booking/booking";
+
 import { ViewProfileComponent } from "./features/customer/view-profile/view-profile";
 import { AdminDashboardComponent } from "./features/admin/dashboard/dashboard";
 import { ProviderApprovalComponent } from "./features/admin/provider-approval/provider-approval";
 import { AboutComponent } from "./features/about/about";
 import { ForgotPasswordComponent } from "./features/auth/forgot-password/forgot-password";
 import { roleGuard } from "./core/guards/role-guard";
+import { ProviderProfile } from "./features/provider/profile/profile";
+import { Layout } from "./features/admin/layout/layout";
 
 import { authGuard } from "./core/guards/auth-guard";
 
@@ -58,12 +60,6 @@ export const routes: Routes = [
     data: { role: "customer" },
   },
   {
-    path: "booking",
-    component: Booking,
-    canActivate: [authGuard, roleGuard],
-    data: { role: "customer" },
-  },
-  {
     path: "view-profile",
     component: ViewProfileComponent,
     canActivate: [authGuard],
@@ -80,52 +76,68 @@ export const routes: Routes = [
     canActivate: [authGuard, roleGuard],
     data: { role: "provider" },
   },
-
+  {
+    path: "provider-profile",
+    component: ProviderProfile,
+    canActivate: [authGuard, roleGuard],
+    data: { role: "provider" },
+  },
+  // ADMIN
   // ADMIN
   {
-    path: "admin-dashboard",
-    component: AdminDashboardComponent,
+    path: "admin",
+    component: Layout,
     canActivate: [authGuard, roleGuard],
     data: { role: "admin" },
-  },
-  {
-    path: "admin/provider-approval",
-    component: ProviderApprovalComponent,
-    canActivate: [authGuard, roleGuard],
-    data: { role: "admin" },
-  },
-  {
-    path: "admin/users",
-    loadComponent: () =>
-      import("./features/admin/users/users").then((m) => m.UsersComponent),
-    canActivate: [authGuard, roleGuard],
-    data: { role: "admin" },
-  },
-  {
-    path: "admin/providers",
-    loadComponent: () =>
-      import("./features/admin/providers/providers").then(
-        (m) => m.ProvidersComponent,
-      ),
-    canActivate: [authGuard],
-  },
-  {
-    path: "admin/bookings",
-    loadComponent: () =>
-      import("./features/admin/bookings/bookings").then(
-        (m) => m.BookingsComponent,
-      ),
-    canActivate: [authGuard],
-  },
-  {
-    path: "admin/reports",
-    loadComponent: () =>
-      import("./features/admin/reports/reports").then(
-        (m) => m.ReportsComponent,
-      ),
-    canActivate: [authGuard],
-  },
 
+    children: [
+      {
+        path: "",
+        redirectTo: "dashboard",
+        pathMatch: "full",
+      },
+
+      {
+        path: "dashboard",
+        component: AdminDashboardComponent,
+      },
+
+      {
+        path: "provider-approval",
+        component: ProviderApprovalComponent,
+      },
+
+      {
+        path: "users",
+        loadComponent: () =>
+          import("./features/admin/users/users").then((m) => m.UsersComponent),
+      },
+
+      {
+        path: "providers",
+        loadComponent: () =>
+          import("./features/admin/providers/providers").then(
+            (m) => m.ProvidersComponent,
+          ),
+      },
+
+      {
+        path: "bookings",
+        loadComponent: () =>
+          import("./features/admin/bookings/bookings").then(
+            (m) => m.BookingsComponent,
+          ),
+      },
+
+      {
+        path: "reports",
+        loadComponent: () =>
+          import("./features/admin/reports/reports").then(
+            (m) => m.ReportsComponent,
+          ),
+      },
+    ],
+  },
   {
     path: "about",
     component: AboutComponent,

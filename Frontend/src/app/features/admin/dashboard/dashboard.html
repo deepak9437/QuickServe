@@ -1,59 +1,170 @@
-<div class="admin-dashboard">
-  <div class="welcome-card">
-    <h1>Welcome Admin 👋</h1>
-    <p>Manage QuickServe Platform</p>
-  </div>
+<!-- ===========================
+     STAT CARDS
+=========================== -->
 
-  <div class="stats-grid">
-    <div class="stat-card users">
-      <h2>{{ dashboardStats.totalUsers }}</h2>
-      <p>Total Customers</p>
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-icon green">
+      <i class="bi bi-people-fill"></i>
     </div>
 
-    <div class="stat-card providers">
+    <div class="stat-content">
+      <h2>{{ dashboardStats.totalUsers }}</h2>
+      <p>Total Users</p>
+      <span class="stat-trend up">
+        <i class="bi bi-arrow-up-short"></i>
+        12.5% vs last week
+      </span>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-icon blue">
+      <i class="bi bi-person-workspace"></i>
+    </div>
+
+    <div class="stat-content">
       <h2>{{ dashboardStats.totalProviders }}</h2>
       <p>Total Providers</p>
-    </div>
-
-    <div class="stat-card approvals">
-      <h2>{{ dashboardStats.pendingApprovals }}</h2>
-      <p>Pending Approvals</p>
-    </div>
-
-    <div class="stat-card bookings">
-      <h2>{{ dashboardStats.totalBookings }}</h2>
-      <p>Total Bookings</p>
+      <span class="stat-trend up">
+        <i class="bi bi-arrow-up-short"></i>
+        8.2% vs last week
+      </span>
     </div>
   </div>
 
-  <div class="action-section">
-    <h2>Quick Actions</h2>
-
-    <div class="action-grid">
-      <div class="action-card" (click)="goToUsers()">
-        <span>👤</span>
-        <h3>Manage Users</h3>
-      </div>
-
-      <div class="action-card" (click)="goToProviders()">
-        <span>👷</span>
-        <h3>Manage Providers</h3>
-      </div>
-
-      <div class="action-card" (click)="goToApprovals()">
-        <span>✅</span>
-        <h3>Provider Approvals</h3>
-      </div>
-
-      <div class="action-card" (click)="goToBookings()">
-        <span>📅</span>
-        <h3>Manage Bookings</h3>
-      </div>
-
-      <div class="action-card" (click)="goToReports()">
-        <span>📈</span>
-        <h3>Reports</h3>
-      </div>
+  <div class="stat-card">
+    <div class="stat-icon amber">
+      <i class="bi bi-calendar-check-fill"></i>
     </div>
+
+    <div class="stat-content">
+      <h2>{{ dashboardStats.totalBookings }}</h2>
+      <p>Total Bookings</p>
+      <span class="stat-trend up">
+        <i class="bi bi-arrow-up-short"></i>
+        18.7% vs last week
+      </span>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-icon purple">
+      <i class="bi bi-currency-rupee"></i>
+    </div>
+
+    <div class="stat-content">
+      <h2>₹{{ dashboardStats.totalEarnings }}</h2>
+      <p>Total Earnings</p>
+      <span class="stat-trend up">
+        <i class="bi bi-arrow-up-short"></i>
+        15.3% vs last week
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================
+     CHARTS
+=========================== -->
+
+<div class="charts-row">
+  <div class="chart-card">
+    <div class="chart-header">
+      <h3>Bookings Overview</h3>
+
+      <button class="filter-btn">
+        This Week
+        <i class="bi bi-chevron-down"></i>
+      </button>
+    </div>
+
+    <div class="chart-canvas-wrap">
+      <canvas #bookingsChart></canvas>
+    </div>
+  </div>
+
+  <div class="chart-card donut-card">
+    <div class="chart-header">
+      <h3>Booking Status</h3>
+    </div>
+
+    <div class="donut-wrap">
+      <div class="donut-canvas-wrap">
+        <canvas #statusChart></canvas>
+
+        <div class="donut-center">
+          <h2>{{ bookingStatus.total }}</h2>
+          <p>Total</p>
+        </div>
+      </div>
+
+      <ul class="donut-legend">
+        @for(item of bookingStatus.items; track $index){
+
+        <li>
+          <span class="legend-dot" [style.background]="item.color"> </span>
+
+          <span class="legend-label"> {{ item.label }} </span>
+
+          <span class="legend-value">
+            {{ item.value }} ({{ item.percent }}%)
+          </span>
+        </li>
+
+        }
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================
+     LISTS
+=========================== -->
+
+<div class="lists-row">
+  <div class="list-card">
+    <div class="list-header">
+      <h3>Recent Bookings</h3>
+      <a routerLink="/admin/bookings">View All</a>
+    </div>
+
+    <!-- bookings -->
+  </div>
+
+  <div class="list-card">
+    <div class="list-header">
+      <h3>Top Providers</h3>
+      <a routerLink="/admin/providers">View All</a>
+    </div>
+
+    <!-- providers -->
+  </div>
+
+  <div class="list-card">
+    <div class="list-header">
+      <h3>Recent Users</h3>
+      <a routerLink="/admin/users">View All</a>
+    </div>
+
+    <!-- users -->
+  </div>
+</div>
+
+<!-- ===========================
+     APPROVAL TABLE
+=========================== -->
+
+<div class="approvals-card">
+  <div class="list-header">
+    <h3>Pending Provider Approvals</h3>
+
+    <a routerLink="/admin/provider-approval"> View All </a>
+  </div>
+
+  <div class="approvals-table-wrap">
+    <table class="approvals-table">
+      <!-- your table -->
+    </table>
   </div>
 </div>

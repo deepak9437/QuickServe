@@ -1,3 +1,7 @@
+/* ── Font Import ────────────────────────────────────────────────── */
+
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap");
+
 /* ── Reset & Base ───────────────────────────────────────────────── */
 
 *,
@@ -9,7 +13,7 @@
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   background: #f5fbf8;
   color: #1a1a1a;
   line-height: 1.6;
@@ -47,7 +51,7 @@ body {
   align-items: center;
   gap: 4rem;
   padding: 3rem 4rem;
-  min-height: 110vh;
+  min-height: 100%;
 
   background:
     linear-gradient(rgba(206, 246, 199, 0.88), rgba(255, 255, 255, 0.88)),
@@ -62,6 +66,7 @@ body {
 
 .qs-hero__copy {
   max-width: 580px;
+  margin-top: 40px;
 }
 
 .qs-pill {
@@ -85,20 +90,12 @@ body {
 }
 
 .qs-hero__heading {
-  font-size: clamp(3rem, 5vw, 4rem);
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: -2px;
   margin-bottom: 24px;
   color: #0b1f17;
 }
-
-/* .qs-hero__heading span {
-  color: #1d9e75;
-  text-decoration: none;
-  text-decoration-thickness: 5px;
-  text-underline-offset: 8px;
-} */
 
 .qs-hero__heading span {
   display: block;
@@ -264,6 +261,7 @@ body {
 .qs-hero__visual {
   display: flex;
   justify-content: center;
+  margin-top: 50px;
 }
 
 .qs-mosaic {
@@ -386,7 +384,7 @@ body {
   font-weight: 600;
 }
 
-.qs-mosaic__band-left h4 {
+.qs-mosaic__band-left h5 {
   margin: 0;
   color: #111827;
 }
@@ -394,6 +392,7 @@ body {
 .qs-mosaic__band-left p {
   margin-top: 6px;
   color: #6b7280;
+  font-size: 13px;
 }
 
 .qs-mosaic__band-stats {
@@ -479,14 +478,13 @@ body {
 /* =======================
    Categories Section
 ======================= */
-/* Section Heading */
 .qs-sec--white {
   position: relative;
-  /* top: -70px; */
   background: white;
-  border-radius: 30px 30px 0 0;
+  /* border-radius: 30px 30px 0 0; */
   box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.04);
   z-index: 10;
+  margin-top: 50px;
 }
 
 .qs-sec__head {
@@ -696,33 +694,18 @@ body {
 /* ══════════════════════════════════════════════════════════════════
    TOP PROVIDERS
    ══════════════════════════════════════════════════════════════════ */
-/* ==========================================================
-   TOP PROVIDERS SECTION
-========================================================== */
 
 .qs-sec--gray {
   padding: 6rem 2rem;
   background: #f8fafc;
+  margin-bottom: -80px;
 }
-
-.qs-sec__inner {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* ==========================================================
-   PROVIDER GRID
-========================================================== */
 
 .qs-prov-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
-
-/* ==========================================================
-   PROVIDER CARD
-========================================================== */
 
 .qs-prov {
   background: #ffffff;
@@ -737,10 +720,6 @@ body {
   transform: translateY(-5px);
   box-shadow: 0 15px 35px rgba(29, 158, 117, 0.08);
 }
-
-/* ==========================================================
-   AVATAR
-========================================================== */
 
 .qs-prov__avatar {
   width: 60px;
@@ -757,9 +736,6 @@ body {
 
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
-/* ==========================================================
-   NAME
-========================================================== */
 
 .qs-prov__name {
   font-size: 1.1rem;
@@ -767,10 +743,6 @@ body {
   color: #0b1f17;
   margin-bottom: 8px;
 }
-
-/* ==========================================================
-   SKILL BADGE
-========================================================== */
 
 .qs-prov__skill {
   display: inline-block;
@@ -787,10 +759,6 @@ body {
   font-weight: 700;
 }
 
-/* ==========================================================
-   RATING
-========================================================== */
-
 .qs-prov__stars {
   color: #f59e0b;
   font-size: 14px;
@@ -802,20 +770,12 @@ body {
   margin-left: 6px;
 }
 
-/* ==========================================================
-   DESCRIPTION
-========================================================== */
-
 .qs-prov__desc {
   color: #5f6f68;
   font-size: 14px;
   line-height: 1.7;
   margin-bottom: 1.5rem;
 }
-
-/* ==========================================================
-   BUTTON
-========================================================== */
 
 .qs-prov__btn {
   display: block;
@@ -841,20 +801,12 @@ body {
   color: white;
 }
 
-/* ==========================================================
-   EMPTY STATE
-========================================================== */
-
 .qs-prov-empty {
   grid-column: 1 / -1;
   text-align: center;
   padding: 3rem;
   color: #6b7b74;
 }
-
-/* ==========================================================
-   VIEW ALL BUTTON
-========================================================== */
 
 .qs-view-all {
   text-align: center;
@@ -883,10 +835,6 @@ body {
   background: #1d9e75;
   color: white;
 }
-
-/* ==========================================================
-   RESPONSIVE
-========================================================== */
 
 @media (max-width: 992px) {
   .qs-prov-grid {
@@ -1023,8 +971,6 @@ body {
   overflow: hidden;
 }
 
-/* Green glow top left */
-
 .qs-cta__inner::before {
   content: "";
   position: absolute;
@@ -1044,8 +990,6 @@ body {
   pointer-events: none;
 }
 
-/* Light glow bottom right */
-
 .qs-cta__inner::after {
   content: "";
   position: absolute;
@@ -1064,10 +1008,6 @@ body {
 
   pointer-events: none;
 }
-
-/* ==========================================================
-   LEFT CONTENT
-========================================================== */
 
 .qs-cta__copy {
   position: relative;
@@ -1123,10 +1063,6 @@ body {
 
   margin-bottom: 2rem;
 }
-
-/* ==========================================================
-   BUTTONS
-========================================================== */
 
 .qs-cta__btns {
   display: flex;
@@ -1186,10 +1122,6 @@ body {
   background: rgba(255, 255, 255, 0.05);
 }
 
-/* ==========================================================
-   PERKS GRID
-========================================================== */
-
 .qs-cta__perks {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -1245,10 +1177,6 @@ body {
   line-height: 1.6;
 }
 
-/* ==========================================================
-   RESPONSIVE
-========================================================== */
-
 @media (max-width: 992px) {
   .qs-cta__inner {
     grid-template-columns: 1fr;
@@ -1296,18 +1224,12 @@ body {
    BOOTSTRAP ICONS
 ========================================================== */
 
-/* General Bootstrap Icons */
-
 .bi {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   line-height: 1;
 }
-
-/* ==========================================================
-   HERO
-========================================================== */
 
 .qs-pill i {
   font-size: 16px;
@@ -1335,10 +1257,6 @@ body {
   margin-right: 4px;
 }
 
-/* ==========================================================
-   HERO IMAGE BADGES
-========================================================== */
-
 .qs-photo__badge {
   display: flex;
   align-items: center;
@@ -1348,10 +1266,6 @@ body {
 .qs-photo__badge i {
   color: #1d9e75;
 }
-
-/* ==========================================================
-   CATEGORIES
-========================================================== */
 
 .qs-cat__icon {
   display: flex;
@@ -1373,9 +1287,6 @@ body {
 .qs-cat__cta i {
   font-size: 13px;
 }
-/* ==========================================================
-   HOW IT WORKS
-========================================================== */
 
 .step-number {
   width: 72px;
@@ -1397,10 +1308,6 @@ body {
   font-size: 32px;
   color: #1d9e75;
 }
-
-/* ==========================================================
-   PROVIDERS
-========================================================== */
 
 .qs-prov__skill {
   display: inline-flex;
@@ -1441,10 +1348,6 @@ body {
   margin-bottom: 15px;
 }
 
-/* ==========================================================
-   TESTIMONIALS
-========================================================== */
-
 .qs-t__stars {
   display: flex;
   gap: 3px;
@@ -1465,10 +1368,6 @@ body {
 .qs-t__author small i {
   color: #1d9e75;
 }
-
-/* ==========================================================
-   PROVIDER CTA
-========================================================== */
 
 .qs-provider-cta__icon {
   width: 82px;

@@ -1,8 +1,7 @@
 import { Component } from "@angular/core";
 import { NavbarComponent } from "./shared/navbar/navbar";
 import { FooterComponent } from "./shared/footer/footer";
-import { Router, NavigationEnd, RouterOutlet } from "@angular/router";
-import { filter } from "rxjs";
+import { Router, RouterOutlet } from "@angular/router";
 
 @Component({
   selector: "app-root",
@@ -12,21 +11,29 @@ import { filter } from "rxjs";
   styleUrl: "./app.css",
 })
 export class App {
-  hideFooter = false;
+  constructor(public router: Router) {}
 
-  constructor(private router: Router) {
-    this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe(() => {
-        const hiddenRoutes = [
-          "/login",
-          "/signup",
-          "/provider-register",
-          "/about",
-          "/dashboard",
-        ];
+  get hideNavbar(): boolean {
+    const currentUrl = this.router.url;
 
-        this.hideFooter = hiddenRoutes.includes(this.router.url);
-      });
+    return (
+      currentUrl === "/admin/dashboard" ||
+      currentUrl === "/admin/users" ||
+      currentUrl === "/admin/providers" ||
+      currentUrl === "/admin/bookings" ||
+      currentUrl === "/admin/reports" ||
+      currentUrl === "/admin/provider-approval"
+    );
+  }
+
+  get hideFooter(): boolean {
+    const currentUrl = this.router.url;
+
+    return (
+      currentUrl === "/login" ||
+      currentUrl === "/signup" ||
+      currentUrl === "/provider-register" ||
+      currentUrl === "/admin/dashboard"
+    );
   }
 }

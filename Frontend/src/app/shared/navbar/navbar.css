@@ -314,3 +314,53 @@
     right: -20px;
   }
 }
+
+/* ==========================================================
+   BOOTSTRAP ICONS
+========================================================== */
+
+.nav-links a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-links a i {
+  font-size: 15px;
+  color: inherit;
+}
+
+.signup-btn i {
+  color: white;
+}
+
+.profile-icon {
+  font-size: 20px;
+}
+
+.profile-icon i {
+  color: white;
+}
+
+.dropdown a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dropdown a i {
+  width: 18px;
+  text-align: center;
+  color: #1d9e75;
+}
+
+.dropdown button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.dropdown button i {
+  font-size: 15px;
+}

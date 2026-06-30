@@ -11,58 +11,115 @@
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
       >
+        <i class="bi bi-house-door-fill"></i>
         Home
       </a>
     </li>
 
-    <!-- Services (Hide for Admin) -->
+    <!-- Services -->
     @if (!user || user.role !== 'admin') {
     <li>
-      <a routerLink="/services" routerLinkActive="active"> Services </a>
+      <a routerLink="/services" routerLinkActive="active">
+        <i class="bi bi-grid-fill"></i>
+        Services
+      </a>
     </li>
-    } @if (!user || user.role === 'customer') {
+    }
+
+    <!-- About -->
+    @if (!user || user.role === 'customer') {
     <li>
-      <a routerLink="/about" routerLinkActive="active"> About Us </a>
+      <a routerLink="/about" routerLinkActive="active">
+        <i class="bi bi-info-circle-fill"></i>
+        About Us
+      </a>
     </li>
     }
 
     <!-- Guest -->
     @if (!user) {
+
     <li>
-      <a routerLink="/login">Login</a>
+      <a routerLink="/login">
+        <i class="bi bi-box-arrow-in-right"></i>
+        Login
+      </a>
     </li>
 
     <li>
-      <a routerLink="/signup" class="signup-btn"> Sign Up </a>
+      <a routerLink="/signup" class="signup-btn">
+        <i class="bi bi-person-plus-fill"></i>
+        Sign Up
+      </a>
     </li>
+
     }
 
     <!-- Logged In -->
     @if (user) {
+
     <li class="profile-menu">
-      <div class="profile-icon" (click)="toggleMenu()">👤</div>
+      <div class="profile-icon" (click)="toggleMenu()">
+        <i class="bi bi-person-fill"></i>
+      </div>
 
       @if (showMenu) {
 
       <div class="dropdown">
         <p>{{ user.fullName }}</p>
-        <!-- <small>{{ user.role }}</small> -->
 
-        <a routerLink="/view-profile"> View Profile </a>
+        <!-- View Profile -->
 
         @if (user.role === 'customer') {
-        <a routerLink="/dashboard"> Customer Dashboard </a>
+
+        <a routerLink="/view-profile">
+          <i class="bi bi-person-circle"></i>
+          View Profile
+        </a>
+
         } @if (user.role === 'provider') {
-        <a routerLink="/provider-dashboard"> Provider Dashboard </a>
-        } @if (user.role === 'admin') {
-        <a routerLink="/admin-dashboard"> Admin Dashboard </a>
+
+        <a routerLink="/provider-profile">
+          <i class="bi bi-person-circle"></i>
+          View Profile
+        </a>
+
         }
 
-        <button (click)="logout()">Logout</button>
+        <!-- Dashboard -->
+
+        @if (user.role === 'customer') {
+
+        <a routerLink="/dashboard">
+          <i class="bi bi-speedometer2"></i>
+          Customer Dashboard
+        </a>
+
+        } @if (user.role === 'provider') {
+
+        <a routerLink="/provider-dashboard">
+          <i class="bi bi-tools"></i>
+          Provider Dashboard
+        </a>
+
+        } @if (user.role === 'admin') {
+
+        <a routerLink="/admin-dashboard">
+          <i class="bi bi-shield-lock-fill"></i>
+          Admin Dashboard
+        </a>
+
+        }
+
+        <button (click)="logout()">
+          <i class="bi bi-box-arrow-right"></i>
+          Logout
+        </button>
       </div>
 
       }
     </li>
+
     }
   </ul>
 </nav>
