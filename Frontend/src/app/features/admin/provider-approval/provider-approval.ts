@@ -87,46 +87,92 @@ export class ProviderApprovalComponent {
       },
     });
   }
+viewProvider(provider: any) {
 
-  viewProvider(provider: any) {
-    const doc = provider.providerdocs?.[0];
+  const doc = provider.providerdocs?.[0];
 
-    Swal.fire({
-      title: provider.user.fullName,
+   console.log("Document Object:", doc);
+  console.log("Document Name:", doc?.documentURL);
+  console.log("Certificate:", doc?.certificate);
+  console.log("Extra Certificate:", doc?.extraCertificate);
 
-      html: `
-      <div style="text-align:left">
+  Swal.fire({
+    title: provider.user.fullName,
+    width: 900,
+    confirmButtonText: "Close",
 
-        <p><b>Email:</b> ${provider.user.userEmail}</p>
+    html: `
+      <div style="text-align:left; font-size:15px;">
 
-        <p><b>Phone:</b> ${provider.user.userPhone}</p>
+        <div style="background:#f8fafc; padding:18px; border-radius:12px; margin-bottom:20px;">
+          <p><b>Email:</b> ${provider.user.userEmail}</p>
+          <p><b>Phone:</b> ${provider.user.userPhone}</p>
+          <p><b>Skill:</b> ${provider.skills}</p>
+          <p><b>Experience:</b> ${provider.experience} Years</p>
+          <p><b>Status:</b> ${provider.status}</p>
+          <p><b>Description:</b> ${provider.description}</p>
+        </div>
 
-        <p><b>Skill:</b> ${provider.skills}</p>
+        <h3 style="margin-bottom:8px;">
+          ${doc?.documentType || "Identity Document"}
+        </h3>
 
-        <p><b>Experience:</b> ${provider.experience} Years</p>
+        <a href="http://localhost:3030/quickserve/provider/document/${doc?.documentURL}" target="_blank">
+          <img
+            src="http://localhost:3030/quickserve/provider/document/${doc?.documentURL}"
+            style="
+              width:100%;
+              max-height:350px;
+              object-fit:contain;
+              border:1px solid #ddd;
+              border-radius:10px;
+              margin-bottom:25px;
+              cursor:zoom-in;
+            ">
+        </a>
 
-        <p><b>Status:</b> ${provider.status}</p>
+        <h3 style="margin-bottom:8px;">Certificate</h3>
 
-        <p><b>Description:</b> ${provider.description}</p>
+        <a href="http://localhost:3030/quickserve/provider/certificate/${doc?.certificate}" target="_blank">
+          <img
+            src="http://localhost:3030/quickserve/provider/certificate/${doc?.certificate}"
+            style="
+              width:100%;
+              max-height:350px;
+              object-fit:contain;
+              border:1px solid #ddd;
+              border-radius:10px;
+              margin-bottom:25px;
+              cursor:zoom-in;
+            ">
+        </a>
 
-        <hr>
+        ${
+          doc?.extraCertificate
+            ? `
+              <h3 style="margin-bottom:8px;">Extra Certificate</h3>
 
-        <p><b>Document Type:</b>
-        ${doc?.documentType || "N/A"}</p>
-
-        <p><b>Document:</b>
-        ${doc?.documentURL || "N/A"}</p>
-
-        <p><b>Certificate:</b>
-        ${doc?.certificate || "N/A"}</p>
-
-        <p><b>Extra Certificate:</b>
-        ${doc?.extraCertificate || "N/A"}</p>
+              <a href="http://localhost:3030/quickserve/provider/extraCertificate/${doc.extraCertificate}" target="_blank">
+                <img
+                  src="http://localhost:3030/quickserve/provider/extraCertificate/${doc.extraCertificate}"
+                  style="
+                    width:100%;
+                    max-height:350px;
+                    object-fit:contain;
+                    border:1px solid #ddd;
+                    border-radius:10px;
+                    cursor:zoom-in;
+                  ">
+              </a>
+            `
+            : `
+              <p style="color:#888;">No Extra Certificate Uploaded</p>
+            `
+        }
 
       </div>
-    `,
-      width: 700,
-      confirmButtonText: "Close",
-    });
-  }
+    `
+  });
+
+}
 }

@@ -100,6 +100,11 @@ SecurityFilterChain securityFilterChain(
             
             .requestMatchers("/review/set_review").permitAll()
             .requestMatchers("/review/x").permitAll()
+            
+            .requestMatchers("/provider/document/**").permitAll()
+            .requestMatchers("/provider/certificate/**").permitAll()
+            .requestMatchers("/provider/extraCertificate/**").permitAll()
+            
             .anyRequest().authenticated()
 
         );

@@ -19,7 +19,7 @@ public class ReviewController {
 
 	@Autowired
 	private ReviewRepo reviewRepo;
-	
+
 	@Autowired
 	private ProviderRepository providerRepo;
 
@@ -48,31 +48,33 @@ public class ReviewController {
 
 		return "REVIEW_SUBMITTED";
 	}
-	
-	//@GetMapping("/x")
-	public void updaterating(Integer pId,Double rating) {
-		
+
+	// @GetMapping("/x")
+	public void updaterating(Integer pId, Double rating) {
+
 		ProviderEntity provider = providerRepo.findById(pId).orElseThrow();
-		
+
 		Double existRating = provider.getRating();
 		Integer existTotal = provider.getTotalReview();
-		
-		if (existRating == null) {
-	        existRating = 0.0;
-	    }
 
-	    if (existTotal == null) {
-	        existTotal = 0;
-	    }
-		
-		Integer newTotal=existTotal+1;
-		Double newRating = (existRating+rating)/newTotal;
-		
+		if (existRating == null) {
+			existRating = 0.0;
+		}
+
+		if (existTotal == null) {
+			existTotal = 0;
+		}
+
+		Integer newTotal = existTotal + 1;
+		Double newRating = ((existRating * existTotal) + rating) / newTotal;
+
+		// Round to 1 decimal place
+		newRating = Math.round(newRating * 10.0) / 10.0;
 		provider.setRating(newRating);
 		provider.setTotalReview(newTotal);
-		
+
 		providerRepo.save(provider);
-		
+
 	}
-	
+
 }
