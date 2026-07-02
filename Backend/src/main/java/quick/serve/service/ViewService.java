@@ -85,6 +85,7 @@ public class ViewService {
 			userDto.setUserPhone(provider.getUser().getUserPhone());
 			userDto.setPassword(provider.getUser().getPassword());
 			userDto.setGender(provider.getUser().getGender());
+			userDto.setAddress(provider.getUser().getAddress());
 			userDto.setPincode(provider.getUser().getPincode());
 			userDto.setRole(provider.getUser().getRole());
 			dto.setUser(userDto);
@@ -137,6 +138,7 @@ public class ViewService {
 			userDto.setUserPhone(provider.getUser().getUserPhone());
 			userDto.setPassword(provider.getUser().getPassword());
 			userDto.setGender(provider.getUser().getGender());
+			userDto.setAddress(provider.getUser().getAddress());
 			userDto.setPincode(provider.getUser().getPincode());
 			userDto.setRole(provider.getUser().getRole());
 			dto.setUser(userDto);

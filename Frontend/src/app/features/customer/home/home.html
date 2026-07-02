@@ -419,7 +419,21 @@
           <span> {{ provider.rating ?? 4.8 }} </span>
         </div>
 
-        <p class="qs-prov__desc">{{ provider.description }}</p>
+        <!-- Information -->
+
+        <div class="provider-info">
+          <div class="info-item">
+            <i class="bi bi-briefcase-fill"></i>
+
+            <span> {{ provider.experience || 0 }} Years Experience </span>
+          </div>
+
+          <div class="info-item">
+            <i class="bi bi-geo-alt-fill"></i>
+
+            <span>{{ provider.user.address }}</span>
+          </div>
+        </div>
 
         <a [routerLink]="['/provider', provider.id]" class="qs-prov__btn">
           View Profile
@@ -452,113 +466,147 @@
 <!-- ==========================================================
      TESTIMONIALS
 ========================================================== -->
+<!-- ==========================================================
+     CUSTOMER REVIEWS
+========================================================== -->
 
 <section class="qs-sec qs-sec--white">
   <div class="qs-sec__inner">
+    <!-- Section Header -->
+
     <div class="qs-sec__head">
       <div class="qs-eyebrow">Customer Stories</div>
 
-      <h2>What Across Odisha Say</h2>
+      <h2>What Our Customers Say</h2>
 
-      <p>Real reviews from real customers</p>
+      <p>Genuine experiences shared by customers across Odisha.</p>
     </div>
 
-    <div class="qs-t-grid">
-      <!-- Review 1 -->
+    <!-- Reviews -->
 
-      <div class="qs-t">
-        <div class="qs-t__stars">
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-        </div>
+    @if (reviews.length > 0) {
 
-        <p class="qs-t__quote">
-          "Found an electrician within minutes. Professional, punctual and
-          affordable. Will definitely use again."
-        </p>
+    <div class="qs-review-slider">
+      <div class="qs-review-track">
+        <!-- Original Reviews -->
 
-        <div class="qs-t__author">
-          <div class="qs-t__av qs-t__av--purple">R</div>
+        @for (review of reviews; track review.id) {
 
-          <div>
-            <strong> Rahul Sharma </strong>
+        <div class="qs-review-card">
+          <!-- Rating -->
 
-            <small>
-              <i class="bi bi-geo-alt-fill"></i>
+          <div class="qs-review-stars">
+            @for (star of [1,2,3,4,5]; track star) {
 
-              Bhubaneswar
-            </small>
+            <i
+              class="bi"
+              [class.bi-star-fill]="star <= review.rating"
+              [class.bi-star]="star > review.rating"
+            >
+            </i>
+
+            }
+
+            <span class="rating-text"> {{ review.rating }}/5 </span>
+          </div>
+
+          <!-- Review -->
+
+          <p class="qs-review-comment">"{{ review.comment }}"</p>
+
+          <!-- Customer -->
+
+          <div class="qs-review-user">
+            <div
+              class="qs-review-avatar"
+              [style.background-color]="getAvatarColor($index)"
+            >
+              {{ getInitials(review.user.fullName) }}
+            </div>
+
+            <div class="qs-review-details">
+              <h4>{{ review.user.fullName }}</h4>
+
+              <span>
+                <i class="bi bi-geo-alt-fill"></i>
+
+                {{ review.user.address || "Odisha" }}
+              </span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Review 2 -->
+        }
+        <!-- Duplicate Reviews
+             (Creates seamless infinite scrolling)
+        -->
 
-      <div class="qs-t">
-        <div class="qs-t__stars">
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-        </div>
+        @for (review of reviews; track 'copy-' + review.id) {
 
-        <p class="qs-t__quote">
-          "The direct contact feature helped me discuss everything before
-          booking. Very transparent."
-        </p>
+        <div class="qs-review-card">
+          <!-- Rating -->
 
-        <div class="qs-t__author">
-          <div class="qs-t__av qs-t__av--green">P</div>
+          <div class="qs-review-stars">
+            @for (star of [1,2,3,4,5]; track star) {
 
-          <div>
-            <strong> Priya Das </strong>
+            <i
+              class="bi"
+              [class.bi-star-fill]="star <= review.rating"
+              [class.bi-star]="star > review.rating"
+            >
+            </i>
 
-            <small>
-              <i class="bi bi-geo-alt-fill"></i>
+            }
 
-              Cuttack
-            </small>
+            <span class="rating-text"> {{ review.rating }}/5 </span>
+          </div>
+
+          <!-- Review -->
+
+          <p class="qs-review-comment">"{{ review.comment }}"</p>
+
+          <!-- Customer -->
+
+          <div class="qs-review-user">
+            <div
+              class="qs-review-avatar"
+              [style.background-color]="getAvatarColor($index)"
+            >
+              {{ getInitials(review.user.fullName) }}
+            </div>
+
+            <div class="qs-review-details">
+              <h4>{{ review.user.fullName }}</h4>
+
+              <span>
+                <i class="bi bi-geo-alt-fill"></i>
+
+                {{ review.user.address || "Odisha" }}
+              </span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Review 3 -->
-
-      <div class="qs-t">
-        <div class="qs-t__stars">
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-        </div>
-
-        <p class="qs-t__quote">
-          "Very easy to use and the providers are genuinely reliable. The review
-          system keeps everyone honest."
-        </p>
-
-        <div class="qs-t__author">
-          <div class="qs-t__av qs-t__av--orange">A</div>
-
-          <div>
-            <strong> Amit Kumar </strong>
-
-            <small>
-              <i class="bi bi-geo-alt-fill"></i>
-
-              Puri
-            </small>
-          </div>
-        </div>
+        }
       </div>
     </div>
+
+    } @else {
+
+    <!-- Empty State -->
+
+    <div class="qs-review-empty">
+      <i class="bi bi-chat-heart-fill"></i>
+
+      <h3>No Reviews Yet</h3>
+
+      <p>Be the first customer to share your experience with QuickServe.</p>
+    </div>
+
+    }
   </div>
 </section>
+
 <!-- ==========================================================
      BECOME A PROVIDER CTA
 ========================================================== -->

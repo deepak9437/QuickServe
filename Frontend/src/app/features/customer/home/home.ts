@@ -7,6 +7,7 @@ import { FormsModule } from "@angular/forms";
 import { Router } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { AdminService } from "../../../core/services/admin";
+import { ReviewService } from "../../../core/services/review";
 
 @Component({
   selector: "app-home",
@@ -18,6 +19,7 @@ import { AdminService } from "../../../core/services/admin";
 export class HomeComponent implements OnInit {
   providers: any[] = [];
   totalProviders = 0;
+  reviews: any[] = [];
   searchText: string = "";
 
   constructor(
@@ -25,11 +27,27 @@ export class HomeComponent implements OnInit {
     private providerService: ProviderService,
     private cdr: ChangeDetectorRef,
     private adminService: AdminService,
+    private reviewService: ReviewService,
   ) {}
 
   ngOnInit(): void {
     this.loadProviders();
     this.loadStats();
+    this.loadReviews();
+  }
+  loadReviews() {
+    this.reviewService.getAllReviews().subscribe({
+      next: (data) => {
+        console.log("Reviews:", data);
+
+        this.reviews = data;
+
+        this.cdr.detectChanges();
+      },
+    });
+  }
+  get scrollingReviews() {
+    return [...this.reviews, ...this.reviews];
   }
   loadStats() {
     this.adminService.getDashboardStats().subscribe({

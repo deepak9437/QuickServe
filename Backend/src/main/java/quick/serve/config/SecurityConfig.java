@@ -27,6 +27,7 @@ SecurityFilterChain securityFilterChain(
             .requestMatchers("/user/user_login").permitAll()
             .requestMatchers("/user/user_update").permitAll()
             .requestMatchers("/user/dashboard/**").permitAll()
+            
 
             // =========================
             // PROVIDER MODULE
@@ -100,6 +101,7 @@ SecurityFilterChain securityFilterChain(
             
             .requestMatchers("/review/set_review").permitAll()
             .requestMatchers("/review/x").permitAll()
+            .requestMatchers("/review/all").permitAll()
             
             .requestMatchers("/provider/document/**").permitAll()
             .requestMatchers("/provider/certificate/**").permitAll()

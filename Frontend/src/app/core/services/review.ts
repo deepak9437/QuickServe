@@ -28,4 +28,7 @@ export class ReviewService {
       responseType: "text",
     });
   }
+  getAllReviews() {
+    return this.http.get<any[]>(`${this.apiUrl}/review/all`);
+  }
 }
