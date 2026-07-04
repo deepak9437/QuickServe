@@ -1,6 +1,13 @@
 package quick.serve.controller;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -53,6 +61,29 @@ public class UserController {
 		entity.setUserPhone(userPhone);
 
 		userService.userRegisterService(entity);
+	}
+	
+	//Add image.path.user.profile in the application.properties.
+	@Value("${image.path.user.profile}")
+	String profile;
+	
+	@PutMapping("/profile/{id}")
+	public void setProfile(@PathVariable Integer id,@RequestParam MultipartFile profilePic) {
+		
+		UserEntity existEntity = userRepository.findById(id).orElseThrow();
+		
+		Path profileLocation = Paths.get(profile + File.separator + profilePic.getOriginalFilename());
+		
+		try{
+			Files.copy(profilePic.getInputStream(), profileLocation , StandardCopyOption.REPLACE_EXISTING);
+		}catch(Exception e) {
+			e.getLocalizedMessage();
+		}
+		
+		existEntity.setProfile(profilePic.getOriginalFilename());
+		
+		userRepository.save(existEntity);
+		
 	}
 
 	@PostMapping("/user_login")

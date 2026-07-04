@@ -3,9 +3,53 @@
     <div class="profile-banner"></div>
 
     <div class="profile-header">
-      <div class="profile-avatar">
+     <div class="profile-avatar-wrapper">
+
+  <label
+    for="profilePicInput"
+    class="profile-avatar"
+    title="Change profile picture">
+
+    @if (profileImageUrl) {
+
+      <img
+        [src]="profileImageUrl"
+        alt="Profile picture"
+        class="profile-image">
+
+    } @else {
+
+      <span class="avatar-letter">
         {{ user.fullName?.charAt(0).toUpperCase() }}
+      </span>
+
+    }
+
+    <div class="camera-overlay">
+      📷
+    </div>
+
+    @if (uploading) {
+      <div class="uploading-overlay">
+        Uploading...
       </div>
+    }
+
+  </label>
+
+  <input
+    id="profilePicInput"
+    type="file"
+    accept="image/*"
+    hidden
+    [disabled]="uploading"
+    (change)="onProfileSelected($event)">
+
+  <p class="change-photo-text">
+    Click photo to change
+  </p>
+
+</div>
 
       <h2>{{ user.fullName }}</h2>
 

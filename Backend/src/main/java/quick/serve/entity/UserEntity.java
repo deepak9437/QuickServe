@@ -50,5 +50,8 @@ public class UserEntity {
 	
 	@Column(name="phone")
 	private String userPhone;
+	
+	@Column(name="profile")
+	private String profile;
 
 }

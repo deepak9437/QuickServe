@@ -18,5 +18,7 @@ public class WebConfig implements WebMvcConfigurer {
 		registry.addResourceHandler("/provider/extraCertificate/**")
 				.addResourceLocations("file:D:/assets/provider/certificate/");
 
+		registry.addResourceHandler("/user/profilePic/**").addResourceLocations("file:D:/assets/user");
+
 	}
 }
