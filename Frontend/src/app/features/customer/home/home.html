@@ -409,14 +409,12 @@
           {{ provider.skills }}
         </span>
 
-        <div class="qs-prov__stars">
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
-          <i class="bi bi-star-fill"></i>
+        <div class="provider-rating">
           <i class="bi bi-star-fill"></i>
 
-          <span> {{ provider.rating ?? 4.8 }} </span>
+          <strong> {{ provider.rating || 0 }} </strong>
+
+          <span> ({{ provider.review || 0 }} Reviews) </span>
         </div>
 
         <!-- Information -->

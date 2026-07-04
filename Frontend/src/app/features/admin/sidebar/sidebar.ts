@@ -5,7 +5,7 @@ import { Router, RouterLink, RouterLinkActive } from "@angular/router";
 @Component({
   selector: "app-admin-sidebar",
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: "./sidebar.html",
   styleUrl: "./sidebar.css",
 })

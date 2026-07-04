@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { Router } from "@angular/router";
+import { AuthService } from "../../../core/services/auth";
 
 @Component({
   selector: "app-admin-topbar",
@@ -13,11 +14,13 @@ export class AdminTopbarComponent {
   adminName = "Admin";
   notifications = 8;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+  ) {}
 
   logout() {
-    localStorage.clear();
-    sessionStorage.clear();
+    this.authService.clearCurrentUser();
     this.router.navigate(["/login"]);
   }
 }
