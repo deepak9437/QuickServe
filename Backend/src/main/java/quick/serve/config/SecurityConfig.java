@@ -27,6 +27,8 @@ SecurityFilterChain securityFilterChain(
             .requestMatchers("/user/user_login").permitAll()
             .requestMatchers("/user/user_update").permitAll()
             .requestMatchers("/user/dashboard/**").permitAll()
+            .requestMatchers("/user/profile/**").permitAll()
+            .requestMatchers("/user/profilePic/**").permitAll()
             
 
             // =========================

@@ -151,4 +151,14 @@ export class AuthService {
     );
 
 }
+updateProfilePic(userId: number, profilePic: File) {
+  const formData = new FormData();
+
+  formData.append("profilePic", profilePic);
+
+  return this.http.put(
+    `${this.apiUrl}/user/profile/${userId}`,
+    formData
+  );
+}
 }
