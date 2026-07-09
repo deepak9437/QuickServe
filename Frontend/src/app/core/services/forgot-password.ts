@@ -5,7 +5,7 @@ import { HttpClient } from "@angular/common/http";
   providedIn: "root",
 })
 export class ForgotPasswordService {
-  private apiUrl = "http://localhost:3030/quickserve/forgot";
+  private apiUrl = "http://13.233.86.215:3030/quickserve/forgot";
 
   constructor(private http: HttpClient) {}
 

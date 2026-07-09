@@ -117,9 +117,9 @@ viewProvider(provider: any) {
           ${doc?.documentType || "Identity Document"}
         </h3>
 
-        <a href="http://localhost:3030/quickserve/provider/document/${doc?.documentURL}" target="_blank">
+        <a href="http://13.233.86.215:3030/quickserve/provider/document/${doc?.documentURL}" target="_blank">
           <img
-            src="http://localhost:3030/quickserve/provider/document/${doc?.documentURL}"
+            src="http://13.233.86.215:3030/quickserve/provider/document/${doc?.documentURL}"
             style="
               width:100%;
               max-height:350px;
@@ -133,9 +133,9 @@ viewProvider(provider: any) {
 
         <h3 style="margin-bottom:8px;">Certificate</h3>
 
-        <a href="http://localhost:3030/quickserve/provider/certificate/${doc?.certificate}" target="_blank">
+        <a href="http://13.233.86.215:3030/quickserve/provider/certificate/${doc?.certificate}" target="_blank">
           <img
-            src="http://localhost:3030/quickserve/provider/certificate/${doc?.certificate}"
+            src="http://13.233.86.215:3030/quickserve/provider/certificate/${doc?.certificate}"
             style="
               width:100%;
               max-height:350px;
@@ -152,9 +152,9 @@ viewProvider(provider: any) {
             ? `
               <h3 style="margin-bottom:8px;">Extra Certificate</h3>
 
-              <a href="http://localhost:3030/quickserve/provider/extraCertificate/${doc.extraCertificate}" target="_blank">
+              <a href="http://13.233.86.215:3030/quickserve/provider/extraCertificate/${doc.extraCertificate}" target="_blank">
                 <img
-                  src="http://localhost:3030/quickserve/provider/extraCertificate/${doc.extraCertificate}"
+                  src="http://13.233.86.215:3030/quickserve/provider/extraCertificate/${doc.extraCertificate}"
                   style="
                     width:100%;
                     max-height:350px;

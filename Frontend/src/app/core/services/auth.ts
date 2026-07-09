@@ -6,9 +6,9 @@ import { Observable, BehaviorSubject } from "rxjs";
   providedIn: "root",
 })
 export class AuthService {
-  private apiUrl = "http://localhost:3030/quickserve";
-  private apiUrl1 = "http://localhost:3030/quickserve/user";
-  private apiUrl2 = "http://localhost:3030/quickserve/provider";
+  private apiUrl = "http://13.233.86.215:3030/quickserve";
+  private apiUrl1 = "http://13.233.86.215:3030/quickserve/user";
+  private apiUrl2 = "http://13.233.86.215:3030/quickserve/provider";
 
   // 1. Add a BehaviorSubject to hold and stream the current user's state.
   // It checks sessionStorage on initialization so users stay logged in on refresh.
@@ -96,7 +96,7 @@ export class AuthService {
   }
 
   getAllProviders() {
-    return this.http.get("http://localhost:3030/quickserve/view/pending");
+    return this.http.get("http://13.233.86.215:3030/quickserve/view/pending");
   }
 
   getDashboardData(pId: number): Observable<any> {
@@ -105,13 +105,13 @@ export class AuthService {
 
   getUserDashboardData(uId: number) {
     return this.http.get(
-      `http://localhost:3030/quickserve/user/dashboard/${uId}`,
+      `http://13.233.86.215:3030/quickserve/user/dashboard/${uId}`,
     );
   }
 
   getProviderId(userId: number) {
     return this.http.get<number>(
-      `http://localhost:3030/quickserve/provider/provider-id/${userId}`,
+      `http://13.233.86.215:3030/quickserve/provider/provider-id/${userId}`,
     );
   }
 

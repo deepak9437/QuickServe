@@ -39,7 +39,7 @@ export class ViewProfileComponent {
     if (this.user.profile) {
 
       this.profileImageUrl =
-        `http://localhost:3030/quickserve/user/profilePic/${encodeURIComponent(this.user.profile)}`;
+        `http://13.233.86.215:3030/quickserve/user/profilePic/${encodeURIComponent(this.user.profile)}`;
 
     } else {
 

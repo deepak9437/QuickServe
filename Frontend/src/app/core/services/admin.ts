@@ -5,7 +5,7 @@ import { HttpClient } from "@angular/common/http";
   providedIn: "root",
 })
 export class AdminService {
-  private apiUrl = "http://localhost:3030/quickserve/admin";
+  private apiUrl = "http://13.233.86.215:3030/quickserve/admin";
 
   constructor(private http: HttpClient) {}
 
@@ -14,14 +14,14 @@ export class AdminService {
   }
   approveProvider(id: number) {
     return this.http.put(
-      `http://localhost:3030/quickserve/provider/approve/${id}`,
+      `http://13.233.86.215:3030/quickserve/provider/approve/${id}`,
       {},
     );
   }
 
   rejectProvider(id: number) {
     return this.http.put(
-      `http://localhost:3030/quickserve/provider/reject/${id}`,
+      `http://13.233.86.215:3030/quickserve/provider/reject/${id}`,
       {},
     );
   }
@@ -36,7 +36,7 @@ export class AdminService {
   }
   getPendingProviders() {
     return this.http.get<any[]>(
-      "http://localhost:3030/quickserve/view/pending",
+      "http://13.233.86.215:3030/quickserve/view/pending",
     );
   }
 }
