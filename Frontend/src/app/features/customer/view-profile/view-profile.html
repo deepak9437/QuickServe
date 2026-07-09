@@ -1,114 +1,150 @@
-<div class="profile-page">
-  <div class="profile-card">
-    <div class="profile-banner"></div>
-
+<section class="profile-page">
+  <div class="container">
+    <!-- =========================
+         SIMPLE HEADER
+    ========================== -->
     <div class="profile-header">
-     <div class="profile-avatar-wrapper">
+      <div class="profile-avatar-wrapper">
+        <label for="profilePicInput" class="profile-avatar">
+          @if (profileImageUrl) {
 
-  <label
-    for="profilePicInput"
-    class="profile-avatar"
-    title="Change profile picture">
+          <img [src]="profileImageUrl" class="profile-image" alt="Profile" />
 
-    @if (profileImageUrl) {
+          } @else {
 
-      <img
-        [src]="profileImageUrl"
-        alt="Profile picture"
-        class="profile-image">
+          <span class="avatar-letter">
+            {{ user.fullName?.charAt(0).toUpperCase() }}
+          </span>
 
-    } @else {
+          }
 
-      <span class="avatar-letter">
-        {{ user.fullName?.charAt(0).toUpperCase() }}
-      </span>
+          <!-- Small Camera Button -->
+          <div class="camera-icon">
+            <i class="bi bi-camera-fill"></i>
+          </div>
 
-    }
+          @if(uploading){
 
-    <div class="camera-overlay">
-      📷
+          <div class="uploading-overlay">
+            <div class="spinner-border spinner-border-sm text-light"></div>
+            <small>Uploading...</small>
+          </div>
+
+          }
+        </label>
+
+        <input
+          id="profilePicInput"
+          type="file"
+          hidden
+          accept="image/*"
+          (change)="onProfileSelected($event)"
+        />
+      </div>
+
+      <div class="profile-info">
+        <h2>{{ user.fullName }}</h2>
+        <p>{{ user.userEmail }}</p>
+
+        <span class="status-badge">
+          <i class="bi bi-patch-check-fill"></i>
+          Verified Customer
+        </span>
+      </div>
+
+      <button class="edit-profile-btn" (click)="editProfile()">
+        <i class="bi bi-pencil-square"></i>
+        Edit Profile
+      </button>
     </div>
 
-    @if (uploading) {
-      <div class="uploading-overlay">
-        Uploading...
+    <!-- =========================
+         STATS ROW
+    ========================== -->
+    <div class="stats-row">
+      <div class="stat-item">
+        <h3>18</h3>
+        <p>Bookings</p>
       </div>
-    }
-
-  </label>
-
-  <input
-    id="profilePicInput"
-    type="file"
-    accept="image/*"
-    hidden
-    [disabled]="uploading"
-    (change)="onProfileSelected($event)">
-
-  <p class="change-photo-text">
-    Click photo to change
-  </p>
-
-</div>
-
-      <h2>{{ user.fullName }}</h2>
-
-      <p>{{ user.userEmail }}</p>
-
-      <div class="profile-status">
-        <span class="verified"> ✔ Verified </span>
-
-        <span class="active"> ● Active </span>
+      <div class="stat-item">
+        <h3>12</h3>
+        <p>Reviews</p>
       </div>
-    </div>
-
-    <div class="profile-info">
-      <div class="info-item">
-        <div class="info-icon">👤</div>
-
-        <div>
-          <span>FULL NAME</span>
-          <h4>{{ user.fullName }}</h4>
-        </div>
-      </div>
-
-      <div class="info-item">
-        <div class="info-icon">✉️</div>
-
-        <div>
-          <span>EMAIL ADDRESS</span>
-          <h4>{{ user.userEmail }}</h4>
-        </div>
-      </div>
-
-      <div class="info-item">
-        <div class="info-icon">📞</div>
-
-        <div>
-          <span>PHONE NUMBER</span>
-          <h4>{{ user.userPhone }}</h4>
-        </div>
-      </div>
-
-      <div class="info-item">
-        <div class="info-icon">📍</div>
-
-        <div>
-          <span>ADDRESS</span>
-          <h4>{{ user.address }}</h4>
-        </div>
-      </div>
-
-      <div class="info-item">
-        <div class="info-icon">#</div>
-
-        <div>
-          <span>PINCODE</span>
-          <h4>{{ user.pincode }}</h4>
-        </div>
+      <div class="stat-item">
+        <h3>2026</h3>
+        <p>Member Since</p>
       </div>
     </div>
 
-    <button class="edit-btn" (click)="editProfile()">✎ Edit Profile</button>
+    <!-- =========================
+         PERSONAL INFO
+    ========================== -->
+    <div class="info-card">
+      <h3 class="section-title">Personal Information</h3>
+
+      <div class="info-grid">
+        <div class="info-row">
+          <span>Full Name</span>
+          <p>{{ user.fullName }}</p>
+        </div>
+
+        <div class="info-row">
+          <span>Email Address</span>
+          <p>{{ user.userEmail }}</p>
+        </div>
+
+        <div class="info-row">
+          <span>Phone Number</span>
+          <p>{{ user.userPhone }}</p>
+        </div>
+
+        <div class="info-row">
+          <span>Gender</span>
+          <p>{{ user.gender }}</p>
+        </div>
+
+        <div class="info-row">
+          <span>Address</span>
+          <p>{{ user.address }}</p>
+        </div>
+
+        <div class="info-row">
+          <span>Pincode</span>
+          <p>{{ user.pincode }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================
+         ACCOUNT OVERVIEW
+    ========================== -->
+    <div class="info-card">
+      <h3 class="section-title">Account Overview</h3>
+
+      <ul class="account-list">
+        <li>
+          <i class="bi bi-check-circle-fill success"></i>
+          Email Verified
+        </li>
+        <li>
+          <i class="bi bi-person-check-fill success"></i>
+          Account Active
+        </li>
+        <li>
+          <i class="bi bi-calendar-event-fill accent"></i>
+          Member Since January 2026
+        </li>
+      </ul>
+
+      <div class="profile-progress">
+        <div class="progress-header">
+          <span>Profile Strength</span>
+          <span>100%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" style="width: 100%"></div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</section>
