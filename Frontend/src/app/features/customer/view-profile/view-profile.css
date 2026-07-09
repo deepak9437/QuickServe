@@ -1,10 +1,5 @@
 /* ==========================
-   PROFILE PAGE — SIMPLE STYLE
-   Uses global CSS variables from styles.css:
-   --forest: #0b1f17
-   --teal: #1d9e75
-   --amber: #f4a947
-   --mint: #f0faf5
+   PROFILE PAGE
 ========================== */
 
 .profile-page {
@@ -23,20 +18,27 @@
   gap: 1.5rem;
 }
 
+
 /* ==========================
-   HEADER
+   PROFILE HEADER
 ========================== */
 
 .profile-header {
-  background: #fff;
+  background: #ffffff;
   border-radius: 16px;
   padding: 1.5rem;
+
   display: flex;
   align-items: center;
   gap: 1.25rem;
+
   box-shadow: 0 1px 4px rgba(11, 31, 23, 0.06);
-  flex-wrap: wrap;
 }
+
+
+/* ==========================
+   PROFILE AVATAR
+========================== */
 
 .profile-avatar-wrapper {
   position: relative;
@@ -44,48 +46,62 @@
 }
 
 .profile-avatar {
+  position: relative;
+
   width: 100px;
   height: 100px;
 
   border-radius: 50%;
+  border: 4px solid #ffffff;
 
-  background: linear-gradient(135deg, var(--teal), var(--forest));
+  background: linear-gradient(
+    135deg,
+    var(--teal),
+    var(--forest)
+  );
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   overflow: hidden;
-
   cursor: pointer;
-
-  position: relative;
-
-  border: 4px solid #fff;
 
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
 
-  transition: transform 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .profile-avatar:hover {
   transform: scale(1.03);
+
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.16);
 }
 
 .profile-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
 .avatar-letter {
-  color: #fff;
+  color: #ffffff;
   font-size: 2.5rem;
   font-weight: 700;
 }
 
+
+/* ==========================
+   CAMERA ICON
+========================== */
+
 .camera-icon {
   position: absolute;
+
   right: -2px;
   bottom: -2px;
 
@@ -95,20 +111,24 @@
   border-radius: 50%;
 
   background: var(--teal);
-  color: #fff;
+  color: #ffffff;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border: 3px solid #fff;
+  border: 3px solid #ffffff;
 
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.15);
 
-  transition: all 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
 }
 
 .camera-icon i {
+  color: #ffffff;
   font-size: 15px;
 }
 
@@ -117,21 +137,34 @@
   transform: scale(1.1);
 }
 
+
+/* ==========================
+   UPLOADING OVERLAY
+========================== */
+
 .uploading-overlay {
   position: absolute;
   inset: 0;
 
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(0, 0, 0, 0.6);
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   gap: 8px;
 
-  color: #fff;
+  color: #ffffff;
+
   border-radius: 50%;
+  z-index: 5;
 }
+
+
+/* ==========================
+   PROFILE INFORMATION
+========================== */
 
 .profile-info {
   flex: 1;
@@ -140,123 +173,280 @@
 
 .profile-info h2 {
   margin: 0;
+
   color: var(--forest);
+
   font-size: 1.25rem;
   font-weight: 700;
 }
 
 .profile-info p {
   margin: 0.15rem 0 0.5rem;
+
   color: #5c6b64;
+
   font-size: 0.9rem;
 }
+
+
+/* ==========================
+   STATUS BADGE
+========================== */
 
 .status-badge {
   display: inline-flex;
   align-items: center;
+
   gap: 0.35rem;
+
   background: var(--mint);
   color: var(--teal);
+
   font-size: 0.78rem;
   font-weight: 600;
+
   padding: 0.25rem 0.65rem;
+
   border-radius: 999px;
 }
 
 
+/* ==========================
+   EDIT PROFILE BUTTON
+========================== */
+
 .edit-profile-btn {
-  background: transparent;
-  color: var(--teal) !important;
-  border: 2px solid var(--teal);
+  margin-left: auto;
+
+  background-color: #ffffff;
+
+  color: #0b1f17 !important;
+
+  border: 1.5px solid #1d9e75;
 
   padding: 12px 22px;
+
   border-radius: 10px;
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   gap: 8px;
 
+  font-family: inherit;
   font-size: 15px;
   font-weight: 600;
+
+  white-space: nowrap;
+
   cursor: pointer;
 
-  transition: all 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .edit-profile-btn i {
-  color: var(--teal) !important;
+  color: #0b1f17 !important;
+
+  font-size: 16px;
+
+  transition: color 0.3s ease;
 }
 
 .edit-profile-btn:hover {
-  background: var(--teal);
+  background-color: #1d9e75 !important;
+
   color: #ffffff !important;
-  border-color: var(--teal);
+
+  border-color: #1d9e75 !important;
 
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(20, 184, 166, 0.3);
+
+  box-shadow:
+    0 6px 18px rgba(29, 158, 117, 0.3);
 }
 
 .edit-profile-btn:hover i {
   color: #ffffff !important;
 }
 
+.edit-profile-btn:focus,
+.edit-profile-btn:focus-visible {
+  color: #ffffff !important;
+
+  background-color: #1d9e75 !important;
+
+  outline: 3px solid rgba(29, 158, 117, 0.2);
+  outline-offset: 2px;
+}
+
+.edit-profile-btn:focus i,
+.edit-profile-btn:focus-visible i {
+  color: #ffffff !important;
+}
+
+.edit-profile-btn:active {
+  background-color: #167d5d !important;
+
+  color: #ffffff !important;
+
+  transform: translateY(0);
+
+  box-shadow:
+    0 3px 8px rgba(29, 158, 117, 0.25);
+}
+
+.edit-profile-btn:active i {
+  color: #ffffff !important;
+}
+
+
 /* ==========================
-   INFO CARDS
+   STATISTICS ROW
+========================== */
+
+.stats-row {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  width: 100%;
+
+  background: #ffffff;
+
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 1px 4px rgba(11, 31, 23, 0.06);
+}
+
+.stats-row .stat-item {
+  text-align: center;
+
+  padding: 1.5rem 1rem;
+
+  border-right:
+    1px solid #e8eeeb;
+}
+
+.stats-row .stat-item:last-child {
+  border-right: none;
+}
+
+.stats-row .stat-item h3 {
+  margin: 0 0 0.35rem;
+
+  color: var(--forest);
+
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.stats-row .stat-item p {
+  margin: 0;
+
+  color: #5c6b64;
+
+  font-size: 0.85rem;
+}
+
+
+/* ==========================
+   INFORMATION CARDS
 ========================== */
 
 .info-card {
-  background: #fff;
+  background: #ffffff;
+
   border-radius: 16px;
+
   padding: 1.5rem;
-  box-shadow: 0 1px 4px rgba(11, 31, 23, 0.06);
+
+  box-shadow:
+    0 1px 4px rgba(11, 31, 23, 0.06);
 }
 
 .section-title {
   margin: 0 0 1rem;
+
   color: var(--forest);
+
   font-size: 1rem;
   font-weight: 700;
 }
 
+
+/* ==========================
+   INFORMATION GRID
+========================== */
+
 .info-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
   gap: 1rem 1.5rem;
+}
+
+.info-row {
+  min-width: 0;
 }
 
 .info-row span {
   display: block;
+
   color: #8a978f;
+
   font-size: 0.75rem;
+
   margin-bottom: 0.15rem;
 }
 
 .info-row p {
   margin: 0;
+
   color: var(--forest);
+
   font-size: 0.92rem;
   font-weight: 600;
+
+  overflow-wrap: anywhere;
 }
 
+
 /* ==========================
-   ACCOUNT LIST
+   ACCOUNT OVERVIEW
 ========================== */
 
 .account-list {
   list-style: none;
+
   margin: 0 0 1.25rem;
   padding: 0;
+
   display: flex;
   flex-direction: column;
+
   gap: 0.75rem;
 }
 
 .account-list li {
   display: flex;
   align-items: center;
+
   gap: 0.6rem;
+
   font-size: 0.9rem;
+
   color: var(--forest);
 }
 
@@ -268,48 +458,119 @@
   color: var(--amber);
 }
 
+
+/* ==========================
+   PROFILE PROGRESS
+========================== */
+
 .profile-progress {
-  border-top: 1px solid #eef3f0;
+  border-top:
+    1px solid #eef3f0;
+
   padding-top: 1rem;
 }
 
 .progress-header {
   display: flex;
+
   justify-content: space-between;
+
   font-size: 0.8rem;
+
   color: #5c6b64;
+
   margin-bottom: 0.4rem;
 }
 
 .progress-track {
   width: 100%;
   height: 8px;
+
   background: var(--mint);
+
   border-radius: 999px;
+
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
+
   background: var(--teal);
+
   border-radius: 999px;
+
+  transition: width 0.4s ease;
 }
 
+
 /* ==========================
-   RESPONSIVE
+   TABLET
 ========================== */
 
-@media (max-width: 560px) {
-  .info-grid {
-    grid-template-columns: 1fr;
+@media (max-width: 768px) {
+  .profile-page {
+    padding: 1.5rem 1rem;
   }
 
   .profile-header {
+    padding: 1.25rem;
+  }
+}
+
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media (max-width: 560px) {
+  .profile-page {
+    padding: 1rem 0.75rem;
+  }
+
+  .container {
+    gap: 1rem;
+  }
+
+  .profile-header {
+    flex-direction: column;
+
     text-align: center;
+
     justify-content: center;
+
+    padding: 1.25rem 1rem;
+  }
+
+  .profile-info {
+    width: 100%;
   }
 
   .edit-profile-btn {
     margin: 0.5rem auto 0;
+
+    width: 100%;
+
+    max-width: 220px;
+  }
+
+  .stats-row .stat-item {
+    padding: 1rem 0.4rem;
+  }
+
+  .stats-row .stat-item h3 {
+    font-size: 1.15rem;
+  }
+
+  .stats-row .stat-item p {
+    font-size: 0.7rem;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .info-card {
+    padding: 1.25rem;
   }
 }
