@@ -53,5 +53,8 @@ public class UserEntity {
 	
 	@Column(name="profile")
 	private String profile;
+	
+	@Column(name = "created_at")
+	private LocalDateTime createdAt;
 
 }

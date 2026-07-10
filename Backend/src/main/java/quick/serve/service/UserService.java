@@ -63,12 +63,20 @@ public class UserService {
 	public UserDashboardDTO getUserDashboardData(Integer uId) {
 
 		UserDashboardDTO dto = new UserDashboardDTO();
+		
+		UserEntity userEntity = userRepo.findById(uId).orElseThrow();
 
 		dto.setTotalBookings(bookingRepo.countByUId(uId));
 
 		dto.setActiveBookings(bookingRepo.countByUIdAndBookingStatus(uId, "pending"));
 
 		dto.setCompletedBookings(bookingRepo.countByUIdAndBookingStatus(uId, "completed"));
+		
+		dto.setTotalReviews(reviewRepo.countUId(uId));
+		
+		if (userEntity.getCreatedAt() != null) {
+		    dto.setMemberSince(userEntity.getCreatedAt().toLocalDate());
+		}
 
 		List<BookingEntity> bookings = bookingRepo.findByUIdOrderByBookingDateDesc(uId);
 
