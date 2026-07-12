@@ -1,0 +1,653 @@
+/* ==========================================================
+   TOP PROVIDERS SECTION
+========================================================== */
+
+.qs-sec--gray {
+  padding: 90px 20px;
+  background: #f8fafc;
+}
+
+.qs-sec__inner {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.qs-sec__head {
+  max-width: 700px;
+  margin: 0 auto 60px;
+  text-align: center;
+}
+
+.qs-sec__head h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  color: #0b1f17;
+  margin-bottom: 12px;
+}
+
+.qs-sec__head p {
+  color: #64748b;
+  line-height: 1.7;
+}
+
+/* ==========================================================
+   PROVIDERS GRID
+========================================================== */
+
+.qs-prov-grid {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+
+  gap: 24px;
+
+  align-items: stretch;
+}
+
+/* ==========================================================
+   PROVIDER CARD
+========================================================== */
+
+.qs-prov {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 26px;
+
+  background: #ffffff;
+
+  border: 1.5px solid #dceee8;
+
+  border-radius: 22px;
+
+  transition: 0.35s ease;
+
+  overflow: hidden;
+
+  min-height: 380px;
+
+  will-change: transform;
+}
+
+.qs-prov:hover {
+  transform: translateY(-8px);
+
+  border-color: #1d9e75;
+
+  box-shadow: 0 18px 40px rgba(29, 158, 117, 0.14);
+}
+
+.qs-prov::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 4px;
+
+  background: linear-gradient(90deg, #1d9e75, #22c55e);
+
+  transform: scaleX(0);
+
+  transform-origin: left;
+
+  transition: 0.35s;
+}
+
+.qs-prov:hover::before {
+  transform: scaleX(1);
+}
+
+/* ==========================================================
+   AVATAR
+========================================================== */
+
+.qs-prov__avatar {
+  width: 70px;
+  height: 70px;
+
+  border-radius: 18px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: #ffffff;
+
+  font-size: 1.35rem;
+  font-weight: 800;
+
+  margin-bottom: 18px;
+
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+
+  transition: 0.35s ease;
+}
+
+.qs-prov:hover .qs-prov__avatar {
+  transform: scale(1.08) rotate(2deg);
+
+  box-shadow: 0 14px 30px rgba(29, 158, 117, 0.25);
+}
+
+/* ==========================================================
+   PROVIDER NAME
+========================================================== */
+
+.qs-prov__name {
+  font-size: 1.2rem;
+
+  font-weight: 800;
+
+  color: #0b1f17;
+
+  line-height: 1.4;
+
+  margin-bottom: 14px;
+
+  transition: 0.3s ease;
+
+  word-break: break-word;
+}
+
+.qs-prov:hover .qs-prov__name {
+  color: #1d9e75;
+}
+
+/* ==========================================================
+   SKILL BADGE
+========================================================== */
+
+.qs-prov__skill {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  width: fit-content;
+
+  max-width: 100%;
+
+  padding: 8px 16px;
+
+  margin-bottom: 20px;
+
+  border-radius: 999px;
+
+  background: #e8f7ef;
+
+  border: 1px solid #cde9de;
+
+  color: #1d9e75;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+}
+
+.qs-prov__skill i {
+  font-size: 14px;
+
+  color: #1d9e75;
+}
+
+/* ==========================================================
+   RATING
+========================================================== */
+
+.provider-rating {
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-bottom: 20px;
+
+  color: #64748b;
+}
+
+.provider-rating i {
+  color: #f4b400;
+
+  font-size: 18px;
+}
+
+.provider-rating strong {
+  color: #111827;
+
+  font-size: 16px;
+
+  font-weight: 700;
+}
+
+.provider-rating span {
+  font-size: 14px;
+
+  color: #64748b;
+}
+
+/* ==========================================================
+   EXPERIENCE & LOCATION
+========================================================== */
+
+.provider-info {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+
+  margin-top: auto;
+
+  margin-bottom: 24px;
+}
+
+.info-item {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 10px;
+
+  color: #64748b;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+.info-item i {
+  width: 18px;
+
+  flex-shrink: 0;
+
+  color: #1d9e75;
+
+  margin-top: 2px;
+}
+
+.info-item span {
+  word-break: break-word;
+}
+
+/* ==========================================================
+   VIEW PROFILE BUTTON
+========================================================== */
+
+.qs-prov__btn {
+  margin-top: auto;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  width: 100%;
+
+  padding: 14px 18px;
+
+  border-radius: 14px;
+
+  background: #e8f7ef;
+
+  border: 1px solid #b8e6d6;
+
+  color: #1d9e75;
+
+  text-decoration: none;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  transition: all 0.3s ease;
+}
+
+.qs-prov__btn:hover {
+  background: #1d9e75;
+
+  color: #ffffff;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 12px 28px rgba(29, 158, 117, 0.22);
+
+  border-color: #1d9e75;
+}
+
+.qs-prov__btn i {
+  transition: 0.3s;
+
+  font-size: 15px;
+}
+
+.qs-prov__btn:hover i {
+  transform: translateX(5px);
+}
+
+/* ==========================================================
+   EMPTY STATE
+========================================================== */
+
+.qs-prov-empty {
+  grid-column: 1/-1;
+
+  background: #ffffff;
+
+  border: 2px dashed #dceee8;
+
+  border-radius: 22px;
+
+  padding: 70px 20px;
+
+  text-align: center;
+}
+
+.qs-prov-empty i {
+  font-size: 64px;
+
+  color: #cbd5e1;
+
+  margin-bottom: 18px;
+}
+
+.qs-prov-empty p {
+  font-size: 16px;
+
+  color: #64748b;
+
+  max-width: 450px;
+
+  margin: auto;
+
+  line-height: 1.8;
+}
+
+/* ==========================================================
+   VIEW ALL BUTTON
+========================================================== */
+
+.qs-view-all {
+  display: flex;
+
+  justify-content: center;
+
+  margin-top: 50px;
+}
+
+.qs-view-all__btn {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 15px 30px;
+
+  border-radius: 14px;
+
+  border: 2px solid #1d9e75;
+
+  background: #ffffff;
+
+  color: #1d9e75;
+
+  text-decoration: none;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  transition: 0.3s;
+}
+
+.qs-view-all__btn:hover {
+  background: #1d9e75;
+
+  color: #ffffff;
+
+  transform: translateY(-3px);
+
+  box-shadow: 0 15px 35px rgba(29, 158, 117, 0.22);
+}
+
+.qs-view-all__btn i {
+  transition: 0.3s;
+
+  font-size: 15px;
+}
+
+.qs-view-all__btn:hover i {
+  transform: translateX(5px);
+}
+
+/* ==========================================================
+   RESPONSIVE — TABLET
+========================================================== */
+
+@media (max-width: 992px) {
+  .qs-prov-grid {
+    grid-template-columns: repeat(2, minmax(260px, 1fr));
+  }
+}
+
+/* ==========================================================
+   RESPONSIVE — MOBILE
+   Card restructures into a compact header row
+   (avatar | name + skill) with rating/info/button below,
+   using grid-template-areas — no HTML changes needed.
+========================================================== */
+
+@media (max-width: 768px) {
+  .qs-sec--gray {
+    padding: 60px 16px;
+  }
+
+  .qs-sec__head {
+    margin-bottom: 40px;
+  }
+
+  .qs-prov-grid {
+    grid-template-columns: 1fr;
+
+    gap: 16px;
+  }
+
+  .qs-prov {
+    min-height: auto;
+
+    padding: 20px;
+
+    border-radius: 18px;
+
+    display: grid;
+
+    grid-template-columns: 56px 1fr;
+
+    column-gap: 14px;
+
+    row-gap: 10px;
+
+    grid-template-areas:
+      "avatar name"
+      "avatar skill"
+      "rating rating"
+      "info info"
+      "btn btn";
+  }
+
+  /* disable desktop lift, use tap feedback */
+  .qs-prov:hover {
+    transform: none;
+
+    box-shadow: none;
+  }
+
+  .qs-prov:active {
+    border-color: #1d9e75;
+  }
+
+  .qs-prov__avatar {
+    grid-area: avatar;
+
+    width: 52px;
+    height: 52px;
+
+    border-radius: 14px;
+
+    font-size: 1.05rem;
+
+    margin-bottom: 0;
+
+    align-self: start;
+  }
+
+  .qs-prov:hover .qs-prov__avatar {
+    transform: none;
+  }
+
+  .qs-prov__name {
+    grid-area: name;
+
+    font-size: 1rem;
+
+    margin-bottom: 0;
+
+    align-self: center;
+  }
+
+  .qs-prov__skill {
+    grid-area: skill;
+
+    margin-bottom: 0;
+
+    font-size: 11.5px;
+
+    padding: 5px 12px;
+  }
+
+  .provider-rating {
+    grid-area: rating;
+
+    margin-bottom: 0;
+
+    padding-top: 10px;
+
+    border-top: 1px solid #eef3f0;
+  }
+
+  .provider-info {
+    grid-area: info;
+
+    margin: 0;
+
+    gap: 10px;
+  }
+
+  .info-item {
+    font-size: 13px;
+  }
+
+  .qs-prov__btn {
+    grid-area: btn;
+
+    margin-top: 4px;
+
+    padding: 12px;
+
+    font-size: 14px;
+  }
+
+  .qs-view-all {
+    margin-top: 30px;
+  }
+
+  .qs-view-all__btn {
+    width: 100%;
+
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .qs-sec--gray {
+    padding: 50px 14px;
+  }
+
+  .qs-sec__head {
+    margin-bottom: 32px;
+  }
+
+  .qs-sec__head h2 {
+    font-size: 1.7rem;
+  }
+
+  .qs-sec__head p {
+    font-size: 14px;
+  }
+
+  .qs-prov {
+    padding: 16px;
+
+    grid-template-columns: 46px 1fr;
+
+    column-gap: 12px;
+  }
+
+  .qs-prov__avatar {
+    width: 46px;
+    height: 46px;
+
+    border-radius: 12px;
+
+    font-size: 0.95rem;
+  }
+
+  .qs-prov__name {
+    font-size: 0.92rem;
+  }
+
+  .qs-prov__skill {
+    font-size: 11px;
+
+    padding: 4px 10px;
+  }
+
+  .provider-rating i {
+    font-size: 15px;
+  }
+
+  .provider-rating strong {
+    font-size: 14px;
+  }
+
+  .provider-rating span {
+    font-size: 12.5px;
+  }
+
+  .qs-prov-empty {
+    padding: 45px 18px;
+  }
+
+  .qs-prov-empty i {
+    font-size: 50px;
+  }
+
+  .qs-prov-empty p {
+    font-size: 14px;
+  }
+}

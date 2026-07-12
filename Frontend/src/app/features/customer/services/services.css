@@ -45,6 +45,7 @@
 
 .container {
   max-width: 1320px;
+  margin-top: 30px;
 }
 
 /* ==========================================================
@@ -78,6 +79,14 @@
   bottom: -120px;
   border-radius: 50%;
   background: #ecfdf5;
+}
+/* Keep all content above the shapes */
+.container,
+.hero-content,
+.search-card,
+.category-list {
+  position: relative;
+  z-index: 1;
 }
 
 /* ==========================================================
@@ -245,6 +254,14 @@
   transform: scale(0.96);
 }
 
+/* Selected chip stays highlighted, not just on hover */
+.category-chip.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  /* color: #fff; */
+  box-shadow: 0 10px 24px rgba(22, 163, 74, 0.25);
+}
+
 /* ==========================================================
    PROVIDERS SECTION
 ========================================================== */
@@ -287,13 +304,18 @@
   font-weight: 700;
   white-space: nowrap;
 }
+
 /* ==========================================================
    PROVIDERS GRID
 ========================================================== */
 
 .providers-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 340px));
+
+  /* fixed: previous minmax(400px, 340px) had min > max, which is
+     invalid and made the grid effectively lock to 400px columns */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 380px));
+
   justify-content: center;
   gap: 25px;
 }
@@ -367,6 +389,7 @@
 
 .provider-details {
   flex: 1;
+  min-width: 0;
 }
 
 .provider-name {
@@ -392,6 +415,7 @@
 .verified-icon {
   color: var(--primary);
   font-size: 18px;
+  flex-shrink: 0;
 }
 
 .provider-skill {
@@ -645,6 +669,7 @@
   width: auto;
   padding: 0 18px;
 }
+
 /* ==========================================================
    SCROLLBAR
 ========================================================== */
@@ -740,17 +765,13 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .provider-actions {
-    grid-template-columns: 1fr;
-  }
-
   .search-card {
     padding: 20px;
   }
 }
 
 /* ==========================================================
-   MOBILE
+   MOBILE — full redesign of the mobile experience
 ========================================================== */
 
 @media (max-width: 768px) {
@@ -758,90 +779,236 @@
     padding-bottom: 50px;
   }
 
+  /* ---------- Hero ---------- */
+
   .services-hero {
-    padding: 45px 0 35px;
+    padding: 40px 0 30px;
+  }
+
+  .services-hero::before {
+    width: 260px;
+    height: 260px;
+    right: -110px;
+    top: -110px;
+  }
+
+  .services-hero::after {
+    width: 160px;
+    height: 160px;
+    left: -60px;
+    bottom: -70px;
+  }
+
+  .hero-content {
+    margin-bottom: 28px;
   }
 
   .hero-content h1 {
-    font-size: 36px;
+    font-size: 32px;
+    letter-spacing: -1px;
     line-height: 1.2;
   }
 
   .hero-content p {
-    font-size: 15px;
+    font-size: 14.5px;
+    line-height: 1.7;
   }
 
   .hero-badge {
     font-size: 12px;
-    padding: 8px 15px;
+    padding: 7px 14px;
+    margin-bottom: 16px;
   }
+
+  /* ---------- Search card ---------- */
 
   .search-card {
-    padding: 18px;
-    border-radius: 20px;
+    padding: 16px;
+    border-radius: 18px;
+    margin: 24px auto 20px;
   }
 
-  .providers-grid {
-    grid-template-columns: 1fr;
-    gap: 22px;
+  .search-input,
+  .form-select {
+    height: 50px;
+    border-radius: 13px;
+    font-size: 14px;
   }
 
-  .provider-card {
-    padding: 22px;
-  }
-
-  .provider-header {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .provider-avatar {
-    margin: auto;
-  }
-
-  .provider-name {
-    justify-content: center;
-  }
-
-  .provider-skill {
-    justify-content: center;
-  }
-
-  .provider-actions {
-    grid-template-columns: 1fr;
-  }
-
-  .section-heading {
-    text-align: center;
-    align-items: center;
-  }
-
-  .provider-count {
-    align-self: center;
-  }
+  /* ---------- Category chips: horizontal scroll ---------- */
 
   .category-list {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+
     gap: 10px;
+    margin-top: 16px;
+    padding: 2px 2px 8px;
+
+    /* hide scrollbar, keep it functional */
+    scrollbar-width: none;
+  }
+
+  .category-list::-webkit-scrollbar {
+    display: none;
   }
 
   .category-chip {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    white-space: nowrap;
+
     font-size: 13px;
-    padding: 10px 16px;
+    padding: 9px 16px;
   }
+
+  .category-chip:hover {
+    transform: none;
+  }
+
+  /* ---------- Section heading ---------- */
+
+  .section-heading {
+    text-align: left;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+
+  .section-heading h2 {
+    font-size: 24px;
+  }
+
+  .section-heading p {
+    font-size: 13.5px;
+  }
+
+  .provider-count {
+    align-self: flex-start;
+    font-size: 12.5px;
+    padding: 9px 16px;
+  }
+
+  /* ---------- Provider cards: compact row header ---------- */
+
+  .providers-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .provider-card {
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  .provider-card:hover {
+    transform: none;
+    box-shadow: var(--shadow-md);
+  }
+
+  .provider-card:active {
+    border-color: #d8efe2;
+  }
+
+  .provider-card:hover .provider-avatar {
+    transform: none;
+  }
+
+  /* keep header as a row: avatar left, name/skill right — not centered/stacked */
+  .provider-header {
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .provider-avatar {
+    width: 52px;
+    height: 52px;
+    font-size: 18px;
+  }
+
+  .provider-name h3 {
+    font-size: 16px;
+  }
+
+  .verified-icon {
+    font-size: 14px;
+  }
+
+  .provider-skill {
+    font-size: 12.5px;
+  }
+
+  .provider-rating {
+    margin-bottom: 14px;
+    padding-top: 12px;
+    border-top: 1px solid #f1f5f3;
+  }
+
+  .provider-rating strong {
+    font-size: 15px;
+  }
+
+  .provider-rating span {
+    font-size: 12.5px;
+  }
+
+  .provider-info {
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .info-item {
+    font-size: 12.5px;
+  }
+
+  .provider-status {
+    margin-bottom: 16px;
+  }
+
+  .status-pill {
+    font-size: 12px;
+    padding: 8px 14px;
+  }
+
+  /* keep actions side-by-side — compact, not full stacked */
+  .provider-actions {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .booking-btn,
+  .profile-btn {
+    height: 46px;
+    font-size: 13px;
+    border-radius: 12px;
+  }
+
+  .booking-btn i,
+  .profile-btn i {
+    margin-right: 4px;
+  }
+
+  /* ---------- Pagination ---------- */
 
   .pagination-wrapper {
     gap: 8px;
+    margin-top: 32px;
   }
 
   .page-btn {
-    width: 42px;
-    height: 42px;
-    font-size: 13px;
+    width: 40px;
+    height: 40px;
+    font-size: 12.5px;
+    border-radius: 11px;
   }
 
   .pagination-wrapper .page-btn:first-child,
   .pagination-wrapper .page-btn:last-child {
-    padding: 0 14px;
+    padding: 0 12px;
   }
 }
 
@@ -849,41 +1016,29 @@
    EXTRA SMALL DEVICES
 ========================================================== */
 
-@media (max-width: 480px) {
+@media (max-width: 380px) {
   .hero-content h1 {
-    font-size: 30px;
+    font-size: 27px;
   }
 
-  .hero-content p {
-    font-size: 14px;
+  /* only drop to single-column actions on very narrow phones */
+  .provider-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-btn,
+  .profile-btn {
+    height: 46px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 29px;
   }
 
   .section-heading h2 {
-    font-size: 28px;
-  }
-
-  .provider-card {
-    padding: 20px;
-  }
-
-  .provider-avatar {
-    width: 60px;
-    height: 60px;
     font-size: 22px;
-  }
-
-  .provider-name h3 {
-    font-size: 20px;
-  }
-
-  .search-input,
-  .form-select {
-    height: 52px;
-  }
-
-  .provider-actions button,
-  .provider-actions a {
-    height: 50px;
   }
 
   .provider-count {
@@ -906,11 +1061,6 @@
 
 .provider-card:hover .status-pill.offline {
   background: #fee2e2;
-}
-
-.booking-btn i,
-.profile-btn i {
-  margin-right: 6px;
 }
 
 .provider-card:hover .booking-btn {

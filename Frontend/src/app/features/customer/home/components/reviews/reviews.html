@@ -1,0 +1,140 @@
+<!-- ==========================================================
+     CUSTOMER REVIEWS
+========================================================== -->
+
+<section class="qs-sec qs-sec--white">
+  <div class="qs-sec__inner">
+    <!-- Section Header -->
+
+    <div class="qs-sec__head">
+      <div class="qs-eyebrow">Customer Stories</div>
+
+      <h2>What Our Customers Say</h2>
+
+      <p>Genuine experiences shared by customers across Odisha.</p>
+    </div>
+
+    <!-- Reviews -->
+
+    @if (reviews.length > 0) {
+
+    <div class="qs-review-slider">
+      <div class="qs-review-track">
+        <!-- Original Reviews -->
+
+        @for (review of reviews; track review.id) {
+
+        <div class="qs-review-card">
+          <!-- Rating -->
+
+          <div class="qs-review-stars">
+            @for (star of [1,2,3,4,5]; track star) {
+
+            <i
+              class="bi"
+              [class.bi-star-fill]="star <= review.rating"
+              [class.bi-star]="star > review.rating"
+            >
+            </i>
+
+            }
+
+            <span class="rating-text"> {{ review.rating }}/5 </span>
+          </div>
+
+          <!-- Review -->
+
+          <p class="qs-review-comment">"{{ review.comment }}"</p>
+
+          <!-- Customer -->
+
+          <div class="qs-review-user">
+            <div
+              class="qs-review-avatar"
+              [style.background-color]="getAvatarColor($index)"
+            >
+              {{ getInitials(review.user.fullName) }}
+            </div>
+
+            <div class="qs-review-details">
+              <h4>{{ review.user.fullName }}</h4>
+
+              <span>
+                <i class="bi bi-geo-alt-fill"></i>
+
+                {{ review.user.address || "Odisha" }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        }
+        <!-- Duplicate Reviews
+             (Creates seamless infinite scrolling)
+        -->
+
+        @for (review of reviews; track 'copy-' + review.id) {
+
+        <div class="qs-review-card">
+          <!-- Rating -->
+
+          <div class="qs-review-stars">
+            @for (star of [1,2,3,4,5]; track star) {
+
+            <i
+              class="bi"
+              [class.bi-star-fill]="star <= review.rating"
+              [class.bi-star]="star > review.rating"
+            >
+            </i>
+
+            }
+
+            <span class="rating-text"> {{ review.rating }}/5 </span>
+          </div>
+
+          <!-- Review -->
+
+          <p class="qs-review-comment">"{{ review.comment }}"</p>
+
+          <!-- Customer -->
+
+          <div class="qs-review-user">
+            <div
+              class="qs-review-avatar"
+              [style.background-color]="getAvatarColor($index)"
+            >
+              {{ getInitials(review.user.fullName) }}
+            </div>
+
+            <div class="qs-review-details">
+              <h4>{{ review.user.fullName }}</h4>
+
+              <span>
+                <i class="bi bi-geo-alt-fill"></i>
+
+                {{ review.user.address || "Odisha" }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        }
+      </div>
+    </div>
+
+    } @else {
+
+    <!-- Empty State -->
+
+    <div class="qs-review-empty">
+      <i class="bi bi-chat-heart-fill"></i>
+
+      <h3>No Reviews Yet</h3>
+
+      <p>Be the first customer to share your experience with QuickServe.</p>
+    </div>
+
+    }
+  </div>
+</section>

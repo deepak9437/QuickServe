@@ -1,0 +1,172 @@
+<!-- ==========================================================
+     HERO SECTION
+========================================================== -->
+
+<section class="hero">
+  <!-- LEFT SIDE -->
+
+  <div class="qs-hero__copy">
+    <div class="qs-pill">
+      <i class="bi bi-patch-check-fill"></i>
+      Trusted Service Platform Across Odisha
+    </div>
+
+    <h1 class="qs-hero__heading">
+      Book Trusted
+      <span>Home Service Experts</span>
+    </h1>
+
+    <p class="qs-hero__sub">
+      Find verified electricians, plumbers, cleaners, AC technicians, tutors and
+      other skilled professionals near you — fast, reliable and affordable.
+    </p>
+
+    <!-- Search -->
+
+    <div class="qs-search">
+      <input
+        type="text"
+        placeholder="What service do you need?"
+        [(ngModel)]="searchText"
+        (keyup.enter)="searchService()"
+      />
+
+      <button (click)="searchService()">
+        <i class="bi bi-search"></i>
+        Find Now
+      </button>
+    </div>
+
+    <!-- Tags -->
+
+    <div class="qs-hero__tags">
+      <span class="qs-tag">
+        <i class="bi bi-tools"></i>
+        Electrician
+      </span>
+
+      <span class="qs-tag">
+        <i class="bi bi-droplet-fill"></i>
+        Plumber
+      </span>
+
+      <span class="qs-tag">
+        <i class="bi bi-stars"></i>
+        Cleaning
+      </span>
+
+      <span class="qs-tag">
+        <i class="bi bi-snow"></i>
+        AC Repair
+      </span>
+
+      <span class="qs-tag">
+        <i class="bi bi-book"></i>
+        Tutor
+      </span>
+    </div>
+
+    <!-- Stats -->
+
+    <div class="qs-hero__stats">
+      <div class="qs-stat">
+        <span class="qs-stat__num">500+</span>
+        <span class="qs-stat__lbl">Providers</span>
+      </div>
+
+      <div class="qs-stat">
+        <span class="qs-stat__num">5K+</span>
+        <span class="qs-stat__lbl">Bookings</span>
+      </div>
+
+      <div class="qs-stat">
+        <span class="qs-stat__num">
+          <i class="bi bi-star-fill"></i>
+          4.8
+        </span>
+        <span class="qs-stat__lbl">Rating</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT SIDE -->
+
+  <div class="qs-hero__visual">
+    <div class="qs-mosaic">
+      <!-- Main Card -->
+
+      <div class="qs-photo qs-photo--tall">
+        <img src="/images/img1.jpg" alt="Electrician" />
+
+        <span class="qs-photo__badge">
+          <i class="bi bi-tools"></i>
+          Electrician
+        </span>
+
+        <div class="qs-photo__overlay">
+          <h4>Verified Electricians</h4>
+          <p>Repairs, Wiring & Installations</p>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+
+      <div class="qs-mosaic__col">
+        <div class="qs-photo qs-photo--short">
+          <img src="/images/img2.jpg" alt="AC Repair" />
+
+          <span class="qs-photo__badge">
+            <i class="bi bi-snow"></i>
+            AC Repair
+          </span>
+
+          <div class="qs-photo__overlay">
+            <h4>AC Repair Services</h4>
+            <p>Cooling Solutions & Maintenance</p>
+          </div>
+        </div>
+
+        <div class="qs-photo qs-photo--short">
+          <img src="/images/img3.jpg" alt="Tutor" />
+
+          <span class="qs-photo__badge">
+            <i class="bi bi-book"></i>
+            Tutor
+          </span>
+
+          <div class="qs-photo__overlay">
+            <h4>Experienced Tutors</h4>
+            <p>Learn From Trusted Educators</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Band -->
+
+      <div class="qs-mosaic__band">
+        <div class="qs-mosaic__band-left">
+          <span class="qs-mosaic__band-pill">
+            <i class="bi bi-patch-check-fill"></i>
+            Serving all of Odisha
+          </span>
+
+          <h5>Bhubaneswar · Cuttack · Puri · Rourkela</h5>
+
+          <p>Instant Booking · Verified Professionals · Trusted Service</p>
+        </div>
+
+        <div class="qs-mosaic__band-stats">
+          <div class="qs-mosaic__band-stat">
+            <strong>24/7</strong>
+            <small>Support</small>
+          </div>
+
+          <div class="qs-mosaic__band-stat">
+            <strong>100%</strong>
+            <small>Free Platform</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

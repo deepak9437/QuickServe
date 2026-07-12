@@ -1,0 +1,431 @@
+/* ==========================================================
+   CUSTOMER REVIEWS SECTION
+========================================================== */
+
+.qs-sec--white {
+  padding: 90px 20px;
+
+  background: #ffffff;
+
+  overflow: hidden;
+}
+
+.qs-sec__inner {
+  max-width: 1200px;
+
+  margin: 0 auto;
+}
+
+.qs-sec__head {
+  text-align: center;
+
+  max-width: 700px;
+
+  margin: 0 auto 60px;
+}
+
+.qs-sec__head h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+
+  font-weight: 800;
+
+  color: #0b1f17;
+
+  margin-bottom: 12px;
+}
+
+.qs-sec__head p {
+  color: #64748b;
+
+  line-height: 1.8;
+}
+
+/* ==========================================================
+   REVIEW SLIDER
+========================================================== */
+
+.qs-review-slider {
+  position: relative;
+
+  width: 100%;
+
+  overflow: hidden;
+
+  cursor: grab;
+}
+
+.qs-review-slider:active {
+  cursor: grabbing;
+}
+
+/* ==========================================================
+   REVIEW TRACK
+========================================================== */
+
+.qs-review-track {
+  display: flex;
+
+  gap: 24px;
+
+  width: max-content;
+
+  animation: reviewScroll 35s linear infinite;
+
+  will-change: transform;
+}
+
+.qs-review-slider:hover .qs-review-track {
+  animation-play-state: paused;
+}
+
+/* ==========================================================
+   AUTO SCROLL ANIMATION
+========================================================== */
+
+@keyframes reviewScroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 992px) {
+  .qs-sec--white {
+    padding: 80px 20px;
+  }
+
+  .qs-review-track {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .qs-sec--white {
+    padding: 70px 18px;
+  }
+
+  .qs-sec__head {
+    margin-bottom: 40px;
+  }
+
+  .qs-review-track {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .qs-sec--white {
+    padding: 60px 15px;
+  }
+
+  .qs-sec__head h2 {
+    font-size: 1.8rem;
+  }
+
+  .qs-sec__head p {
+    font-size: 14px;
+  }
+}
+/* ==========================================================
+   REVIEW CARD
+========================================================== */
+
+.qs-review-card {
+  width: 340px;
+
+  min-height: 270px;
+
+  flex-shrink: 0;
+
+  background: #ffffff;
+
+  border: 1px solid #dceee8;
+
+  border-radius: 22px;
+
+  padding: 24px;
+
+  transition: all 0.35s ease;
+
+  position: relative;
+
+  overflow: hidden;
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.qs-review-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 4px;
+
+  background: linear-gradient(90deg, #1d9e75, #22c55e);
+
+  transform: scaleX(0);
+
+  transform-origin: left;
+
+  transition: 0.35s;
+}
+
+.qs-review-card:hover {
+  transform: translateY(-8px);
+
+  border-color: #1d9e75;
+
+  box-shadow: 0 20px 40px rgba(29, 158, 117, 0.15);
+}
+
+.qs-review-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* ==========================================================
+   STARS
+========================================================== */
+
+.qs-review-stars {
+  display: flex;
+
+  align-items: center;
+
+  gap: 4px;
+
+  margin-bottom: 18px;
+
+  color: #f4b400;
+}
+
+.qs-review-stars i {
+  font-size: 16px;
+}
+
+.rating-text {
+  margin-left: 10px;
+
+  color: #64748b;
+
+  font-size: 14px;
+
+  font-weight: 700;
+}
+
+/* ==========================================================
+   REVIEW COMMENT
+========================================================== */
+
+.qs-review-comment {
+  color: #475569;
+
+  font-size: 15px;
+
+  line-height: 1.8;
+
+  margin-bottom: 24px;
+
+  min-height: 90px;
+
+  font-style: italic;
+}
+
+/* ==========================================================
+   REVIEW USER
+========================================================== */
+
+.qs-review-user {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+}
+
+.qs-review-avatar {
+  width: 58px;
+  height: 58px;
+
+  border-radius: 50%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: #ffffff;
+
+  font-size: 20px;
+
+  font-weight: 700;
+
+  flex-shrink: 0;
+
+  transition: 0.3s;
+
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+.qs-review-card:hover .qs-review-avatar {
+  transform: scale(1.08);
+}
+
+.qs-review-details {
+  flex: 1;
+}
+
+.qs-review-details h4 {
+  font-size: 17px;
+
+  font-weight: 700;
+
+  color: #0b1f17;
+
+  margin-bottom: 5px;
+
+  transition: 0.3s;
+}
+
+.qs-review-card:hover .qs-review-details h4 {
+  color: #1d9e75;
+}
+
+.qs-review-details span {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  color: #64748b;
+
+  font-size: 14px;
+}
+
+.qs-review-details i {
+  color: #1d9e75;
+}
+
+/* ==========================================================
+   EMPTY STATE
+========================================================== */
+
+.qs-review-empty {
+  text-align: center;
+
+  padding: 70px 20px;
+}
+
+.qs-review-empty i {
+  font-size: 60px;
+
+  color: #22c55e;
+
+  margin-bottom: 18px;
+}
+
+.qs-review-empty h3 {
+  color: #0b1f17;
+
+  margin-bottom: 10px;
+}
+
+.qs-review-empty p {
+  color: #64748b;
+
+  max-width: 420px;
+
+  margin: auto;
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 992px) {
+  .qs-review-card {
+    width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .qs-review-card {
+    width: 270px;
+
+    padding: 20px;
+
+    min-height: 250px;
+  }
+
+  .qs-review-comment {
+    min-height: auto;
+
+    font-size: 14px;
+  }
+
+  .qs-review-avatar {
+    width: 52px;
+    height: 52px;
+
+    font-size: 18px;
+  }
+
+  .qs-review-details h4 {
+    font-size: 16px;
+  }
+
+  .qs-review-details span {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .qs-review-card {
+    width: 240px;
+
+    padding: 18px;
+  }
+
+  .qs-review-stars i {
+    font-size: 14px;
+  }
+
+  .rating-text {
+    font-size: 13px;
+  }
+
+  .qs-review-avatar {
+    width: 48px;
+    height: 48px;
+
+    font-size: 16px;
+  }
+
+  .qs-review-details h4 {
+    font-size: 15px;
+  }
+
+  .qs-review-details span {
+    font-size: 12px;
+  }
+
+  .qs-review-empty {
+    padding: 50px 15px;
+  }
+
+  .qs-review-empty i {
+    font-size: 48px;
+  }
+}

@@ -480,12 +480,19 @@ form {
 /* ==========================================================
    RESPONSIVE
 ========================================================== */
+/* ==========================================================
+   TABLET
+========================================================== */
 
-@media (max-width: 1100px) {
+@media (max-width: 991px) {
+  .signup-page {
+    padding: 40px 20px;
+  }
+
   .signup-wrapper {
     grid-template-columns: 1fr;
-
-    max-width: 620px;
+    max-width: 560px;
+    gap: 0;
   }
 
   .signup-left {
@@ -493,57 +500,175 @@ form {
   }
 
   .signup-card {
-    padding: 36px;
+    padding: 40px 35px;
   }
 }
+/* ==========================================================
+   MOBILE
+========================================================== */
 
 @media (max-width: 768px) {
   .signup-page {
-    padding: 20px;
+    min-height: 100dvh;
+
+    padding: 20px 16px;
+
+    align-items: center;
+  }
+
+  .signup-wrapper {
+    width: 100%;
+
+    max-width: 100%;
   }
 
   .signup-card {
-    padding: 28px 22px;
+    width: 100%;
 
-    border-radius: 22px;
+    padding: 28px 20px;
+
+    border-radius: 20px;
+
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+  }
+
+  .signup-logo {
+    width: 64px;
+    height: 64px;
+
+    border-radius: 18px;
+
+    margin-bottom: 18px;
+  }
+
+  .signup-logo img {
+    width: 42px;
   }
 
   .signup-card h2 {
     font-size: 28px;
+
+    margin-bottom: 8px;
   }
 
   .subtitle {
     font-size: 14px;
+
+    margin-bottom: 24px;
   }
 
   form {
     grid-template-columns: 1fr;
+
+    gap: 18px;
   }
 
   .form-group.full {
     grid-column: auto;
   }
 
-  .signup-logo {
-    width: 72px;
+  .form-group label {
+    font-size: 13px;
 
-    height: 72px;
-  }
-
-  .signup-logo img {
-    width: 48px;
+    margin-bottom: 6px;
   }
 
   .input-wrap input,
   .input-wrap select {
-    height: 52px;
+    height: 50px;
+
+    padding: 0 16px 0 48px;
+
+    font-size: 14px;
+  }
+
+  .input-wrap textarea {
+    min-height: 100px;
+
+    padding: 14px 16px 14px 48px;
+
+    font-size: 14px;
+  }
+
+  .input-wrap i {
+    left: 16px;
+
+    font-size: 17px;
   }
 
   .signup-btn {
-    height: 54px;
+    height: 50px;
+
+    font-size: 15px;
+
+    margin-top: 4px;
   }
 
-  .feature-list {
-    grid-template-columns: 1fr;
+  .divider {
+    margin: 22px 0;
+  }
+
+  .login-link {
+    font-size: 14px;
+  }
+}
+/* ==========================================================
+   SMALL MOBILE
+========================================================== */
+
+@media (max-width: 480px) {
+  .signup-page {
+    padding: 16px;
+    margin-top: 40px;
+  }
+
+  .signup-card {
+    padding: 22px 16px;
+
+    border-radius: 18px;
+  }
+
+  .signup-logo {
+    width: 58px;
+    height: 58px;
+  }
+
+  .signup-logo img {
+    width: 36px;
+  }
+
+  .signup-card h2 {
+    font-size: 24px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+
+  .form-group {
+    gap: 4px;
+  }
+
+  .input-wrap input,
+  .input-wrap select {
+    height: 48px;
+
+    font-size: 13px;
+  }
+
+  .input-wrap textarea {
+    min-height: 90px;
+
+    font-size: 13px;
+  }
+
+  .signup-btn {
+    height: 48px;
+
+    font-size: 14px;
+  }
+
+  .login-link {
+    font-size: 13px;
   }
 }

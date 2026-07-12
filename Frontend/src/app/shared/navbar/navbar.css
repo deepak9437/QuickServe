@@ -6,10 +6,12 @@
   max-width: 1600px;
   padding: 3px;
 
-  margin: 3px auto;
   position: fixed;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 9999;
-  margin-left: 30px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -48,7 +50,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-left: auto;
+
   list-style: none;
   margin: 0;
   padding: 0;
@@ -217,6 +219,9 @@
   gap: 10px;
 
   z-index: 999;
+
+  max-height: min(70vh, 400px);
+  overflow-y: auto;
 }
 
 .dropdown p {
@@ -275,47 +280,6 @@
 }
 
 /* ==========================================================
-   RESPONSIVE
-========================================================== */
-
-@media (max-width: 992px) {
-  .navbar {
-    padding: 14px 20px;
-  }
-
-  .logo {
-    font-size: 1.5rem;
-  }
-
-  .nav-links {
-    gap: 6px;
-  }
-
-  .nav-links a {
-    padding: 10px 14px;
-    font-size: 0.95rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    gap: 15px;
-
-    padding: 20px;
-  }
-
-  .nav-links {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .dropdown {
-    right: -20px;
-  }
-}
-
-/* ==========================================================
    BOOTSTRAP ICONS
 ========================================================== */
 
@@ -363,4 +327,149 @@
 
 .dropdown button i {
   font-size: 15px;
+}
+
+/* ==========================================================
+   HAMBURGER TOGGLE
+========================================================== */
+
+.menu-toggle {
+  display: none;
+
+  align-items: center;
+  justify-content: center;
+
+  background: none;
+  border: none;
+
+  font-size: 26px;
+
+  cursor: pointer;
+
+  color: #1d9e75;
+
+  width: 42px;
+  height: 42px;
+
+  border-radius: 12px;
+
+  transition: background 0.2s ease;
+}
+
+.menu-toggle:hover {
+  background: #f2faf7;
+}
+
+/* ==========================================================
+   RESPONSIVE — TABLET
+========================================================== */
+
+@media (max-width: 992px) {
+  .navbar {
+    width: 96%;
+    top: 10px;
+    padding: 10px 18px;
+  }
+
+  .logo img {
+    height: 36px;
+  }
+
+  .nav-links {
+    gap: 5px;
+  }
+
+  .nav-links a {
+    padding: 10px 14px;
+    font-size: 0.95rem;
+  }
+}
+
+/* ==========================================================
+   RESPONSIVE — MOBILE
+========================================================== */
+
+@media (max-width: 768px) {
+  .navbar {
+    width: 95%;
+    top: 10px;
+    padding: 10px 16px;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    position: absolute;
+
+    top: calc(100% + 10px);
+    left: 0;
+
+    width: 100%;
+
+    background: white;
+
+    border-radius: 20px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+
+    padding: 16px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 6px;
+
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(-12px);
+
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease,
+      visibility 0.25s;
+  }
+
+  .nav-links.mobile-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .nav-links li {
+    width: 100%;
+  }
+
+  .nav-links a {
+    width: 100%;
+    border-radius: 12px;
+  }
+
+  .profile-menu {
+    width: 100%;
+  }
+
+  .dropdown {
+    position: relative;
+
+    top: 8px;
+    right: 0;
+
+    width: 100%;
+
+    max-height: none;
+
+    box-shadow: none;
+
+    border-color: #eef3f0;
+
+    background: #f8faf9;
+  }
 }

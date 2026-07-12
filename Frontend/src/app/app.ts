@@ -35,7 +35,11 @@ export class App {
       currentUrl === "/provider-register" ||
       currentUrl === "/admin/dashboard" ||
       currentUrl === "/about" ||
-      currentUrl === "/services"
+      currentUrl === "/services" ||
+      currentUrl === "/view-profile" ||
+      currentUrl === "/profile" ||
+      // Hide footer on all provider profile pages
+      currentUrl.startsWith("/provider/")
     );
   }
 }

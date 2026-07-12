@@ -54,35 +54,69 @@
 
       <!-- Categories -->
       <div class="category-list">
-        <button class="category-chip" (click)="selectedCategory='Electrician'">
+        <button
+          class="category-chip"
+          [class.active]="selectedCategory === 'Electrician'"
+          (click)="selectedCategory='Electrician'"
+        >
           ⚡ Electrician
         </button>
 
-        <button class="category-chip" (click)="selectedCategory='Plumber'">
+        <button
+          class="category-chip"
+          [class.active]="selectedCategory === 'Plumber'"
+          (click)="selectedCategory='Plumber'"
+        >
           💧 Plumber
         </button>
 
-        <button class="category-chip" (click)="selectedCategory='Cleaner'">
+        <button
+          class="category-chip"
+          [class.active]="selectedCategory === 'Cleaner'"
+          (click)="selectedCategory='Cleaner'"
+        >
           ✨ Cleaner
         </button>
 
-        <button class="category-chip" (click)="selectedCategory='Carpenter'">
+        <button
+          class="category-chip"
+          [class.active]="selectedCategory === 'Carpenter'"
+          (click)="selectedCategory='Carpenter'"
+        >
           🔨 Carpenter
         </button>
 
-        <button class="category-chip" (click)="selectedCategory='Painter'">
+        <button
+          class="category-chip"
+          [class.active]="selectedCategory === 'Painter'"
+          (click)="selectedCategory='Painter'"
+        >
           🎨 Painter
         </button>
 
-        <button class="category-chip" (click)="selectedCategory='Tutor'">
+        <button
+          class="category-chip"
+          [class.active]="selectedCategory === 'Tutor'"
+          (click)="selectedCategory='Tutor'"
+        >
           📚 Tutor
         </button>
 
-        <button class="category-chip" (click)="selectedCategory='Driver'">
+        <button
+          class="category-chip"
+          [class.active]="selectedCategory === 'Driver'"
+          (click)="selectedCategory='Driver'"
+        >
           🚗 Driver
         </button>
 
-        <button class="category-chip" (click)="selectedCategory=''">All</button>
+        <button
+          class="category-chip"
+          [class.active]="selectedCategory === ''"
+          (click)="selectedCategory=''"
+        >
+          All
+        </button>
       </div>
     </div>
   </section>

@@ -19,7 +19,13 @@ import { Subscription } from "rxjs";
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   user: any = null;
+
+  // Profile dropdown
   showMenu = false;
+
+  // Mobile navigation
+  showMobileMenu = false;
+
   private authSubscription!: Subscription;
 
   constructor(
@@ -29,7 +35,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    // Dynamically listen to login/logout events via the AuthService observable
     this.authSubscription = this.authService.currentUser$.subscribe({
       next: (user) => {
         this.user = user;
@@ -37,31 +42,64 @@ export class NavbarComponent implements OnInit, OnDestroy {
     });
   }
 
+  // ===========================
+  // Profile Menu
+  // ===========================
+
   toggleMenu() {
     this.showMenu = !this.showMenu;
   }
 
+  // ===========================
+  // Mobile Menu
+  // ===========================
+
+  toggleMobileMenu() {
+    this.showMobileMenu = !this.showMobileMenu;
+  }
+
+  closeMobileMenu() {
+    this.showMobileMenu = false;
+  }
+
+  // ===========================
+  // Close menus when clicking outside
+  // ===========================
+
   @HostListener("document:click", ["$event"])
   onDocumentClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+
     const profileMenu =
       this.elementRef.nativeElement.querySelector(".profile-menu");
 
-    if (profileMenu && !profileMenu.contains(event.target)) {
+    const navbar = this.elementRef.nativeElement.querySelector(".navbar");
+
+    // Close profile dropdown
+    if (profileMenu && !profileMenu.contains(target)) {
       this.showMenu = false;
+    }
+
+    // Close mobile menu
+    if (navbar && !navbar.contains(target)) {
+      this.showMobileMenu = false;
     }
   }
 
-  logout() {
-    // Clear user state globally using the service
-    this.authService.clearCurrentUser();
-    this.showMenu = false;
+  // ===========================
+  // Logout
+  // ===========================
 
-    // Redirect to home without needing a window.location.reload()
+  logout() {
+    this.authService.clearCurrentUser();
+
+    this.showMenu = false;
+    this.showMobileMenu = false;
+
     this.router.navigate(["/"]);
   }
 
   ngOnDestroy() {
-    // Unsubscribe to avoid memory leaks
     if (this.authSubscription) {
       this.authSubscription.unsubscribe();
     }

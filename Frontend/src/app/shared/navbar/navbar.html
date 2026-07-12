@@ -2,12 +2,19 @@
   <div class="logo">
     <img src="logo.png" alt="QuickServe Logo" />
   </div>
-
-  <ul class="nav-links">
+  <button class="menu-toggle" (click)="toggleMobileMenu()">
+    <i
+      class="bi"
+      [class.bi-list]="!showMobileMenu"
+      [class.bi-x-lg]="showMobileMenu"
+    ></i>
+  </button>
+  <ul class="nav-links" [class.mobile-open]="showMobileMenu">
     <!-- Home -->
     <li>
       <a
         routerLink="/"
+        (click)="closeMobileMenu()"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
       >
@@ -19,7 +26,11 @@
     <!-- Services -->
     @if (!user || user.role !== 'admin') {
     <li>
-      <a routerLink="/services" routerLinkActive="active">
+      <a
+        routerLink="/services"
+        (click)="closeMobileMenu()"
+        routerLinkActive="active"
+      >
         <i class="bi bi-grid-fill"></i>
         Services
       </a>
@@ -29,7 +40,11 @@
     <!-- About -->
     @if (!user || user.role === 'customer') {
     <li>
-      <a routerLink="/about" routerLinkActive="active">
+      <a
+        routerLink="/about"
+        (click)="closeMobileMenu()"
+        routerLinkActive="active"
+      >
         <i class="bi bi-info-circle-fill"></i>
         About Us
       </a>
@@ -40,14 +55,18 @@
     @if (!user) {
 
     <li>
-      <a routerLink="/login">
+      <a
+        routerLink="/login"
+        (click)="closeMobileMenu()"
+        routerLinkActive="active"
+      >
         <i class="bi bi-box-arrow-in-right"></i>
         Login
       </a>
     </li>
 
     <li>
-      <a routerLink="/signup" class="signup-btn">
+      <a routerLink="/signup" (click)="closeMobileMenu()" class="signup-btn">
         <i class="bi bi-person-plus-fill"></i>
         Sign Up
       </a>
@@ -59,7 +78,7 @@
     @if (user) {
 
     <li class="profile-menu">
-      <div class="profile-icon" (click)="toggleMenu()">
+      <div class="profile-icon" (click)="toggleMenu();">
         <i class="bi bi-person-fill"></i>
       </div>
 
@@ -72,14 +91,20 @@
 
         @if (user.role === 'customer') {
 
-        <a routerLink="/view-profile">
+        <a
+          routerLink="/view-profile"
+          (click)="closeMobileMenu(); showMenu=false"
+        >
           <i class="bi bi-person-circle"></i>
           View Profile
         </a>
 
         } @if (user.role === 'provider') {
 
-        <a routerLink="/view-profile">
+        <a
+          routerLink="/view-profile"
+          (click)="closeMobileMenu(); showMenu=false"
+        >
           <i class="bi bi-person-circle"></i>
           View Profile
         </a>
@@ -90,28 +115,28 @@
 
         @if (user.role === 'customer') {
 
-        <a routerLink="/dashboard">
+        <a routerLink="/dashboard" (click)="closeMobileMenu()">
           <i class="bi bi-speedometer2"></i>
           Customer Dashboard
         </a>
 
         } @if (user.role === 'provider') {
 
-        <a routerLink="/provider-dashboard">
+        <a routerLink="/provider-dashboard" (click)="closeMobileMenu()">
           <i class="bi bi-tools"></i>
           Provider Dashboard
         </a>
 
         } @if (user.role === 'admin') {
 
-        <a routerLink="/admin-dashboard">
+        <a routerLink="/admin-dashboard" (click)="closeMobileMenu()">
           <i class="bi bi-shield-lock-fill"></i>
           Admin Dashboard
         </a>
 
         }
 
-        <button (click)="logout()">
+        <button (click)="logout(); closeMobileMenu()">
           <i class="bi bi-box-arrow-right"></i>
           Logout
         </button>

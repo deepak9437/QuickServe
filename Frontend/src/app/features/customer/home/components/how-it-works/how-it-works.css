@@ -1,0 +1,493 @@
+/* ==========================================================
+   HOW IT WORKS SECTION
+========================================================== */
+
+.how-it-works {
+  padding: 100px 6%;
+
+  background: #0b1f17;
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+/* Background decoration */
+
+.how-it-works::before {
+  content: "";
+
+  position: absolute;
+
+  top: -180px;
+  right: -180px;
+
+  width: 420px;
+  height: 420px;
+
+  border-radius: 50%;
+
+  background: rgba(29, 158, 117, 0.08);
+
+  filter: blur(20px);
+}
+
+.how-it-works::after {
+  content: "";
+
+  position: absolute;
+
+  bottom: -160px;
+  left: -160px;
+
+  width: 380px;
+  height: 380px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.03);
+
+  filter: blur(20px);
+}
+
+/* ==========================================================
+   SECTION HEADER
+========================================================== */
+
+.how-it-works .section-header {
+  position: relative;
+
+  z-index: 2;
+
+  text-align: center;
+
+  margin-bottom: 70px;
+}
+
+.how-it-works .section-header h2 {
+  color: #ffffff;
+
+  font-size: clamp(2rem, 4vw, 3rem);
+
+  font-weight: 800;
+
+  margin-bottom: 14px;
+}
+
+.how-it-works .section-header p {
+  color: #b8d2c8;
+
+  max-width: 620px;
+
+  margin: auto;
+
+  line-height: 1.8;
+}
+
+/* ==========================================================
+   STEPS GRID
+========================================================== */
+
+.steps-grid {
+  position: relative;
+
+  z-index: 2;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 30px;
+}
+
+/* Connector Line */
+
+.steps-grid::before {
+  content: "";
+
+  position: absolute;
+
+  top: 46px;
+
+  left: 17%;
+
+  right: 17%;
+
+  height: 2px;
+
+  background: repeating-linear-gradient(
+    to right,
+    #1d9e75 0,
+    #1d9e75 10px,
+    transparent 10px,
+    transparent 20px
+  );
+
+  z-index: 0;
+}
+
+/* ==========================================================
+   STEP CARD
+========================================================== */
+
+.step-card {
+  position: relative;
+
+  z-index: 1;
+
+  background: rgba(255, 255, 255, 0.05);
+
+  border: 1px solid rgba(29, 158, 117, 0.25);
+
+  border-radius: 22px;
+
+  padding: 40px 28px;
+
+  text-align: center;
+
+  transition: 0.35s ease;
+
+  backdrop-filter: blur(8px);
+
+  overflow: hidden;
+}
+
+.step-card:hover {
+  transform: translateY(-10px);
+
+  border-color: #1d9e75;
+
+  background: rgba(29, 158, 117, 0.1);
+
+  box-shadow: 0 20px 45px rgba(29, 158, 117, 0.15);
+}
+
+.step-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 4px;
+
+  background: linear-gradient(90deg, #1d9e75, #22c55e);
+
+  transform: scaleX(0);
+
+  transform-origin: left;
+
+  transition: 0.35s;
+}
+
+.step-card:hover::before {
+  transform: scaleX(1);
+}
+
+.step-card * {
+  position: relative;
+
+  z-index: 2;
+}
+
+/* ==========================================================
+   STEP ICON
+========================================================== */
+
+.step-number {
+  width: 80px;
+  height: 80px;
+
+  margin: 0 auto 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 22px;
+
+  background: #e8f7ef;
+
+  border: 1px solid #cde9de;
+
+  transition: 0.35s;
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+
+  flex-shrink: 0;
+}
+
+.step-card:hover .step-number {
+  background: #1d9e75;
+
+  transform: scale(1.08);
+
+  box-shadow: 0 15px 30px rgba(29, 158, 117, 0.3);
+}
+
+.step-number i {
+  font-size: 34px;
+
+  color: #1d9e75;
+
+  transition: 0.35s;
+}
+
+.step-card:hover .step-number i {
+  color: #ffffff;
+}
+
+/* ==========================================================
+   TITLE
+========================================================== */
+
+.step-card h3 {
+  color: #ffffff;
+
+  font-size: 1.25rem;
+
+  font-weight: 700;
+
+  margin-bottom: 14px;
+
+  transition: 0.3s;
+}
+
+.step-card:hover h3 {
+  color: #22c55e;
+}
+
+/* ==========================================================
+   DESCRIPTION
+========================================================== */
+
+.step-card p {
+  color: #d1d5db;
+
+  line-height: 1.8;
+
+  font-size: 15px;
+}
+
+/* ==========================================================
+   HOW IT WORKS RESPONSIVE
+========================================================== */
+
+/* ---------- Large Tablet ---------- */
+
+@media (max-width: 992px) {
+  .how-it-works {
+    padding: 80px 30px;
+  }
+
+  .how-it-works .section-header {
+    margin-bottom: 55px;
+  }
+
+  .steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 22px;
+  }
+
+  /* Hide connector */
+
+  .steps-grid::before {
+    display: none;
+  }
+
+  .step-card {
+    padding: 35px 24px;
+  }
+
+  .step-number {
+    width: 72px;
+    height: 72px;
+  }
+
+  .step-number i {
+    font-size: 30px;
+  }
+}
+
+/* ---------- Mobile: vertical timeline, icon + text in one line ---------- */
+
+@media (max-width: 768px) {
+  .how-it-works {
+    padding: 70px 20px;
+  }
+
+  .how-it-works .section-header {
+    margin-bottom: 45px;
+  }
+
+  .how-it-works .section-header h2 {
+    font-size: 2rem;
+  }
+
+  .how-it-works .section-header p {
+    font-size: 15px;
+
+    line-height: 1.7;
+  }
+
+  .steps-grid {
+    grid-template-columns: 1fr;
+
+    gap: 0;
+
+    position: relative;
+
+    padding-left: 8px;
+  }
+
+  /* Vertical dashed connector running through the icons */
+  .steps-grid::before {
+    display: block;
+
+    top: 40px;
+    bottom: 40px;
+    left: 35px;
+    right: auto;
+
+    width: 2px;
+    height: auto;
+
+    background: repeating-linear-gradient(
+      to bottom,
+      #1d9e75 0,
+      #1d9e75 8px,
+      transparent 8px,
+      transparent 16px
+    );
+  }
+
+  .step-card {
+    background: transparent;
+
+    border: none;
+
+    border-radius: 0;
+
+    padding: 18px 0;
+
+    text-align: left;
+
+    backdrop-filter: none;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+  }
+
+  .step-card:hover {
+    transform: none;
+
+    background: transparent;
+
+    box-shadow: none;
+  }
+
+  .step-card::before {
+    display: none;
+  }
+
+  .step-number {
+    width: 60px;
+    height: 60px;
+
+    margin: 0;
+
+    border-radius: 16px;
+  }
+
+  .step-card:hover .step-number {
+    transform: none;
+  }
+
+  .step-number i {
+    font-size: 26px;
+  }
+
+  .step-card h3 {
+    font-size: 1.05rem;
+
+    margin-bottom: 4px;
+  }
+
+  .step-card p {
+    font-size: 13.5px;
+
+    line-height: 1.55;
+  }
+
+  /* subtle tap feedback since hover lift is gone */
+  .step-card:active .step-number {
+    background: #1d9e75;
+  }
+
+  .step-card:active .step-number i {
+    color: #ffffff;
+  }
+}
+
+/* ---------- Small Mobile ---------- */
+
+@media (max-width: 480px) {
+  .how-it-works {
+    padding: 60px 15px;
+  }
+
+  .how-it-works .section-header {
+    margin-bottom: 35px;
+  }
+
+  .how-it-works .section-header h2 {
+    font-size: 1.7rem;
+  }
+
+  .how-it-works .section-header p {
+    font-size: 14px;
+  }
+
+  .steps-grid {
+    padding-left: 4px;
+  }
+
+  .steps-grid::before {
+    left: 29px;
+  }
+
+  .step-card {
+    gap: 14px;
+
+    padding: 15px 0;
+  }
+
+  .step-number {
+    width: 50px;
+    height: 50px;
+
+    border-radius: 14px;
+  }
+
+  .step-number i {
+    font-size: 22px;
+  }
+
+  .step-card h3 {
+    font-size: 0.98rem;
+
+    margin-bottom: 3px;
+  }
+
+  .step-card p {
+    font-size: 13px;
+
+    line-height: 1.5;
+  }
+}

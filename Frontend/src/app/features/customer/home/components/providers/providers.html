@@ -1,0 +1,85 @@
+<!-- ==========================================================
+     TOP PROVIDERS
+========================================================== -->
+
+<section class="qs-sec qs-sec--gray">
+  <div class="qs-sec__inner">
+    <div class="qs-sec__head">
+      <div class="qs-eyebrow">Top Rated</div>
+
+      <h2>Trusted Professionals Near You</h2>
+
+      <p>Verified, reviewed and ready to help</p>
+    </div>
+
+    <div class="qs-prov-grid">
+      @if (providers.length > 0) { @for (provider of providers; track
+      provider.pId) {
+
+      <div class="qs-prov">
+        <div
+          class="qs-prov__avatar"
+          [style.background-color]="getAvatarColor($index)"
+        >
+          {{ getInitials(provider.user.fullName) }}
+        </div>
+
+        <div class="qs-prov__name">{{ provider.user.fullName }}</div>
+
+        <span class="qs-prov__skill">
+          <i class="bi bi-briefcase-fill"></i>
+
+          {{ provider.skills }}
+        </span>
+
+        <div class="provider-rating">
+          <i class="bi bi-star-fill"></i>
+
+          <strong> {{ provider.rating || 0 }} </strong>
+
+          <span> ({{ provider.review || 0 }} Reviews) </span>
+        </div>
+
+        <!-- Information -->
+
+        <div class="provider-info">
+          <div class="info-item">
+            <i class="bi bi-briefcase-fill"></i>
+
+            <span> {{ provider.experience || 0 }} Years Experience </span>
+          </div>
+
+          <div class="info-item">
+            <i class="bi bi-geo-alt-fill"></i>
+
+            <span>{{ provider.user.address }}</span>
+          </div>
+        </div>
+
+        <a [routerLink]="['/provider', provider.id]" class="qs-prov__btn">
+          View Profile
+
+          <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
+
+      } } @else {
+
+      <div class="qs-prov-empty">
+        <i class="bi bi-person-x-fill"></i>
+
+        <p>No providers available right now. Please check back later.</p>
+      </div>
+
+      }
+    </div>
+
+    <div class="qs-view-all">
+      <a routerLink="/services" class="qs-view-all__btn">
+        Browse All Providers
+
+        <i class="bi bi-arrow-right-circle-fill"></i>
+      </a>
+    </div>
+  </div>
+</section>
