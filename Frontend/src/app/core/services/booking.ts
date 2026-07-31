@@ -6,7 +6,7 @@ import { Observable } from "rxjs/internal/Observable";
   providedIn: "root",
 })
 export class ServiceBooking {
-  private apiUrl = "http://13.233.86.215:3030/quickserve";
+  private apiUrl = "https://quick-serve.in/quickserve";
 
   constructor(private http: HttpClient) {}
 

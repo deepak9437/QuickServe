@@ -79,7 +79,7 @@ loadDashboardData(): void {
   loadProfileImage(): void {
     if (this.user.profile) {
       this.profileImageUrl =
-        `http://13.233.86.215:3030/quickserve/user/profilePic/` +
+        `https://quick-serve.in/quickserve/user/profilePic/` +
         `${encodeURIComponent(this.user.profile)}` +
         `?t=${new Date().getTime()}`;
     } else {

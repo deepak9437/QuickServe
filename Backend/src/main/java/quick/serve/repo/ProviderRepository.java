@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import quick.serve.entity.ProviderDocEntity;
 import quick.serve.entity.ProviderEntity;
+import quick.serve.entity.UserEntity;
 
 @Repository
 public interface ProviderRepository extends JpaRepository<ProviderEntity, Integer> {
@@ -31,7 +32,7 @@ public interface ProviderRepository extends JpaRepository<ProviderEntity, Intege
 
 //	@Query(value = "", nativeQuery = true);
 
-	@Query(value = "select status from provider where user_id =:id", nativeQuery = true)
+	@Query(value = "select * from provider where user_id =:id", nativeQuery = true)
 	ProviderEntity findByUserId(@Param("id") Integer id);
 
 	@Query("""
@@ -50,6 +51,8 @@ public interface ProviderRepository extends JpaRepository<ProviderEntity, Intege
 			WHERE p.user.id = :userId
 			""")
 	ProviderEntity findProviderByUserId(@Param("userId") Integer userId);
+
+	ProviderEntity findProviderByUser(UserEntity user);	
 	
 //	@Query("""
 //			SELECT p

@@ -127,7 +127,7 @@ public class ProviderService {
 //	-----------------------------------------------------
 	public void approveProvider(Integer id) {
 
-		ProviderEntity provider = providerRepo.findById(id).orElseThrow();
+		ProviderEntity provider = providerRepo.findByUserId(id);
 
 		provider.setStatus("approved");
 
@@ -136,37 +136,37 @@ public class ProviderService {
 
 	public void rejectProvider(Integer id) {
 
-		ProviderEntity provider = providerRepo.findById(id).orElseThrow();
+		ProviderEntity provider = providerRepo.findByUserId(id);
 
 		provider.setStatus("rejected");
 
 		providerRepo.save(provider);
 	}
 
-	public ProviderDashboardDTO getDashboardData(Integer pId) {
+	public ProviderDashboardDTO getDashboardData(String email) {
 
-	    ProviderDashboardDTO dto =
-	            new ProviderDashboardDTO();
+	    UserEntity user = userRepo.findByUserEmail(email);
+
+	    ProviderEntity provider = providerRepo.findProviderByUser(user);
+
+	    Integer pId = provider.getPId();
+
+	    ProviderDashboardDTO dto = new ProviderDashboardDTO();
 
 	    dto.setTotalBookings(
 	            bookingRepo.countByPId(pId));
 
 	    dto.setPendingRequests(
-	            bookingRepo.countByPIdAndBookingStatus(
-	                    pId,
-	                    "pending"));
+	            bookingRepo.countByPIdAndBookingStatus(pId,"pending"));
 
 	    dto.setCompletedJobs(
-	            bookingRepo.countByPIdAndBookingStatus(
-	                    pId,
-	                    "completed"));
+	            bookingRepo.countByPIdAndBookingStatus(pId,"completed"));
 
 	    dto.setRecentBookings(
 	            getProviderBookings(pId));
 
 	    return dto;
 	}
-
 	
 	//for provider Accept the service then shows customer details
 	

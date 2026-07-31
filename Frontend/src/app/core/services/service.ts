@@ -5,7 +5,7 @@ import { Injectable } from "@angular/core";
   providedIn: "root",
 })
 export class Service {
-  private apiUrl = "http://13.233.86.215:3030/quickserve";
+  private apiUrl = "https://quick-serve.in/quickserve";
 
   constructor(private http: HttpClient) {}
 

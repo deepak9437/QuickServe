@@ -1,0 +1,173 @@
+/* ===========================================
+   ANDROID APP SECTION
+=========================================== */
+
+.qs-app{
+     padding:35px 20px 90px;
+    background:#f8fafb;
+}
+
+.qs-app__container{
+
+    max-width:1300px;
+
+    margin:auto;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:40px;
+}
+
+.qs-app__content{
+    flex:1;
+}
+
+.qs-app__badge{
+    display:inline-block;
+
+    padding:8px 18px;
+
+    background:#e7f8ef;
+
+    color:#1d9e75;
+
+    border-radius:40px;
+
+    font-weight:700;
+
+    margin-bottom:18px;
+}
+
+.qs-app h2{
+
+    font-size:46px;
+
+    font-weight:800;
+
+    margin-bottom:18px;
+
+    color:#0b1f17;
+}
+
+.qs-app p{
+
+    color:#64748b;
+
+    font-size:17px;
+
+    line-height:1.8;
+
+    margin-bottom:30px;
+}
+
+.qs-app__features{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:15px;
+
+    margin-bottom:35px;
+
+    font-weight:600;
+
+    color:#1d9e75;
+}
+
+.download-btn{
+
+    background:#1d9e75;
+
+    color:#fff;
+
+    border:none;
+
+    padding:16px 34px;
+
+    border-radius:14px;
+
+    font-size:17px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.download-btn:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 15px 30px rgba(29,158,117,.25);
+}
+
+.download-btn i{
+
+    margin-right:10px;
+}
+
+.qs-app small{
+
+    display:block;
+
+    margin-top:18px;
+
+    color:#64748b;
+}
+
+.qs-app__image{
+
+    flex:1;
+
+    display:flex;
+
+    justify-content:center;
+}
+
+.qs-app__image img{
+
+    width:520px;
+
+    max-width:100%;
+
+    height:auto;
+
+    transition:.4s;
+}
+
+.qs-app__image img:hover{
+
+    transform:scale(1.03);
+
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:900px){
+
+.qs-app__container{
+
+flex-direction:column-reverse;
+
+text-align:center;
+}
+
+.qs-app__features{
+
+grid-template-columns:1fr;
+}
+
+.qs-app h2{
+
+font-size:34px;
+}
+
+}

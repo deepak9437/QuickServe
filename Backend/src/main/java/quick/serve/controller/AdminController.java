@@ -3,6 +3,7 @@ package quick.serve.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,8 +33,13 @@ public class AdminController {
 	private BookingRepo bookingRepo;
 	
 	@GetMapping("/approval")
-	public void adminApproval(@RequestBody ProviderEntity pEntity) {
-		ProviderEntity existPEntity = providerRepository.findById(pEntity.getPId()).orElseThrow();
+	public void adminApproval(Authentication authentication,@RequestBody ProviderEntity pEntity) {
+		
+		String email = authentication.getName();
+		
+		UserEntity entity = userRepository.findByUserEmail(email);
+		
+		ProviderEntity existPEntity = providerRepository.findByUserId(entity.getId());
 		
 		existPEntity.setStatus(pEntity.getStatus());
 		

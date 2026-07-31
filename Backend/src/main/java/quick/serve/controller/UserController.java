@@ -8,10 +8,10 @@ import java.nio.file.StandardCopyOption;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,10 +20,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
+import quick.serve.dto.LoginResponse;
 import quick.serve.dto.UserDashboardDTO;
+import quick.serve.entity.ProviderEntity;
 import quick.serve.entity.UserEntity;
+import quick.serve.jwt.JwtUtil;
+import quick.serve.repo.ProviderRepository;
 import quick.serve.repo.UserRepository;
 import quick.serve.service.UserService;
 
@@ -41,6 +44,12 @@ public class UserController {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private ProviderRepository providerRepository;
+	
+	@Autowired
+	private JwtUtil jwtUtil;
 
 	@PostMapping("/user_register")
 	public void gotoUserRegister(@RequestParam String fullName, @RequestParam String password,
@@ -67,10 +76,12 @@ public class UserController {
 	@Value("${image.path.user.profile}")
 	String profile;
 	
-	@PutMapping("/profile/{id}")
-	public void setProfile(@PathVariable Integer id,@RequestParam MultipartFile profilePic) {
+	@PutMapping("/profile")
+	public void setProfile(Authentication authentication ,@RequestParam MultipartFile profilePic) {
 		
-		UserEntity existEntity = userRepository.findById(id).orElseThrow();
+		String email = authentication.getName();
+		
+		UserEntity existEntity = userRepository.findByUserEmail(email);
 		
 		Path profileLocation = Paths.get(profile + File.separator + profilePic.getOriginalFilename());
 		
@@ -87,24 +98,44 @@ public class UserController {
 	}
 
 	@PostMapping("/user_login")
-	public UserEntity gotoUserLogin(@RequestParam String userEmail, @RequestParam String password,
-			HttpSession uSession) {
+	public LoginResponse gotoUserLogin(@RequestParam String userEmail,
+	                                   @RequestParam String password) {
 
-		UserEntity entity = userService.userLoginService(userEmail, password);
+	    UserEntity entity = userService.userLoginService(userEmail, password);
 
-		// userService.userLoginService(userEmail,password);
+	    if (entity == null) {
+	        return new LoginResponse(null, null, "Invalid email or password.");
+	    }
 
-		if (entity != null) {
-			log.info("log in Successfully....");
-			uSession.setAttribute("email", userEmail);
-			return entity;
-		}
-		return null;
+	    if ("provider".equalsIgnoreCase(entity.getRole())) {
+
+	    	 ProviderEntity pEntity = providerRepository.findByUserId(entity.getId());
+//	 		System.out.println(pEntity.getStatus());
+	 		String status = pEntity.getStatus();
+	 		
+	        if (!"approved".equalsIgnoreCase(status)) {
+	            return new LoginResponse(
+	                    null,
+	                    null,
+	                    "Your account approval is currently pending."
+	            );
+	        }
+	    }
+
+	    String token = jwtUtil.generateToken(entity);
+
+	    return new LoginResponse(
+	            token,
+	            entity,
+	            "Login Successful"
+	    );
 	}
 
 	@PutMapping("/user_update")
-	public void updateProfile(@RequestBody UserEntity user) {
-		UserEntity existUser = userRepository.findById(user.getId()).orElseThrow();
+	public void updateProfile(Authentication authentication,@RequestBody UserEntity user) {
+		
+		String email =authentication.getName();
+		UserEntity existUser = userRepository.findByUserEmail(email);
 
 		existUser.setFullName(user.getFullName());
 		existUser.setAddress(user.getAddress());
@@ -115,10 +146,14 @@ public class UserController {
 
 	}
 
-	@GetMapping("/dashboard/{uId}")
-	public UserDashboardDTO dashboard(@PathVariable Integer uId) {
-
-		return userService.getUserDashboardData(uId);
+	@GetMapping("/dashboard")
+	public UserDashboardDTO dashboard(Authentication authentication) {
+		
+		String email = authentication.getName();
+		
+		UserEntity entity = userRepository.findByUserEmail(email);
+		
+		return userService.getUserDashboardData(entity.getId());
 	}
 
 }

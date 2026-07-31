@@ -41,12 +41,26 @@ export class LoginComponent {
       next: (response: any) => {
         console.log("LOGIN RESPONSE =", response);
 
-        const user = JSON.parse(response);
+        // If login failed (pending provider / wrong password)
+        if (!response.token) {
+          Swal.fire({
+            title: "Error!",
+            text: response.message,
+            icon: "error",
+          });
+          return;
+        }
+
+        const token = response.token;
+        const user = response.user;
 
         console.log("User =", user);
         console.log("Role =", user.role);
 
-        // Notify the app state instead of setting raw sessionStorage here
+        // Store JWT
+        localStorage.setItem("token", token);
+
+        // Store current user
         this.authService.setCurrentUser(user);
 
         if (user.role === "customer") {

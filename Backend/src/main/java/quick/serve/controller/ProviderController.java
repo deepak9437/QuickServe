@@ -2,7 +2,9 @@ package quick.serve.controller;
 
 import java.security.SecureRandom;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
-import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import quick.serve.dto.ProviderDashboardDTO;
 import quick.serve.entity.BookingEntity;
@@ -48,6 +50,7 @@ public class ProviderController {
 
 	@Autowired
 	private EmailService emailService;
+	
 
 	@PostMapping("/provider_register")
 	public void gotoProviderRegister(@RequestParam String fullName, @RequestParam String password,
@@ -79,54 +82,44 @@ public class ProviderController {
 		providerService.providerRegisterService(entity, pEntity, documentType, documentURL, certificate,
 				extraCertificate);
 	}
+	
 
-	@PostMapping("/provider_login")
-	public UserEntity gotoProviderLogin(@RequestParam String userEmail, @RequestParam String password,
-			HttpSession pSession) {
+	@PutMapping("/approve")
+	public void approveProvider(Authentication authentication) {
+		
+		String email = authentication.getName();
+		
+		UserEntity user = userRepo.findByUserEmail(email);
 
-		UserEntity entity = providerService.providerLogingService(userEmail, password);
-
-		ProviderEntity pEntity = providerRepo.findByUserId(entity.getId());
-		System.out.println(pEntity.getStatus());
-		String status = pEntity.getStatus();
-
-		if (entity != null && "approved".equals(status)) {
-			log.info("provider login seuccessful ...");
-			pSession.setAttribute("pEmail", userEmail);
-			return entity;
-		} else if (entity != null && "pending".equals(status)) {
-			log.info("Provider status is pending...try again after successful registration.");
-			return entity;
-		} else {
-			log.info("provider Login Failed !");
-			return null;
-		}
+		providerService.approveProvider(user.getId());
 
 	}
 
-	@PutMapping("/approve/{id}")
-	public void approveProvider(@PathVariable Integer id) {
+	@PutMapping("/reject")
+	public void rejectProvider(Authentication authentication) {
+		
+		String email = authentication.getName();
+		
+		UserEntity user = userRepo.findByUserEmail(email);
 
-		providerService.approveProvider(id);
-
+		providerService.rejectProvider(user.getId());
 	}
 
-	@PutMapping("/reject/{id}")
-	public void rejectProvider(@PathVariable Integer id) {
+	@GetMapping("/dashboard")
+	public ProviderDashboardDTO dashboard(Authentication authentication) {
 
-		providerService.rejectProvider(id);
+	    return providerService.getDashboardData(authentication.getName());
 	}
 
-	@GetMapping("/dashboard/{pId}")
-	public ProviderDashboardDTO dashboard(@PathVariable Integer pId) {
+	@GetMapping("/provider-id")
+	public Integer getProviderId(Authentication authentication) {
+		
+		String email = authentication.getName();
+		
+		UserEntity user = userRepo.findByUserEmail(email);
 
-		return providerService.getDashboardData(pId);
-	}
 
-	@GetMapping("/provider-id/{userId}")
-	public Integer getProviderId(@PathVariable Integer userId) {
-
-		ProviderEntity provider = providerRepo.findProviderByUserId(userId);
+		ProviderEntity provider = providerRepo.findProviderByUserId(user.getId());
 
 		return provider.getPId();
 	}
@@ -136,9 +129,22 @@ public class ProviderController {
 	 */
 
 	@PutMapping("/accept/{bookingId}")
-	public void acceptBooking(@PathVariable Integer bookingId) {
+	public void acceptBooking(Authentication authentication,@PathVariable Integer bookingId) {
+		
+		String email =authentication.getName();
+		
+		UserEntity user = userRepo.findByUserEmail(email);
+		
+		ProviderEntity providerEntity = providerRepo.findProviderByUser(user);
 
 		BookingEntity booking = bookingRepo.findById(bookingId).orElseThrow();
+		
+		if(!providerEntity.getPId().equals(booking.getPId())) {
+			throw new ResponseStatusException(
+			        HttpStatus.FORBIDDEN,
+			        "You are not allowed to accept this booking."
+			    );
+		}
 
 		booking.setBookingStatus("accepted");
 
@@ -210,11 +216,16 @@ public class ProviderController {
 		providerRepo.save(provider);
 	}
 	
-	@GetMapping("/availability/{userId}")
-	public Boolean getAvailability(@PathVariable Integer userId){
+	@GetMapping("/availability")
+	public Boolean getAvailability(Authentication authentication){
+		
+		String email = authentication.getName();
+		
+		UserEntity user = userRepo.findByUserEmail(email);
+
 
 	    ProviderEntity provider =
-	            providerRepo.findProviderByUserId(userId);
+	            providerRepo.findProviderByUserId(user.getId());
 
 	    return provider.getAvailability();
 	}

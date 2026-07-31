@@ -6,14 +6,14 @@ import { Observable, BehaviorSubject } from "rxjs";
   providedIn: "root",
 })
 export class AuthService {
-  private apiUrl = "http://13.233.86.215:3030/quickserve";
-  private apiUrl1 = "http://13.233.86.215:3030/quickserve/user";
-  private apiUrl2 = "http://13.233.86.215:3030/quickserve/provider";
+  private apiUrl = "https://quick-serve.in/quickserve";
+  private apiUrl1 = "https://quick-serve.in/quickserve/user";
+  private apiUrl2 = "https://quick-serve.in/quickserve/provider";
 
   // 1. Add a BehaviorSubject to hold and stream the current user's state.
-  // It checks sessionStorage on initialization so users stay logged in on refresh.
+  // It checks localStorage on initialization so users stay logged in on refresh.
   private currentUserSubject = new BehaviorSubject<any>(
-    JSON.parse(sessionStorage.getItem("user") || "null"),
+    JSON.parse(localStorage.getItem("user") || "null"),
   );
 
   // 2. Expose the subject as an Observable that components can subscribe to.
@@ -23,12 +23,12 @@ export class AuthService {
 
   // Current User Methods
   setCurrentUser(user: any) {
-    sessionStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("user", JSON.stringify(user));
     this.currentUserSubject.next(user);
   }
 
   clearCurrentUser() {
-    sessionStorage.removeItem("user");
+    localStorage.removeItem("user");
     this.currentUserSubject.next(null);
   }
 
@@ -59,9 +59,7 @@ export class AuthService {
     formData.append("userEmail", loginData.userEmail);
     formData.append("password", loginData.password);
 
-    return this.http.post(`${this.apiUrl1}/user_login`, formData, {
-      responseType: "text",
-    });
+    return this.http.post(`${this.apiUrl1}/user_login`, formData);
   }
 
   registerProvider(provider: any) {
@@ -96,7 +94,7 @@ export class AuthService {
   }
 
   getAllProviders() {
-    return this.http.get("http://13.233.86.215:3030/quickserve/view/pending");
+    return this.http.get("https://quick-serve.in/quickserve/view/pending");
   }
 
   getDashboardData(pId: number): Observable<any> {
@@ -105,13 +103,13 @@ export class AuthService {
 
   getUserDashboardData(uId: number) {
     return this.http.get(
-      `http://13.233.86.215:3030/quickserve/user/dashboard/${uId}`,
+      `https://quick-serve.in/quickserve/user/dashboard/${uId}`,
     );
   }
 
   getProviderId(userId: number) {
     return this.http.get<number>(
-      `http://13.233.86.215:3030/quickserve/provider/provider-id/${userId}`,
+      `https://quick-serve.in/quickserve/provider/provider-id/${userId}`,
     );
   }
 
